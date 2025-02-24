@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 18:02:59 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 18:06:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 20:24:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 20:24:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-#include "transformation.c"
-#include "compare_matrix.c"
 
 t_matrix	*create_identity_matrix(int size)
 {

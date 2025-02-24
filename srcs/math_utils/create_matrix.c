@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 18:20:20 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 18:20:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 20:22:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 20:22:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ void	print_matrix(t_matrix *matrix)
 		j = 0;
 		while (j < matrix->cols)
 		{
-			printf(" %-5.1f |", matrix->values[i][j]);
+			if (matrix->values[i][j] == (int)matrix->values[i][j])
+				printf(" %6.0f |", matrix->values[i][j]);
+			else
+				printf(" %10.5f |", matrix->values[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -107,7 +110,7 @@ void	copy_submatrix_values(t_matrix *matrix, t_matrix *result,
 		if (i == remove_row)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		new_j = 0;
 		j = 0;

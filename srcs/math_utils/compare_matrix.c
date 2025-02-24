@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 17:54:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 17:54:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 20:22:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 20:23:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	compare_matrices(t_matrix *a, t_matrix *b)
 		j = 0;
 		while (j < a->cols)
 		{
-			if (a->values[i][j] != b->values[i][j])
-			{
+			if (!ft_equal(a->values[i][j], b->values[i][j]))
 				return (0);
-			}
 			j++;
 		}
 		i++;

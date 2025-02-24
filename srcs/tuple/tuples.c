@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 16:03:19 by ameechan         ###   ########.fr       */
+/*   Created: 2025/02/24 20:19:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 20:19:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,27 @@ bool	is_vector(t_tuple *tuple)
 	return (tuple->w == VECTOR);
 }
 
-int	main(void)
-{
-	t_tuple	*a;
-	t_tuple	*b;
-	double	x = 29.987654321;
-	double	y = 29.987669999;
+// int	main(void)
+// {
+// 	t_tuple	*a;
+// 	t_tuple	*b;
+// 	double	x = 29.987654321;
+// 	double	y = 29.987669999;
 
-	a = make_tuple(25.07, -19.60, 21.09, POINT);
-	b = make_tuple(11.08, -19.95, 28.05, VECTOR);
-	if (!b || !a)
-	{
-		printf("Error: Malloc Failure\n");
-		return (1);
-	}
-	print_tuple(a, "a");
-	print_tuple(b, "b");
-	free(a);
-	free(b);
-	if (ft_equal(x, y))
-		printf("equal! (diff: %.5f)\n", fabs(x-y));
-	else
-		printf("not EQUAL!!!! (diff %.5f)\n", fabs(x-y));
-	return (0);
-}
+// 	a = make_tuple(25.07, -19.60, 21.09, POINT);
+// 	b = make_tuple(11.08, -19.95, 28.05, VECTOR);
+// 	if (!b || !a)
+// 	{
+// 		printf("Error: Malloc Failure\n");
+// 		return (1);
+// 	}
+// 	print_tuple(a, "a");
+// 	print_tuple(b, "b");
+// 	free(a);
+// 	free(b);
+// 	if (ft_equal(x, y))
+// 		printf("equal! (diff: %.5f)\n", fabs(x-y));
+// 	else
+// 		printf("not EQUAL!!!! (diff %.5f)\n", fabs(x-y));
+// 	return (0);
+// }
