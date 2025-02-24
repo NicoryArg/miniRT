@@ -28,11 +28,11 @@ RM				= rm -rf
 # Libft Files
 LIBFT_DIR		= libft
 LIBFT			= $(LIBFT_DIR)/libft.a
-LINKER  	    = -lft -L $(LIBFT_DIR)
+LINKER			= -lft -L $(LIBFT_DIR)
 
 # Includes Files
-INCLUDES_DIR 	= includes
-INCLUDES_FLAG 	= -I$(INCLUDES_DIR) \
+INCLUDES_DIR	= includes
+INCLUDES_FLAG	= -I$(INCLUDES_DIR) \
 				  -I$(LIBFT_DIR) \
 
 INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
@@ -40,6 +40,7 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 # Sources
 SRCS_DIR			= srcs/
+TUPLE_FILES			= $(addprefix tuple/, tuples.c)
 # MAIN_FILES			= $(addprefix main/, main.c)
 # BUILTINS_FILES		= $(addprefix builtins/, builtin.c cd.c echo.c env.c exit_invalid.c exit.c export.c export2_utils.c pwd.c unset.c)
 # ENV_FILES			= $(addprefix env/, setup_env.c parse_env.c lst.c)
@@ -51,7 +52,7 @@ SRCS_DIR			= srcs/
 # TOKEN_FILES			= $(addprefix tokens/, arg_lst.c expand_token.c fix_input_utils.c fix_input.c identify.c lexer.c process_tokens.c quotes.c valid.c)
 # UTILS_FILES			= $(addprefix utils/, cleanup.c execution_utils.c test_funcs.c free_ast.c free.c validate_utils.c)
 
-# SRC_FILES		= $(MAIN_FILES) $(BUILTINS_FILES) $(ENV_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
+SRC_FILES		= $(TUPLE_FILES) #$(MAIN_FILES) $(BUILTINS_FILES) $(ENV_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
@@ -74,8 +75,9 @@ $(LIBFT) :
 
 
 
-# $(OBJS_DIR) :
-# 	# @$(MKDIR) $(OBJS_DIR)
+$(OBJS_DIR) :
+	@$(MKDIR) $(OBJS_DIR)
+	@$(MKDIR) $(OBJS_DIR)tuple
 # 	# @$(MKDIR) $(OBJS_DIR)/main
 # 	# @$(MKDIR) $(OBJS_DIR)/builtins
 # 	# @$(MKDIR) $(OBJS_DIR)/env
@@ -91,7 +93,7 @@ $(LIBFT) :
 
 $(NAME) : $(OBJS) Makefile
 	@echo $(CYAN) " - Compiling $(NAME)..." $(RESET)
-	@$(CC) $(CFLAGS) $(OBJS) $(LINKER) -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LINKER) -lm -o $(NAME)
 	@echo $(GREEN) " - "$(NAME)" Ready!" $(RESET)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(INCLUDES)
