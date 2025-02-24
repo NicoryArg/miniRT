@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:52:59 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/21 15:53:53 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:58:00 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ typedef struct	s_tuple
 	double		z;
 }	t_tuple;
 
+//#############################################
+//##################DEBUG######################
+//#############################################
+//print.c
+
+void		print_tuple(t_tuple *tuple, char *name);
+
+//#############################################
+//##################TUPLE######################
+//#############################################
+//tuples.c
+
+t_tuple 	*make_tuple(double x, double y, double z, tpl_type type);
+bool		is_point(t_tuple *tuple);
+bool		is_vector(t_tuple *tuple);
 #endif

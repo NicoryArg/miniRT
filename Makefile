@@ -41,8 +41,8 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 # Sources
 SRCS_DIR			= srcs/
 TUPLE_FILES			= $(addprefix tuple/, tuples.c)
+DEBUG_FILES		= $(addprefix debug/, print.c)
 # MAIN_FILES			= $(addprefix main/, main.c)
-# BUILTINS_FILES		= $(addprefix builtins/, builtin.c cd.c echo.c env.c exit_invalid.c exit.c export.c export2_utils.c pwd.c unset.c)
 # ENV_FILES			= $(addprefix env/, setup_env.c parse_env.c lst.c)
 # EXEC_FILES			= $(addprefix execution/, execute_cmd.c  execute_new_minish.c  execute_redir_cmd.c  external_exec.c  external_exec_utils.c  start_shell.c)
 # EXEC_HANDLER_FILES	= $(addprefix execution_handlers/, command_handler.c generate_temp_file.c handle_variable_assign.c heredoc_handler.c heredoc_handler_utils.c local_var_handler.c pipe_handler.c redirection_handler.c)
@@ -52,7 +52,7 @@ TUPLE_FILES			= $(addprefix tuple/, tuples.c)
 # TOKEN_FILES			= $(addprefix tokens/, arg_lst.c expand_token.c fix_input_utils.c fix_input.c identify.c lexer.c process_tokens.c quotes.c valid.c)
 # UTILS_FILES			= $(addprefix utils/, cleanup.c execution_utils.c test_funcs.c free_ast.c free.c validate_utils.c)
 
-SRC_FILES		= $(TUPLE_FILES) #$(MAIN_FILES) $(BUILTINS_FILES) $(ENV_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
+SRC_FILES		= $(TUPLE_FILES) $(DEBUG_FILES) #$(MAIN_FILES) $(ENV_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
@@ -78,8 +78,8 @@ $(LIBFT) :
 $(OBJS_DIR) :
 	@$(MKDIR) $(OBJS_DIR)
 	@$(MKDIR) $(OBJS_DIR)tuple
+	@$(MKDIR) $(OBJS_DIR)/debug
 # 	# @$(MKDIR) $(OBJS_DIR)/main
-# 	# @$(MKDIR) $(OBJS_DIR)/builtins
 # 	# @$(MKDIR) $(OBJS_DIR)/env
 # 	# @$(MKDIR) $(OBJS_DIR)/execution
 # 	# @$(MKDIR) $(OBJS_DIR)/execution_handlers

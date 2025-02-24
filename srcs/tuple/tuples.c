@@ -6,37 +6,20 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 15:39:01 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:03:19 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
-static t_tuple *make_tuple(double x, double y, double z, tpl_type type);
-static bool	is_point(t_tuple *tuple);
-static bool	is_vector(t_tuple *tuple);
-
-static bool	ft_equal(double a, double b)
+bool	ft_equal(double a, double b)
 {
 	if (fabs(a - b) < EPSILON)
 		return (true);
 	return (false);
 }
 
-static void	print_tuple(t_tuple *tuple, char *name)
-{
-	if (is_vector(tuple))
-		printf("tuple `%s` is VECTOR:\n", name);
-	else if (is_point(tuple))
-		printf("tuple `%s` is POINT:\n", name);
-	else
-		printf("ERROR: tuple type undefined\n");
-	printf("x: %.2f\n", tuple->x);
-	printf("y: %.2f\n", tuple->y);
-	printf("z: %.2f\n", tuple->z);
-}
-
-static t_tuple *make_tuple(double x, double y, double z, tpl_type type)
+t_tuple *make_tuple(double x, double y, double z, tpl_type type)
 {
 	t_tuple	*tuple;
 
@@ -50,12 +33,12 @@ static t_tuple *make_tuple(double x, double y, double z, tpl_type type)
 	return (tuple);
 }
 
-static bool	is_point(t_tuple *tuple)
+bool	is_point(t_tuple *tuple)
 {
 	return (tuple->w == POINT);
 }
 
-static bool	is_vector(t_tuple *tuple)
+bool	is_vector(t_tuple *tuple)
 {
 	return (tuple->w == VECTOR);
 }
