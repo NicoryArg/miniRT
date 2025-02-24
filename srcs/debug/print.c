@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 16:03:22 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:32:00 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	print_tuple(t_tuple *tuple, char *name)
 		printf("tuple `%s` is POINT:\n", name);
 	else
 		printf("ERROR: tuple type undefined\n");
-	printf("x: %.2f\n", tuple->x);
-	printf("y: %.2f\n", tuple->y);
-	printf("z: %.2f\n", tuple->z);
+	printf("w: %d\n", tuple->w);
+	printf("x: %.5f\n", tuple->x);
+	printf("y: %.5f\n", tuple->y);
+	printf("z: %.5f\n", tuple->z);
 }

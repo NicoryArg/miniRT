@@ -6,20 +6,13 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 16:03:19 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:26:04 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-bool	ft_equal(double a, double b)
-{
-	if (fabs(a - b) < EPSILON)
-		return (true);
-	return (false);
-}
-
-t_tuple *make_tuple(double x, double y, double z, tpl_type type)
+t_tuple *make_tuple(double x, double y, double z, t_tpl type)
 {
 	t_tuple	*tuple;
 
@@ -33,25 +26,27 @@ t_tuple *make_tuple(double x, double y, double z, tpl_type type)
 	return (tuple);
 }
 
-bool	is_point(t_tuple *tuple)
+t_tuple	*new_tuple(void)
 {
-	return (tuple->w == POINT);
-}
+	t_tuple	*new;
 
-bool	is_vector(t_tuple *tuple)
-{
-	return (tuple->w == VECTOR);
+	new = malloc(sizeof(t_tuple));
+	if (!new)
+	{
+		printf("[DEBUG] `new_tuple` -> malloc failure\n");
+		return (NULL);
+	}
+	return(new);
 }
-
 int	main(void)
 {
 	t_tuple	*a;
 	t_tuple	*b;
-	double	x = 29.987654321;
-	double	y = 29.987669999;
+	// double	x = 29.987654321;
+	// double	y = 29.987669999;
 
-	a = make_tuple(25.07, -19.60, 21.09, POINT);
-	b = make_tuple(11.08, -19.95, 28.05, VECTOR);
+	a = make_tuple(-3, 2, 1, POINT);
+	b = make_tuple(5, -66, 7, VECTOR);
 	if (!b || !a)
 	{
 		printf("Error: Malloc Failure\n");
@@ -59,11 +54,12 @@ int	main(void)
 	}
 	print_tuple(a, "a");
 	print_tuple(b, "b");
+	printf("negating a & b\n");
+	negate_tuple(a);
+	negate_tuple(b);
+	print_tuple(a, "a");
+	print_tuple(b, "b");
 	free(a);
 	free(b);
-	if (ft_equal(x, y))
-		printf("equal! (diff: %.5f)\n", fabs(x-y));
-	else
-		printf("not EQUAL!!!! (diff %.5f)\n", fabs(x-y));
 	return (0);
 }
