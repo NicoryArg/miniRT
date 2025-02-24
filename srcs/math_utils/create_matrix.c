@@ -5,70 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 16:57:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 16:57:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 18:20:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 18:20:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-double	**allocate_matrix(int rows, int cols)
+t_matrix	*create_matrix(int rows, int cols, int is_tuple)
 {
-	int		i;
-	double	**matrix;
+	t_matrix	*matrix;
+	int			i;
 
-	matrix = (double **)malloc(rows * sizeof(double *));
-	if (matrix == NULL)
-	{
-		printf("Memory allocation failed!\n");
+	matrix = (t_matrix *)malloc(sizeof(t_matrix));
+	if (!matrix)
 		exit(1);
-	}
+	matrix->rows = rows;
+	matrix->cols = cols;
+	matrix->is_tuple = is_tuple;
+	matrix->is_identity = 0;
+	matrix->values = (double **)malloc(rows * sizeof(double *));
+	if (!matrix->values)
+		exit(1);
 	i = 0;
 	while (i < rows)
 	{
-		matrix[i] = (double *)malloc(cols * sizeof(double));
-		if (matrix[i] == NULL)
-		{
-			printf("Memory allocation failed!\n");
+		matrix->values[i] = (double *)malloc(cols * sizeof(double));
+		if (!matrix->values[i])
 			exit(1);
-		}
 		i++;
 	}
 	return (matrix);
 }
 
-void	fill_matrix(double **matrix, int rows, int cols)
+void	fill_matrix(t_matrix *matrix)
 {
 	int		i;
 	int		j;
 
-	printf("Enter %d values for the %dx%d matrix:\n", rows * cols, rows, cols);
+	printf("Enter %d values for the %dx%d matrix:\n",
+		matrix->rows * matrix->cols, matrix->rows, matrix->cols);
 	i = 0;
-	while (i < rows)
+	while (i < matrix->rows)
 	{
 		j = 0;
-		while (j < cols)
+		while (j < matrix->cols)
 		{
-			scanf("%lf", &matrix[i][j]);
+			scanf("%lf", &matrix->values[i][j]);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	print_matrix(double **matrix, int rows, int cols)
+void	print_matrix(t_matrix *matrix)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while (i < rows)
+	while (i < matrix->rows)
 	{
 		printf("|");
 		j = 0;
-		while (j < cols)
+		while (j < matrix->cols)
 		{
-			printf(" %-5.1f |", matrix[i][j]);
+			printf(" %-5.1f |", matrix->values[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -76,33 +78,46 @@ void	print_matrix(double **matrix, int rows, int cols)
 	}
 }
 
-void	free_matrix(double **matrix, int rows)
+void	free_matrix(t_matrix *matrix)
 {
 	int		i;
 
 	i = 0;
-	while (i < rows)
+	while (i < matrix->rows)
 	{
-		free(matrix[i]);
+		free(matrix->values[i]);
 		i++;
 	}
+	free(matrix->values);
 	free(matrix);
 }
 
-// int	main(void)
-// {
-// 	int		rows;
-// 	int		cols;
-// 	double	**matrix;
+void	copy_submatrix_values(t_matrix *matrix, t_matrix *result,
+			int remove_row, int remove_col)
+{
+	int	i;
+	int	j;
+	int	new_i;
+	int	new_j;
 
-// 	printf("Enter number of rows: ");
-// 	scanf("%d", &rows);
-// 	printf("Enter number of columns: ");
-// 	scanf("%d", &cols);
-// 	matrix = allocate_matrix(rows, cols);
-// 	fill_matrix(matrix, rows, cols);
-// 	printf("\nYour matrix:\n");
-// 	print_matrix(matrix, rows, cols);
-// 	free_matrix(matrix, rows);
-// 	return (0);
-// }
+	new_i = 0;
+	i = 0;
+	while (i < matrix->rows)
+	{
+		if (i == remove_row)
+		{
+			i++;
+			continue;
+		}
+		new_j = 0;
+		j = 0;
+		while (j < matrix->cols)
+		{
+			if (j != remove_col)
+				result->values[new_i][new_j++] = matrix->values[i][j];
+			j++;
+		}
+		new_i++;
+		i++;
+	}
+}

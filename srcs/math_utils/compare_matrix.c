@@ -5,25 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 17:05:31 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 17:05:36 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 17:54:08 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 17:54:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int	compare_matrices(double **a, double **b, int rows, int cols)
+int	compare_matrices(t_matrix *a, t_matrix *b)
 {
 	int		i;
 	int		j;
 
+	if (a->rows != b->rows || a->cols != b->cols)
+	{
+		return (0);
+	}
 	i = 0;
-	while (i < rows)
+	while (i < a->rows)
 	{
 		j = 0;
-		while (j < cols)
+		while (j < a->cols)
 		{
-			if (a[i][j] != b[i][j])
+			if (a->values[i][j] != b->values[i][j])
 			{
 				return (0);
 			}
@@ -33,35 +37,28 @@ int	compare_matrices(double **a, double **b, int rows, int cols)
 	}
 	return (1);
 }
-
 // int	main()
 // {
-// 	int		rows;
-// 	int		cols;
-// 	double	**a;
-// 	double	**b;
-// 	int		result;
+// 	t_matrix	*a;
+// 	t_matrix	*b;
+// 	int			result;
 
-// 	printf("Enter number of rows: ");
-// 	scanf("%d", &rows);
-// 	printf("Enter number of columns: ");
-// 	scanf("%d", &cols);
-// 	a = allocate_matrix(rows, cols);
-// 	b = allocate_matrix(rows, cols);
+// 	a = create_matrix(3, 3, 0);
+// 	b = create_matrix(3, 3, 0);
 // 	printf("\nFill matrix A:\n");
-// 	fill_matrix(a, rows, cols);
+// 	fill_matrix(a);
 // 	printf("\nFill matrix B:\n");
-// 	fill_matrix(b, rows, cols);
+// 	fill_matrix(b);
 // 	printf("\nMatrix A:\n");
-// 	print_matrix(a, rows, cols);
+// 	print_matrix(a);
 // 	printf("\nMatrix B:\n");
-// 	print_matrix(b, rows, cols);
-// 	result = compare_matrices(a, b, rows, cols);
+// 	print_matrix(b);
+// 	result = compare_matrices(a, b);
 // 	if (result == 1)
 // 		printf("\nMatrices are equal.\n");
 // 	else
 // 		printf("\nMatrices are NOT equal.\n");
-// 	free_matrix(a, rows);
-// 	free_matrix(b, rows);
+// 	free_matrix(a);
+// 	free_matrix(b);
 // 	return (0);
 // }

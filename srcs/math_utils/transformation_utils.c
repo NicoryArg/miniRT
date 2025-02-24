@@ -5,75 +5,122 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 17:29:01 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 17:33:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 18:02:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 18:06:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "transformation.c"
+#include "compare_matrix.c"
 
-double	**multiply_by_identity(double **input, int size, int is_tuple)
+t_matrix	*create_identity_matrix(int size)
 {
-	int		i;
-	int		j;
-	double	**result;
+	int			i;
+	int			j;
+	t_matrix	*identity;
 
-	if (is_tuple == 1)
+	identity = create_matrix(size, size, 0);
+	identity->is_identity = 1;
+	i = 0;
+	while (i < size)
 	{
-		result = allocate_matrix(1, size);
-		i = 0;
-		while (i < size)
+		j = 0;
+		while (j < size)
 		{
-			result[0][i] = input[0][i]; // Identity multiplication keeps tuple unchanged
+			if (i == j)
+				identity->values[i][j] = 1.0;
+			else
+				identity->values[i][j] = 0.0;
+			j++;
+		}
+		i++;
+	}
+	return (identity);
+}
+
+t_matrix	*multiply_by_identity(t_matrix *input)
+{
+	int			i;
+	t_matrix	*result;
+	t_matrix	*identity;
+
+	if (input->is_tuple == 1)
+	{
+		result = create_matrix(1, input->cols, 1);
+		i = 0;
+		while (i < input->cols)
+		{
+			result->values[0][i] = input->values[0][i];
 			i++;
 		}
+		return (result);
 	}
-	else
-	{
-		result = allocate_matrix(size, size);
-		i = 0;
-		while (i < size)
-		{
-			j = 0;
-			while (j < size)
-			{
-				if (i == j)
-					result[i][j] = 1.0;
-				else
-					result[i][j] = 0.0;
-				j++;
-			}
-			i++;
-		}
-		result = multiply_matrices(input, result, (int[]){size, size, size});
-	}
+	identity = create_identity_matrix(input->rows);
+	result = multiply_matrices(input, identity);
+	free_matrix(identity);
 	return (result);
 }
 
-
-int	main()
+t_matrix	*transpose_matrix(t_matrix *input)
 {
-	int		size;
-	double	**a;
-	double	**identity;
-	double	**result;
+	int			i;
+	int			j;
+	t_matrix	*transposed;
 
-	printf("Enter the size of the square matrix: ");
-	scanf("%d", &size);
-	a = allocate_matrix(size, size);
-	printf("\nFill matrix A:\n");
-	fill_matrix(a, size, size);
-	identity = create_identity_matrix(size);
-	printf("\nMatrix A:\n");
-	print_matrix(a, size, size);
-	printf("\nIdentity Matrix:\n");
-	print_matrix(identity, size, size);
-	result = multiply_matrices(a, identity, (int[]){size, size, size});
-	printf("\nA * Identity Matrix:\n");
-	print_matrix(result, size, size);
-	free_matrix(a, size);
-	free_matrix(identity, size);
-	free_matrix(result, size);
-	return (0);
+	transposed = create_matrix(input->cols, input->rows, input->is_tuple);
+	i = 0;
+	while (i < input->rows)
+	{
+		j = 0;
+		while (j < input->cols)
+		{
+			transposed->values[j][i] = input->values[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (transposed);
 }
+
+// int	main()
+// {
+// 	t_matrix	*a;
+// 	t_matrix	*transposed;
+// 	t_matrix	*identity;
+// 	t_matrix	*identity_transposed;
+// 	int			size;
+
+// 	// Example for normal matrix
+// 	printf("Enter the size of the square matrix: ");
+// 	scanf("%d", &size);
+// 	a = create_matrix(size, size, 0);
+// 	printf("\nFill matrix A:\n");
+// 	fill_matrix(a);
+// 	printf("\nMatrix A:\n");
+// 	print_matrix(a);
+// 	transposed = transpose_matrix(a);
+// 	printf("\nTransposed Matrix A:\n");
+// 	print_matrix(transposed);
+
+// 	// Example for identity matrix
+// 	identity = create_identity_matrix(size);
+// 	identity_transposed = transpose_matrix(identity);
+// 	printf("\nIdentity Matrix:\n");
+// 	print_matrix(identity);
+// 	printf("\nTransposed Identity Matrix:\n");
+// 	print_matrix(identity_transposed);
+
+// 	// Check if transposing an identity matrix returns itself
+// 	if (compare_matrices(identity, identity_transposed))
+// 		printf("\nTranspose of identity matrix is still the identity matrix ✅\n");
+// 	else
+// 		printf("\nTranspose of identity matrix failed ❌\n");
+
+// 	// Free memory
+// 	free_matrix(a);
+// 	free_matrix(transposed);
+// 	free_matrix(identity);
+// 	free_matrix(identity_transposed);
+// 	return (0);
+// }
