@@ -40,7 +40,8 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 # Sources
 SRCS_DIR			= srcs/
-TUPLE_FILES			= $(addprefix tuple/, operations.c tuples.c utils.c)
+TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
+						tuples.c utils.c)
 DEBUG_FILES			= $(addprefix debug/, print.c)
 # MAIN_FILES			= $(addprefix main/, main.c)
 # ENV_FILES			= $(addprefix env/, setup_env.c parse_env.c lst.c)

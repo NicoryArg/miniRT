@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:47:13 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 10:43:49 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:44:32 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,22 +110,24 @@ t_tuple	*ft_multiply(t_tuple *vector, double t)
 }
 
 /**
- * @brief inverts the direction of a vector
- * @param tup expected to be a vector!
+ *@brief returns `x` squared
  */
-void	ft_negate(t_tuple *tup)
-{
-	if (tup->w == POINT)
-	{
-		printf("[DEBUG] `negate_tuple` -> trying to negate POINT\n");//debugging
-		exit (1);
-	}
-	tup->x = 0 - tup->x;
-	tup->y = 0 - tup->y;
-	tup->z = 0 - tup->z;
-}
-
-double	square(double x)
+double	ft_sqr(double x)
 {
 	return (x*x);
+}
+
+/**
+ * @brief Calculates and returns the length of a vector
+ */
+double	magnitude(t_tuple *v)
+{
+	double	magnitude;
+	double	square;
+
+	square = (ft_sqr(v->x)+ft_sqr(v->y)+ft_sqr(v->z)+ft_sqr(v->w));
+	magnitude = sqrt(square);
+	if (ft_equal(magnitude, 0))
+		printf("[DEBUG] `magnitude` -> magnitude of 0 detected\n");
+	return (magnitude);
 }

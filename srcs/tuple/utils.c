@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:51:06 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 18:16:39 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:27:17 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ bool	ft_equal(double a, double b)
 	if (fabs(a - b) < EPSILON)
 		return (true);
 	return (false);
+}
+
+/**
+ * @brief inverts the direction of a vector
+ * @param tup expected to be a vector!
+ */
+void	ft_negate(t_tuple *tup)
+{
+	if (tup->w == POINT)
+	{
+		printf("[DEBUG] `negate_tuple` -> trying to negate POINT\n");//debugging
+		exit (1);
+	}
+	tup->x = 0 - tup->x;
+	tup->y = 0 - tup->y;
+	tup->z = 0 - tup->z;
 }

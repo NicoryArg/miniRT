@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 10:45:37 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:50:44 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_tuple *make_tuple(double x, double y, double z, t_tpl type)
 	return (tuple);
 }
 
+/**
+ * @brief Allocates memory for a new tuple
+ */
 t_tuple	*new_tuple(void)
 {
 	t_tuple	*new;
@@ -33,11 +36,31 @@ t_tuple	*new_tuple(void)
 	new = malloc(sizeof(t_tuple));
 	if (!new)
 	{
-		printf("[DEBUG] `new_tuple` -> malloc failure\n");
+		printf("[DEBUG] `new_tuple` -> malloc failure\n");//	debugging
 		return (NULL);
 	}
 	return(new);
 }
+
+t_tuple	*normalise(t_tuple *v)
+{
+	double	len;
+	t_tuple	*normal;
+
+	len = magnitude(v);
+	normal = new_tuple();
+	if (!normal)
+	{
+		printf("[DEBUG] `normalise` -> malloc failure\n");//	debugging
+		return (NULL);
+	}
+	normal->w = VECTOR;
+	normal->x = v->x/len;
+	normal->y = v->y/len;
+	normal->z = v->z/len;
+	return (normal);
+}
+
 int	main(void)
 {
 	t_tuple	*a;
@@ -45,8 +68,8 @@ int	main(void)
 	// double	x = 29.987654321;
 	// double	y = 29.987669999;
 
-	a = make_tuple(1, -2, 3, VECTOR);
-	b = make_tuple(3.5, -7, 10.5, VECTOR);
+	a = make_tuple(1, 2, 3, VECTOR);
+	b = normalise(a);
 	if (!b || !a)
 	{
 		printf("Error: Malloc Failure\n");
@@ -54,7 +77,9 @@ int	main(void)
 	}
 	print_tuple(a, "a");
 	print_tuple(b, "b");
-	printf("square of a (%f, %f, %f)\n", square(a->x), square(a->y), square(a->z));
+	printf("a: %.2f\n", magnitude(a));
+	printf("b: %.2f\n", magnitude(b));
+	// printf("sqrt: %.2f\n", sqrt(14));
 	free(a);
 	free(b);
 	return (0);
