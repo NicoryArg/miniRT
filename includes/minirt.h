@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:52:59 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 18:27:47 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:44:02 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		print_tuple(t_tuple *tuple, char *name);
  */
 t_tuple		*add_tuple(t_tuple *t1, t_tuple *t2);
 t_tuple		*diff_tuple(t_tuple *t1, t_tuple *t2);
+t_tuple		*ft_multiply(t_tuple *vector, double t);
 void		ft_negate(t_tuple *tup);
 
 //tuples.c
@@ -63,5 +64,6 @@ bool		is_point(t_tuple *tuple);
 bool		is_vector(t_tuple *tuple);
 bool		equal_tuple(t_tuple *t1, t_tuple *t2);
 bool		ft_equal(double a, double b);
+double		square(double x);
 
 #endif

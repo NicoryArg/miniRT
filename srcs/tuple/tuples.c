@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 18:26:04 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:45:37 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(void)
 	// double	x = 29.987654321;
 	// double	y = 29.987669999;
 
-	a = make_tuple(-3, 2, 1, POINT);
-	b = make_tuple(5, -66, 7, VECTOR);
+	a = make_tuple(1, -2, 3, VECTOR);
+	b = make_tuple(3.5, -7, 10.5, VECTOR);
 	if (!b || !a)
 	{
 		printf("Error: Malloc Failure\n");
@@ -54,11 +54,7 @@ int	main(void)
 	}
 	print_tuple(a, "a");
 	print_tuple(b, "b");
-	printf("negating a & b\n");
-	negate_tuple(a);
-	negate_tuple(b);
-	print_tuple(a, "a");
-	print_tuple(b, "b");
+	printf("square of a (%f, %f, %f)\n", square(a->x), square(a->y), square(a->z));
 	free(a);
 	free(b);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:47:13 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/24 18:29:30 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:43:49 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,39 @@ t_tuple	*diff_tuple(t_tuple *t1, t_tuple *t2)
 }
 
 /**
+ * @brief Takes a vector and multiplies it by `t` ->
+ * vectors multiplied or divided, increase or decrease in length by
+ * a factor of `t` while maintaining their direction
+ * @note can be used for division by setting t as `1/t`
+ */
+t_tuple	*ft_multiply(t_tuple *vector, double t)
+{
+	t_tuple	*res;
+
+	if (!vector)
+	{
+		printf("[DEBUG] `ft_multiply` -> NULL tuple detected\n");//	debugging
+		exit (1);
+	}
+	if (vector->w == POINT)
+	{
+		printf("[DEBUG] `ft_multiply` -> multiplying POINT\n");//	debugging
+		exit (1);
+	}
+	res = new_tuple();
+	if (!res)
+	{
+		printf("[DEBUG] `ft_multiply` -> malloc failure\n");//	debugging
+		return (NULL);
+	}
+	res->w = vector->w;
+	res->x = vector->x * t;
+	res->y = vector->y * t;
+	res->z = vector->z * t;
+	return (res);
+}
+
+/**
  * @brief inverts the direction of a vector
  * @param tup expected to be a vector!
  */
@@ -90,4 +123,9 @@ void	ft_negate(t_tuple *tup)
 	tup->x = 0 - tup->x;
 	tup->y = 0 - tup->y;
 	tup->z = 0 - tup->z;
+}
+
+double	square(double x)
+{
+	return (x*x);
 }
