@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 15:50:44 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:18:53 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(void)
 	// double	y = 29.987669999;
 
 	a = make_tuple(1, 2, 3, VECTOR);
-	b = normalise(a);
+	b = make_tuple(2, 3, 4, VECTOR);
 	if (!b || !a)
 	{
 		printf("Error: Malloc Failure\n");
@@ -77,8 +77,8 @@ int	main(void)
 	}
 	print_tuple(a, "a");
 	print_tuple(b, "b");
-	printf("a: %.2f\n", magnitude(a));
-	printf("b: %.2f\n", magnitude(b));
+	print_tuple(cross(a, b), "a->b");
+	print_tuple(cross(b, a), "b->a");
 	// printf("sqrt: %.2f\n", sqrt(14));
 	free(a);
 	free(b);

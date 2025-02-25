@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:52:59 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 15:46:47 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:16:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ double		ft_sqr(double x);
 double		magnitude(t_tuple *v);
 
 //product.c
+/**
+ * @brief Calculates the dot product of two vectors
+ * @note a dot of 1 means vectors are identical,
+ * while a dot of -1 means they point in opposite directions.
+ */
+double		dot(t_tuple *a, t_tuple *b);
+t_tuple		*cross(t_tuple *a, t_tuple *b);
 
 //tuples.c
 /**
