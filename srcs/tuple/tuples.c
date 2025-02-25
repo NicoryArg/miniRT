@@ -60,27 +60,3 @@ t_tuple	*normalise(t_tuple *v)
 	normal->z = v->z/len;
 	return (normal);
 }
-
-int	main(void)
-{
-	t_tuple	*a;
-	t_tuple	*b;
-	// double	x = 29.987654321;
-	// double	y = 29.987669999;
-
-	a = make_tuple(1, 2, 3, VECTOR);
-	b = make_tuple(2, 3, 4, VECTOR);
-	if (!b || !a)
-	{
-		printf("Error: Malloc Failure\n");
-		return (1);
-	}
-	print_tuple(a, "a");
-	print_tuple(b, "b");
-	print_tuple(cross(a, b), "a->b");
-	print_tuple(cross(b, a), "b->a");
-	// printf("sqrt: %.2f\n", sqrt(14));
-	free(a);
-	free(b);
-	return (0);
-}
