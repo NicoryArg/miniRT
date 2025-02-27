@@ -61,7 +61,7 @@ t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
 		return (NULL);
 	}
 	result = create_matrix(matrix->rows - 1, matrix->cols - 1, 0);
-	copy_submatrix_values(matrix, result, remove_row, remove_col);
+	populate_submatrix(matrix, result, remove_row, remove_col);
 	return (result);
 }
 
@@ -271,52 +271,52 @@ void	check_invertibility(t_matrix *matrix)
 // }
 //
 //
-// int	main()
-// {
-// 	//main to test submatrix
-// 	t_matrix	*a;
-// 	t_matrix	*sub;
-// 	int			rows;
-// 	int			cols;
-// 	int			remove_row;
-// 	int			remove_col;
+int	main()
+{
+	//main to test submatrix
+	t_matrix	*a;
+	t_matrix	*sub;
+	int			rows;
+	int			cols;
+	int			remove_row;
+	int			remove_col;
 
-// 	printf("Enter number of rows for matrix A: ");
-// 	scanf("%d", &rows);
-// 	printf("Enter number of columns for matrix A: ");
-// 	scanf("%d", &cols);
-// 	a = create_matrix(rows, cols, 0);
-// 	printf("\nFill matrix A:\n");
-// 	fill_matrix(a);
-// 	printf("\nMatrix A:\n");
-// 	print_matrix(a);
-// 	if (rows < 2 || cols < 2)
-// 	{
-// 		printf("\nError: Cannot extract a
-//			submatrix from a matrix smaller than 2x2.\n");
-// 		free_matrix(a);
-// 		return (1);
-// 	}
-// 	printf("\nEnter the row and column to remove: ");
-// 	scanf("%d %d", &remove_row, &remove_col);
-// 	if (remove_row < 0 || remove_row >= rows
-//			|| remove_col < 0 || remove_col >= cols)
-// 	{
-// 		printf("\nError: Row or column out of bounds.\n");
-// 		free_matrix(a);
-// 		return (1);
-// 	}
-// 	sub = submatrix(a, remove_row, remove_col);
-// 	if (sub)
-// 	{
-// 		printf("\nSubmatrix (without row %d and column %d):\n",
-//			remove_row, remove_col);
-// 		print_matrix(sub);
-// 		free_matrix(sub);
-// 	}
-// 	free_matrix(a);
-// 	return (0);
-// }
+	printf("Enter number of rows for matrix A: ");
+	scanf("%d", &rows);
+	printf("Enter number of columns for matrix A: ");
+	scanf("%d", &cols);
+	a = create_matrix(rows, cols, 0);
+	printf("\nFill matrix A:\n");
+	fill_matrix(a);
+	printf("\nMatrix A:\n");
+	print_matrix(a);
+	if (rows < 2 || cols < 2)
+	{
+		printf("\nError: Cannot extract a \
+submatrix from a matrix smaller than 2x2.\n");
+		free_matrix(a);
+		return (1);
+	}
+	printf("\nEnter the row and column to remove: ");
+	scanf("%d %d", &remove_row, &remove_col);
+	if (remove_row < 0 || remove_row >= rows
+			|| remove_col < 0 || remove_col >= cols)
+	{
+		printf("\nError: Row or column out of bounds.\n");
+		free_matrix(a);
+		return (1);
+	}
+	sub = submatrix(a, remove_row, remove_col);
+	if (sub)
+	{
+		printf("\nSubmatrix (without row %d and column %d):\n",
+			remove_row, remove_col);
+		print_matrix(sub);
+		free_matrix(sub);
+	}
+	free_matrix(a);
+	return (0);
+}
 
 /////////////////////////////////////////////////////
 // int	main()

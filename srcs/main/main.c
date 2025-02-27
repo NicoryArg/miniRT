@@ -37,18 +37,18 @@
 // 	return (0);
 // }
 
-int	main(void)
-{
-	t_matrix	*a;
-	t_matrix	*b;
+// int	main(void)
+// {
+// 	t_matrix	*a;
+// 	t_matrix	*b;
 
-	a = create_matrix(2, 2, 0);
-	b = create_matrix(2, 2, 0);
-	fill_matrix(a);
-	fill_matrix(b);
-	if (compare_matrices(a, b))
-		printf("Equal!\n");
-	else
-		printf("Not Equal\n");
-	return (0);
-}
+// 	a = create_matrix(2, 2, 0);
+// 	b = create_matrix(2, 2, 0);
+// 	fill_matrix(a);
+// 	fill_matrix(b);
+// 	if (compare_matrices(a, b))
+// 		printf("Equal!\n");
+// 	else
+// 		printf("Not Equal\n");
+// 	return (0);
+// }

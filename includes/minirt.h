@@ -63,7 +63,7 @@ t_matrix	*create_matrix(int rows, int cols, int is_tuple);
 void		fill_matrix(t_matrix *matrix);
 void		print_matrix(t_matrix *matrix);
 void		free_matrix(t_matrix *matrix);
-void		copy_submatrix_values(t_matrix *matrix, t_matrix *result,
+void		populate_submatrix(t_matrix *matrix, t_matrix *result,
 				int remove_row, int remove_col);
 
 //invert_matrix.c

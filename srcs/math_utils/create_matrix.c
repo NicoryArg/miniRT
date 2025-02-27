@@ -95,32 +95,32 @@ void	free_matrix(t_matrix *matrix)
 	free(matrix);
 }
 
-void	copy_submatrix_values(t_matrix *matrix, t_matrix *result,
-			int remove_row, int remove_col)
+void	populate_submatrix(t_matrix *matrix, t_matrix *sub,
+			int ignore_row, int ignore_col)
 {
 	int	i;
 	int	j;
-	int	new_i;
-	int	new_j;
+	int	sub_i;
+	int	sub_j;
 
-	new_i = 0;
+	sub_i = 0;
 	i = 0;
 	while (i < matrix->rows)
 	{
-		if (i == remove_row)
+		if (i == ignore_row)
 		{
 			i++;
 			continue ;
 		}
-		new_j = 0;
+		sub_j = 0;
 		j = 0;
 		while (j < matrix->cols)
 		{
-			if (j != remove_col)
-				result->values[new_i][new_j++] = matrix->values[i][j];
+			if (j != ignore_col)
+				sub->values[sub_i][sub_j++] = matrix->values[i][j];
 			j++;
 		}
-		new_i++;
+		sub_i++;
 		i++;
 	}
 }
