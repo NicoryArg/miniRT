@@ -105,7 +105,6 @@ double	determinant(t_matrix *matrix)
 {
 	int			col;
 	double		det;
-	t_matrix	*sub;
 
 	if (matrix->rows != matrix->cols)
 	{
@@ -118,12 +117,7 @@ double	determinant(t_matrix *matrix)
 	col = 0;
 	while (col < matrix->cols)
 	{
-		sub = submatrix(matrix, 0, col);
-		if (sub)
-		{
-			det += matrix->values[0][col] * cofactor(matrix, 0, col);
-			free_matrix(sub);
-		}
+		det += matrix->values[0][col] * cofactor(matrix, 0, col);
 		col++;
 	}
 	return (det);
@@ -163,43 +157,31 @@ void	check_invertibility(t_matrix *matrix)
 // 	return (0);
 // }
 
-// int	main()
-// {
-// 	//main to test determinant any square matrix
-// 	t_matrix	*a;
-// 	double		det;
-// 	double		cof;
-// 	int			col;
+int	main()
+{
+	//main to test determinant any square matrix
+	t_matrix	*a;
+	double		det;
 
-// 	printf("Enter size of square matrix A: ");
-// 	int size;
-// 	scanf("%d", &size);
-// 	if (size < 2)
-// 	{
-// 		printf("Error: Matrix must be at least 2x2.\n");
-// 		return (1);
-// 	}
-// 	a = create_matrix(size, size, 0);
-// 	printf("\nFill matrix A:\n");
-// 	fill_matrix(a);
-// 	printf("\nMatrix A:\n");
-// 	print_matrix(a);
+	printf("Enter size of square matrix A: ");
+	int size;
+	scanf("%d", &size);
+	if (size < 2)
+	{
+		printf("Error: Matrix must be at least 2x2.\n");
+		return (1);
+	}
+	a = create_matrix(size, size, 0);
+	printf("\nFill matrix A:\n");
+	fill_matrix(a);
+	printf("\nMatrix A:\n");
+	print_matrix(a);
+	det = determinant(a);
+	printf("And determinant(A) = %.0f\n", det);
 
-// 	printf("\nCalculating cofactors for row 0...\n");
-// 	col = 0;
-// 	while (col < size)
-// 	{
-// 		cof = cofactor(a, 0, col);
-// 		printf("Then cofactor(A, 0, %d) = %.0f\n", col, cof);
-// 		col++;
-// 	}
-
-// 	det = determinant(a);
-// 	printf("And determinant(A) = %.0f\n", det);
-
-// 	free_matrix(a);
-// 	return (0);
-// }
+	free_matrix(a);
+	return (0);
+}
 
 // int	main()
 // {
@@ -271,52 +253,52 @@ void	check_invertibility(t_matrix *matrix)
 // }
 //
 //
-int	main()
-{
-	//main to test submatrix
-	t_matrix	*a;
-	t_matrix	*sub;
-	int			rows;
-	int			cols;
-	int			remove_row;
-	int			remove_col;
+// int	main()
+// {
+// 	//main to test submatrix
+// 	t_matrix	*a;
+// 	t_matrix	*sub;
+// 	int			rows;
+// 	int			cols;
+// 	int			remove_row;
+// 	int			remove_col;
 
-	printf("Enter number of rows for matrix A: ");
-	scanf("%d", &rows);
-	printf("Enter number of columns for matrix A: ");
-	scanf("%d", &cols);
-	a = create_matrix(rows, cols, 0);
-	printf("\nFill matrix A:\n");
-	fill_matrix(a);
-	printf("\nMatrix A:\n");
-	print_matrix(a);
-	if (rows < 2 || cols < 2)
-	{
-		printf("\nError: Cannot extract a \
-submatrix from a matrix smaller than 2x2.\n");
-		free_matrix(a);
-		return (1);
-	}
-	printf("\nEnter the row and column to remove: ");
-	scanf("%d %d", &remove_row, &remove_col);
-	if (remove_row < 0 || remove_row >= rows
-			|| remove_col < 0 || remove_col >= cols)
-	{
-		printf("\nError: Row or column out of bounds.\n");
-		free_matrix(a);
-		return (1);
-	}
-	sub = submatrix(a, remove_row, remove_col);
-	if (sub)
-	{
-		printf("\nSubmatrix (without row %d and column %d):\n",
-			remove_row, remove_col);
-		print_matrix(sub);
-		free_matrix(sub);
-	}
-	free_matrix(a);
-	return (0);
-}
+// 	printf("Enter number of rows for matrix A: ");
+// 	scanf("%d", &rows);
+// 	printf("Enter number of columns for matrix A: ");
+// 	scanf("%d", &cols);
+// 	a = create_matrix(rows, cols, 0);
+// 	printf("\nFill matrix A:\n");
+// 	fill_matrix(a);
+// 	printf("\nMatrix A:\n");
+// 	print_matrix(a);
+// 	if (rows < 2 || cols < 2)
+// 	{
+// 		printf("\nError: Cannot extract a
+// submatrix from a matrix smaller than 2x2.\n");
+// 		free_matrix(a);
+// 		return (1);
+// 	}
+// 	printf("\nEnter the row and column to remove: ");
+// 	scanf("%d %d", &remove_row, &remove_col);
+// 	if (remove_row < 0 || remove_row >= rows
+// 			|| remove_col < 0 || remove_col >= cols)
+// 	{
+// 		printf("\nError: Row or column out of bounds.\n");
+// 		free_matrix(a);
+// 		return (1);
+// 	}
+// 	sub = submatrix(a, remove_row, remove_col);
+// 	if (sub)
+// 	{
+// 		printf("\nSubmatrix (without row %d and column %d):\n",
+// 			remove_row, remove_col);
+// 		print_matrix(sub);
+// 		free_matrix(sub);
+// 	}
+// 	free_matrix(a);
+// 	return (0);
+// }
 
 /////////////////////////////////////////////////////
 // int	main()
