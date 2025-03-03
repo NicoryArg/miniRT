@@ -16,7 +16,7 @@ t_tuple *make_tuple(double x, double y, double z, t_tpl type)
 {
 	t_tuple	*tuple;
 
-	tuple = malloc(sizeof(t_tuple));
+	tuple = new_tuple();
 	if (!tuple)
 		return (NULL);
 	tuple->x = x;
