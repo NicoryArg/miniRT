@@ -42,7 +42,7 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 SRCS_DIR			= srcs/
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c utils.c)
-MATH_FILES			= $(addprefix math_utils/, compare_matrix.c create_matrix.c inver_matrix.c transformation.c transformation_utils.c)
+MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 DEBUG_FILES			= $(addprefix debug/, print.c)
 MAIN_FILES			= $(addprefix main/, main.c)
 # ENV_FILES			= $(addprefix env/, setup_env.c parse_env.c lst.c)
@@ -54,7 +54,7 @@ MAIN_FILES			= $(addprefix main/, main.c)
 # TOKEN_FILES			= $(addprefix tokens/, arg_lst.c expand_token.c fix_input_utils.c fix_input.c identify.c lexer.c process_tokens.c quotes.c valid.c)
 # UTILS_FILES			= $(addprefix utils/, cleanup.c execution_utils.c test_funcs.c free_ast.c free.c validate_utils.c)
 
-SRC_FILES		= $(MATH_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(MAIN_FILES) #$(ENV_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
+SRC_FILES		= $(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(MAIN_FILES) #$(ENV_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
@@ -79,7 +79,7 @@ $(LIBFT) :
 
 $(OBJS_DIR) :
 	@$(MKDIR) $(OBJS_DIR)
-	@$(MKDIR) $(OBJS_DIR)/math_utils
+	@$(MKDIR) $(OBJS_DIR)/matrices
 	@$(MKDIR) $(OBJS_DIR)/tuple
 	@$(MKDIR) $(OBJS_DIR)/debug
 	@$(MKDIR) $(OBJS_DIR)/main

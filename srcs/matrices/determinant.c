@@ -12,59 +12,6 @@
 
 #include "../../includes/minirt.h"
 
-static void	compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	while (i < a->rows)
-	{
-		j = 0;
-		while (j < b->cols)
-		{
-			result->values[i][j] = 0;
-			k = 0;
-			while (k < a->cols)
-			{
-				result->values[i][j] += a->values[i][k] * b->values[k][j];
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
-{
-	t_matrix	*result;
-
-	if (a->cols != b->rows)
-	{
-		printf("Error: Matrices cannot be multiplied (A columns != B rows)\n");
-		return (NULL);
-	}
-	result = create_matrix(a->rows, b->cols, 0);
-	compute_product_matrix(a, b, result);
-	return (result);
-}
-
-t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
-{
-	t_matrix	*result;
-
-	if (matrix->rows < 2 || matrix->cols < 2)
-	{
-		printf("Error:not valid matrix smaller than 2x2.\n");
-		return (NULL);
-	}
-	result = create_matrix(matrix->rows - 1, matrix->cols - 1, 0);
-	populate_submatrix(matrix, result, remove_row, remove_col);
-	return (result);
-}
-
 double	minor(t_matrix *matrix, int row, int col)
 {
 	t_matrix	*sub;
@@ -95,7 +42,7 @@ double	cofactor(t_matrix *matrix, int row, int col)
 	return (sign * minor_value);
 }
 
-static double	determinant_base_case(t_matrix *matrix)
+double	determinant_base_case(t_matrix *matrix)
 {
 	return ((matrix->values[0][0] * matrix->values[1][1]) -
 			(matrix->values[0][1] * matrix->values[1][0]));
@@ -123,16 +70,6 @@ double	determinant(t_matrix *matrix)
 	return (det);
 }
 
-void	check_invertibility(t_matrix *matrix)
-{
-	if (matrix->rows != matrix->cols)
-	{
-		matrix->is_invertible = 0;
-		return ;
-	}
-	matrix->is_invertible = (determinant(matrix) != 0);
-}
-
 // int	main()
 // {
 // 	//main to test invertibility of a square matrix
@@ -151,7 +88,7 @@ void	check_invertibility(t_matrix *matrix)
 // 	fill_matrix(a);
 // 	printf("\nMatrix A:\n");
 // 	print_matrix(a);
-// 	check_invertibility(a); // ✅ Check if matrix is invertible
+// 	invertable(a); // ✅ Check if matrix is invertible
 // 	free_matrix(a);
 // 	printf("Matrix A is %s invertible.\n", a->is_invertible ? "" : "NOT");
 // 	return (0);

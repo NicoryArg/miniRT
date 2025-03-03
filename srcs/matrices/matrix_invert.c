@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-static t_matrix	*compute_cofactor_matrix(t_matrix *matrix)
+t_matrix	*compute_cofactor_matrix(t_matrix *matrix)
 {
 	int			i;
 	int			j;
@@ -33,7 +33,7 @@ static t_matrix	*compute_cofactor_matrix(t_matrix *matrix)
 	return (cofactor_matrix);
 }
 
-static void	scale_matrix(t_matrix *matrix, double scalar)
+void	scale_matrix(t_matrix *matrix, double scalar)
 {
 	int		i;
 	int		j;
@@ -51,20 +51,31 @@ static void	scale_matrix(t_matrix *matrix, double scalar)
 	}
 }
 
+bool	invertable(t_matrix *matrix)
+{
+	matrix->is_invertible = 0;
+	if (matrix->rows != matrix->cols)
+		return (false);
+	matrix->det = determinant(matrix);
+	if (matrix->det != 0)
+	{
+		matrix->is_invertible = 1;
+		return (true);
+	}
+	return (false);
+}
+
 t_matrix	*invert_matrix(t_matrix *matrix)
 {
-	double		det;
 	t_matrix	*cofactor_matrix;
 	t_matrix	*inverse;
 
-	check_invertibility(matrix);
-	if (!matrix->is_invertible)
+	if (!(invertable(matrix)))
 		return (NULL);
-	det = determinant(matrix);
 	cofactor_matrix = compute_cofactor_matrix(matrix);
 	inverse = transpose_matrix(cofactor_matrix);
 	free_matrix(cofactor_matrix);
-	scale_matrix(inverse, 1.0 / det);
+	scale_matrix(inverse, 1.0 / matrix->det);
 	return (inverse);
 }
 
@@ -88,7 +99,7 @@ t_matrix	*invert_matrix(t_matrix *matrix)
 // 	printf("\nMatrix A:\n");
 // 	print_matrix(a);
 
-// 	check_invertibility(a);
+// 	invertable(a);
 // 	if (!a->is_invertible)
 // 	{
 // 		printf("\nMatrix A is not invertible (determinant is 0).\n");
@@ -147,7 +158,7 @@ t_matrix	*invert_matrix(t_matrix *matrix)
 // 	print_matrix(c);
 
 // 	// Step 2: Compute inverse(B)
-// 	check_invertibility(b);
+// 	invertable(b);
 // 	if (!b->is_invertible)
 // 	{
 // 		printf("\nMatrix B is not invertible.\n");
@@ -184,7 +195,7 @@ t_matrix	*invert_matrix(t_matrix *matrix)
 // 	print_matrix(result);
 
 // 	// Step 4: Check if result == A
-// 	if (compare_matrices(result, a))
+// 	if (equal_matrix(result, a))
 // 		printf("\n✅ C * inverse(B) is equal to A.\n");
 // 	else
 // 		printf("\n❌ C * inverse(B) is NOT equal to A.\n");

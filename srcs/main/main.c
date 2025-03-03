@@ -46,7 +46,7 @@
 // 	b = create_matrix(2, 2, 0);
 // 	fill_matrix(a);
 // 	fill_matrix(b);
-// 	if (compare_matrices(a, b))
+// 	if (equal_matrix(a, b))
 // 		printf("Equal!\n");
 // 	else
 // 		printf("Not Equal\n");
