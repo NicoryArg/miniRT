@@ -65,11 +65,11 @@ t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
 {
 	t_matrix	*result;
 
-	// if (a->cols != b->rows)
-	// {
-	// 	printf("Error: Matrices cannot be multiplied (A columns != B rows)\n");
-	// 	return (NULL);
-	// }
+	if (a->cols != b->rows)
+	{
+		printf("Error: Matrices cannot be multiplied (A columns != B rows)\n");
+		return (NULL);
+	}
 	result = create_matrix(a->rows, b->cols, 0);
 	compute_product_matrix(a, b, result);
 	return (result);
