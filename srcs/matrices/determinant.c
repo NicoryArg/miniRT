@@ -94,31 +94,31 @@ double	determinant(t_matrix *matrix)
 // 	return (0);
 // }
 
-int	main()
-{
-	//main to test determinant any square matrix
-	t_matrix	*a;
-	double		det;
+// int	main()
+// {
+// 	//main to test determinant any square matrix
+// 	t_matrix	*a;
+// 	double		det;
 
-	printf("Enter size of square matrix A: ");
-	int size;
-	scanf("%d", &size);
-	if (size < 2)
-	{
-		printf("Error: Matrix must be at least 2x2.\n");
-		return (1);
-	}
-	a = create_matrix(size, size, 0);
-	printf("\nFill matrix A:\n");
-	fill_matrix(a);
-	printf("\nMatrix A:\n");
-	print_matrix(a);
-	det = determinant(a);
-	printf("And determinant(A) = %.0f\n", det);
+// 	printf("Enter size of square matrix A: ");
+// 	int size;
+// 	scanf("%d", &size);
+// 	if (size < 2)
+// 	{
+// 		printf("Error: Matrix must be at least 2x2.\n");
+// 		return (1);
+// 	}
+// 	a = create_matrix(size, size, 0);
+// 	printf("\nFill matrix A:\n");
+// 	fill_matrix(a);
+// 	printf("\nMatrix A:\n");
+// 	print_matrix(a);
+// 	det = determinant(a);
+// 	printf("And determinant(A) = %.0f\n", det);
 
-	free_matrix(a);
-	return (0);
-}
+// 	free_matrix(a);
+// 	return (0);
+// }
 
 // int	main()
 // {

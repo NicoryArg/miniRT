@@ -89,6 +89,23 @@ t_matrix	*transpose_matrix(t_matrix *input);
 void		free_matrix(t_matrix *matrix);
 
 //#############################################
+//#############TRANSFORMATIONS#################
+//#############################################
+//transformations.c
+/**
+ * @brief creates and returns a translation matrix
+ */
+t_matrix	*translate(double x, double y, double z);
+
+//conversion.c
+/**
+ * @brief grabs values from a tuple and adds them to
+ * a 1x4 matrix
+ */
+t_matrix	*tuple_to_matrix(t_tuple *tup);
+
+
+//#############################################
 //##################TUPLE######################
 //#############################################
 //operations.c

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transformations.c                                  :+:      :+:    :+:   */
+/*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 17:20:47 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/04 14:20:23 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/04 14:52:31 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/04 15:09:02 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_matrix	*translate(double x, double y, double z)
+t_matrix	*tuple_to_matrix(t_tuple *tup)
 {
 	t_matrix	*matrix;
 
-	matrix = create_identity_matrix(4);
-	matrix->values[0][3] = x;
-	matrix->values[1][3] = y;
-	matrix->values[2][3] = z;
-	return (matrix);
+	matrix = create_matrix(4, 1, 1);
+	matrix->values[0][0] = tup->x;
+	matrix->values[1][0] = tup->y;
+	matrix->values[2][0] = tup->z;
+	matrix->values[3][0] = tup->w;
+	return(matrix);
 }
