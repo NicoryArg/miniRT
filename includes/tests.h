@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/06 14:03:06 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:59:31 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void		print_matrix(t_matrix *matrix);
  * @return 0 if all tests pass, 1 if any test fails
  */
 int			rotate_test(int x, int y, int z);
+//test_tuples.c
+
+int	t_matrix_to_tuple(int run);
+int	t_tuple_to_matrix(int run);
 
 
 #endif

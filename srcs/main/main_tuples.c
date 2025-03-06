@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_tuples.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
+/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:36:00 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 20:36:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/06 14:50:27 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/06 15:10:59 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// int	main(void)
-// {
-// 	t_matrix	*a;
-// 	t_matrix	*b;
-
-// 	a = create_matrix(2, 2, 0);
-// 	b = create_matrix(2, 2, 0);
-// 	fill_matrix(a);
-// 	fill_matrix(b);
-// 	if (equal_matrix(a, b))
-// 		printf("Equal!\n");
-// 	else
-// 		printf("Not Equal\n");
-// 	return (0);
-// }
+int	main(void)
+{
+	t_tuple_to_matrix(0);
+	t_matrix_to_tuple(0);
+	printf(R_B"END OF TESTS\n"RES);
+	return (0);
+}
