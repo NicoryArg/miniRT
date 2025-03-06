@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.c                                        :+:      :+:    :+:   */
+/*   main_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:23:55 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/06 14:21:14 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:11:42 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //#############################################################################
 //#############################################################################
 
-static int	translate_test(int run)
+int	translate_test(int run)
 {
 	if (run == 0)
 		return (0);
@@ -70,7 +70,7 @@ static int	translate_test(int run)
 	return (0);
 }
 
-static int	scale_test(int run)
+int	scale_test(int run)
 {
 	if (run == 0)
 		return (0);
@@ -134,13 +134,14 @@ static int	scale_test(int run)
 	return (0);
 }
 
-int	main(void)
-{
-	if (translate_test(0)) //1 to run , 0 to skip
-		printf("Error: translate_test failed\n");
-	if (scale_test(0))	//1 to run, 0 to skip
-		printf("Error: scale_test failed\n");
-	if (rotate_test(0, 0, 0)) //1 to run, 0 to skip
-		printf("Error: rotate_test failed\n");
-	return (0);
-}
+// int	main(void)
+// {
+// 	if (translate_test(0)) //1 to run , 0 to skip
+// 		printf("Error: translate_test failed\n");
+// 	if (scale_test(0))	//1 to run, 0 to skip
+// 		printf("Error: scale_test failed\n");
+// 	if (rotate_test(0, 0, 0)) //1 to run, 0 to skip
+// 		printf("Error: rotate_test failed\n");
+//	printf(R_B"END OF TESTS\n"RES);
+// 	return (0);
+// }

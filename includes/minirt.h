@@ -105,6 +105,7 @@ t_matrix	*rotate_z(double rad);
  * a 1x4 matrix
  */
 t_matrix	*tuple_to_matrix(t_tuple *tup);
+t_tuple		*matrix_to_tuple(t_matrix *matrix);
 
 
 //#############################################
