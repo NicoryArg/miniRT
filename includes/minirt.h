@@ -18,6 +18,7 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include "tests.h"
 
 # ifndef M_PI
 #  define M_PI 3.1415926535897932384626433
@@ -49,13 +50,7 @@ typedef struct s_matrix
 	double	**values;
 }	t_matrix;
 
-//#############################################
-//####################DEBUG####################
-//#############################################
-//print.c
 
-void		print_tuple(t_tuple *tuple, char *name);
-void		print_matrix(t_matrix *matrix);
 
 //#############################################
 //###################MATRICES##################

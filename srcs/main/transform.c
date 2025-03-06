@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:23:55 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/06 12:44:55 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:21:14 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 //#############################################################################
 //#############################################################################
 
-static int	translate_test()
+static int	translate_test(int run)
 {
+	if (run == 0)
+		return (0);
 	t_matrix	*transform = translate(5, -3, 2);
 	t_matrix	*inverse = invert_matrix(transform);
 	t_matrix	*result = NULL;
@@ -68,8 +70,10 @@ static int	translate_test()
 	return (0);
 }
 
-static int	scale_test()
+static int	scale_test(int run)
 {
+	if (run == 0)
+		return (0);
 	t_matrix	*transform = scale(2, 3, 4);
 	t_matrix	*inverse = invert_matrix(transform);
 	t_matrix	*result = NULL;
@@ -113,12 +117,12 @@ static int	scale_test()
 	printf("##### TEST 4 #####\n"RES);
 	printf("Reflection is scaling a POINT by a negative value\n");
 	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
 	free_matrix(transform);
 	free(point);
 	//adapt values to match example in book
 	point = make_tuple(2, 3, 4, POINT);
 	p = tuple_to_matrix(point);
+	print_matrix(p);
 	transform = scale(-1, 1, 1);
 	result = multiply_matrices(transform, p);
 	printf(GR"RESULT:\n"RES);
@@ -130,112 +134,13 @@ static int	scale_test()
 	return (0);
 }
 
-static int	rotate_x_test()
-{
-	t_matrix	*half_quarter = rotate_x(M_PI / 4);
-	t_matrix	*full_quarter = rotate_x(M_PI / 2);
-	t_matrix	*inverse = invert_matrix(half_quarter);
-	t_tuple		*point = make_tuple(0, 1, 0, POINT);
-	t_matrix	*p = tuple_to_matrix(point);
-	t_matrix	*result = NULL;
-
-	if (!half_quarter || !full_quarter || !point || !p)
-	{
-		printf("Error: one or more arguments are NULL\n");
-		return (1);
-	}
-	printf(B_B"##############################################################\n");
-	printf("################  [R O T A T I O N  X]  #########################\n");
-	printf("##############################################################\n"CYAN);
-	printf("##### TEST 1 #####\n"RES);
-	printf("Rotating a point half a quarter around the x-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(half_quarter, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
-	printf(B_B"##############################################################\n"CYAN);
-	printf("##### TEST 2 #####\n"RES);
-	printf("Rotating a point full quarter around the x-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(full_quarter, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
-	printf(B_B"##############################################################\n"CYAN);
-	printf("##### TEST 3 #####\n"RES);
-	printf(R_B"[INVERSE]"RES" Rotating a point half a quarter around the x-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(inverse, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
-	free_matrix(p);
-	free_matrix(result);
-	free_matrix(half_quarter);
-	free_matrix(full_quarter);
-	free_matrix(inverse);
-	return (0);
-}
-
-static int	rotate_y_test()
-{
-	t_matrix	*half_quarter = rotate_x(M_PI / 4);
-	t_matrix	*full_quarter = rotate_x(M_PI / 2);
-	t_tuple		*point = make_tuple(0, 0, 1, POINT);
-	t_matrix	*p = tuple_to_matrix(point);
-	t_matrix	*result = NULL;
-
-	if (!half_quarter || !full_quarter || !point || !p)
-	{
-		printf("Error: one or more arguments are NULL\n");
-		return (1);
-	}
-	printf(B_B"##############################################################\n");
-	printf("################  [R O T A T I O N  Y]  #########################\n");
-	printf("##############################################################\n"CYAN);
-	printf("##### TEST 1 #####\n"RES);
-	printf("Rotating a point half a quarter around the y-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(half_quarter, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
-	printf(B_B"##############################################################\n"CYAN);
-	printf("##### TEST 2 #####\n"RES);
-	printf("Rotating a point full quarter around the y-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(full_quarter, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
-	return (0);
-}
-
 int	main(void)
 {
-	// if (translate_test())
-	// {
-	// 	printf("Error: translate_test failed\n");
-	// 	return (1);
-	// }
-	// if (scale_test())
-	// {
-	// 	printf("Error: scale_test failed\n");
-	// 	return (1);
-	// }
-	if (rotate_x_test())
-	{
-		printf("Error: rotate_x_test failed\n");
-		return (1);
-	}
-	if (rotate_y_test())
-	{
-		printf("Error: rotate_y_test failed\n");
-		return (1);
-	}
-	(void)translate_test;
-	(void)scale_test;
-	(void)rotate_x_test;
+	if (translate_test(0)) //1 to run , 0 to skip
+		printf("Error: translate_test failed\n");
+	if (scale_test(0))	//1 to run, 0 to skip
+		printf("Error: scale_test failed\n");
+	if (rotate_test(0, 0, 0)) //1 to run, 0 to skip
+		printf("Error: rotate_test failed\n");
 	return (0);
 }
