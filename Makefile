@@ -54,7 +54,7 @@ TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 # TOKEN_FILES			= $(addprefix tokens/, arg_lst.c expand_token.c fix_input_utils.c fix_input.c identify.c lexer.c process_tokens.c quotes.c valid.c)
 # UTILS_FILES			= $(addprefix utils/, cleanup.c execution_utils.c test_funcs.c free_ast.c free.c validate_utils.c)
 
-SRC_FILES		= $(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(MAIN_FILES) $(TRANSFORM_FILES) $(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
+SRC_FILES		= $(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(MAIN_FILES) $(TRANSFORM_FILES) #$(EXEC_FILES) $(EXEC_HANDLER_FILES) $(PARSING_FILES) $(SIGNALS_FILES) $(SYNTAX_FILES) $(TOKEN_FILES) $(UTILS_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))

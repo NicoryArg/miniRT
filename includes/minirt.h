@@ -19,6 +19,9 @@
 # include <unistd.h>
 # include <stdbool.h>
 
+# ifndef M_PI
+#  define M_PI 3.1415926535897932384626433
+# endif
 # define EPSILON 0.00001
 
 typedef enum tuple_type
@@ -97,6 +100,9 @@ void		free_matrix(t_matrix *matrix);
  */
 t_matrix	*translate(double x, double y, double z);
 t_matrix	*scale(double x, double y, double z);
+t_matrix	*rotate_x(double rad);
+t_matrix	*rotate_y(double rad);
+t_matrix	*rotate_z(double rad);
 
 //conversion.c
 /**
@@ -145,6 +151,7 @@ bool		ft_equal(double a, double b);
 void		ft_negate(t_tuple *tup);
 
 # define B_B "\033[1;34m"
+# define R_B "\033[1;31m"
 # define CYAN "\033[0;36m"
 # define GR "\033[0;32m"
 # define RES "\033[0m"
