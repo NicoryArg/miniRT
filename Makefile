@@ -43,7 +43,7 @@ SRCS_DIR			= srcs/
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c utils.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
-DEBUG_FILES			= $(addprefix debug/, print.c test_rotate.c test_scale.c test_translate.c)
+DEBUG_FILES			= $(addprefix debug/, print.c test_rotate.c )
 MAIN_FILES			= $(addprefix main/, main.c transform.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 # EXEC_FILES			= $(addprefix execution/, execute_cmd.c  execute_new_minish.c  execute_redir_cmd.c  external_exec.c  external_exec_utils.c  start_shell.c)
