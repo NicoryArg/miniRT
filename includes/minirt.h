@@ -18,7 +18,11 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include "tests.h"
 
+# ifndef M_PI
+#  define M_PI 3.1415926535897932384626433
+# endif
 # define EPSILON 0.00001
 
 typedef enum tuple_type
@@ -42,45 +46,66 @@ typedef struct s_matrix
 	int		is_tuple;
 	int		is_identity;
 	int		is_invertible;
+	double	det;
 	double	**values;
 }	t_matrix;
 
-//#############################################
-//##################DEBUG######################
-//#############################################
-//print.c
 
-void		print_tuple(t_tuple *tuple, char *name);
 
 //#############################################
-//##################MATH_UTILS#################
+//###################MATRICES##################
 //#############################################
-//compare_matrix.c
-int			compare_matrices(t_matrix *a, t_matrix *b);
 
-//create_matrix.c
+//determinant.c
+double		minor(t_matrix *matrix, int row, int col);
+double		cofactor(t_matrix *matrix, int row, int col);
+double		determinant_base_case(t_matrix *matrix);
+double		determinant(t_matrix *matrix);
+
+//matrix_create.c
 t_matrix	*create_matrix(int rows, int cols, int is_tuple);
 void		fill_matrix(t_matrix *matrix);
-void		print_matrix(t_matrix *matrix);
-void		free_matrix(t_matrix *matrix);
-void		copy_submatrix_values(t_matrix *matrix, t_matrix *result,
-				int remove_row, int remove_col);
+t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col);
+void		fill_submatrix(t_matrix *matrix, t_matrix *sub,
+				int ignore_row, int ignore_col);
+t_matrix	*create_identity_matrix(int size);
 
-//invert_matrix.c
+//matrix_invert.c
+t_matrix	*compute_cofactor_matrix(t_matrix *matrix);
+void		scale_matrix(t_matrix *matrix, double scalar);
+bool		invertable(t_matrix *matrix);
 t_matrix	*invert_matrix(t_matrix *matrix);
 
-//transformation_utils.c
-t_matrix	*create_identity_matrix(int size);
+//matrix_utils.c
+int			equal_matrix(t_matrix *a, t_matrix *b);
+void		compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result);
+t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
 t_matrix	*multiply_by_identity(t_matrix *input);
 t_matrix	*transpose_matrix(t_matrix *input);
 
-//transformation.c
-t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
-t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col);
-double		minor(t_matrix *matrix, int row, int col);
-double		cofactor(t_matrix *matrix, int row, int col);
-double		determinant(t_matrix *matrix);
-void		check_invertibility(t_matrix *matrix);
+//matrix_free.c
+void		free_matrix(t_matrix *matrix);
+
+//#############################################
+//#############TRANSFORMATIONS#################
+//#############################################
+//transformations.c
+/**
+ * @brief creates and returns a translation matrix
+ */
+t_matrix	*translate(double x, double y, double z);
+t_matrix	*scale(double x, double y, double z);
+t_matrix	*rotate_x(double rad);
+t_matrix	*rotate_y(double rad);
+t_matrix	*rotate_z(double rad);
+
+//conversion.c
+/**
+ * @brief grabs values from a tuple and adds them to
+ * a 1x4 matrix
+ */
+t_matrix	*tuple_to_matrix(t_tuple *tup);
+
 
 //#############################################
 //##################TUPLE######################
@@ -119,5 +144,11 @@ bool		is_vector(t_tuple *tuple);
 bool		equal_tuple(t_tuple *t1, t_tuple *t2);
 bool		ft_equal(double a, double b);
 void		ft_negate(t_tuple *tup);
+
+# define B_B "\033[1;34m"
+# define R_B "\033[1;31m"
+# define CYAN "\033[0;36m"
+# define GR "\033[0;32m"
+# define RES "\033[0m"
 
 #endif

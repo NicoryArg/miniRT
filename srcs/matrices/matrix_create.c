@@ -58,69 +58,71 @@ void	fill_matrix(t_matrix *matrix)
 	}
 }
 
-void	print_matrix(t_matrix *matrix)
+t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
 {
-	int		i;
-	int		j;
+	t_matrix	*result;
 
-	i = 0;
-	while (i < matrix->rows)
+	if (matrix->rows < 2 || matrix->cols < 2)
 	{
-		printf("|");
-		j = 0;
+		printf("Error:not valid matrix smaller than 2x2.\n");
+		return (NULL);
+	}
+	result = create_matrix(matrix->rows - 1, matrix->cols - 1, 0);
+	fill_submatrix(matrix, result, remove_row, remove_col);
+	return (result);
+}
+
+void	fill_submatrix(t_matrix *matrix, t_matrix *sub,
+	int ignore_row, int ignore_col)
+	{
+		int	i;
+		int	j;
+		int	sub_i;
+		int	sub_j;
+
+		sub_i = 0;
+		i = 0;
+		while (i < matrix->rows)
+		{
+			if (i == ignore_row)
+			{
+				i++;
+				continue ;
+			}
+			sub_j = 0;
+			j = 0;
 		while (j < matrix->cols)
 		{
-			if (matrix->values[i][j] == (int)matrix->values[i][j])
-				printf(" %6.0f |", matrix->values[i][j]);
+			if (j != ignore_col)
+			sub->values[sub_i][sub_j++] = matrix->values[i][j];
+			j++;
+		}
+		sub_i++;
+		i++;
+	}
+}
+
+t_matrix	*create_identity_matrix(int size)
+{
+	int			i;
+	int			j;
+	t_matrix	*identity;
+
+	identity = create_matrix(size, size, 0);
+	identity->is_identity = 1;
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (i == j)
+				identity->values[i][j] = 1.0;
 			else
-				printf(" %10.5f |", matrix->values[i][j]);
+				identity->values[i][j] = 0.0;
 			j++;
 		}
-		printf("\n");
 		i++;
 	}
-}
-
-void	free_matrix(t_matrix *matrix)
-{
-	int		i;
-
-	i = 0;
-	while (i < matrix->rows)
-	{
-		free(matrix->values[i]);
-		i++;
-	}
-	free(matrix->values);
-	free(matrix);
-}
-
-void	copy_submatrix_values(t_matrix *matrix, t_matrix *result,
-			int remove_row, int remove_col)
-{
-	int	i;
-	int	j;
-	int	new_i;
-	int	new_j;
-
-	new_i = 0;
-	i = 0;
-	while (i < matrix->rows)
-	{
-		if (i == remove_row)
-		{
-			i++;
-			continue ;
-		}
-		new_j = 0;
-		j = 0;
-		while (j < matrix->cols)
-		{
-			if (j != remove_col)
-				result->values[new_i][new_j++] = matrix->values[i][j];
-			j++;
-		}
-		new_i++;
-		i++;
-	}
+	return (identity);
 }

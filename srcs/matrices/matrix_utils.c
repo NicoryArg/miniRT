@@ -1,40 +1,78 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transformation_utils.c                             :+:      :+:    :+:   */
+/*   compare_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:24:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 20:24:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 20:22:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/02/24 20:23:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_matrix	*create_identity_matrix(int size)
+int	equal_matrix(t_matrix *a, t_matrix *b)
 {
-	int			i;
-	int			j;
-	t_matrix	*identity;
+	int		i;
+	int		j;
 
-	identity = create_matrix(size, size, 0);
-	identity->is_identity = 1;
+	if (a->rows != b->rows || a->cols != b->cols)
+	{
+		return (0);
+	}
 	i = 0;
-	while (i < size)
+	while (i < a->rows)
 	{
 		j = 0;
-		while (j < size)
+		while (j < a->cols)
 		{
-			if (i == j)
-				identity->values[i][j] = 1.0;
-			else
-				identity->values[i][j] = 0.0;
+			if (!ft_equal(a->values[i][j], b->values[i][j]))
+				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (identity);
+	return (1);
+}
+
+void	compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	while (i < a->rows)
+	{
+		j = 0;
+		while (j < b->cols)
+		{
+			result->values[i][j] = 0;
+			k = 0;
+			while (k < a->cols)
+			{
+				result->values[i][j] += a->values[i][k] * b->values[k][j];
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
+{
+	t_matrix	*result;
+
+	if (a->cols != b->rows)
+	{
+		printf("Error: Matrices cannot be multiplied (A columns != B rows)\n");
+		return (NULL);
+	}
+	result = create_matrix(a->rows, b->cols, 0);
+	compute_product_matrix(a, b, result);
+	return (result);
 }
 
 t_matrix	*multiply_by_identity(t_matrix *input)
@@ -84,41 +122,25 @@ t_matrix	*transpose_matrix(t_matrix *input)
 // int	main()
 // {
 // 	t_matrix	*a;
-// 	t_matrix	*transposed;
-// 	t_matrix	*identity;
-// 	t_matrix	*identity_transposed;
-// 	int			size;
+// 	t_matrix	*b;
+// 	int			result;
 
-// 	// Example for normal matrix
-// 	printf("Enter the size of the square matrix: ");
-// 	scanf("%d", &size);
-// 	a = create_matrix(size, size, 0);
+// 	a = create_matrix(3, 3, 0);
+// 	b = create_matrix(3, 3, 0);
 // 	printf("\nFill matrix A:\n");
 // 	fill_matrix(a);
+// 	printf("\nFill matrix B:\n");
+// 	fill_matrix(b);
 // 	printf("\nMatrix A:\n");
 // 	print_matrix(a);
-// 	transposed = transpose_matrix(a);
-// 	printf("\nTransposed Matrix A:\n");
-// 	print_matrix(transposed);
-
-// 	// Example for identity matrix
-// 	identity = create_identity_matrix(size);
-// 	identity_transposed = transpose_matrix(identity);
-// 	printf("\nIdentity Matrix:\n");
-// 	print_matrix(identity);
-// 	printf("\nTransposed Identity Matrix:\n");
-// 	print_matrix(identity_transposed);
-
-// 	// Check if transposing an identity matrix returns itself
-// 	if (compare_matrices(identity, identity_transposed))
-// 		printf("\nTranspose of identity matrix is still the identity matrix ✅\n");
+// 	printf("\nMatrix B:\n");
+// 	print_matrix(b);
+// 	result = equal_matrix(a, b);
+// 	if (result == 1)
+// 		printf("\nMatrices are equal.\n");
 // 	else
-// 		printf("\nTranspose of identity matrix failed ❌\n");
-
-// 	// Free memory
+// 		printf("\nMatrices are NOT equal.\n");
 // 	free_matrix(a);
-// 	free_matrix(transposed);
-// 	free_matrix(identity);
-// 	free_matrix(identity_transposed);
+// 	free_matrix(b);
 // 	return (0);
 // }

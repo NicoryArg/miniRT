@@ -12,59 +12,6 @@
 
 #include "../../includes/minirt.h"
 
-static void	compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	while (i < a->rows)
-	{
-		j = 0;
-		while (j < b->cols)
-		{
-			result->values[i][j] = 0;
-			k = 0;
-			while (k < a->cols)
-			{
-				result->values[i][j] += a->values[i][k] * b->values[k][j];
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
-{
-	t_matrix	*result;
-
-	if (a->cols != b->rows)
-	{
-		printf("Error: Matrices cannot be multiplied (A columns != B rows)\n");
-		return (NULL);
-	}
-	result = create_matrix(a->rows, b->cols, 0);
-	compute_product_matrix(a, b, result);
-	return (result);
-}
-
-t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
-{
-	t_matrix	*result;
-
-	if (matrix->rows < 2 || matrix->cols < 2)
-	{
-		printf("Error:not valid matrix smaller than 2x2.\n");
-		return (NULL);
-	}
-	result = create_matrix(matrix->rows - 1, matrix->cols - 1, 0);
-	copy_submatrix_values(matrix, result, remove_row, remove_col);
-	return (result);
-}
-
 double	minor(t_matrix *matrix, int row, int col)
 {
 	t_matrix	*sub;
@@ -95,7 +42,7 @@ double	cofactor(t_matrix *matrix, int row, int col)
 	return (sign * minor_value);
 }
 
-static double	determinant_base_case(t_matrix *matrix)
+double	determinant_base_case(t_matrix *matrix)
 {
 	return ((matrix->values[0][0] * matrix->values[1][1]) -
 			(matrix->values[0][1] * matrix->values[1][0]));
@@ -105,7 +52,6 @@ double	determinant(t_matrix *matrix)
 {
 	int			col;
 	double		det;
-	t_matrix	*sub;
 
 	if (matrix->rows != matrix->cols)
 	{
@@ -118,25 +64,10 @@ double	determinant(t_matrix *matrix)
 	col = 0;
 	while (col < matrix->cols)
 	{
-		sub = submatrix(matrix, 0, col);
-		if (sub)
-		{
-			det += matrix->values[0][col] * cofactor(matrix, 0, col);
-			free_matrix(sub);
-		}
+		det += matrix->values[0][col] * cofactor(matrix, 0, col);
 		col++;
 	}
 	return (det);
-}
-
-void	check_invertibility(t_matrix *matrix)
-{
-	if (matrix->rows != matrix->cols)
-	{
-		matrix->is_invertible = 0;
-		return ;
-	}
-	matrix->is_invertible = (determinant(matrix) != 0);
 }
 
 // int	main()
@@ -157,7 +88,7 @@ void	check_invertibility(t_matrix *matrix)
 // 	fill_matrix(a);
 // 	printf("\nMatrix A:\n");
 // 	print_matrix(a);
-// 	check_invertibility(a); // ✅ Check if matrix is invertible
+// 	invertable(a); // ✅ Check if matrix is invertible
 // 	free_matrix(a);
 // 	printf("Matrix A is %s invertible.\n", a->is_invertible ? "" : "NOT");
 // 	return (0);
@@ -168,8 +99,6 @@ void	check_invertibility(t_matrix *matrix)
 // 	//main to test determinant any square matrix
 // 	t_matrix	*a;
 // 	double		det;
-// 	double		cof;
-// 	int			col;
 
 // 	printf("Enter size of square matrix A: ");
 // 	int size;
@@ -184,16 +113,6 @@ void	check_invertibility(t_matrix *matrix)
 // 	fill_matrix(a);
 // 	printf("\nMatrix A:\n");
 // 	print_matrix(a);
-
-// 	printf("\nCalculating cofactors for row 0...\n");
-// 	col = 0;
-// 	while (col < size)
-// 	{
-// 		cof = cofactor(a, 0, col);
-// 		printf("Then cofactor(A, 0, %d) = %.0f\n", col, cof);
-// 		col++;
-// 	}
-
 // 	det = determinant(a);
 // 	printf("And determinant(A) = %.0f\n", det);
 
@@ -293,14 +212,14 @@ void	check_invertibility(t_matrix *matrix)
 // 	if (rows < 2 || cols < 2)
 // 	{
 // 		printf("\nError: Cannot extract a
-//			submatrix from a matrix smaller than 2x2.\n");
+// submatrix from a matrix smaller than 2x2.\n");
 // 		free_matrix(a);
 // 		return (1);
 // 	}
 // 	printf("\nEnter the row and column to remove: ");
 // 	scanf("%d %d", &remove_row, &remove_col);
 // 	if (remove_row < 0 || remove_row >= rows
-//			|| remove_col < 0 || remove_col >= cols)
+// 			|| remove_col < 0 || remove_col >= cols)
 // 	{
 // 		printf("\nError: Row or column out of bounds.\n");
 // 		free_matrix(a);
@@ -310,7 +229,7 @@ void	check_invertibility(t_matrix *matrix)
 // 	if (sub)
 // 	{
 // 		printf("\nSubmatrix (without row %d and column %d):\n",
-//			remove_row, remove_col);
+// 			remove_row, remove_col);
 // 		print_matrix(sub);
 // 		free_matrix(sub);
 // 	}
