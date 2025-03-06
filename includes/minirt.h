@@ -96,6 +96,7 @@ void		free_matrix(t_matrix *matrix);
  * @brief creates and returns a translation matrix
  */
 t_matrix	*translate(double x, double y, double z);
+t_matrix	*scale(double x, double y, double z);
 
 //conversion.c
 /**
@@ -142,5 +143,10 @@ bool		is_vector(t_tuple *tuple);
 bool		equal_tuple(t_tuple *t1, t_tuple *t2);
 bool		ft_equal(double a, double b);
 void		ft_negate(t_tuple *tup);
+
+# define B_B "\033[1;34m"
+# define CYAN "\033[0;36m"
+# define GR "\033[0;32m"
+# define RES "\033[0m"
 
 #endif
