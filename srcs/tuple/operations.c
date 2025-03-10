@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:47:13 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 15:44:32 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:43:04 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,24 @@ t_tuple	*diff_tuple(t_tuple *t1, t_tuple *t2)
  * a factor of `t` while maintaining their direction
  * @note can be used for division by setting t as `1/t`
  */
-t_tuple	*ft_multiply(t_tuple *vector, double t)
+t_tuple	*mult_tuple(t_tuple *vector, double t)
 {
 	t_tuple	*res;
 
 	if (!vector)
 	{
-		printf("[DEBUG] `ft_multiply` -> NULL tuple detected\n");//	debugging
+		printf("[DEBUG] `mult_tuple` -> NULL tuple detected\n");//	debugging
 		exit (1);
 	}
 	if (vector->w == POINT)
 	{
-		printf("[DEBUG] `ft_multiply` -> multiplying POINT\n");//	debugging
+		printf("[DEBUG] `mult_tuple` -> multiplying POINT\n");//	debugging
 		exit (1);
 	}
 	res = new_tuple();
 	if (!res)
 	{
-		printf("[DEBUG] `ft_multiply` -> malloc failure\n");//	debugging
+		printf("[DEBUG] `mult_tuple` -> malloc failure\n");//	debugging
 		return (NULL);
 	}
 	res->w = vector->w;

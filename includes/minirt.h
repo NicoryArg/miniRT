@@ -41,19 +41,23 @@ typedef struct s_tuple
 
 typedef struct s_matrix
 {
-	int		rows;
-	int		cols;
-	int		is_tuple;
-	int		is_identity;
-	int		is_invertible;
-	double	det;
-	double	**values;
+	int			rows;
+	int			cols;
+	int			is_tuple;
+	int			is_identity;
+	int			is_invertible;
+	double		det;
+	double		**values;
 }	t_matrix;
 
-
+typedef struct s_ray
+{
+	t_tuple		*origin;
+	t_tuple		*direction;
+}	t_ray;
 
 //#############################################
-//###################MATRICES##################
+//#################MATRICES####################
 //#############################################
 
 //determinant.c
@@ -87,6 +91,19 @@ t_matrix	*transpose_matrix(t_matrix *input);
 void		free_matrix(t_matrix *matrix);
 
 //#############################################
+//##################RAYS#######################
+//#############################################
+/**
+ * @brief creates a ray with an origin and direction
+ * @param origin the starting point of the ray
+ * @param direction the direction the ray is pointing
+ * @return a pointer to the newly created ray
+ */
+t_ray		*ray(t_tuple *origin, t_tuple *direction);
+t_tuple		*get_point(t_ray *ray, double t);
+
+
+//#############################################
 //#############TRANSFORMATIONS#################
 //#############################################
 //transformations.c
@@ -118,7 +135,7 @@ t_tuple		*matrix_to_tuple(t_matrix *matrix);
  */
 t_tuple		*add_tuple(t_tuple *t1, t_tuple *t2);
 t_tuple		*diff_tuple(t_tuple *t1, t_tuple *t2);
-t_tuple		*ft_multiply(t_tuple *vector, double t);
+t_tuple		*mult_tuple(t_tuple *vector, double t);
 double		ft_sqr(double x);
 double		magnitude(t_tuple *v);
 

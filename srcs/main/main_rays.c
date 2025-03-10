@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_transform.c                                   :+:      :+:    :+:   */
+/*   main_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 17:23:55 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:17:36 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/10 19:48:26 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/10 20:19:16 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// int	main(void)
-// {
-// 	if (translate_test(0)) //1 to run , 0 to skip
-// 		printf("Error: translate_test failed\n");
-// 	if (scale_test(0))	//1 to run, 0 to skip
-// 		printf("Error: scale_test failed\n");
-// 	if (rotate_test(0, 0, 0)) //1 to run, 0 to skip
-// 		printf("Error: rotate_test failed\n");
-// 	if (chained_test(0))
-// 		printf("Error: chained_test failed\n");
-// 	printf(R_B"END OF TRANSFORM TESTS\n"RES);
-// 	return (0);
-// }
+int	main()
+{
+	if (position_test(1))
+		printf(R_B"Error:"RES" position_test failed\n");
+	printf(R_B"END OF RAYS TESTS\n"RES);
+	return (0);
+}

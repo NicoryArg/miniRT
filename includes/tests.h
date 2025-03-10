@@ -6,13 +6,14 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 17:08:34 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:18:08 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TESTS_H
 # define TESTS_H
 
+# include <string.h>
 # include "minirt.h"
 
 typedef struct s_tuple t_tuple;
@@ -25,6 +26,16 @@ typedef struct s_matrix t_matrix;
 
 void		print_tuple(t_tuple *tuple, char *name);
 void		print_matrix(t_matrix *matrix);
+void		print_test_banner(const char *word);
+void		print_test_number(int *i);
+
+//test_rays.c
+/**
+ * @brief runs tests for position (p.58)
+ * @note tests for `get_point(t_ray *ray, double t)`
+ */
+int		position_test(int run);
+
 
 //test_transform.c
 /**
