@@ -66,32 +66,44 @@ OBJS_DIR		= objs/
 OBJ_FILES		= $(SRC_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
 
+# Objects
+OBJS_DIR		= objs/
+OBJ_FILES		= $(SRC_FILES:.c=.o)
+OBJS			= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
+
+# Platform-dependent compilation
+ifeq ($(OS), Linux)
+	MLX_DIR			= mlx_linux
+	MLX				= $(MLX_DIR)/libmlx.a
+	LINKER			+= -lmlx -lm -lz -lXext -lX11 -L $(MLX_DIR)
+	INCLUDES_FLAG	+= -I$(MLX_DIR)
+else
+	MLX_DIR			= mlx_macos
+	MLX				= $(MLX_DIR)/libmlx.a
+	LINKER			+= -lmlx -lm -framework OpenGl -framework Appkit -L $(MLX_DIR)
+	INCLUDES_FLAG	+= -I$(MLX_DIR)
+endif
 
 # Default target to build everything
-all : $(LIBFT) $(OBJS_DIR) $(NAME)
+all : $(LIBFT) $(MLX) $(OBJS_DIR) $(NAME)
 
 $(LIBFT) :
 	@echo $(CYAN) " - Making Libft..." $(RESET)
 	@$(MAKE) $(LIBFT_DIR)
 	@echo $(GREEN) " - Libft Ready!" $(RESET)
 
+$(MLX) :
+	@echo $(CYAN) " - Making mlx..." $(RESET)
+	@$(MAKE) $(MLX_DIR) > /dev/null 2>&1;
+	@echo $(GREEN) " - Made mlx!" $(RESET)
 
-
-$(OBJS_DIR) :
+$(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)
 	@$(MKDIR) $(OBJS_DIR)/matrices
 	@$(MKDIR) $(OBJS_DIR)/tuple
 	@$(MKDIR) $(OBJS_DIR)/debug
 	@$(MKDIR) $(OBJS_DIR)/main
 	@$(MKDIR) $(OBJS_DIR)/transformations
-# 	# @$(MKDIR) $(OBJS_DIR)/execution
-# 	# @$(MKDIR) $(OBJS_DIR)/execution_handlers
-# 	# @$(MKDIR) $(OBJS_DIR)/parsing
-# 	# @$(MKDIR) $(OBJS_DIR)/signals
-# 	# @$(MKDIR) $(OBJS_DIR)/syntax
-# 	# @$(MKDIR) $(OBJS_DIR)/tokens
-# 	# @$(MKDIR) $(OBJS_DIR)/utils
-
 
 
 $(NAME) : $(OBJS) Makefile
@@ -112,6 +124,7 @@ clean :
 #Removes Objects files, the executable, and cleans the libraries
 fclean : clean
 	@$(RM) $(NAME)
+	@$(MAKE) $(MLX_DIR) clean > /dev/null 2>&1;
 	@$(MAKE) $(LIBFT_DIR) fclean
 	@echo $(GREEN) " - Fully Cleaned!" $(RESET)
 #Performs a full clean and rebuilds everything.
