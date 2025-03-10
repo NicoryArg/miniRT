@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:55:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/06 15:10:01 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:42:36 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	t_matrix_to_tuple(int run)
 		printf("Error: Malloc Failure (t_matrix_to_tuple)\n");
 		return (1);
 	}
+	print_test_banner("Matrix to Tuple");
 	print_tuple(b, "b");
 	printf(B_B"converting a to matrix\n"RES);
 	print_matrix(ab);
@@ -44,6 +45,7 @@ int	t_tuple_to_matrix(int run)
 	t_tuple 	*a = make_tuple(89, -20, 69, VECTOR);
 	t_matrix	*mat = create_matrix(4, 1, 1);
 
+	print_test_banner("Tuple to Matrix");
 	print_tuple(a, "a");
 	printf(GR"Matrix:\n"RES);
 	print_matrix(mat);

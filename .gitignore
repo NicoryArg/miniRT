@@ -55,3 +55,6 @@ dkms.conf
 
 # objs directory
 objs/
+
+#minilibx file
+mlx_linux/test/mlx-test

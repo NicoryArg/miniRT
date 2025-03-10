@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:15:07 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:54:57 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	print_tuple(t_tuple *tuple, char *name)
 		printf(GR"tuple `%s` is POINT:\n"RES, name);
 	else
 		printf(R_B"ERROR:"RES" tuple type undefined\n");
-	printf("w: %d\n", tuple->w);
 	printf("x: %.5f\n", tuple->x);
 	printf("y: %.5f\n", tuple->y);
 	printf("z: %.5f\n", tuple->z);
+	printf("w: %d\n", tuple->w);
 }
 void	print_matrix(t_matrix *matrix)
 {
