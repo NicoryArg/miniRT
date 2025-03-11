@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/11 19:10:47 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:40:46 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	position_test(int run)
 		return (0);
 	int	i = 1;
 	t_ray	*r = ray(make_tuple(2, 3, 4, POINT), make_tuple(1, 0, 0, VECTOR));
-	if (!ray)
-		return (1);
 	t_tuple	*res;
 
 
@@ -73,12 +71,13 @@ int	sph_two_intersect(int run)
 	int		i = 1;
 	t_ray	*r = ray(make_tuple(0, 0, -5, POINT), make_tuple(0, 0, 1, VECTOR));
 	t_sph	*s = sphere(1);
-	double	**xs = NULL;
+	// double	**xs = NULL;
 	if (!r || !s)
 		return (1);
 
 //TEST 1
 	print_test_banner("SPHERE-RAY -> two intersections");
 	print_test_number(&i);
-	xs = intersect(s, r);
+	// xs = intersect(s, r);
+	return (0);
 }
