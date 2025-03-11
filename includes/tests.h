@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:18:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:58:41 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void		print_test_number(int *i);
  * @note tests for `get_point(t_ray *ray, double t)`
  */
 int		position_test(int run);
+int		sph_unique_id(int run, int num);
 
 
 //test_transform.c

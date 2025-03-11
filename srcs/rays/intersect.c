@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_transform.c                                   :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 17:23:55 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/11 18:38:58 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/11 19:23:44 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/11 19:39:38 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// int	main(void)
+// double	**intersect(void *obj, t_ray *ray, t_obj type)
 // {
-// 	if (translate_test(0)) //1 to run , 0 to skip
-// 		printf("Error: translate_test failed\n");
-// 	if (scale_test(0))	//1 to run, 0 to skip
-// 		printf("Error: scale_test failed\n");
-// 	if (rotate_test(0, 0, 0)) //1 to run, 0 to skip
-// 		printf("Error: rotate_test failed\n");
-// 	if (chained_test(0))
-// 		printf("Error: chained_test failed\n");
-// 	printf(R_B"END OF TRANSFORM TESTS\n"RES);
-// 	return (0);
+// 	if (type == SPHERE)
+// 		return (intersect_sph((t_sph *)obj, ray));
+// 	// else if (type == CYLINDER)
+// 	// 	return (intersect_cyl((t_cyl *)obj, ray));
+// 	// else if (type == PLANE)
+// 	// 	return (intersect_pl((t_pl *)obj, ray));
+// }
+
+// double	**intersect_sph(t_sph *sphere, t_ray *ray)
+// {
+// 	double	*xs[2] = {12, 1};
+// 	return (xs);
 // }
