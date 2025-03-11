@@ -31,6 +31,13 @@ typedef enum tuple_type
 	POINT,
 }	t_tpl;
 
+typedef enum e_obj_shape
+{
+	SPHERE,
+	CYLINDER,
+	PLANE,
+}	t_obj;
+
 typedef struct s_tuple
 {
 	t_tpl		w;
@@ -56,10 +63,16 @@ typedef struct s_ray
 	t_tuple		*direction;
 }	t_ray;
 
+typedef struct s_sphere
+{
+	t_tuple	*origin;
+	double	radius;
+	int		id;
+}	t_sph;
+
 //#############################################
 //#################MATRICES####################
 //#############################################
-
 //determinant.c
 double		minor(t_matrix *matrix, int row, int col);
 double		cofactor(t_matrix *matrix, int row, int col);
@@ -93,6 +106,11 @@ void		free_matrix(t_matrix *matrix);
 //#############################################
 //##################RAYS#######################
 //#############################################
+//intersect.c
+double	**intersect(void *obj, t_ray *ray, t_obj type);
+double	**intersect_sph(t_sph *sphere, t_ray *ray);
+
+//rays.c
 /**
  * @brief creates a ray with an origin and direction
  * @param origin the starting point of the ray
@@ -102,6 +120,16 @@ void		free_matrix(t_matrix *matrix);
 t_ray		*ray(t_tuple *origin, t_tuple *direction);
 t_tuple		*get_point(t_ray *ray, double t);
 
+
+//#############################################
+//############### SCENE #######################
+//#############################################
+//objects.c
+/**
+ * @brief creates and returns a sphere with a unique ID
+ * @param radius the radius of the sphere
+ */
+t_sph	*sphere(double	radius);
 
 //#############################################
 //#############TRANSFORMATIONS#################
