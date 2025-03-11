@@ -41,12 +41,13 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 # Sources
 SRCS_DIR			= srcs/
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
-						tuples.c utils.c)
+						tuples.c tuple_utils.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 DEBUG_FILES			= $(addprefix debug/, print.c test_rays.c test_transform.c test_tuples.c)
-MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_transform.c main_tuples.c)
+MAIN_FILES			= $(addprefix main/, main.c make_engine.c main_rays.c main_transform.c main_tuples.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 RAYS_FILES			= $(addprefix rays/, rays.c)
+UTILS_FILES			= $(addprefix utils/, message.c)
 # EXEC_HANDLER_FILES	= $(addprefix execution_handlers/, command_handler.c generate_temp_file.c handle_variable_assign.c heredoc_handler.c heredoc_handler_utils.c local_var_handler.c pipe_handler.c redirection_handler.c)
 # PARSING_FILES		= $(addprefix parsing/, create_ast.c new_nodes.c parse_utils.c redir_chain.c)
 # SIGNALS_FILES		= $(addprefix signals/, signals_utils.c signals.c)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:52:59 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 16:16:25 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/11 19:44:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/11 19:46:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include "../libft/libft.h"
 # include "tests.h"
+# include "../mlx_linux/mlx.h"
+# include "keys.h"
+# include "engine.h"
+
+
 
 # ifndef M_PI
 #  define M_PI 3.1415926535897932384626433
@@ -156,17 +162,37 @@ t_tuple		*make_tuple(double x, double y, double z, t_tpl type);
 t_tuple		*new_tuple(void);
 t_tuple		*normalise(t_tuple *v);
 
-//utils.c
+//tuple_utils.c
 bool		is_point(t_tuple *tuple);
 bool		is_vector(t_tuple *tuple);
 bool		equal_tuple(t_tuple *t1, t_tuple *t2);
 bool		ft_equal(double a, double b);
 void		ft_negate(t_tuple *tup);
 
+//#############################################
+//##################UTILS######################
+//#############################################
+//message.c
+void	display_help_message(t_engine *engine);
+
+
+// Define window and view parameters
+# define WIN_SIZE 2000
+# define VIEW_CHANGE_SIZE 60
+# define MIN_ITERATIONS 256
+# define MAX_ITERATIONS 256
+# define DEFAULT_COLOR 265
+
+# define SCALE 2
+# define FIXED_RADIUS 1
+# define MINIMUM_RADIUS 0.5
+
+// Define Colors
 # define B_B "\033[1;34m"
 # define R_B "\033[1;31m"
 # define CYAN "\033[0;36m"
 # define GR "\033[0;32m"
 # define RES "\033[0m"
+
 
 #endif

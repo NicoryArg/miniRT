@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:36:00 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 20:36:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/11 18:33:19 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/11 18:57:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 // int	main(void)
 // {
@@ -27,3 +28,16 @@
 // 		printf("Not Equal\n");
 // 	return (0);
 // }
+
+
+
+int	main(void)
+{
+	t_engine	engine;
+
+	init_engine(&engine);
+	mlx_key_hook(engine.window, on_key_hook_event, &engine);
+	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
+}
