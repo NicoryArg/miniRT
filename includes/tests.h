@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/11 18:58:41 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:24:15 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct s_tuple t_tuple;
 typedef struct s_matrix t_matrix;
+typedef struct s_ray_sphere t_ray_sphere;
 
 //#############################################
 //####################DEBUG####################
@@ -28,6 +29,8 @@ void		print_tuple(t_tuple *tuple, char *name);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);
+void		malloc_err(char *func_name);
+void		print_rs(t_ray_sphere *rs);
 
 //test_rays.c
 /**
@@ -36,6 +39,7 @@ void		print_test_number(int *i);
  */
 int		position_test(int run);
 int		sph_unique_id(int run, int num);
+int		sph_two_intersect(int run);
 
 
 //test_transform.c
