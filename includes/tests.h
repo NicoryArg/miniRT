@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/12 11:24:15 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:31:55 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		print_rs(t_ray_sphere *rs);
  */
 int		position_test(int run);
 int		sph_unique_id(int run, int num);
-int		sph_two_intersect(int run);
+int		sph_ray_intersect(int run);
 
 
 //test_transform.c
