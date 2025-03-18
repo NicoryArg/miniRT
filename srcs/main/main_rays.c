@@ -18,8 +18,10 @@ int	main()
 		printf(R_B"Error:"RES" position_test failed\n");
 	if (sph_unique_id(0, 10))// 0 to skip, 1 to run
 		printf(R_B"Error:"RES" sph_unique_id failed\n");
-	if (sph_ray_intersect(1))// 0 to skip, 1 to run
+	if (sph_ray_intersect(0))// 0 to skip, 1 to run
 		printf(R_B"Error:"RES" sph_ray_intersect failed\n");
+	if (intersection_test(1))// 0 to skip, 1 to run
+		printf(R_B"Error:"RES" intersection_test failed\n");
 	printf(R_B"END OF RAYS TESTS\n"RES);
 	return (0);
 }

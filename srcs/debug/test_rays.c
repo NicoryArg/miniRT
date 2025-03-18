@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:15:51 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 22:00:11 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ int	sph_unique_id(int run, int num)
 	return (0);
 }
 
+
+
+//#################################################################//
+//########################## P59 - P62 #############################//
+//#################################################################//
+
 int	sph_ray_intersect(int run)
 {
 	if (run == 0)
@@ -71,8 +77,8 @@ int	sph_ray_intersect(int run)
 	int		i = 1;
 	t_ray	*r = ray(make_tuple(-5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	t_sphere	*s = sphere(1);
-	double	d;
-	double	*xs = NULL;
+	double		d;
+	t_inters	*xs = NULL;
 	if (!r || !s)
 		return (1);
 //TEST 1
@@ -82,8 +88,8 @@ int	sph_ray_intersect(int run)
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	xs = intersect(s, r, SPHERE);
-	printf(G_B"t1: "RES"%f\n", xs[0]);
-	printf(G_B"t2: "RES"%f\n", xs[1]);
+	printf(G_B"t1: "RES"%f\n", xs->hits[0].t);
+	printf(G_B"t2: "RES"%f\n", xs->hits[1].t);
 	free(xs);
 	free(r->direction);
 	free(r->origin);
@@ -98,8 +104,8 @@ int	sph_ray_intersect(int run)
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
-	printf(G_B"t1: "RES"%f\n", xs[0]);
-	printf(G_B"t2: "RES"%f\n", xs[1]);
+	printf(G_B"t1: "RES"%f\n", xs->hits[0].t);
+	printf(G_B"t2: "RES"%f\n", xs->hits[1].t);
 	//free resources
 	free(xs);
 	free(r->direction);
@@ -117,8 +123,8 @@ int	sph_ray_intersect(int run)
 	//print output
 	if (xs)
 	{
-		printf(G_B"t1: "RES"%f\n", xs[0]);
-		printf(G_B"t2: "RES"%f\n", xs[1]);
+		printf(G_B"t1: "RES"%f\n", xs->hits[0].t);
+		printf(G_B"t2: "RES"%f\n", xs->hits[1].t);
 	}
 	else
 		printf(YEL"xs is NULL\n"RES);
@@ -137,8 +143,8 @@ int	sph_ray_intersect(int run)
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
-	printf(G_B"t1: "RES"%f\n", xs[0]);
-	printf(G_B"t2: "RES"%f\n", xs[1]);
+	printf(G_B"t1: "RES"%f\n", xs->hits[0].t);
+	printf(G_B"t2: "RES"%f\n", xs->hits[1].t);
 	//free resources
 	free(xs);
 	free(r->direction);
@@ -154,12 +160,56 @@ int	sph_ray_intersect(int run)
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
-	printf(G_B"t1: "RES"%f\n", xs[0]);
-	printf(G_B"t2: "RES"%f\n", xs[1]);
+	printf(G_B"t1: "RES"%f\n", xs->hits[0].t);
+	printf(G_B"t2: "RES"%f\n", xs->hits[1].t);
 	//free resources
 	free(xs);
 	free(r->direction);
 	free(r->origin);
 	free(r);
+	return (0);
+}
+
+
+
+//#################################################################//
+//########################## P63 - Pxx #############################//
+//#################################################################//
+
+int	intersection_test(int run)
+{
+	if (run == 0)
+		return (0);
+	int			i = 1;
+	t_sphere	*s = sphere(1);
+	t_ray		*r = ray(make_tuple(-5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
+	t_hit		*i1 = NULL;
+	// t_hit		*i2 = NULL;
+	// t_hit		*xs = NULL;
+
+//TEST 1
+	//print banners
+	print_test_banner("Intersection encapsulates t and object");
+	print_test_number(&i);
+	//call function
+	i1 = intersection(3.5, s, SPHERE);
+	//print ouput
+	printf(BOLD"%15s "GR"%14f\n"RES, "i.t:", i1->t);
+	printf(BOLD"%15s "GR"%20p"RES"\n", "i.object:", i1->object);
+	printf(BOLD"%15s "LILA"%20p\n"RES"", "Sphere:", s);
+
+//TEST 2
+	//print banners
+	print_test_banner("Aggregating intersections");
+	print_test_number(&i);
+	//redefine variables
+	free(s);
+	s = sphere(1);
+	t_inters	*xs = intersect(s, r, SPHERE);
+	printf(BOLD"%15s "GR"%7d\n"RES, "xs.count:", xs->count);
+	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0].object);
+	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", xs->hits[1].object);
+	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s);
+
 	return (0);
 }

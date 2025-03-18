@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:18:13 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 20:03:13 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void		malloc_err(char *func_name);
 int		position_test(int run);
 int		sph_unique_id(int run, int num);
 int		sph_ray_intersect(int run);
+int		intersection_test(int run);
 
 
 //test_transform.c

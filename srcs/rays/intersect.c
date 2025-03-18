@@ -6,21 +6,57 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 19:23:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:15:05 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 21:55:29 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-double	*intersect(void *obj, t_ray *ray, t_obj type)
+t_inters	*init_intersections(int initial_capacity)
 {
+	t_inters	*xs;
+
+	xs = malloc(sizeof(t_inters));
+	if (!xs)
+		return (NULL);
+	xs->count = 0;
+	xs->capacity = initial_capacity;
+	xs->hits = malloc(sizeof(t_hit) * initial_capacity);
+	if (!xs->hits)
+	{
+		free(xs);
+		return (NULL);
+	}
+	return (xs);
+}
+
+t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
+{
+	t_inters	*xs;
+
+	xs = init_intersections(256);
 	if (type == SPHERE)
-		return (intersect_sph((t_sphere *)obj, ray));
+		return (intersect_sph((t_sphere *)obj, ray, xs));
 	// else if (type == CYLINDER)
 	// 	return (intersect_cyl((t_cyl *)obj, ray));
 	// else if (type == PLANE)
 	// 	return (intersect_pl((t_pl *)obj, ray));
 	return (NULL);
+}
+
+t_hit	*intersection(double t, void *object, t_obj type)
+{
+	t_hit	*intersection;
+
+	intersection = malloc(sizeof(t_hit));
+	if (!intersection)
+		malloc_err("intersection");//	debugging
+	if (type == SPHERE)
+		object = (t_sphere *)object;
+	intersection->object = object;
+	intersection->t = t;
+	intersection->type = SPHERE;
+	return (intersection);
 }
 
 double	discriminant(t_ray *ray, t_tuple *sph_to_ray)
@@ -40,26 +76,21 @@ double	discriminant(t_ray *ray, t_tuple *sph_to_ray)
 	return (discriminant);
 }
 
-
-double	*intersect_sph(t_sphere *sph, t_ray *ray)
+t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 {
 	double	d;
 	double	a;
 	double	b;
-	double	*t;
 
-	t = malloc(sizeof(double) * 2);
-	if (!t)
-		malloc_err("intersect_sph");//	debugging
 	d = discriminant(ray, diff_tuple(ray->origin, sph->centre));
 	if (d < 0)
 		return (NULL);
 	a = dot(ray->direction, ray->direction);
 	b = 2 * dot(ray->direction, diff_tuple(ray->origin, sph->centre));
-	t[0] = ((-b - sqrt(d)) / (2 * a));
-	t[1] = ((-b + sqrt(d)) / (2 * a));
-	t[2] = '\0';
-	return (t);
+	xs->hits[0] = *intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
+	xs->hits[1] = *intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
+	xs->count += 2;
+	return (xs);
 }
 
 // void	find_d(t_sphere *sph, t_ray *ray, t_ray_sphere *rs)

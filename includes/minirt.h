@@ -76,15 +76,28 @@ typedef struct s_sphere
 	int		id;
 }	t_sphere;
 
-typedef struct s_ray_sphere
+typedef struct s_hit
 {
-	int		x_count;
-	double	tc;
-	t_tuple	*l;
-	double	l_len;
-	double	d;
-	double	offset;
-}	t_ray_sphere;
+	double	t;
+	t_sphere	*object;
+	t_obj	type;
+}	t_hit;
+
+typedef struct s_inters
+{
+	int		count;
+	int		capacity;
+	t_hit	*hits;
+}	t_inters;
+// typedef struct s_ray_sphere
+// {
+// 	int		x_count;
+// 	double	tc;
+// 	t_tuple	*l;
+// 	double	l_len;
+// 	double	d;
+// 	double	offset;
+// }	t_ray_sphere;
 
 //#############################################
 //#################MATRICES####################
@@ -123,9 +136,10 @@ void		free_matrix(t_matrix *matrix);
 //##################RAYS#######################
 //#############################################
 //intersect.c
-double	*intersect(void *obj, t_ray *ray, t_obj type);
-double	discriminant(t_ray *ray, t_tuple *sph_to_ray);
-double	*intersect_sph(t_sphere *sphere, t_ray *ray);
+t_inters	*intersect(void *obj, t_ray *ray, t_obj type);
+t_hit		*intersection(double t, void *object, t_obj type);
+double		discriminant(t_ray *ray, t_tuple *sph_to_ray);
+t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
 
 //rays.c
 /**
@@ -228,11 +242,13 @@ void	display_help_message(t_engine *engine);
 
 // Define Colors
 # define B_B "\033[1;34m"
+# define LILA "\033[0;34m"
 # define R_B "\033[1;31m"
 # define G_B "\033[1;32m"
 # define YEL "\e[0;33m"
 # define CYAN "\033[0;36m"
 # define GR "\033[0;32m"
+# define BOLD "\033[1m"
 # define RES "\033[0m"
 
 
