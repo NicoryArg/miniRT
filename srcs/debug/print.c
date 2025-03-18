@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/12 12:54:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:17:55 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,16 @@ void	malloc_err(char *func_name)
 	exit(1);
 }
 
+
+
+
+//##############################################################//
+//######################## OBSOLETE ###########################//
+//##############################################################//
+
+
+
+/*
 void	print_rs(t_ray_sphere *rs)
 {
 	// printf(G_B"x_count:"RES" %d\n", rs->x_count);
@@ -79,4 +89,4 @@ void	print_rs(t_ray_sphere *rs)
 	printf(G_B"l_len:"RES"\t%f\n", rs->l_len);
 	printf(G_B"d:"RES" %f\n", rs->d);
 	printf(G_B"offset:"RES" %f\n", rs->offset);
-}
+} */

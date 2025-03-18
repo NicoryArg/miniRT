@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 19:23:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/12 13:23:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:15:05 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,42 +23,82 @@ double	*intersect(void *obj, t_ray *ray, t_obj type)
 	return (NULL);
 }
 
-void	find_d(t_sphere *sph, t_ray *ray, t_ray_sphere *rs)
+double	discriminant(t_ray *ray, t_tuple *sph_to_ray)
 {
-	double	temp_d;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
 
-	rs->l = diff_tuple(sph->centre, ray->origin);
-	rs->l_len = magnitude(rs->l);
-	rs->tc = dot(rs->l, ray->direction);
-	temp_d = ft_sqr(rs->tc) - ft_sqr(rs->l_len);
-	rs->d = sqrt(fabs(temp_d));
-	if (rs->d < sph->radius)
-		rs->x_count = 2;
-	else if (rs->d == sph->radius)
-		rs->x_count = 1;
-	else
-		rs->x_count = 0;
-	printf(B_B"%d intersections\n"RES, rs->x_count);
+	a = dot(ray->direction, ray->direction);
+	b = 2 * dot(ray->direction, sph_to_ray);
+	c = dot(sph_to_ray, sph_to_ray) - 1;
+	discriminant = ft_sqr(b) - (4 * a * c);
+	// printf(G_B"Discriminant: "RES"%.2f\n", discriminant);
+	// printf(G_B"t1: "RES"%f\n", ((-b - sqrt(discriminant)) / (2 * a)));
+	// printf(G_B"t2: "RES"%f\n", ((-b + sqrt(discriminant)) / (2 * a)));
+	return (discriminant);
 }
+
 
 double	*intersect_sph(t_sphere *sph, t_ray *ray)
 {
-	double			*t = malloc(sizeof(double) * 2);
-	t_ray_sphere	*rs;
-	double			temp_offset;
+	double	d;
+	double	a;
+	double	b;
+	double	*t;
 
-	rs = malloc(sizeof(t_ray_sphere));
-	if (!rs)
-	malloc_err("intersect_sph");//	debugging
-	find_d(sph, ray, rs);
-	temp_offset = (ft_sqr(sph->radius) - ft_sqr(rs->d));
-	if (temp_offset < 0)
+	t = malloc(sizeof(double) * 2);
+	if (!t)
+		malloc_err("intersect_sph");//	debugging
+	d = discriminant(ray, diff_tuple(ray->origin, sph->centre));
+	if (d < 0)
 		return (NULL);
-	rs->offset = sqrt(temp_offset);
-	print_rs(rs);
-	t[0] = rs->tc - rs->offset;
-	t[1] = rs->tc + rs->offset;
-	free(rs->l);
-	free(rs);
+	a = dot(ray->direction, ray->direction);
+	b = 2 * dot(ray->direction, diff_tuple(ray->origin, sph->centre));
+	t[0] = ((-b - sqrt(d)) / (2 * a));
+	t[1] = ((-b + sqrt(d)) / (2 * a));
+	t[2] = '\0';
 	return (t);
 }
+
+// void	find_d(t_sphere *sph, t_ray *ray, t_ray_sphere *rs)
+// {
+// 	double	temp_d;
+
+// 	rs->l = diff_tuple(sph->centre, ray->origin);
+// 	rs->l_len = magnitude(rs->l);
+// 	rs->tc = dot(rs->l, ray->direction);
+// 	temp_d = ft_sqr(rs->tc) - ft_sqr(rs->l_len);
+// 	rs->d = sqrt(fabs(temp_d));
+// 	if (rs->d < sph->radius)
+// 		rs->x_count = 2;
+// 	else if (rs->d == sph->radius)
+// 		rs->x_count = 1;
+// 	else
+// 		rs->x_count = 0;
+// 	printf(B_B"%d intersections\n"RES, rs->x_count);
+// }
+
+
+// double	*intersect_sph(t_sphere *sph, t_ray *ray)
+// {
+// 	double			*t = malloc(sizeof(double) * 2);
+// 	t_ray_sphere	*rs;
+// 	double			temp_offset;
+
+// 	rs = malloc(sizeof(t_ray_sphere));
+// 	if (!rs)
+// 	malloc_err("intersect_sph");//	debugging
+// 	find_d(sph, ray, rs);
+// 	temp_offset = (ft_sqr(sph->radius) - ft_sqr(rs->d));
+// 	if (temp_offset < 0)
+// 		return (NULL);
+// 	rs->offset = sqrt(temp_offset);
+// 	print_rs(rs);
+// 	t[0] = rs->tc - rs->offset;
+// 	t[1] = rs->tc + rs->offset;
+// 	free(rs->l);
+// 	free(rs);
+// 	return (t);
+// }

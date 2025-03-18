@@ -124,6 +124,7 @@ void		free_matrix(t_matrix *matrix);
 //#############################################
 //intersect.c
 double	*intersect(void *obj, t_ray *ray, t_obj type);
+double	discriminant(t_ray *ray, t_tuple *sph_to_ray);
 double	*intersect_sph(t_sphere *sphere, t_ray *ray);
 
 //rays.c

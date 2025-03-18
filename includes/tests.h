@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/12 13:31:55 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:18:13 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);
 void		malloc_err(char *func_name);
-void		print_rs(t_ray_sphere *rs);
+// void		print_rs(t_ray_sphere *rs);//	obsolete
 
 //test_rays.c
 /**

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/12 13:37:17 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:15:51 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	sph_ray_intersect(int run)
 	int		i = 1;
 	t_ray	*r = ray(make_tuple(-5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	t_sphere	*s = sphere(1);
+	double	d;
 	double	*xs = NULL;
 	if (!r || !s)
 		return (1);
@@ -78,6 +79,8 @@ int	sph_ray_intersect(int run)
 	print_test_banner("SPHERE-RAY");
 	print_test_banner("two intersections");
 	print_test_number(&i);
+	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	xs = intersect(s, r, SPHERE);
 	printf(G_B"t1: "RES"%f\n", xs[0]);
 	printf(G_B"t2: "RES"%f\n", xs[1]);
@@ -90,6 +93,8 @@ int	sph_ray_intersect(int run)
 	r = ray(make_tuple(-5, 1, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	print_test_banner("tangent");
 	print_test_number(&i);
+	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
@@ -105,6 +110,8 @@ int	sph_ray_intersect(int run)
 	r = ray(make_tuple(-5, 2, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	print_test_banner("no intersection");
 	print_test_number(&i);
+	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
@@ -125,6 +132,8 @@ int	sph_ray_intersect(int run)
 	r = ray(make_tuple(0, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	print_test_banner("ray originates inside sphere");
 	print_test_number(&i);
+	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
@@ -140,6 +149,8 @@ int	sph_ray_intersect(int run)
 	r = ray(make_tuple(5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	print_test_banner("sphere is behind ray");
 	print_test_number(&i);
+	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
