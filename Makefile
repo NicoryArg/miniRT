@@ -44,11 +44,11 @@ TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 DEBUG_FILES			= $(addprefix debug/, print.c test_rays.c test_transform.c test_tuples.c)
-MAIN_FILES			= $(addprefix main/, main.c make_engine.c main_rays.c main_transform.c main_tuples.c)
+MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_transform.c main_tuples.c)
+ENGINE_FILES		= $(addprefix make_engine/, make_engine.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 RAYS_FILES			= $(addprefix rays/, rays.c)
 UTILS_FILES			= $(addprefix utils/, message.c)
-# EXEC_HANDLER_FILES	= $(addprefix execution_handlers/, command_handler.c generate_temp_file.c handle_variable_assign.c heredoc_handler.c heredoc_handler_utils.c local_var_handler.c pipe_handler.c redirection_handler.c)
 RAYS_FILES			= $(addprefix rays/, intersect.c rays.c)
 SCENE_FILES			= $(addprefix scene/, objects.c)
 # PARSING_FILES		= $(addprefix parsing/, create_ast.c new_nodes.c parse_utils.c redir_chain.c)
@@ -57,7 +57,7 @@ SCENE_FILES			= $(addprefix scene/, objects.c)
 # TOKEN_FILES			= $(addprefix tokens/, arg_lst.c expand_token.c fix_input_utils.c fix_input.c identify.c lexer.c process_tokens.c quotes.c valid.c)
 # UTILS_FILES			= $(addprefix utils/, cleanup.c execution_utils.c test_funcs.c free_ast.c free.c validate_utils.c)
 
-SRC_FILES		= $(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(MAIN_FILES) $(TRANSFORM_FILES) $(RAYS_FILES) $(SCENE_FILES) #$(PARSING_FILES) #$(SIGNALS_FILES) #$(SYNTAX_FILES) #$(TOKEN_FILES) #$(UTILS_FILES)
+SRC_FILES		= $(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) $(RAYS_FILES) $(SCENE_FILES) #$(PARSING_FILES) #$(SIGNALS_FILES) #$(SYNTAX_FILES) #$(TOKEN_FILES) #$(UTILS_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
@@ -106,6 +106,7 @@ $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)/tuple
 	@$(MKDIR) $(OBJS_DIR)/debug
 	@$(MKDIR) $(OBJS_DIR)/main
+	@$(MKDIR) $(OBJS_DIR)/make_engine
 	@$(MKDIR) $(OBJS_DIR)/transformations
 	@$(MKDIR) $(OBJS_DIR)/rays
 	@$(MKDIR) $(OBJS_DIR)/scene
