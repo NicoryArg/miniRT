@@ -1,0 +1,137 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_projectile.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/18 19:11:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:11:57 by nryser           ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minirt.h"
+#include "engine.h"
+
+typedef struct	s_projectile
+{
+	t_tuple		*position;
+	t_tuple		*velocity;
+}	t_projectile;
+
+typedef struct	s_environment
+{
+	t_tuple		*gravity;
+	t_tuple		*wind;
+}	t_environment;
+
+t_projectile	*new_projectile()
+{
+	t_projectile	*p;
+	t_tuple			*velocity;
+
+	p = malloc(sizeof(t_projectile));
+	if (!p)
+		return (NULL);
+	p->position = make_tuple(1, 1, 0, POINT);
+	velocity = make_tuple(1, 5.5, 0, VECTOR);
+	p->velocity = mult_tuple(normalise(velocity), 10);
+	free(velocity);
+	return (p);
+}
+
+t_environment	*new_environment()
+{
+	t_environment	*e;
+
+	e = malloc(sizeof(t_environment));
+	if (!e)
+		return (NULL);
+	e->gravity = make_tuple(0, -0.71, 0, VECTOR);
+	e->wind = make_tuple(-0.01, 0, 0, VECTOR);
+	return (e);
+}
+
+t_projectile	*update_projectile(t_projectile *p, t_environment *e)
+{
+	t_tuple		*new_pos;
+	t_tuple		*new_vel;
+
+	new_vel = add_tuple(p->velocity, add_tuple(e->gravity, e->wind));
+	new_pos = add_tuple(p->position, p->velocity);
+	if (new_pos->y < 0)
+	{
+		new_pos->y = 0;
+		new_vel->y *= -0.8; // 🔄 Bounce effect (reduce velocity)
+	}
+	if (magnitude(new_vel) > 500)
+		new_vel = mult_tuple(normalise(new_vel), 20);
+	free(p->position);
+	free(p->velocity);
+	p->position = new_pos;
+	p->velocity = new_vel;
+	return (p);
+}
+
+void	draw_projectile(t_image *img, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	i = -PROJECTILE_SIZE;
+	while (i <= PROJECTILE_SIZE)
+	{
+		j = -PROJECTILE_SIZE ;
+		while (j <= PROJECTILE_SIZE)
+		{
+			put_pixel(img, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_trajectory(t_image *img)
+{
+	t_projectile	*p;
+	t_environment	*e;
+	int				screen_x;
+	int				screen_y;
+
+	p = new_projectile();
+	e = new_environment();
+	if (!p || !e)
+		return ;
+	while (p->position->x < 2700 / SCALE)// width as 2700
+	{
+		screen_x = (int)(p->position->x * SCALE);
+		screen_y = 2700 - (int)(p->position->y * SCALE);//height as 2700
+		draw_projectile(img, screen_x, screen_y, RED);
+		p = update_projectile(p, e);
+		if (screen_y <= 0 || screen_y >= 2700)//height as 2700
+			p->velocity->y *= -1;
+	}
+	free(p->position);
+	free(p->velocity);
+	free(p);
+	free(e->gravity);
+	free(e->wind);
+	free(e);
+}
+//engine to see projectile
+// void	init_engine(t_engine *engine)
+// {
+// 	int	pixel_bits;
+// 	int	line_len;
+// 	int	endian;
+
+// 	engine->mlx = mlx_init();
+// 	engine->window = mlx_new_window(engine->mlx, 2700, 2700, "Projectile Trajectory");
+// 	engine->image.img_ptr = mlx_new_image(engine->mlx, 2700, 2700);
+// 	engine->image.addr_ptr = mlx_get_data_addr(engine->image.img_ptr, &pixel_bits, &line_len, &endian);
+// 	engine->image.pixel_bits = pixel_bits;
+// 	engine->image.line_len = line_len;
+// 	engine->image.endian = endian;
+// 	draw_trajectory(&engine->image);
+// 	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr, 0, 0);
+// }

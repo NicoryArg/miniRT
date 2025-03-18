@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 16:21:54 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 16:23:33 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 19:12:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:12:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,30 @@ int	on_key_hook_event(int key, t_engine *engine)
 	return (0);
 }
 
+void	put_pixel(t_image *img, int x, int y, int color)
+{
+	if (x >= 0 && x < WIN_SIZE && y >= 0 && y < WIN_SIZE) // Bounds check
+	{
+		char	*pixel;
+		pixel = img->addr_ptr + (y * img->line_len + x * (img->pixel_bits / 8));
+		*(unsigned int *)pixel = color;
+	}
+}
+
+void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color)
+{
+	int x, y;
+
+	for (y = -radius; y <= radius; y++)
+	{
+		for (x = -radius; x <= radius; x++)
+		{
+			if (x * x + y * y <= radius * radius) // Circle equation
+				put_pixel(img, center_x + x, center_y + y, color);
+		}
+	}
+}
+
 //Initializes the engine with command-line arguments.
 void	init_engine(t_engine *engine)
 {
@@ -71,7 +95,7 @@ void	init_engine(t_engine *engine)
 	engine->mlx = mlx_init();
 	if (!engine->mlx)
 		error_message("[MLX ERROR]: can't do mlx_init!\n", 1);
-	engine->window = mlx_new_window(engine->mlx, WIN_SIZE, WIN_SIZE, \
+	engine->window = mlx_new_window(engine->mlx, WIN_SIZE, WIN_SIZE,
 												"MiniRt project");
 	engine->image.img_ptr = mlx_new_image(engine->mlx, WIN_SIZE, WIN_SIZE);
 	if (!engine->window || !engine->image.img_ptr)
@@ -80,7 +104,7 @@ void	init_engine(t_engine *engine)
 		mlx_destroy_window(engine->mlx, engine->window);
 		error_message("[MLX ERROR]: can't handle object creation!\n", 1);
 	}
-	engine->image.addr_ptr = mlx_get_data_addr(engine->image.img_ptr, \
+	engine->image.addr_ptr = mlx_get_data_addr(engine->image.img_ptr,
 								&pixel_bits, &line_len, &endian);
 	engine->image.pixel_bits = pixel_bits;
 	engine->image.line_len = line_len;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 19:48:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/11 19:48:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 16:54:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 16:54:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ void	cleanup(t_engine *engine);
 int		on_key_hook_event(int key, t_engine *engine);
 
 
+void	put_pixel(t_image *img, int x, int y, int color);
+void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color);
 #endif

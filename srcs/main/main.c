@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 18:33:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/11 18:57:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 19:12:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:12:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(void)
 	t_engine	engine;
 
 	init_engine(&engine);
+	draw_circle(&engine.image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, COLOR_X);
+	mlx_put_image_to_window(engine.mlx, engine.window, engine.image.img_ptr, 0, 0);
 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
 	mlx_loop(engine.mlx);

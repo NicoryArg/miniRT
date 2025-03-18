@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 19:44:59 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/11 19:46:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 19:13:24 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:14:36 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
 # include "engine.h"
-
-
-
-# ifndef M_PI
-#  define M_PI 3.1415926535897932384626433
-# endif
-# define EPSILON 0.00001
 
 typedef enum tuple_type
 {
@@ -214,6 +207,11 @@ void		ft_negate(t_tuple *tup);
 void	display_help_message(t_engine *engine);
 
 
+# ifndef M_PI
+#  define M_PI 3.1415926535897932384626433
+# endif
+# define EPSILON 0.00001
+
 // Define window and view parameters
 # define WIN_SIZE 2000
 # define VIEW_CHANGE_SIZE 60
@@ -221,9 +219,23 @@ void	display_help_message(t_engine *engine);
 # define MAX_ITERATIONS 256
 # define DEFAULT_COLOR 265
 
-# define SCALE 2
+#define WIDTH 1920
+#define HEIGHT 1080
+
+// Define circle parameters
+# define SCALE 25
 # define FIXED_RADIUS 1
 # define MINIMUM_RADIUS 0.5
+# define RADIUS 400
+# define PROJECTILE_SIZE 15
+
+// Colors (Hex format: 0xRRGGBB)
+# define COLOR_X 0x0000FF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
 
 // Define Colors
 # define B_B "\033[1;34m"
