@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:28:17 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 19:48:03 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:45:37 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ t_ray	*ray(t_tuple *origin, t_tuple *direction)
 
 	ray = (t_ray *)malloc(sizeof(t_ray));
 	if (!ray)
-	{
-		printf(R_B"Error:"RES" failed to allocate memory for ray.\n");
-		exit(1);
-	}
+		malloc_err("ray");//	debugging
 	ray->origin = origin;
 	ray->direction = direction;
 	return (ray);

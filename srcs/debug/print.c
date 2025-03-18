@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:54:57 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:54:08 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	print_tuple(t_tuple *tuple, char *name)
 {
 	if (is_vector(tuple))
-		printf(GR"tuple `%s` is VECTOR:\n"RES, name);
+		printf(G_B"tuple `%s` is VECTOR:\n"RES, name);
 	else if (is_point(tuple))
-		printf(GR"tuple `%s` is POINT:\n"RES, name);
+		printf(G_B"tuple `%s` is POINT:\n"RES, name);
 	else
 		printf(R_B"ERROR:"RES" tuple type undefined\n");
-	printf("x: %.5f\n", tuple->x);
-	printf("y: %.5f\n", tuple->y);
-	printf("z: %.5f\n", tuple->z);
-	printf("w: %d\n", tuple->w);
+	printf(YEL"\tx:"RES" %.5f\n", tuple->x);
+	printf(YEL"\ty:"RES" %.5f\n", tuple->y);
+	printf(YEL"\tz:"RES" %.5f\n", tuple->z);
+	printf(YEL"\tw:"RES" %d\n", tuple->w);
 }
 void	print_matrix(t_matrix *matrix)
 {
@@ -63,4 +63,20 @@ void	print_test_banner(const char *word)
 void	print_test_number(int *i)
 {
 	printf(CYAN"##### TEST %d #####\n"RES, (*i)++);
+}
+
+void	malloc_err(char *func_name)
+{
+	printf(R_B"Error:"RES" [%s] -> failed to allocate memory\n", func_name);
+	exit(1);
+}
+
+void	print_rs(t_ray_sphere *rs)
+{
+	// printf(G_B"x_count:"RES" %d\n", rs->x_count);
+	printf(G_B"tc:"RES" %f\n", rs->tc);
+	print_tuple(rs->l, "rs->l");
+	printf(G_B"l_len:"RES"\t%f\n", rs->l_len);
+	printf(G_B"d:"RES" %f\n", rs->d);
+	printf(G_B"offset:"RES" %f\n", rs->offset);
 }

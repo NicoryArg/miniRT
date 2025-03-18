@@ -71,10 +71,20 @@ typedef struct s_ray
 
 typedef struct s_sphere
 {
-	t_tuple	*origin;
+	t_tuple	*centre;
 	double	radius;
 	int		id;
-}	t_sph;
+}	t_sphere;
+
+typedef struct s_ray_sphere
+{
+	int		x_count;
+	double	tc;
+	t_tuple	*l;
+	double	l_len;
+	double	d;
+	double	offset;
+}	t_ray_sphere;
 
 //#############################################
 //#################MATRICES####################
@@ -113,8 +123,8 @@ void		free_matrix(t_matrix *matrix);
 //##################RAYS#######################
 //#############################################
 //intersect.c
-double	**intersect(void *obj, t_ray *ray, t_obj type);
-double	**intersect_sph(t_sph *sphere, t_ray *ray);
+double	*intersect(void *obj, t_ray *ray, t_obj type);
+double	*intersect_sph(t_sphere *sphere, t_ray *ray);
 
 //rays.c
 /**
@@ -135,7 +145,7 @@ t_tuple		*get_point(t_ray *ray, double t);
  * @brief creates and returns a sphere with a unique ID
  * @param radius the radius of the sphere
  */
-t_sph	*sphere(double	radius);
+t_sphere	*sphere(double	radius);
 
 //#############################################
 //#############TRANSFORMATIONS#################
@@ -218,6 +228,8 @@ void	display_help_message(t_engine *engine);
 // Define Colors
 # define B_B "\033[1;34m"
 # define R_B "\033[1;31m"
+# define G_B "\033[1;32m"
+# define YEL "\e[0;33m"
 # define CYAN "\033[0;36m"
 # define GR "\033[0;32m"
 # define RES "\033[0m"

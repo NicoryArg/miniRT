@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/11 19:40:46 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:37:17 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,98 @@ int	sph_unique_id(int run, int num)
 	print_test_number(&test);
 	while (i < num)
 	{
-		t_sph	*s0 = sphere(1);
+		t_sphere	*s0 = sphere(1);
 		printf("sphere ID: %d\n", s0->id);
 		i++;
 	}
 	return (0);
 }
 
-int	sph_two_intersect(int run)
+int	sph_ray_intersect(int run)
 {
 	if (run == 0)
 		return (0);
 	int		i = 1;
-	t_ray	*r = ray(make_tuple(0, 0, -5, POINT), make_tuple(0, 0, 1, VECTOR));
-	t_sph	*s = sphere(1);
-	// double	**xs = NULL;
+	t_ray	*r = ray(make_tuple(-5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
+	t_sphere	*s = sphere(1);
+	double	*xs = NULL;
 	if (!r || !s)
 		return (1);
-
 //TEST 1
-	print_test_banner("SPHERE-RAY -> two intersections");
+	print_test_banner("SPHERE-RAY");
+	print_test_banner("two intersections");
 	print_test_number(&i);
-	// xs = intersect(s, r);
+	xs = intersect(s, r, SPHERE);
+	printf(G_B"t1: "RES"%f\n", xs[0]);
+	printf(G_B"t2: "RES"%f\n", xs[1]);
+	free(xs);
+	free(r->direction);
+	free(r->origin);
+	free(r);
+//TEST 2
+	//redefine ray
+	r = ray(make_tuple(-5, 1, 0, POINT), make_tuple(1, 0, 0, VECTOR));
+	print_test_banner("tangent");
+	print_test_number(&i);
+	//call function
+	xs = intersect(s, r, SPHERE);
+	//print output
+	printf(G_B"t1: "RES"%f\n", xs[0]);
+	printf(G_B"t2: "RES"%f\n", xs[1]);
+	//free resources
+	free(xs);
+	free(r->direction);
+	free(r->origin);
+	free(r);
+//TEST 3
+	//redifine ray
+	r = ray(make_tuple(-5, 2, 0, POINT), make_tuple(1, 0, 0, VECTOR));
+	print_test_banner("no intersection");
+	print_test_number(&i);
+	//call function
+	xs = intersect(s, r, SPHERE);
+	//print output
+	if (xs)
+	{
+		printf(G_B"t1: "RES"%f\n", xs[0]);
+		printf(G_B"t2: "RES"%f\n", xs[1]);
+	}
+	else
+		printf(YEL"xs is NULL\n"RES);
+	//free resources
+	free(xs);
+	free(r->direction);
+	free(r->origin);
+	free(r);
+//TEST 4
+	//redefine ray
+	r = ray(make_tuple(0, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
+	print_test_banner("ray originates inside sphere");
+	print_test_number(&i);
+	//call function
+	xs = intersect(s, r, SPHERE);
+	//print output
+	printf(G_B"t1: "RES"%f\n", xs[0]);
+	printf(G_B"t2: "RES"%f\n", xs[1]);
+	//free resources
+	free(xs);
+	free(r->direction);
+	free(r->origin);
+	free(r);
+//TEST 5
+	//redefine ray
+	r = ray(make_tuple(5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
+	print_test_banner("sphere is behind ray");
+	print_test_number(&i);
+	//call function
+	xs = intersect(s, r, SPHERE);
+	//print output
+	printf(G_B"t1: "RES"%f\n", xs[0]);
+	printf(G_B"t2: "RES"%f\n", xs[1]);
+	//free resources
+	free(xs);
+	free(r->direction);
+	free(r->origin);
+	free(r);
 	return (0);
 }

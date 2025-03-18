@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:47:13 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:53:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:12:13 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_tuple	*diff_tuple(t_tuple *t1, t_tuple *t2)
 	res->x = t1->x - t2->x;
 	res->y = t1->y - t2->y;
 	res->z = t1->z - t2->z;
-	print_tuple(res, "res");//		debugging
 	return (res);
 }
 
