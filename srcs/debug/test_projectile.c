@@ -5,25 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:11:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:11:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 19:32:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:32:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-typedef struct	s_projectile
-{
-	t_tuple		*position;
-	t_tuple		*velocity;
-}	t_projectile;
-
-typedef struct	s_environment
-{
-	t_tuple		*gravity;
-	t_tuple		*wind;
-}	t_environment;
 
 t_projectile	*new_projectile()
 {
@@ -118,20 +107,3 @@ void	draw_trajectory(t_image *img)
 	free(e->wind);
 	free(e);
 }
-//engine to see projectile
-// void	init_engine(t_engine *engine)
-// {
-// 	int	pixel_bits;
-// 	int	line_len;
-// 	int	endian;
-
-// 	engine->mlx = mlx_init();
-// 	engine->window = mlx_new_window(engine->mlx, 2700, 2700, "Projectile Trajectory");
-// 	engine->image.img_ptr = mlx_new_image(engine->mlx, 2700, 2700);
-// 	engine->image.addr_ptr = mlx_get_data_addr(engine->image.img_ptr, &pixel_bits, &line_len, &endian);
-// 	engine->image.pixel_bits = pixel_bits;
-// 	engine->image.line_len = line_len;
-// 	engine->image.endian = endian;
-// 	draw_trajectory(&engine->image);
-// 	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr, 0, 0);
-// }

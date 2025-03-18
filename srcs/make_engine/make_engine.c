@@ -5,45 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:12:03 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:12:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 19:34:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:34:49 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/engine.h"
-
-void	error_message(char *text, int mode)
-{
-	if (mode == 0)
-		perror(text);
-	else if (text)
-		ft_putstr_fd(text, 2);
-	exit(EXIT_FAILURE);
-}
-
-int	on_destroy_event(t_engine *engine)
-{
-	mlx_destroy_image(engine->mlx, engine->image.img_ptr);
-	mlx_destroy_window(engine->mlx, engine->window);
-	exit(EXIT_SUCCESS);
-}
-
-void	cleanup(t_engine *engine)
-{
-	if (engine->image.img_ptr)
-	{
-		printf("Destroying image\n");
-		mlx_destroy_image(engine->mlx, engine->image.img_ptr);
-		engine->image.img_ptr = NULL;
-	}
-	if (engine->window)
-	{
-		printf("Destroying window\n");
-		mlx_destroy_window(engine->mlx, engine->window);
-		engine->window = NULL;
-	}
-}
 
 int	on_key_hook_event(int key, t_engine *engine)
 {
@@ -67,19 +35,6 @@ void	put_pixel(t_image *img, int x, int y, int color)
 	}
 }
 
-void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color)
-{
-	int x, y;
-
-	for (y = -radius; y <= radius; y++)
-	{
-		for (x = -radius; x <= radius; x++)
-		{
-			if (x * x + y * y <= radius * radius) // Circle equation
-				put_pixel(img, center_x + x, center_y + y, color);
-		}
-	}
-}
 
 //Initializes the engine with command-line arguments.
 void	init_engine(t_engine *engine)
@@ -110,4 +65,7 @@ void	init_engine(t_engine *engine)
 	engine->image.line_len = line_len;
 	engine->image.endian = endian;
 	//display_help_message(engine);
+	draw_trajectory(&engine->image);
+	//draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, COLOR_X);
+	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr, 0, 0);
 }
