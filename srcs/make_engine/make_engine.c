@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:34:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:34:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 20:18:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 20:18:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ int	on_key_hook_event(int key, t_engine *engine)
 		//display_help_message(engine);
 	}
 	return (0);
-}
-
-void	put_pixel(t_image *img, int x, int y, int color)
-{
-	if (x >= 0 && x < WIN_SIZE && y >= 0 && y < WIN_SIZE) // Bounds check
-	{
-		char	*pixel;
-		pixel = img->addr_ptr + (y * img->line_len + x * (img->pixel_bits / 8));
-		*(unsigned int *)pixel = color;
-	}
 }
 
 
@@ -64,8 +54,9 @@ void	init_engine(t_engine *engine)
 	engine->image.pixel_bits = pixel_bits;
 	engine->image.line_len = line_len;
 	engine->image.endian = endian;
-	//display_help_message(engine);
-	draw_trajectory(&engine->image);
+	//draw_trajectory(&engine->image);
 	//draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, COLOR_X);
+	draw_hour_markers(&engine->image);
 	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr, 0, 0);
+	display_help_message(engine);
 }

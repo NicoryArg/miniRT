@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:32:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:32:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 20:04:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 20:04:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,13 @@ void	init_engine(t_engine *engine);
 int		on_destroy_event(t_engine *engine);
 void	cleanup(t_engine *engine);
 int		on_key_hook_event(int key, t_engine *engine);
+void	display_help_message(t_engine *engine);
 
 
 void	put_pixel(t_image *img, int x, int y, int color);
 void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color);
 void	draw_trajectory(t_image *img);
+void	draw_marker(t_image *img, int x, int y, int color, int marker_size);
+void	draw_hour_markers(t_image *img);
+
 #endif

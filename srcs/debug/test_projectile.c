@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:32:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:32:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 19:58:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 19:59:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,6 @@ t_projectile	*update_projectile(t_projectile *p, t_environment *e)
 	return (p);
 }
 
-void	draw_projectile(t_image *img, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	i = -PROJECTILE_SIZE;
-	while (i <= PROJECTILE_SIZE)
-	{
-		j = -PROJECTILE_SIZE ;
-		while (j <= PROJECTILE_SIZE)
-		{
-			put_pixel(img, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
-}
 
 void	draw_trajectory(t_image *img)
 {
@@ -95,7 +78,7 @@ void	draw_trajectory(t_image *img)
 	{
 		screen_x = (int)(p->position->x * SCALE);
 		screen_y = 2700 - (int)(p->position->y * SCALE);//height as 2700
-		draw_projectile(img, screen_x, screen_y, RED);
+		draw_marker(img, screen_x, screen_y, RED, MARKER_SIZE);
 		p = update_projectile(p, e);
 		if (screen_y <= 0 || screen_y >= 2700)//height as 2700
 			p->velocity->y *= -1;

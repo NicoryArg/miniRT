@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:13:24 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:14:36 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 20:04:23 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 20:04:23 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void		ft_negate(t_tuple *tup);
 //##################UTILS######################
 //#############################################
 //message.c
-void	display_help_message(t_engine *engine);
+//void	display_help_message(t_engine *engine);
 
 
 # ifndef M_PI
@@ -227,7 +227,7 @@ void	display_help_message(t_engine *engine);
 # define FIXED_RADIUS 1
 # define MINIMUM_RADIUS 0.5
 # define RADIUS 400
-# define PROJECTILE_SIZE 15
+# define MARKER_SIZE 15
 
 // Colors (Hex format: 0xRRGGBB)
 # define COLOR_X 0x0000FF
