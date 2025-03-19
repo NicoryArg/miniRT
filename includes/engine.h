@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 19:48:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/11 19:48:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/18 20:04:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/18 20:04:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ typedef struct	s_data
 	int		endian;
 }				t_data;
 
+typedef struct	s_projectile
+{
+	t_tuple		*position;
+	t_tuple		*velocity;
+}	t_projectile;
+
+typedef struct	s_environment
+{
+	t_tuple		*gravity;
+	t_tuple		*wind;
+}	t_environment;
+
 
 
 void	error_message(char *text, int mode);
@@ -49,6 +61,13 @@ void	init_engine(t_engine *engine);
 int		on_destroy_event(t_engine *engine);
 void	cleanup(t_engine *engine);
 int		on_key_hook_event(int key, t_engine *engine);
+void	display_help_message(t_engine *engine);
 
+
+void	put_pixel(t_image *img, int x, int y, int color);
+void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color);
+void	draw_trajectory(t_image *img);
+void	draw_marker(t_image *img, int x, int y, int color, int marker_size);
+void	draw_hour_markers(t_image *img);
 
 #endif
