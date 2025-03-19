@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 19:23:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/18 21:55:29 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:27:34 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,45 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 	xs->hits[1] = *intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
 	xs->count += 2;
 	return (xs);
+}
+
+void	ft_swap(t_hit **a, t_hit **b)
+{
+	t_hit	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	sort_intersections(t_hit	**xs, int count)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < count - 1)
+	{
+		j = i + 1;
+		while (j < count)
+		{
+			if (xs[i]->t > xs[j]->t)
+				ft_swap(&xs[i], &xs[j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+double	find_hit(t_hit	**intersections, int count)
+{
+	double	hit;
+
+	// printf("xs[0]: %f\n", intersections[0]->t);
+	// printf("xs[1]: %f\n", intersections[1]->t);
+	sort_intersections(intersections, count);
+	hit = intersections[0]->t;
+	return (hit);
 }
 
 // void	find_d(t_sphere *sph, t_ray *ray, t_ray_sphere *rs)

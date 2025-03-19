@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:17:55 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:56:49 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,22 @@ void	print_test_banner(const char *word)
 void	print_test_number(int *i)
 {
 	printf(CYAN"##### TEST %d #####\n"RES, (*i)++);
+}
+
+void	print_intersections(t_hit **xs, int count, int sorted)
+{
+	int	i = 0;
+
+	if (sorted)
+		printf(BOLD"%15s\n"RES, "Sorted Array:");
+	else
+		printf(BOLD"%17s\n"RES, "Unsorted Array:");
+	while (i < count)
+	{
+		printf(BOLD"%12s "LILA"%1.0f "RES""BOLD"%1s\n"RES, "|", xs[i]->t, "|");
+		i++;
+	}
+	printf(BOLD"_________________________________\n\n"RES);
 }
 
 void	malloc_err(char *func_name)

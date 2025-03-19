@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/18 22:00:11 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:08:29 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,10 @@ int	intersection_test(int run)
 	t_sphere	*s = sphere(1);
 	t_ray		*r = ray(make_tuple(-5, 0, 0, POINT), make_tuple(1, 0, 0, VECTOR));
 	t_hit		*i1 = NULL;
-	// t_hit		*i2 = NULL;
-	// t_hit		*xs = NULL;
+	t_hit		*i2 = NULL;
+	t_hit		*i3 = NULL;
+	t_hit		*i4 = NULL;
+	double		hit;
 
 //TEST 1
 	//print banners
@@ -197,19 +199,107 @@ int	intersection_test(int run)
 	printf(BOLD"%15s "GR"%14f\n"RES, "i.t:", i1->t);
 	printf(BOLD"%15s "GR"%20p"RES"\n", "i.object:", i1->object);
 	printf(BOLD"%15s "LILA"%20p\n"RES"", "Sphere:", s);
-
+	//free variables
+	free(i1);
 //TEST 2
 	//print banners
 	print_test_banner("Aggregating intersections");
 	print_test_number(&i);
 	//redefine variables
-	free(s);
-	s = sphere(1);
-	t_inters	*xs = intersect(s, r, SPHERE);
+	t_sphere	*s2 = sphere(1);
+	t_inters	*xs = intersect(s2, r, SPHERE);
 	printf(BOLD"%15s "GR"%7d\n"RES, "xs.count:", xs->count);
 	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0].object);
 	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", xs->hits[1].object);
-	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s);
-
+	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s2);
+	//free variables
+	free(xs->hits);
+	free(xs);
+//TEST 3
+	//print banners
+	print_test_banner("hit when all inters have positive `t`");
+	print_test_number(&i);
+	printf(BOLD"_________________________________\n\n"RES);
+	//redifine variables;
+	i1 = intersection(1, s, SPHERE);
+	i2 = intersection(2, s, SPHERE);
+	t_hit	**intersections = malloc(sizeof(t_hit *) * (2 + 1));
+	for (int x = 0; x < 3; x++)
+		intersections[x] = malloc(sizeof(t_hit));
+	intersections[0] = i1;
+	intersections[1] = i2;
+	intersections[2] = NULL;
+	//run test
+	hit = find_hit(intersections, 2);
+	//print output
+	print_intersections(intersections, 2, 1);
+	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//free variables
+	free(i1);
+	free(i2);
+//TEST 4
+	//print banners
+	print_test_banner("hit when some inters have nagative `t`");
+	print_test_number(&i);
+	printf(BOLD"_________________________________\n\n"RES);
+	//redefine variables
+	i1 = intersection(-1, s, SPHERE);
+	i2 = intersection(1, s, SPHERE);
+	intersections[0] = i1;
+	intersections[1] = i2;
+	intersections[2] = NULL;
+	//run test
+	hit = find_hit(intersections, 2);
+	//print output
+	print_intersections(intersections, 2, 1);
+	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//free variables
+	free(i1);
+	free(i2);
+//TEST 5
+	//print banners
+	print_test_banner("hit when all inters have nagative `t`");
+	print_test_number(&i);
+	printf(BOLD"_________________________________\n\n"RES);
+	//redefine variables
+	i1 = intersection(-2, s, SPHERE);
+	i2 = intersection(-1, s, SPHERE);
+	intersections[0] = i1;
+	intersections[1] = i2;
+	intersections[2] = NULL;
+	//run test
+	hit = find_hit(intersections, 2);
+	//print output
+	print_intersections(intersections, 2, 1);
+	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//free variables
+	free(i1);
+	free(i2);
+	free(intersections);
+//TEST 6
+	//print banners
+	print_test_banner("hit when unsorted array of inters");
+	print_test_number(&i);
+	printf(BOLD"_________________________________\n\n"RES);
+	//redefine variables
+	i1 = intersection(5, s, SPHERE);
+	i2 = intersection(7, s, SPHERE);
+	i3 = intersection(-3, s, SPHERE);
+	i4 = intersection(2, s, SPHERE);
+	intersections = malloc(sizeof(t_hit *) * (4 + 1));
+	intersections[0] = i1;
+	intersections[1] = i2;
+	intersections[2] = i3;
+	intersections[3] = i4;
+	intersections[4] = NULL;
+	print_intersections(intersections, 4, 0);
+	//run test
+	hit = find_hit(intersections, 4);
+	//print output
+	print_intersections(intersections, 4, 1);
+	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//free variables
+	free(i1);
+	free(i2);
 	return (0);
 }
