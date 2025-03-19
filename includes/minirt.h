@@ -83,12 +83,13 @@ typedef struct s_hit
 	t_obj	type;
 }	t_hit;
 
-typedef struct s_inters
+typedef struct s_intersection
 {
 	int		count;
 	int		capacity;
 	t_hit	*hits;
 }	t_inters;
+
 // typedef struct s_ray_sphere
 // {
 // 	int		x_count;
