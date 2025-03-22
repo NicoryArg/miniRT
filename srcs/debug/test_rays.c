@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 17:01:03 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:14:18 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,7 +314,7 @@ int	ray_transform_test(int run)
 		return (0);
 	t_ray		*r = ray(make_tuple(1, 2, 3, POINT), make_tuple(0, 1, 0, VECTOR));
 	t_ray		*transformed_ray = NULL;
-	t_matrix	*matrix = translate(3, 4, 5);
+	t_matrix	*inverse = translate(3, 4, 5);
 	int			i = 1;
 
 //TEST 1
@@ -322,10 +322,21 @@ int	ray_transform_test(int run)
 	print_test_banner("Translating a ray");
 	print_test_number(&i);
 	//call function
-	transformed_ray = transform(r, matrix);
+	transformed_ray = transform(r, inverse);
 	print_tuple(transformed_ray->direction, "direction");
 	print_tuple(transformed_ray->origin, "origin");
 	//free variables
-	free_matrix(matrix);
+	free_matrix(inverse);
+
+//TEST 2
+		// //print banners
+		// print_test_banner("Scaling a ray");
+		// print_test_number(&i);
+		// //redefine variables//				NOT WORKING
+		// inverse = scale(2, 3, 4);
+		// //call function
+		// transformed_ray = transform(r, inverse);
+		// print_tuple(transformed_ray->direction, "direction");
+		// print_tuple(transformed_ray->origin, "origin");
 	return (0);
 }
