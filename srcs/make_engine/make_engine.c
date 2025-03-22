@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 20:18:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 20:18:32 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/19 22:05:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/19 22:05:44 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_engine(t_engine *engine)
 	engine->image.line_len = line_len;
 	engine->image.endian = endian;
 	//draw_trajectory(&engine->image);
-	//draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, COLOR_X);
+	draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, RED);
 	draw_hour_markers(&engine->image);
 	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr, 0, 0);
 	display_help_message(engine);

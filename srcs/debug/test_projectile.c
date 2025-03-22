@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 19:58:54 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 19:59:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/19 22:05:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/19 22:05:23 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_projectile	*new_projectile()
 	if (!p)
 		return (NULL);
 	p->position = make_tuple(1, 1, 0, POINT);
-	velocity = make_tuple(1, 5.5, 0, VECTOR);
-	p->velocity = mult_tuple(normalise(velocity), 10);
+	velocity = make_tuple(1, 2, 0, VECTOR);
+	p->velocity = mult_tuple(normalise(velocity), 4.7);
 	free(velocity);
 	return (p);
 }
@@ -36,7 +36,7 @@ t_environment	*new_environment()
 	e = malloc(sizeof(t_environment));
 	if (!e)
 		return (NULL);
-	e->gravity = make_tuple(0, -0.71, 0, VECTOR);
+	e->gravity = make_tuple(0, -0.5, 0, VECTOR);
 	e->wind = make_tuple(-0.01, 0, 0, VECTOR);
 	return (e);
 }
@@ -74,13 +74,13 @@ void	draw_trajectory(t_image *img)
 	e = new_environment();
 	if (!p || !e)
 		return ;
-	while (p->position->x < 2700 / SCALE)// width as 2700
+	while (p->position->x < WIN_SIZE / SCALE)// width as 2700
 	{
 		screen_x = (int)(p->position->x * SCALE);
-		screen_y = 2700 - (int)(p->position->y * SCALE);//height as 2700
+		screen_y = WIN_SIZE - (int)(p->position->y * SCALE);//height as 2700
 		draw_marker(img, screen_x, screen_y, RED, MARKER_SIZE);
 		p = update_projectile(p, e);
-		if (screen_y <= 0 || screen_y >= 2700)//height as 2700
+		if (screen_y <= 0 || screen_y >= WIN_SIZE)//height as 2700
 			p->velocity->y *= -1;
 	}
 	free(p->position);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 20:00:48 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 20:00:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/19 22:06:19 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/19 22:06:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_hour_markers(t_image *img)
 		// Scale & Convert to screen coordinates
 		screen_x = CENTER_X + (int)(transformed->x * CLOCK_RADIUS);
 		screen_y = CENTER_Y - (int)(transformed->z * CLOCK_RADIUS); // Flip Y axis
-		draw_marker(img, screen_x, screen_y, RED, MARKER_SIZE);
+		draw_marker(img, screen_x, screen_y, COLOR_X, MARKER_SIZE);
 		free(transformed);
 		hour++;
 	}
