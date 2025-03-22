@@ -152,6 +152,7 @@ t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
  */
 t_ray		*ray(t_tuple *origin, t_tuple *direction);
 t_tuple		*get_point(t_ray *ray, double t);
+t_ray		*transform(t_ray *r, t_matrix *mtx);
 
 
 //#############################################
