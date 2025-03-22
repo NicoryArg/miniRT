@@ -129,12 +129,19 @@ void		free_matrix(t_matrix *matrix);
 //#############################################
 //##################RAYS#######################
 //#############################################
+//hits.c
+void		ft_swap(t_hit **a, t_hit **b);
+void		sort_intersections(t_hit	**xs, int count);
+double		find_hit(t_hit	**intersections, int count);
+
 //intersect.c
+t_inters	*init_intersections(int initial_capacity);
 t_inters	*intersect(void *obj, t_ray *ray, t_obj type);
 t_hit		*intersection(double t, void *object, t_obj type);
+
+//ray_sphere.c
 double		discriminant(t_ray *ray, t_tuple *sph_to_ray);
 t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
-double		find_hit(t_hit	**intersections, int count);
 
 //rays.c
 /**
