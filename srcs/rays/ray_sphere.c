@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_sphere.c                                       :+:      :+:    :+:   */
+/*   settings.json                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 15:49:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 15:49:30 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 18:12:08 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 18:13:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,26 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 	double	d;
 	double	a;
 	double	b;
+	t_tuple	*oc;
+	int 	i;
 
-	d = discriminant(ray, diff_tuple(ray->origin, sph->centre));
+	i = xs->count;
+	oc = diff_tuple(ray->origin, sph->centre);
+	d = discriminant(ray, oc);
 	if (d < 0)
-		return (NULL);
+	{
+		free(oc);
+		return (xs);
+	}
 	a = dot(ray->direction, ray->direction);
-	b = 2 * dot(ray->direction, diff_tuple(ray->origin, sph->centre));
-	xs->hits[0] = intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
-	xs->hits[1] = intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
+	b = 2 * dot(ray->direction, oc);
+	if (!xs->hits)
+		xs->hits = malloc(sizeof(t_hit *) * 2);
+	if (!xs->hits)
+		malloc_err("intersect_sph");
+	xs->hits[i] = intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
+	xs->hits[i + 1] = intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
 	xs->count += 2;
+	free(oc);
 	return (xs);
 }

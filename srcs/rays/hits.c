@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hits.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 15:48:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 15:49:03 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/24 16:34:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 16:34:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-void	ft_swap(t_hit **a, t_hit **b)
-{
-	t_hit	*tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
 
 void	sort_intersections(t_hit	**xs, int count)
 {
@@ -39,6 +30,20 @@ void	sort_intersections(t_hit	**xs, int count)
 		i++;
 	}
 }
+
+//Rendering camera-facing images (like silhouette)
+double	find_visible_hit(t_hit **hits, int count)
+{
+	int		i = 0;
+
+	sort_intersections(hits, count);//optional
+	while (i < count && hits[i]->t < 0)
+		i++;
+	if (i < count)
+		return (hits[i]->t);
+	return (-1);
+}
+
 
 double	find_hit(t_hit	**intersections, int count)
 {

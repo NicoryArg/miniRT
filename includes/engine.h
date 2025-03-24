@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 20:04:03 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 20:04:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 17:48:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 17:48:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct	s_environment
 }	t_environment;
 
 
-
 void	error_message(char *text, int mode);
 void	init_engine(t_engine *engine);
 int		on_destroy_event(t_engine *engine);
@@ -69,5 +68,11 @@ void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color
 void	draw_trajectory(t_image *img);
 void	draw_marker(t_image *img, int x, int y, int color, int marker_size);
 void	draw_hour_markers(t_image *img);
+
+void	draw_silhouette(t_engine *engine);
+
+#define WALL_Z 50
+#define WALL_SIZE 7
+#define CANVAS_SIZE 500
 
 #endif
