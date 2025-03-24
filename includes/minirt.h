@@ -24,18 +24,33 @@
 # include "keys.h"
 # include "engine.h"
 
-typedef enum tuple_type
-{
-	VECTOR,
-	POINT,
-}	t_tpl;
-
+//#############################################
+//################ OBJECTS ####################
+//#############################################
 typedef enum e_obj_shape
 {
 	SPHERE,
 	CYLINDER,
 	PLANE,
 }	t_obj;
+
+typedef struct s_sphere
+{
+	t_tuple		*centre;
+	double		radius;
+	int			id;
+	t_matrix	*transf;
+}	t_sphere;
+
+//#############################################
+//############ TUPLES & MATRICES ##############
+//#############################################
+
+typedef enum tuple_type
+{
+	VECTOR,
+	POINT,
+}	t_tpl;
 
 typedef struct s_tuple
 {
@@ -56,18 +71,15 @@ typedef struct s_matrix
 	double		**values;
 }	t_matrix;
 
+//#############################################
+//########## RAYS & INTERSECTIONS #############
+//#############################################
+
 typedef struct s_ray
 {
 	t_tuple		*origin;
 	t_tuple		*direction;
 }	t_ray;
-
-typedef struct s_sphere
-{
-	t_tuple	*centre;
-	double	radius;
-	int		id;
-}	t_sphere;
 
 typedef struct s_hit
 {
@@ -83,15 +95,6 @@ typedef struct s_intersection
 	t_hit	*hits;
 }	t_inters;
 
-// typedef struct s_ray_sphere
-// {
-// 	int		x_count;
-// 	double	tc;
-// 	t_tuple	*l;
-// 	double	l_len;
-// 	double	d;
-// 	double	offset;
-// }	t_ray_sphere;
 
 //#############################################
 //#################MATRICES####################
@@ -152,6 +155,9 @@ t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
  */
 t_ray		*ray(t_tuple *origin, t_tuple *direction);
 t_tuple		*get_point(t_ray *ray, double t);
+
+//transform.c
+void		set_transf(void *obj, t_matrix *trans, t_obj type);
 t_ray		*transform(t_ray *r, t_matrix *mtx);
 
 
@@ -266,6 +272,7 @@ void		ft_negate(t_tuple *tup);
 # define B_B "\033[1;34m"
 # define LILA "\033[0;34m"
 # define R_B "\033[1;31m"
+# define AKA "\033[0;31m"
 # define G_B "\033[1;32m"
 # define YEL "\e[0;33m"
 # define CYAN "\033[0;36m"

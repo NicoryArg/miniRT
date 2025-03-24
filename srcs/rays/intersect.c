@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 19:23:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 15:49:06 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:34:01 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ t_inters	*init_intersections(int initial_capacity)
 t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
 {
 	t_inters	*xs;
+	t_ray		*r2;
 
 	xs = init_intersections(256);
 	if (type == SPHERE)
-		return (intersect_sph((t_sphere *)obj, ray, xs));
+	{
+		r2 = transform(ray, invert_matrix(((t_sphere *)obj)->transf));
+		return (intersect_sph((t_sphere *)obj, r2, xs));
+	}
 	// else if (type == CYLINDER)
 	// 	return (intersect_cyl((t_cyl *)obj, ray));
 	// else if (type == PLANE)

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/19 11:56:49 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:14:02 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	print_matrix(t_matrix *matrix)
 	int		j;
 
 	i = 0;
+	if (matrix->cols == 4)
+		printf(" -----------------------------------\n");
 	while (i < matrix->rows)
 	{
 		printf("|");
@@ -46,6 +48,8 @@ void	print_matrix(t_matrix *matrix)
 		printf("\n");
 		i++;
 	}
+	if (matrix->rows == 4)
+		printf(" -----------------------------------\n");
 }
 
 void	print_test_banner(const char *word)

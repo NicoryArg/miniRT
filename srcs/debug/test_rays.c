@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 17:14:18 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:55:17 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,13 @@ int	sph_ray_intersect(int run)
 	//call function
 	xs = intersect(s, r, SPHERE);
 	//print output
-	if (xs)
+	if (xs->count == 0)
 	{
-		printf(G_B"t1: "RES"%f\n", xs->hits[0].t);
-		printf(G_B"t2: "RES"%f\n", xs->hits[1].t);
+		printf(AKA"NO INTERSECTIONS DETECTED!\n"RES"");
+		printf(LILA"xs.count: "GR"%d\n"RES, xs->count);
 	}
 	else
-		printf(YEL"xs is NULL\n"RES);
+		printf(YEL"[DEBUG] TEST%d -> sph_ray_intersect\n"RES, i);
 	//free resources
 	free(xs);
 	free(r->direction);
@@ -323,20 +323,105 @@ int	ray_transform_test(int run)
 	print_test_number(&i);
 	//call function
 	transformed_ray = transform(r, inverse);
-	print_tuple(transformed_ray->direction, "direction");
 	print_tuple(transformed_ray->origin, "origin");
+	print_tuple(transformed_ray->direction, "direction");
 	//free variables
 	free_matrix(inverse);
 
 //TEST 2
-		// //print banners
-		// print_test_banner("Scaling a ray");
-		// print_test_number(&i);
-		// //redefine variables//				NOT WORKING
-		// inverse = scale(2, 3, 4);
-		// //call function
-		// transformed_ray = transform(r, inverse);
-		// print_tuple(transformed_ray->direction, "direction");
-		// print_tuple(transformed_ray->origin, "origin");
+	//print banners
+	print_test_banner("Scaling a ray");
+	print_test_number(&i);
+	//redefine variables//				NOT WORKING
+	inverse = scale(2, 3, 4);
+	//call function
+	transformed_ray = transform(r, inverse);
+	print_tuple(transformed_ray->origin, "origin");
+	print_tuple(transformed_ray->direction, "direction");
+	return (0);
+}
+
+int	ray_transform_test2(int run)
+{
+	if (run == 0)
+		return (0);
+//initiate variables
+	int			i = 1;
+	char		*f = "ray_transform_test2";
+	t_sphere	*s;
+	t_matrix	*t;
+	t_ray		*r;
+	t_inters	*xs;
+
+//TEST 1
+	print_test_banner("Sphere Default `transf`");
+	print_test_number(&i);
+	//run test
+	s = sphere(1);
+	//print output
+	printf(LILA"s->transf:\n"RES);
+	print_matrix(s->transf);
+
+//TEST 2
+	print_test_banner("Changing a sphere's transf (translation)");
+	print_test_number(&i);
+	//define variables
+	t = translate(2, 3, 4);
+	//print input
+	printf(LILA"s->transf BEFORE:\n"RES);
+	print_matrix(s->transf);
+	printf("\n");
+	//run test
+	set_transf(s, t, SPHERE);
+	//print output
+	printf(GR"s->transf AFTER:\n"RES);
+	print_matrix(s->transf);
+
+//TEST 3
+	print_test_banner("Intersecting a scaled sphere with a ray");
+	print_test_number(&i);
+	//define variables
+	free(s);
+	s = sphere(1);
+	r = ray(make_tuple(0, 0, -5, POINT), make_tuple(0, 0, 1, VECTOR));
+	t = scale(2, 2 ,2);
+	//run tests
+	set_transf(s, t, SPHERE);
+	xs = intersect(s, r, SPHERE);
+	//print output
+	if (xs->count == 0)
+	{
+		printf(AKA"NO INTERSECTIONS DETECTED!\n"RES"");
+		printf(LILA"xs.count: "GR"%d\n"RES, xs->count);
+	}
+	else if (xs->count == 2)
+	{
+		printf(LILA"xs.count: "RES"%8d\n", xs->count);
+		printf(G_B"t1: "RES"%21f\n", xs->hits[0].t);
+		printf(G_B"t2: "RES"%21f\n", xs->hits[1].t);
+	}
+	else
+		printf(YEL"[DEBUG] TEST%d -> %s\n"RES, i, f);
+
+//TEST 4
+	print_test_banner("Intersecting a scaled sphere with a ray");
+	print_test_number(&i);
+	//define variables
+	free(s);
+	s = sphere(1);
+	r = ray(make_tuple(0, 0, -5, POINT), make_tuple(0, 0, 1, VECTOR));
+	t = translate(5, 0 ,0);
+	//run tests
+	set_transf(s, t, SPHERE);
+	xs = intersect(s, r, SPHERE);
+	//print output
+	if (xs->count == 0)
+	{
+		printf(AKA"NO INTERSECTIONS DETECTED!\n"RES"");
+		printf(LILA"xs.count: "RES"%8d\n", xs->count);
+	}
+	else
+		printf(YEL"[DEBUG] TEST%d -> %s\n"RES, i, f);
+
 	return (0);
 }

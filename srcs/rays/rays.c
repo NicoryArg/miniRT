@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:28:17 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 16:59:31 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:57:18 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,4 @@ t_tuple	*get_point(t_ray *ray, double t)
 
 	point = add_tuple(ray->origin, mult_tuple(ray->direction, t));
 	return (point);
-}
-
-t_ray	*transform(t_ray *r, t_matrix *inverse)
-{
-	t_ray		*new;
-	t_matrix	*temp;
-	t_matrix	*ray_mtx;
-
-	new = malloc(sizeof(t_ray));
-	if (!new)
-		malloc_err("transform");//	debugging
-	temp = tuple_to_matrix(r->direction);
-	ray_mtx = multiply_matrices(inverse, temp);
-	new->direction = matrix_to_tuple(ray_mtx);
-	free_matrix(temp);
-	free_matrix(ray_mtx);
-	temp = tuple_to_matrix(r->origin);
-	ray_mtx = multiply_matrices(inverse, temp);
-	new->origin = matrix_to_tuple(ray_mtx);
-	free_matrix(temp);
-	free_matrix(ray_mtx);
-	free_matrix(inverse);
-	return (new);
 }

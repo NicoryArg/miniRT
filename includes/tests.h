@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 16:07:27 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:41:39 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		sph_unique_id(int run, int num);
 int		sph_ray_intersect(int run);
 int		intersection_test(int run);
 int		ray_transform_test(int run);
-
+int		ray_transform_test2(int run);
 
 
 //test_transform.c
