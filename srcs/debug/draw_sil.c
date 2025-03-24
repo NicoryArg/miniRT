@@ -43,10 +43,12 @@ static int	get_color_for_pixel(t_render_ctx *ctx, t_ray *ray)
 	int			i;
 
 	xs = intersect(ctx->sphere, ray, SPHERE);
+	if (xs->count == 0)
+		return(COLOR_X);
 	t = find_visible_hit(xs->hits, xs->count);
-	if (t >= 0)
+	if (t)
 	{
-		printf("HIT at t = %.2f\n", t);
+		// printf("HIT at t = %.2f\n", t);
 		color = RED;
 	}
 	else
@@ -97,10 +99,10 @@ static void	render_pixel(t_render_ctx *ctx, int x, int y, t_projection *proj)
 
 	ray = prepare_ray_for_pixel(ctx, x, y, proj);
 	color = get_color_for_pixel(ctx, ray);
-	draw_scaled_pixel(ctx->img, x, y, 1, color); // try scale = 5
+	put_pixel(ctx->img, x, y, color); // try scale = 5
 
 	//put_pixel(ctx->img, x, y, color);
-	free(ray->origin);
+	// free(ray->origin);
 	free(ray->direction);
 	free(ray);
 }
@@ -116,7 +118,7 @@ void	draw_silhouette(t_engine *engine)
 	proj.half = WALL_SIZE / 2.0;
 	ctx.img = &engine->image;
 	ctx.ray_origin = make_tuple(0, 0, -5, POINT);
-	ctx.sphere = sphere(1.0);
+	ctx.sphere = sphere(0.5);
 	y = 0;
 	while (y < CANVAS_SIZE)//loop rows
 	{

@@ -71,7 +71,7 @@ void	draw_hour_markers(t_image *img);
 
 void	draw_silhouette(t_engine *engine);
 
-#define WALL_Z 50
+#define WALL_Z 10
 #define WALL_SIZE 7
 #define CANVAS_SIZE 500
 

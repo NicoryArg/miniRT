@@ -44,10 +44,6 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 	}
 	a = dot(ray->direction, ray->direction);
 	b = 2 * dot(ray->direction, oc);
-	if (!xs->hits)
-		xs->hits = malloc(sizeof(t_hit *) * 2);
-	if (!xs->hits)
-		malloc_err("intersect_sph");
 	xs->hits[i] = intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
 	xs->hits[i + 1] = intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
 	xs->count += 2;
