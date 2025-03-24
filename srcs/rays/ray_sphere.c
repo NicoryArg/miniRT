@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 15:46:09 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/22 15:47:52 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/24 15:49:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 15:49:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 		return (NULL);
 	a = dot(ray->direction, ray->direction);
 	b = 2 * dot(ray->direction, diff_tuple(ray->origin, sph->centre));
-	xs->hits[0] = *intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
-	xs->hits[1] = *intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
+	xs->hits[0] = intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
+	xs->hits[1] = intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
 	xs->count += 2;
 	return (xs);
 }

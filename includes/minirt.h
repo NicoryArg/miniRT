@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 22:06:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/19 22:06:40 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 15:47:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 15:47:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_intersection
 {
 	int		count;
 	int		capacity;
-	t_hit	*hits;
+	t_hit	**hits;
 }	t_inters;
 
 // typedef struct s_ray_sphere
