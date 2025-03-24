@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 20:12:28 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 20:15:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 20:19:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 20:20:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,33 +55,40 @@ static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 	return (color);
 }
 
-void	draw_silhouette(t_engine *engine)
+static void	render_loop(t_render_ctx *ctx, t_image *img)
 {
-	t_tuple		*ray_origin;
-	t_sphere	*sph;
-	int			x;
-	int			y;
-	double		pixel_size;
-	double		half;
+	int		x;
+	int		y;
+	t_tuple	*wall_point;
+	t_ray	*ray;
+	int		color;
 
-	ray_origin = make_tuple(0, 0, -5, POINT);
-	sph = sphere(1);
-	pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
-	sph->centre->z = 10.0;
-	half = WALL_SIZE / 2.0;
-	sph->transf = create_identity_matrix(4);
 	y = 0;
 	while (y < CANVAS_SIZE)
 	{
 		x = 0;
 		while (x < CANVAS_SIZE)
 		{
-			t_tuple	*wall_point = compute_wall_point(x, y, pixel_size, half);
-			t_ray	*ray = create_ray_to_point(ray_origin, wall_point);
-			int		color = compute_pixel_color(sph, ray);
-			put_pixel(&engine->image, x, y, color);
+			wall_point = compute_wall_point(x, y, ctx->pixel_size, ctx->half);
+			ray = create_ray_to_point(ctx->ray_origin, wall_point);
+			color = compute_pixel_color(ctx->sph, ray);
+			put_pixel(img, x, y, color);
 			x++;
 		}
 		y++;
 	}
+}
+
+void	draw_silhouette(t_engine *engine)
+{
+	t_render_ctx	ctx;
+
+	ctx.ray_origin = make_tuple(0, 0, -5, POINT);
+	ctx.sph = sphere(1.0);
+	ctx.sph->centre->z = 10.0;
+	ctx.sph->transf = create_identity_matrix(4);
+	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
+	ctx.half = WALL_SIZE / 2.0;
+
+	render_loop(&ctx, &engine->image);
 }
