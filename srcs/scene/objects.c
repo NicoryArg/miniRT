@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:24:46 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/12 11:27:21 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:31:29 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ if (id == 0)
 	sphere->id = id;
 	sphere->centre = make_tuple(0, 0, 0, POINT);
 	sphere->radius = radius;
+	sphere->transf = create_identity_matrix(4);
 	id++;
 	return (sphere);
 }

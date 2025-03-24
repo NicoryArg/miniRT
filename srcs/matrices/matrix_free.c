@@ -19,6 +19,7 @@ void	free_matrix(t_matrix *matrix)
 	i = 0;
 	while (i < matrix->rows)
 	{
+		// printf("%d\n", i);
 		free(matrix->values[i]);
 		i++;
 	}

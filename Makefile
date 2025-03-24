@@ -47,7 +47,7 @@ DEBUG_FILES			= $(addprefix debug/, print.c test_rays.c test_transform.c test_tu
 MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_transform.c main_tuples.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
-RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c rays.c)
+RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c rays.c transform.c)
 SCENE_FILES			= $(addprefix scene/, objects.c)
 UTILS_FILES			= $(addprefix utils/, messages.c)
 
