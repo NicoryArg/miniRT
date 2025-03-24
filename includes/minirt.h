@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 17:48:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 17:48:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 19:48:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 19:48:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ void		ft_negate(t_tuple *tup);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 2000
+# define WIN_SIZE 1000
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

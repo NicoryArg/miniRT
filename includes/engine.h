@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 17:48:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 17:48:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 20:10:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 20:10:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	draw_hour_markers(t_image *img);
 
 void	draw_silhouette(t_engine *engine);
 
-#define WALL_Z 50
+#define WALL_Z 10
 #define WALL_SIZE 7
 #define CANVAS_SIZE 500
 
