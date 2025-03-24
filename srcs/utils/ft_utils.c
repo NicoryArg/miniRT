@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays.c                                             :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:45:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 16:45:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 16:34:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 16:34:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
-t_ray	*ft_ray(t_tuple *origin, t_tuple *direction)
+void	ft_swap(t_hit **a, t_hit **b)
 {
-	t_ray	*ray;
+	t_hit	*tmp;
 
-	ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!ray)
-		malloc_err("ray");//	debugging
-	ray->origin = origin;
-	ray->direction = direction;
-	return (ray);
-}
-/**
- * @brief Finds the point at the given distance `t` along `ray`
- */
-t_tuple	*get_point(t_ray *ray, double t)
-{
-	t_tuple	*point;
-
-	point = add_tuple(ray->origin, mult_tuple(ray->direction, t));
-	return (point);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

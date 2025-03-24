@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 19:23:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 17:34:01 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/24 18:13:42 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 18:14:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_inters	*init_intersections(int initial_capacity)
 		return (NULL);
 	xs->count = 0;
 	xs->capacity = initial_capacity;
-	xs->hits = malloc(sizeof(t_hit) * initial_capacity);
+	xs->hits = malloc(sizeof(t_hit *) * initial_capacity);
 	if (!xs->hits)
 	{
 		free(xs);
@@ -36,6 +36,8 @@ t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
 	t_ray		*r2;
 
 	xs = init_intersections(256);
+	if (!xs)
+		return (NULL);
 	if (type == SPHERE)
 	{
 		r2 = transform(ray, invert_matrix(((t_sphere *)obj)->transf));
@@ -50,17 +52,15 @@ t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
 
 t_hit	*intersection(double t, void *object, t_obj type)
 {
-	t_hit	*intersection;
+	t_hit	*hit;
 
-	intersection = malloc(sizeof(t_hit));
-	if (!intersection)
-		malloc_err("intersection");//	debugging
-	if (type == SPHERE)
-		object = (t_sphere *)object;
-	intersection->object = object;
-	intersection->t = t;
-	intersection->type = SPHERE;
-	return (intersection);
+	hit = malloc(sizeof(t_hit));
+	if (!hit)
+		malloc_err("intersection");
+	hit->object = object;
+	hit->t = t;
+	hit->type = type;
+	return (hit);
 }
 
 // void	find_d(t_sphere *sph, t_ray *ray, t_ray_sphere *rs)

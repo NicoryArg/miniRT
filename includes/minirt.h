@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 22:06:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/19 22:06:40 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 17:48:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 17:48:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,31 @@ typedef struct s_intersection
 {
 	int		count;
 	int		capacity;
-	t_hit	*hits;
+	t_hit	**hits;
 }	t_inters;
 
+typedef struct s_render_ctx
+{
+	t_image		*img; // where we draw the pixels
+	t_tuple		*ray_origin; //(camera position)
+	t_sphere	*sphere; //pointer to the sphere we want to render
+}	t_render_ctx;
+
+typedef struct s_projection
+{
+	double	pixel_size;
+	double	half;
+}	t_projection;
+
+// typedef struct s_ray_sphere
+// {
+// 	int		x_count;
+// 	double	tc;
+// 	t_tuple	*l;
+// 	double	l_len;
+// 	double	d;
+// 	double	offset;
+// }	t_ray_sphere;
 
 //#############################################
 //#################MATRICES####################
@@ -135,6 +157,7 @@ void		free_matrix(t_matrix *matrix);
 //hits.c
 void		ft_swap(t_hit **a, t_hit **b);
 void		sort_intersections(t_hit	**xs, int count);
+double		find_visible_hit(t_hit **hits, int count);
 double		find_hit(t_hit	**intersections, int count);
 
 //intersect.c
@@ -153,7 +176,7 @@ t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
  * @param direction the direction the ray is pointing
  * @return a pointer to the newly created ray
  */
-t_ray		*ray(t_tuple *origin, t_tuple *direction);
+t_ray		*ft_ray(t_tuple *origin, t_tuple *direction);
 t_tuple		*get_point(t_ray *ray, double t);
 
 //transform.c
@@ -244,7 +267,7 @@ void		ft_negate(t_tuple *tup);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 1000
+# define WIN_SIZE 2000
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256
