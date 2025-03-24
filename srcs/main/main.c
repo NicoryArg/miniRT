@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 17:27:55 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 17:29:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 18:24:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 18:24:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@
 
 
 
-// int	main(void)
-// {
-// 	t_engine	engine;
+int	main(void)
+{
+	t_engine	engine;
 
-// 	init_engine(&engine);
-// 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
-// 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
-// 	mlx_loop(engine.mlx);
-// 	cleanup(&engine);
-// }
+	init_engine(&engine);
+	mlx_key_hook(engine.window, on_key_hook_event, &engine);
+	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
+}
