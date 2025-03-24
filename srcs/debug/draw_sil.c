@@ -100,7 +100,7 @@ static void	render_pixel(t_render_ctx *ctx, int x, int y, t_projection *proj)
 	draw_scaled_pixel(ctx->img, x, y, 1, color); // try scale = 5
 
 	//put_pixel(ctx->img, x, y, color);
-	free(ray->origin);
+	// free(ray->origin);
 	free(ray->direction);
 	free(ray);
 }
