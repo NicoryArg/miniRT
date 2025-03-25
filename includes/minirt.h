@@ -181,6 +181,13 @@ t_ray		*transform(t_ray *r, t_matrix *mtx);
 //#############################################
 //############### REFLECTION ##################
 //#############################################
+//ft_reflect.c
+/**
+ * @brief reflects a given vector around the normal provided
+ */
+t_tuple	*ft_reflect(t_tuple *in, t_tuple *normal);
+
+//normal_at.c
 t_tuple	*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
 t_tuple	*ft_object_point(t_matrix *inverse, t_tuple *world_point);
 t_tuple	*normal_at(t_sphere *sph, t_tuple *world_p);
