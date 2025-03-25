@@ -52,7 +52,7 @@ static int	get_color_for_pixel(t_render_ctx *ctx, t_ray *ray)
 		color = RED;
 	}
 	else
-		color = COLOR_X;
+		color = WHITE;
 	i = 0;
 	while (i < xs->count)
 	{

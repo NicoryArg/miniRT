@@ -267,7 +267,7 @@ void		ft_negate(t_tuple *tup);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 2000
+# define WIN_SIZE 720
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256
