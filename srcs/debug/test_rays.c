@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 19:54:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 17:55:17 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/25 17:11:08 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 17:11:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,6 +326,7 @@ int	ray_transform_test(int run)
 	print_tuple(transformed_ray->origin, "origin");
 	print_tuple(transformed_ray->direction, "direction");
 	//free variables
+	free_ray(transformed_ray);
 	free_matrix(inverse);
 
 //TEST 2

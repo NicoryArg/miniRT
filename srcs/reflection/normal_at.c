@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:09:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 13:14:45 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/25 17:58:07 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 18:00:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,18 @@ t_tuple	*normal_at(t_sphere *sph, t_tuple *world_p)
 {
 	t_tuple		*obj_p;
 	t_tuple		*obj_normal;
-	t_tuple		*world_normal;
 	t_matrix	*inverse;
+	t_tuple		*tuple;
+	t_tuple		*world_normal;
 
+	tuple = ft_tuple(0, 0, 0, POINT);
 	inverse = invert_matrix(sph->transf);
 	obj_p = ft_object_point(inverse, world_p);
-	obj_normal = diff_tuple(obj_p, ft_tuple(0, 0, 0, POINT));
+	obj_normal = diff_tuple(obj_p, tuple);
 	world_normal = ft_world_normal(inverse, obj_normal);
+	free(obj_p);
+	free(obj_normal);
+	free(tuple);
 	free_matrix(inverse);
 	// print_tuple(obj_p, "object point");
 	// print_tuple(obj_normal, "object normal");

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 20:19:54 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 20:20:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 18:20:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 18:23:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ static t_tuple	*compute_wall_point(int x, int y, double px_size, double half)
 static t_ray	*create_ray_to_point(t_tuple *origin, t_tuple *target)
 {
 	t_tuple	*direction;
+	t_tuple	*origin_copy;
 	t_ray	*ray;
+	t_tuple	*diff;
 
-	direction = normalise(diff_tuple(target, origin));
-	ray = ft_ray(origin, direction);
+	diff = diff_tuple(target, origin);
+	direction = normalise(diff);
+	free(diff);
+	origin_copy = ft_tuple(origin->x, origin->y, origin->z, origin->w);
+	ray = ft_ray(origin_copy, direction);
 	return (ray);
 }
 
@@ -41,7 +46,7 @@ static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 	t_inters	*xs;
 	double		t;
 	int			color;
-	int	i;
+	int			i;
 
 	xs = intersect(sphere, ray, SPHERE);
 	t = find_visible_hit(xs->hits, xs->count);
@@ -52,6 +57,8 @@ static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 	i = 0;
 	while (i < xs->count)
 		free(xs->hits[i++]);
+	free(xs->hits);
+	free(xs);
 	return (color);
 }
 
@@ -73,6 +80,8 @@ static void	render_loop(t_render_ctx *ctx, t_image *img)
 			ray = create_ray_to_point(ctx->ray_origin, wall_point);
 			color = compute_pixel_color(ctx->sph, ray);
 			put_pixel(img, x, y, color);
+			free(wall_point);
+			free_ray(ray);
 			x++;
 		}
 		y++;
@@ -91,4 +100,6 @@ void	draw_silhouette(t_engine *engine)
 	ctx.half = WALL_SIZE / 2.0;
 
 	render_loop(&ctx, &engine->image);
+	free(ctx.ray_origin);
+	free_sphere(ctx.sph);
 }

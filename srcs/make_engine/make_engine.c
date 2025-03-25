@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 17:48:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 17:49:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 15:45:24 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 15:45:28 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@ int	on_key_hook_event(int key, t_engine *engine)
 	}
 	return (0);
 }
-
-//debugging function
-void	debug_sphere_info(t_sphere *sph)
-{
-	if (!sph || !sph->centre)
-	{
-		printf("Sphere not initialized correctly!\n");
-		return ;
-	}
-	printf("✅ Sphere created:\n");
-	printf(" - Radius: %.2f\n", sph->radius);
-	printf(" - Center: (%.2f, %.2f, %.2f)\n",
-		sph->centre->x, sph->centre->y, sph->centre->z);
-}
-
 
 //Initializes the engine with command-line arguments.
 void	init_engine(t_engine *engine)
@@ -71,7 +56,6 @@ void	init_engine(t_engine *engine)
 	//draw_trajectory(&engine->image);
 	//draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, RED);
 	//draw_hour_markers(&engine->image);
-	//debug_sphere_info(ctx.sphere);
 	draw_silhouette(engine);
 	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr,(WIN_SIZE - CANVAS_SIZE) / 2, (WIN_SIZE - CANVAS_SIZE) / 2);
 	//display_help_message(engine);

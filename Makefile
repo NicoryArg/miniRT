@@ -50,7 +50,7 @@ SCENE_FILES			= $(addprefix scene/, objects.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
-UTILS_FILES			= $(addprefix utils/, messages.c ft_utils.c)
+UTILS_FILES			= $(addprefix utils/, free_utils.c messages.c ft_utils.c)
 
 
 SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) \

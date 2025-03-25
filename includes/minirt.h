@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 20:19:24 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 20:19:41 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 17:51:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 17:51:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,10 @@ void		ft_negate(t_tuple *tup);
 //#############################################
 //message.c
 //void	display_help_message(t_engine *engine);
+
+//free_utils.c
+void		free_ray(t_ray *ray);
+void		free_sphere(t_sphere *sphere);
 
 
 # ifndef M_PI

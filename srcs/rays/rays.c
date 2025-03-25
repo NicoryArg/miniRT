@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:45:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 16:45:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 17:53:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 17:56:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ t_ray	*ft_ray(t_tuple *origin, t_tuple *direction)
 t_tuple	*get_point(t_ray *ray, double t)
 {
 	t_tuple	*point;
+	t_tuple	*mult_tup;
 
-	point = add_tuple(ray->origin, mult_tuple(ray->direction, t));
+	mult_tup = mult_tuple(ray->direction, t);
+	point = add_tuple(ray->origin, mult_tup);
+	free(mult_tup);
 	return (point);
 }

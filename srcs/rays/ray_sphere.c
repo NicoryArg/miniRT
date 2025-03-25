@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.json                                      :+:      :+:    :+:   */
+/*   ray_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 15:46:09 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 17:39:06 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/25 17:29:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 17:30:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 	xs->hits[i + 1] = intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
 	xs->count += 2;
 	free(oc);
+	free_ray(ray);
 	return (xs);
 }
