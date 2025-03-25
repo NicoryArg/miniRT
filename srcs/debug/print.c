@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 13:32:51 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:42:56 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ void	print_normal(t_tuple *tuple, double x, double y, double z)
 	printf(YEL"\ty:"RES" %.5f\n", tuple->y);
 	printf(YEL"\tz:"RES" %.5f\n", tuple->z);
 	printf(YEL"\tw:"RES" %d\n", tuple->w);
+}
+
+void	print_light(t_light *l, char *name)
+{
+	if (l)
+		printf(G_B"%s:\n"RES, name);
+	else
+		printf(R_B"ERROR:"RES" %s undefined\n", name);
+	printf(YEL"LUM:\n"RES);
+	printf(YEL"\tr:"RES" %.5f\n", l->lum->r);
+	printf(YEL"\tg:"RES" %.5f\n", l->lum->g);
+	printf(YEL"\tb:"RES" %.5f\n", l->lum->b);
+	print_tuple(l->pos, "POS:");
 }
 
 void	print_matrix(t_matrix *matrix)

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:59:08 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 16:16:44 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:25:11 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,16 @@ t_tuple	*ft_reflect(t_tuple *in, t_tuple *normal)
 	reflect = diff_tuple(in, temp);
 	free(temp);
 	return (reflect);
+}
+
+t_light	*ft_light(t_tuple *position, t_colour *lum)
+{
+	t_light	*light;
+
+	light = malloc(sizeof(t_light));
+	if (!light)
+		malloc_err("ft_light");
+	light->pos = position;
+	light->lum = lum;
+	return (light);
 }

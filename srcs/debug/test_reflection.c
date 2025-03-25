@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 16:20:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:42:15 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,30 @@ int	normal_at_test(int run)
 	free(v);
 	free(n);
 	free(r);
+	return (0);
+}
+
+int	light_test(int run)
+{
+	if (run == 0)
+		return (0);
+	t_colour	*lum;
+	t_tuple		*pos;
+	t_light		*light;
+	int			i = 1;
+
+
+//TEST 1
+	//print banners
+	print_test_banner("light has a position and intensity (lum)");
+	print_test_number(&i);
+	//initiate variables
+	lum = ft_colour(255, 255, 255);
+	pos = ft_tuple(0, 0, 0, POINT);
+	//run test;
+	light = ft_light(pos, lum);
+	//print output
+	print_light(light, "light");
+
 	return (0);
 }

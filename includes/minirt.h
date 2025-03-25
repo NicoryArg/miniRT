@@ -24,6 +24,9 @@
 # include "keys.h"
 # include "engine.h"
 
+typedef struct s_colour t_colour;
+typedef struct s_material t_material;
+
 //#############################################
 //################ OBJECTS ####################
 //#############################################
@@ -40,6 +43,7 @@ typedef struct s_sphere
 	double		radius;
 	int			id;
 	t_matrix	*transf;
+	t_material	*m;
 }	t_sphere;
 
 //#############################################
@@ -94,6 +98,36 @@ typedef struct s_intersection
 	int		capacity;
 	t_hit	**hits;
 }	t_inters;
+
+//#############################################
+//########## LIGHTS & REFLECTIONS #############
+//#############################################
+
+typedef struct s_light
+{
+	t_tuple		*pos;
+	t_colour	*lum;
+}	t_light;
+
+typedef struct s_material
+{
+	t_colour	*c;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+}	t_material;
+
+//#############################################
+//################# OTHER #####################
+//#############################################
+
+typedef struct s_colour
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_colour;
 
 typedef struct s_render_ctx {
 	t_tuple		*ray_origin;
@@ -186,6 +220,8 @@ t_ray		*transform(t_ray *r, t_matrix *mtx);
  * @brief reflects a given vector around the normal provided
  */
 t_tuple	*ft_reflect(t_tuple *in, t_tuple *normal);
+t_light	*ft_light(t_tuple *position, t_colour *lum);
+
 
 //normal_at.c
 t_tuple	*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
@@ -265,6 +301,9 @@ void		ft_negate(t_tuple *tup);
 //#############################################
 //##################UTILS######################
 //#############################################
+//colours.c
+t_colour	*ft_colour(double r, double g, double b);
+
 //message.c
 //void	display_help_message(t_engine *engine);
 

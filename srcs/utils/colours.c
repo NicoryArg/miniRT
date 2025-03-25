@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_reflection.c                                  :+:      :+:    :+:   */
+/*   colours.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:30:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 17:42:28 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/25 17:10:57 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/25 17:17:07 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int	main(void)
+t_colour	*ft_colour(double r, double g, double b)
 {
-	if (normal_at_test(0)) //1 to run , 0 to skip
-		printf("Error: normal_at_test failed\n");
-	if (light_test(1)) //1 to run , 0 to skip
-		printf("Error: light_test failed\n");
-	printf(R_B"END OF REFLECTION TESTS\n"RES);
-	return (0);
+	t_colour	*c;
+
+	c = malloc(sizeof(t_colour));
+	if (!c)
+		malloc_err("ft_colour");//	debugging
+	c->r = r;
+	c->g = g;
+	c->b = b;
+	return (c);
 }

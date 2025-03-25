@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 18:24:46 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 12:40:13 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:55:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ if (id == 0)
 	sphere->centre = ft_tuple(0, 0, 0, POINT);
 	sphere->radius = radius;
 	sphere->transf = create_identity_matrix(4);
+	sphere->m = malloc(sizeof(t_material));
 	id++;
 	return (sphere);
 }
