@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:11:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 17:11:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 19:06:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 19:07:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	sph_unique_id(int run, int num)
 	print_test_number(&test);
 	while (i < num)
 	{
-		t_sphere	*s0 = sphere(1);
+		t_sphere	*s0 = ft_sphere(1, NULL);
 		printf("sphere ID: %d\n", s0->id);
 		i++;
 	}
@@ -76,7 +76,7 @@ int	sph_ray_intersect(int run)
 		return (0);
 	int		i = 1;
 	t_ray	*r = ft_ray(ft_tuple(-5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
-	t_sphere	*s = sphere(1);
+	t_sphere	*s = ft_sphere(1, NULL);
 	double		d;
 	t_inters	*xs = NULL;
 	if (!r || !s)
@@ -181,7 +181,7 @@ int	intersection_test(int run)
 	if (run == 0)
 		return (0);
 	int			i = 1;
-	t_sphere	*s = sphere(1);
+	t_sphere	*s = ft_sphere(1, NULL);
 	t_ray		*r = ft_ray(ft_tuple(-5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	t_hit		*i1 = NULL;
 	t_hit		*i2 = NULL;
@@ -206,7 +206,7 @@ int	intersection_test(int run)
 	print_test_banner("Aggregating intersections");
 	print_test_number(&i);
 	//redefine variables
-	t_sphere	*s2 = sphere(1);
+	t_sphere	*s2 = ft_sphere(1, NULL);
 	t_inters	*xs = intersect(s2, r, SPHERE);
 	printf(BOLD"%15s "GR"%7d\n"RES, "xs.count:", xs->count);
 	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0]->object);
@@ -358,7 +358,7 @@ int	ray_transform_test2(int run)
 	print_test_banner("Sphere Default `transf`");
 	print_test_number(&i);
 	//run test
-	s = sphere(1);
+	s = ft_sphere(1, NULL);
 	//print output
 	printf(LILA"s->transf:\n"RES);
 	print_matrix(s->transf);
@@ -383,7 +383,7 @@ int	ray_transform_test2(int run)
 	print_test_number(&i);
 	//define variables
 	free(s);
-	s = sphere(1);
+	s = ft_sphere(1, NULL);
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	t = scale(2, 2 ,2);
 	//run tests
@@ -409,7 +409,7 @@ int	ray_transform_test2(int run)
 	print_test_number(&i);
 	//define variables
 	free(s);
-	s = sphere(1);
+	s = ft_sphere(1, NULL);
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	t = translate(5, 0 ,0);
 	//run tests

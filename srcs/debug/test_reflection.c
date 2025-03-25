@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_reflection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 13:35:08 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/25 19:05:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 19:05:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	normal_at_test(int run)
 	print_test_banner("normal on a translated sphere");
 	print_test_number(&i);
 	//define variables
-	s = sphere(1);
+	s = ft_sphere(1, NULL);
 	set_transf(s, translate(0, 1, 0), SPHERE);
 	world_point = ft_tuple(0, 1.70711, -0.707111, POINT);
 	//run test

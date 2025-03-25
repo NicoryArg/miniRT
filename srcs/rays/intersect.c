@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:34:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:15:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 18:42:31 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 18:43:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
 	t_inters	*xs;
 	t_ray		*r2;
 	t_matrix	*inv;
+	t_inters	*result;
 
 	xs = init_intersections(256);
 	if (!xs)
@@ -44,7 +45,9 @@ t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
 		inv = invert_matrix(((t_sphere *)obj)->transf);
 		r2 = transform(ray, inv);
 		free_matrix(inv);
-		return (intersect_sph((t_sphere *)obj, r2, xs));
+		result = intersect_sph((t_sphere *)obj, r2, xs);
+		free_ray(r2);
+		return (result);
 	}
 	// else if (type == CYLINDER)
 	// 	return (intersect_cyl((t_cyl *)obj, ray));

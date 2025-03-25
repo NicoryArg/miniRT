@@ -5,13 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 18:20:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:23:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 19:09:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 19:17:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../includes/minirt.h"
-#include "engine.h"
 
 #include "../../includes/minirt.h"
 #include "engine.h"
@@ -93,12 +90,10 @@ void	draw_silhouette(t_engine *engine)
 	t_render_ctx	ctx;
 
 	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
-	ctx.sph = sphere(1.0);
+	ctx.sph = ft_sphere(1.0, scale(5,5,5));
 	ctx.sph->centre->z = 10;
-	ctx.sph->transf = scale(5, 5, 5);
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
-
 	render_loop(&ctx, &engine->image);
 	free(ctx.ray_origin);
 	free_sphere(ctx.sph);

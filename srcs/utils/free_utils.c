@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 18:11:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:12:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 18:53:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 18:53:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	free_sphere(t_sphere *sphere)
 	if (!sphere)
 		return ;
 	free(sphere->centre);
-	free(sphere->transf);
+	free_matrix(sphere->transf);
 	free(sphere);
 }
