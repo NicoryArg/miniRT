@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 17:48:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 17:48:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/24 20:19:24 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/24 20:19:41 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,13 @@ typedef struct s_intersection
 	t_hit	**hits;
 }	t_inters;
 
-typedef struct s_render_ctx
-{
-	t_image		*img; // where we draw the pixels
-	t_tuple		*ray_origin; //(camera position)
-	t_sphere	*sphere; //pointer to the sphere we want to render
+typedef struct s_render_ctx {
+	t_tuple		*ray_origin;
+	t_sphere	*sph;
+	double		pixel_size;
+	double		half;
 }	t_render_ctx;
 
-typedef struct s_projection
-{
-	double	pixel_size;
-	double	half;
-}	t_projection;
 
 // typedef struct s_ray_sphere
 // {
