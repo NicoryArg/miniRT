@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 16:41:39 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:33:18 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_hit t_hit;
 //print.c
 
 void		print_tuple(t_tuple *tuple, char *name);
+void		print_normal(t_tuple *tuple, double x, double y, double z);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);
@@ -46,6 +47,8 @@ int		intersection_test(int run);
 int		ray_transform_test(int run);
 int		ray_transform_test2(int run);
 
+//test_reflection.c
+int	normal_at_test(int run);
 
 //test_transform.c
 /**

@@ -26,7 +26,7 @@ static void	compute_hour_position(int hour, t_tuple **transformed)
 	t_matrix	*result_matrix;
 	t_tuple		*hour_pos;
 
-	hour_pos = make_tuple(0, 0, 1, POINT);
+	hour_pos = ft_tuple(0, 0, 1, POINT);
 	hour_matrix = tuple_to_matrix(hour_pos);
 	rotation = rotate_y(hour * ROTATION_STEP);
 	result_matrix = multiply_matrices(rotation, hour_matrix);

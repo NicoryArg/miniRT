@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-t_tuple *make_tuple(double x, double y, double z, t_tpl type)
+t_tuple *ft_tuple(double x, double y, double z, t_tpl type)
 {
 	t_tuple	*tuple;
 

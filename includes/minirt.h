@@ -178,6 +178,12 @@ t_tuple		*get_point(t_ray *ray, double t);
 void		set_transf(void *obj, t_matrix *trans, t_obj type);
 t_ray		*transform(t_ray *r, t_matrix *mtx);
 
+//#############################################
+//############### REFLECTION ##################
+//#############################################
+t_tuple	*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
+t_tuple	*ft_object_point(t_matrix *inverse, t_tuple *world_point);
+t_tuple	*normal_at(t_sphere *sph, t_tuple *world_p);
 
 //#############################################
 //############### SCENE #######################
@@ -238,7 +244,7 @@ t_tuple		*cross(t_tuple *a, t_tuple *b);
 /**
  * @brief Fills a tuple with provided data
  */
-t_tuple		*make_tuple(double x, double y, double z, t_tpl type);
+t_tuple		*ft_tuple(double x, double y, double z, t_tpl type);
 t_tuple		*new_tuple(void);
 t_tuple		*normalise(t_tuple *v);
 

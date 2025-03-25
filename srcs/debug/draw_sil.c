@@ -23,7 +23,7 @@ static t_tuple	*compute_wall_point(int x, int y, double px_size, double half)
 
 	world_x= -half + px_size * x;
 	world_y = half - px_size * y;
-	return (make_tuple(world_x, world_y, WALL_Z, POINT));
+	return (ft_tuple(world_x, world_y, WALL_Z, POINT));
 }
 
 static t_ray	*create_ray_to_point(t_tuple *origin, t_tuple *target)
@@ -83,7 +83,7 @@ void	draw_silhouette(t_engine *engine)
 {
 	t_render_ctx	ctx;
 
-	ctx.ray_origin = make_tuple(0, 0, -5, POINT);
+	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
 	ctx.sph = sphere(1.0);
 	ctx.sph->centre->z = 10;
 	ctx.sph->transf = scale(5, 5, 5);

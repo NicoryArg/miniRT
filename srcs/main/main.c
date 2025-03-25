@@ -31,13 +31,13 @@
 
 
 
-int	main(void)
-{
-	t_engine	engine;
+// int	main(void)
+// {
+// 	t_engine	engine;
 
-	init_engine(&engine);
-	mlx_key_hook(engine.window, on_key_hook_event, &engine);
-	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
-	mlx_loop(engine.mlx);
-	cleanup(&engine);
-}
+// 	init_engine(&engine);
+// 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
+// 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+// 	mlx_loop(engine.mlx);
+// 	cleanup(&engine);
+// }

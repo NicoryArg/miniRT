@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 17:14:02 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:32:51 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ void	print_tuple(t_tuple *tuple, char *name)
 	printf(YEL"\tz:"RES" %.5f\n", tuple->z);
 	printf(YEL"\tw:"RES" %d\n", tuple->w);
 }
+void	print_normal(t_tuple *tuple, double x, double y, double z)
+{
+	if (tuple)
+		printf(G_B"normal"RES" at "YEL"(%.5f, %.5f, %.5f) "RES"is:\n", x, y , z);
+	else
+		printf(R_B"ERROR:"RES" tuple is undefined\n");
+	printf(YEL"\tx:"RES" %.5f\n", tuple->x);
+	printf(YEL"\ty:"RES" %.5f\n", tuple->y);
+	printf(YEL"\tz:"RES" %.5f\n", tuple->z);
+	printf(YEL"\tw:"RES" %d\n", tuple->w);
+}
+
 void	print_matrix(t_matrix *matrix)
 {
 	int		i;

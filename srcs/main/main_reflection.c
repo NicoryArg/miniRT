@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.c                                          :+:      :+:    :+:   */
+/*   main_reflection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 18:24:46 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 12:40:13 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/25 12:30:27 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/25 12:44:45 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_sphere	*sphere(double	radius)
+int	main(void)
 {
-	t_sphere		*sphere;
-	static int	id;
-
-if (id == 0)
-		id = 0;
-	sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	if (!sphere)
-	{
-		printf(R_B"Error:"RES" failed to allocate memory for sphere.\n");
-		exit(1);	//debugging
-	}
-	sphere->id = id;
-	sphere->centre = ft_tuple(0, 0, 0, POINT);
-	sphere->radius = radius;
-	sphere->transf = create_identity_matrix(4);
-	id++;
-	return (sphere);
+	if (normal_at_test(1)) //1 to run , 0 to skip
+		printf("Error: normal_at_test failed\n");
+	printf(R_B"END OF REFLECTION TESTS\n"RES);
+	return (0);
 }
