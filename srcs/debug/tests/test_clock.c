@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 #include "engine.h"
 
 #define CLOCK_RADIUS (WIN_SIZE / 4)  // Clock radius = 3/8 of canvas width

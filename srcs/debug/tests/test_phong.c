@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_reflection.c                                  :+:      :+:    :+:   */
+/*   test_phong.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:30:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/26 16:52:29 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/26 15:58:26 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/26 16:15:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
-int	main(void)
+int	material_test(int run)
 {
-	if (normal_at_test(0)) //1 to run , 0 to skip
-		printf("Error: normal_at_test failed\n");
-	if (light_test(0)) //1 to run , 0 to skip
-		printf("Error: light_test failed\n");
-	if (material_test(1))
-		printf("Error: material_test failed\n");
-	printf(R_B"END OF REFLECTION TESTS\n"RES);
+	if (run == 0)
+		return (0);
+	int			i = 1;
+	t_material	*m;
+
+	m = ft_material();
+
+	print_material(m);
 	return (0);
 }

@@ -86,7 +86,7 @@ void	draw_silhouette(t_engine *engine)
 	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
 	ctx.sph = sphere(1.0);
 	ctx.sph->centre->z = 10;
-	ctx.sph->transf = scale(5, 5, 5);
+	set_transf(ctx.sph, scale(5, 5, 5), SPHERE);
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
 

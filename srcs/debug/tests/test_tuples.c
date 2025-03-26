@@ -6,11 +6,11 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:55:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 12:40:13 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:00:23 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 int	t_matrix_to_tuple(int run)
 {

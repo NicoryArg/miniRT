@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_reflection.c                                  :+:      :+:    :+:   */
+/*   ft_material.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:30:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/26 16:52:29 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/26 16:22:34 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/26 16:32:58 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int	main(void)
+t_material	*ft_material(void)
 {
-	if (normal_at_test(0)) //1 to run , 0 to skip
-		printf("Error: normal_at_test failed\n");
-	if (light_test(0)) //1 to run , 0 to skip
-		printf("Error: light_test failed\n");
-	if (material_test(1))
-		printf("Error: material_test failed\n");
-	printf(R_B"END OF REFLECTION TESTS\n"RES);
-	return (0);
+	t_material	*m;
+
+	m = malloc(sizeof(t_material));
+	if (!m)
+		malloc_err("ft_material");
+	m->c = ft_colour(1, 1, 1);
+	m->ambient = 0.1;
+	m->diffuse = 0.9;
+	m->specular = 0.9;
+	m->shininess = 200;
+	return (m);
 }

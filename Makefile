@@ -40,12 +40,15 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 # Sources
 SRCS_DIR			= srcs/
-DEBUG_FILES			= $(addprefix debug/, draw_sil.c print.c test_rays.c test_reflection.c test_transform.c test_tuples.c test_projectile.c test_circle.c test_clock.c)
+DEBUG_FILES			= $(addprefix debug/, draw_sil.c print.c)
+TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_reflection.c test_transform.c \
+									test_tuples.c test_projectile.c test_circle.c test_clock.c \
+									test_phong.c)
 MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_reflection.c main_transform.c main_tuples.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c rays.c transform.c)
-REFLECTION_FILES	= $(addprefix reflection/, normal_at.c ft_reflect.c)
+REFLECTION_FILES	= $(addprefix reflection/, normal_at.c ft_material.c ft_reflect.c)
 SCENE_FILES			= $(addprefix scene/, objects.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \

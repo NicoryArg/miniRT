@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 #include "engine.h"
 
 void	draw_circle(t_image *img, int center_x, int center_y, int radius, int color)

@@ -215,6 +215,9 @@ t_ray		*transform(t_ray *r, t_matrix *mtx);
 //#############################################
 //############### REFLECTION ##################
 //#############################################
+//ft_material.c
+t_material	*ft_material(void);
+
 //ft_reflect.c
 /**
  * @brief reflects a given vector around the normal provided

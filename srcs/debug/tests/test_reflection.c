@@ -6,11 +6,11 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 17:42:15 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:00:23 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 int	normal_at_test(int run)
 {

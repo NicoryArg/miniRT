@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/25 17:42:56 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:50:18 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ void	print_light(t_light *l, char *name)
 	printf(YEL"\tg:"RES" %.5f\n", l->lum->g);
 	printf(YEL"\tb:"RES" %.5f\n", l->lum->b);
 	print_tuple(l->pos, "POS:");
+}
+
+void	print_material(t_material *m)
+{
+	if (m)
+		printf(G_B"Material:\n"RES);
+	else
+		printf(R_B"ERROR:"RES" material undefined\n");
+	printf(YEL"\tr:"RES" %.1f\n", m->c->r);
+	printf(YEL"\tg:"RES" %.1f\n", m->c->g);
+	printf(YEL"\tb:"RES" %.1f\n", m->c->b);
+	printf(YEL"\tambient:"RES" %.1f\n", m->ambient);
+	printf(YEL"\tdiffuse:"RES" %.1f\n", m->diffuse);
+	printf(YEL"\tspecular:"RES" %.1f\n", m->specular);
+	printf(YEL"\tshininess:"RES" %.1f\n", m->shininess);
 }
 
 void	print_matrix(t_matrix *matrix)
