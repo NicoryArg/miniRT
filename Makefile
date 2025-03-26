@@ -56,7 +56,7 @@ TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 UTILS_FILES			= $(addprefix utils/, colours.c messages.c ft_utils.c)
 
 
-SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) \
+SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
 					$(REFLECTION_FILES)
@@ -105,6 +105,7 @@ $(MLX) :
 $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)
 	@$(MKDIR) $(OBJS_DIR)/debug
+	@$(MKDIR) $(OBJS_DIR)/debug/tests
 	@$(MKDIR) $(OBJS_DIR)/main
 	@$(MKDIR) $(OBJS_DIR)/make_engine
 	@$(MKDIR) $(OBJS_DIR)/matrices

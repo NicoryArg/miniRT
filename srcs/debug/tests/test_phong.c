@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:58:26 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/26 16:15:25 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:59:00 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	material_test(int run)
 	int			i = 1;
 	t_material	*m;
 
+	print_test_banner("MATERIAL TESTS");
+	print_test_number(&i);
 	m = ft_material();
 
 	print_material(m);
