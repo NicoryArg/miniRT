@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/26 16:50:18 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:54:36 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	print_normal(t_tuple *tuple, double x, double y, double z)
 void	print_light(t_light *l, char *name)
 {
 	if (l)
-		printf(G_B"%s:\n"RES, name);
+		printf(YEL"%s:\n"RES, name);
 	else
 		printf(R_B"ERROR:"RES" %s undefined\n", name);
-	printf(YEL"LUM:\n"RES);
+	printf(G_B"\tLUM:\n"RES);
 	printf(YEL"\tr:"RES" %.5f\n", l->lum->r);
 	printf(YEL"\tg:"RES" %.5f\n", l->lum->g);
 	printf(YEL"\tb:"RES" %.5f\n", l->lum->b);
+	printf("\t");
 	print_tuple(l->pos, "POS:");
 }
 

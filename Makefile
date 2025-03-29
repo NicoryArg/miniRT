@@ -41,10 +41,10 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 # Sources
 SRCS_DIR			= srcs/
 DEBUG_FILES			= $(addprefix debug/, draw_sil.c print.c)
-TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_reflection.c test_transform.c \
+TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_transform.c \
 									test_tuples.c test_projectile.c test_circle.c test_clock.c \
 									test_phong.c)
-MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_reflection.c main_transform.c main_tuples.c)
+MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_phong.c main_transform.c main_tuples.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c rays.c transform.c)
