@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/26 16:51:39 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:06:34 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		print_tuple(t_tuple *tuple, char *name);
 void		print_normal(t_tuple *tuple, double x, double y, double z);
 void		print_light(t_light *l, char *name);
 void		print_material(t_material *m);
+int			printable_material(t_material *m);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);

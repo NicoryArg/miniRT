@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_phong.c                                       :+:      :+:    :+:   */
+/*   ft_shading.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:30:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 15:04:57 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/29 15:33:26 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/29 15:55:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-int	main(void)
-{
-	if (normal_at_test(0)) //1 to run , 0 to skip
-		printf("Error: normal_at_test failed\n");
-	if (light_test(0)) //1 to run , 0 to skip
-		printf("Error: light_test failed\n");
-	if (material_test(1)) //1 to run , 0 to skip
-		printf("Error: material_test failed\n");
-	printf(R_B"END OF REFLECTION TESTS\n"RES);
-	return (0);
-}
+// t_colour	*ft_shading(t_material *m, t_light *l)
+// {
+// }

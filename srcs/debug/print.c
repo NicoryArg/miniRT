@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 14:54:36 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:18:46 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ void	print_light(t_light *l, char *name)
 
 void	print_material(t_material *m)
 {
-	if (m)
-		printf(G_B"Material:\n"RES);
-	else
-		printf(R_B"ERROR:"RES" material undefined\n");
+	if (!printable_material(m))
+		return ;
+	// printf(G_B"Material:\n"RES);
 	printf(YEL"\tr:"RES" %.1f\n", m->c->r);
 	printf(YEL"\tg:"RES" %.1f\n", m->c->g);
 	printf(YEL"\tb:"RES" %.1f\n", m->c->b);
@@ -64,6 +63,35 @@ void	print_material(t_material *m)
 	printf(YEL"\tdiffuse:"RES" %.1f\n", m->diffuse);
 	printf(YEL"\tspecular:"RES" %.1f\n", m->specular);
 	printf(YEL"\tshininess:"RES" %.1f\n", m->shininess);
+}
+
+int		printable_material(t_material *m)
+{
+	if (m->c && m->ambient && m->diffuse && m->specular && m->shininess)
+		{
+		printf(G_B"Material:\n"RES);
+		return (1);
+		}
+	else
+	{
+		if (!m)
+			printf(R_B"ERROR:"YEL" material undefined\n");
+		else
+		{
+			printf(G_B"Material:\n"RES);
+			if (!m->c)
+				printf(YEL"\tmaterial colour "AKA"undefined\n");
+			if (!m->ambient)
+				printf(YEL"\tmaterial ambient "AKA"undefined\n");
+			if (!m->diffuse)
+				printf(YEL"\tmaterial diffuse "AKA"undefined\n");
+			if (!m->specular)
+				printf(YEL"\tmaterial specular "AKA"undefined\n");
+			if (!m->shininess)
+				printf(YEL"\tmaterial shininess "AKA"undefined\n");
+		}
+	}
+	return (0);
 }
 
 void	print_matrix(t_matrix *matrix)
