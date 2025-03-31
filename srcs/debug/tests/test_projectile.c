@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 #include "engine.h"
 
 
@@ -22,8 +22,8 @@ t_projectile	*new_projectile()
 	p = malloc(sizeof(t_projectile));
 	if (!p)
 		return (NULL);
-	p->position = make_tuple(1, 1, 0, POINT);
-	velocity = make_tuple(1, 2, 0, VECTOR);
+	p->position = ft_tuple(1, 1, 0, POINT);
+	velocity = ft_tuple(1, 2, 0, VECTOR);
 	p->velocity = mult_tuple(normalise(velocity), 4.7);
 	free(velocity);
 	return (p);
@@ -36,8 +36,8 @@ t_environment	*new_environment()
 	e = malloc(sizeof(t_environment));
 	if (!e)
 		return (NULL);
-	e->gravity = make_tuple(0, -0.5, 0, VECTOR);
-	e->wind = make_tuple(-0.01, 0, 0, VECTOR);
+	e->gravity = ft_tuple(0, -0.5, 0, VECTOR);
+	e->wind = ft_tuple(-0.01, 0, 0, VECTOR);
 	return (e);
 }
 

@@ -6,11 +6,11 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:41:40 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:00:23 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 static int	rotate_x_test()
 {
@@ -18,7 +18,7 @@ static int	rotate_x_test()
 	t_matrix	*half_quarter = rotate_x(M_PI / 4);
 	t_matrix	*full_quarter = rotate_x(M_PI / 2);
 	t_matrix	*inverse = invert_matrix(half_quarter);
-	t_tuple		*point = make_tuple(0, 1, 0, POINT);
+	t_tuple		*point = ft_tuple(0, 1, 0, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
 
@@ -62,7 +62,7 @@ static int	rotate_y_test()
 	int	i = 1;
 	t_matrix	*half_quarter = rotate_y(M_PI / 4);
 	t_matrix	*full_quarter = rotate_y(M_PI / 2);
-	t_tuple		*point = make_tuple(0, 0, 1, POINT);
+	t_tuple		*point = ft_tuple(0, 0, 1, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
 
@@ -96,7 +96,7 @@ static int	rotate_z_test()
 	int	i = 1;
 	t_matrix	*half_quarter = rotate_z(M_PI / 4);
 	t_matrix	*full_quarter = rotate_z(M_PI / 2);
-	t_tuple		*point = make_tuple(0, 1, 0, POINT);
+	t_tuple		*point = ft_tuple(0, 1, 0, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
 
@@ -167,8 +167,8 @@ int	translate_test(int run)
 	t_matrix	*transform = translate(5, -3, 2);
 	t_matrix	*inverse = invert_matrix(transform);
 	t_matrix	*result = NULL;
-	t_tuple		*point = make_tuple(-3, 4, 5, POINT);
-	t_tuple		*vector = make_tuple(-3, 4, 5, VECTOR);
+	t_tuple		*point = ft_tuple(-3, 4, 5, POINT);
+	t_tuple		*vector = ft_tuple(-3, 4, 5, VECTOR);
 	t_matrix	*p = tuple_to_matrix(point);
 
 	if (!transform || !point || !inverse)
@@ -217,8 +217,8 @@ int	scale_test(int run)
 	t_matrix	*transform = scale(2, 3, 4);
 	t_matrix	*inverse = invert_matrix(transform);
 	t_matrix	*result = NULL;
-	t_tuple		*point = make_tuple(-4, 6, 8, POINT);
-	t_tuple		*vector = make_tuple(-4, 6, 8, VECTOR);
+	t_tuple		*point = ft_tuple(-4, 6, 8, POINT);
+	t_tuple		*vector = ft_tuple(-4, 6, 8, VECTOR);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*v = tuple_to_matrix(vector);
 
@@ -255,7 +255,7 @@ int	scale_test(int run)
 	free_matrix(transform);
 	free(point);
 	//adapt values to match example in book
-	point = make_tuple(2, 3, 4, POINT);
+	point = ft_tuple(2, 3, 4, POINT);
 	p = tuple_to_matrix(point);
 	print_matrix(p);
 	transform = scale(-1, 1, 1);
@@ -283,7 +283,7 @@ int	chained_test(int run)
 	if (run == 0)
 	return (0);
 	int	i = 1;
-	t_matrix	*p = tuple_to_matrix(make_tuple(1, 0, 1, POINT));
+	t_matrix	*p = tuple_to_matrix(ft_tuple(1, 0, 1, POINT));
 	t_matrix	*A = rotate_x(M_PI/2);
 	t_matrix	*B = scale(5, 5, 5);
 	t_matrix	*C = translate(10, 5, 7);

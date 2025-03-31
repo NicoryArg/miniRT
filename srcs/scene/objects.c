@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   objects.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 18:24:46 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 16:31:29 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/31 18:16:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:16:47 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_sphere	*sphere(double	radius)
+t_sphere	*ft_sphere(double radius)
 {
-	t_sphere		*sphere;
+	t_sphere	*sphere;
 	static int	id;
 
-if (id == 0)
-		id = 0;
 	sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!sphere)
 	{
 		printf(R_B"Error:"RES" failed to allocate memory for sphere.\n");
-		exit(1);	//debugging
+		exit(1);
 	}
-	sphere->id = id;
-	sphere->centre = make_tuple(0, 0, 0, POINT);
+	sphere->id = id++;
+	sphere->centre = ft_tuple(0, 0, 0, POINT);
 	sphere->radius = radius;
 	sphere->transf = create_identity_matrix(4);
+	sphere->m = malloc(sizeof(t_material));
 	id++;
 	return (sphere);
 }
+

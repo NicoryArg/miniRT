@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 17:48:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 17:48:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/31 18:17:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:17:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include "keys.h"
 # include "engine.h"
 
+typedef struct s_colour t_colour;
+typedef struct s_material t_material;
+
 //#############################################
 //################ OBJECTS ####################
 //#############################################
@@ -40,6 +43,7 @@ typedef struct s_sphere
 	double		radius;
 	int			id;
 	t_matrix	*transf;
+	t_material	*m;
 }	t_sphere;
 
 //#############################################
@@ -95,18 +99,43 @@ typedef struct s_intersection
 	t_hit	**hits;
 }	t_inters;
 
-typedef struct s_render_ctx
+//#############################################
+//########## LIGHTS & REFLECTIONS #############
+//#############################################
+
+typedef struct s_light
 {
-	t_image		*img; // where we draw the pixels
-	t_tuple		*ray_origin; //(camera position)
-	t_sphere	*sphere; //pointer to the sphere we want to render
+	t_tuple		*pos;
+	t_colour	*lum;
+}	t_light;
+
+typedef struct s_material
+{
+	t_colour	*c;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+}	t_material;
+
+//#############################################
+//################# OTHER #####################
+//#############################################
+
+typedef struct s_colour
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_colour;
+
+typedef struct s_render_ctx {
+	t_tuple		*ray_origin;
+	t_sphere	*sph;
+	double		pixel_size;
+	double		half;
 }	t_render_ctx;
 
-typedef struct s_projection
-{
-	double	pixel_size;
-	double	half;
-}	t_projection;
 
 // typedef struct s_ray_sphere
 // {
@@ -183,6 +212,24 @@ t_tuple		*get_point(t_ray *ray, double t);
 void		set_transf(void *obj, t_matrix *trans, t_obj type);
 t_ray		*transform(t_ray *r, t_matrix *mtx);
 
+//#############################################
+//############### REFLECTION ##################
+//#############################################
+//ft_material.c
+t_material	*ft_material(void);
+
+//ft_reflect.c
+/**
+ * @brief reflects a given vector around the normal provided
+ */
+t_tuple	*ft_reflect(t_tuple *in, t_tuple *normal);
+t_light	*ft_light(t_tuple *position, t_colour *lum);
+
+
+//normal_at.c
+t_tuple	*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
+t_tuple	*ft_object_point(t_matrix *inverse, t_tuple *world_point);
+t_tuple	*normal_at(t_sphere *sph, t_tuple *world_p);
 
 //#############################################
 //############### SCENE #######################
@@ -192,7 +239,7 @@ t_ray		*transform(t_ray *r, t_matrix *mtx);
  * @brief creates and returns a sphere with a unique ID
  * @param radius the radius of the sphere
  */
-t_sphere	*sphere(double	radius);
+t_sphere	*ft_sphere(double radius);
 
 //#############################################
 //#############TRANSFORMATIONS#################
@@ -243,7 +290,7 @@ t_tuple		*cross(t_tuple *a, t_tuple *b);
 /**
  * @brief Fills a tuple with provided data
  */
-t_tuple		*make_tuple(double x, double y, double z, t_tpl type);
+t_tuple		*ft_tuple(double x, double y, double z, t_tpl type);
 t_tuple		*new_tuple(void);
 t_tuple		*normalise(t_tuple *v);
 
@@ -257,8 +304,15 @@ void		ft_negate(t_tuple *tup);
 //#############################################
 //##################UTILS######################
 //#############################################
+//colours.c
+t_colour	*ft_colour(double r, double g, double b);
+
 //message.c
 //void	display_help_message(t_engine *engine);
+
+//free_utils.c
+void		free_ray(t_ray *ray);
+void		free_sphere(t_sphere *sphere);
 
 
 # ifndef M_PI
@@ -267,7 +321,7 @@ void		ft_negate(t_tuple *tup);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 2000
+# define WIN_SIZE 720
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

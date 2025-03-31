@@ -6,18 +6,18 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:55:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/10 20:42:36 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:00:23 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 
 int	t_matrix_to_tuple(int run)
 {
 	if (run == 0)
 		return (0);
-	t_tuple	*a = make_tuple(1, 2, 3, VECTOR);
-	t_tuple	*b = make_tuple(4, 5, 6, POINT);
+	t_tuple	*a = ft_tuple(1, 2, 3, VECTOR);
+	t_tuple	*b = ft_tuple(4, 5, 6, POINT);
 	t_matrix	*ab = tuple_to_matrix(a);
 
 	if (!b || !a || !ab)
@@ -42,7 +42,7 @@ int	t_tuple_to_matrix(int run)
 {
 	if (run == 0)
 		return (0);
-	t_tuple 	*a = make_tuple(89, -20, 69, VECTOR);
+	t_tuple 	*a = ft_tuple(89, -20, 69, VECTOR);
 	t_matrix	*mat = create_matrix(4, 1, 1);
 
 	print_test_banner("Tuple to Matrix");

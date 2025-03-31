@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_matrix.c                                    :+:      :+:    :+:   */
+/*   matrix_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:22:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 20:22:31 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 18:03:31 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/25 18:03:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ t_matrix	*create_matrix(int rows, int cols, int is_tuple)
 	return (matrix);
 }
 
-void	fill_matrix(t_matrix *matrix)
-{
-	int		i;
-	int		j;
+// void	fill_matrix(t_matrix *matrix)
+// {
+// 	int		i;
+// 	int		j;
 
-	printf("Enter %d values for the %dx%d matrix:\n",
-		matrix->rows * matrix->cols, matrix->rows, matrix->cols);
-	i = 0;
-	while (i < matrix->rows)
-	{
-		j = 0;
-		while (j < matrix->cols)
-		{
-			scanf("%lf", &matrix->values[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
+// 	printf("Enter %d values for the %dx%d matrix:\n",
+// 		matrix->rows * matrix->cols, matrix->rows, matrix->cols);
+// 	i = 0;
+// 	while (i < matrix->rows)
+// 	{
+// 		j = 0;
+// 		while (j < matrix->cols)
+// 		{
+// 			scanf("%lf", &matrix->values[i][j]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
 {

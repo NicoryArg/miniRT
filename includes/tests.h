@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 16:41:39 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:06:34 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct s_tuple t_tuple;
 typedef struct s_matrix t_matrix;
 typedef struct s_ray_sphere t_ray_sphere;
 typedef struct s_hit t_hit;
+typedef struct s_light t_light;
+typedef struct s_material t_material;
 
 //#############################################
 //####################DEBUG####################
@@ -27,6 +29,10 @@ typedef struct s_hit t_hit;
 //print.c
 
 void		print_tuple(t_tuple *tuple, char *name);
+void		print_normal(t_tuple *tuple, double x, double y, double z);
+void		print_light(t_light *l, char *name);
+void		print_material(t_material *m);
+int			printable_material(t_material *m);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);
@@ -46,6 +52,10 @@ int		intersection_test(int run);
 int		ray_transform_test(int run);
 int		ray_transform_test2(int run);
 
+//test_reflection.c
+int		normal_at_test(int run);
+int		light_test(int run);
+int		material_test(int run);
 
 //test_transform.c
 /**
@@ -55,14 +65,14 @@ int		ray_transform_test2(int run);
  * @param z 1 to run z rotation tests, 0 to skip
  * @return 0 if all tests pass, 1 if any test fails
  */
-int			rotate_test(int x, int y, int z);
-int			scale_test(int run);
-int			translate_test(int run);
-int			chained_test(int run);
+int		rotate_test(int x, int y, int z);
+int		scale_test(int run);
+int		translate_test(int run);
+int		chained_test(int run);
 //test_tuples.c
 
-int			t_matrix_to_tuple(int run);
-int			t_tuple_to_matrix(int run);
+int		t_matrix_to_tuple(int run);
+int		t_tuple_to_matrix(int run);
 
 
 #endif
