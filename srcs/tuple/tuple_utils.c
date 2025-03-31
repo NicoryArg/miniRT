@@ -54,14 +54,18 @@ bool	ft_equal(double a, double b)
  * @brief inverts the direction of a vector
  * @param tup expected to be a vector!
  */
-void	ft_negate(t_tuple *tup)
+t_tuple	ft_negate(t_tuple tup)
 {
-	if (tup->w == POINT)
+	t_tuple	negated;
+
+	if (tup.w == POINT)
 	{
 		printf("[DEBUG] `negate_tuple` -> trying to negate POINT\n");//debugging
 		exit (1);
 	}
-	tup->x = 0 - tup->x;
-	tup->y = 0 - tup->y;
-	tup->z = 0 - tup->z;
+	negated.x = 0 - tup.x;
+	negated.y = 0 - tup.y;
+	negated.z = 0 - tup.z;
+	negated.w = tup.w;
+	return (negated);
 }

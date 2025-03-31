@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 15:06:34 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/03/31 18:06:55 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ int		ray_transform_test2(int run);
 
 //test_reflection.c
 int		normal_at_test(int run);
+
+//test_phong.c
 int		light_test(int run);
 int		material_test(int run);
+int		shading_test(int run);
 
 //test_transform.c
 /**

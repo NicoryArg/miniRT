@@ -26,6 +26,7 @@
 
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
+typedef struct s_phong t_phong;
 
 //#############################################
 //################ OBJECTS ####################
@@ -103,6 +104,37 @@ typedef struct s_intersection
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
 
+typedef struct s_colour
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_colour;
+
+typedef struct s_shading
+{
+	t_material	*m;
+	t_light		*l;
+	t_tuple		point;
+	t_tuple		eyev;
+	t_tuple		normalv;
+	t_phong		*ph;
+}	t_shading;
+
+typedef struct s_phong
+{
+	t_colour	effective_colour;
+	t_colour	ambient;
+	t_colour	diffuse;
+	t_colour	specular;
+	t_tuple		lightv;
+	t_tuple		reflectv;
+	double		light_dot_normal;
+	double		reflect_dot_eye;
+	double		factor;
+}	t_phong;
+
+
 typedef struct s_light
 {
 	t_tuple		*pos;
@@ -122,12 +154,6 @@ typedef struct s_material
 //################# OTHER #####################
 //#############################################
 
-typedef struct s_colour
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_colour;
 
 typedef struct s_render_ctx {
 	t_tuple		*ray_origin;
@@ -222,14 +248,16 @@ t_material	*ft_material(void);
 /**
  * @brief reflects a given vector around the normal provided
  */
-t_tuple	*ft_reflect(t_tuple *in, t_tuple *normal);
-t_light	*ft_light(t_tuple *position, t_colour *lum);
+t_tuple		ft_reflect(t_tuple in, t_tuple normal);
+t_light		*ft_light(t_tuple *position, t_colour *lum);
 
+//ft_shading.c
+t_colour	ft_shading(t_shading L);
 
 //normal_at.c
-t_tuple	*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
-t_tuple	*ft_object_point(t_matrix *inverse, t_tuple *world_point);
-t_tuple	*normal_at(t_sphere *sph, t_tuple *world_p);
+t_tuple		*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
+t_tuple		*ft_object_point(t_matrix *inverse, t_tuple *world_point);
+t_tuple		*normal_at(t_sphere *sph, t_tuple *world_p);
 
 //#############################################
 //############### SCENE #######################
@@ -299,13 +327,17 @@ bool		is_point(t_tuple *tuple);
 bool		is_vector(t_tuple *tuple);
 bool		equal_tuple(t_tuple *t1, t_tuple *t2);
 bool		ft_equal(double a, double b);
-void		ft_negate(t_tuple *tup);
+t_tuple		ft_negate(t_tuple tup);
 
 //#############################################
 //##################UTILS######################
 //#############################################
 //colours.c
 t_colour	*ft_colour(double r, double g, double b);
+t_colour	add_colours(t_colour	a, t_colour b);
+t_colour	mult_colour(t_colour c, double num);
+t_colour	mult_colours(t_colour c1, t_colour c2);
+
 
 //message.c
 //void	display_help_message(t_engine *engine);
