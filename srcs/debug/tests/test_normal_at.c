@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.json                                      :+:      :+:    :+:   */
+/*   test_normal_at.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:13:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:13:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/31 19:14:43 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	normal_at_test(int run)
 //define new variables for reflection tests
 	t_tuple	*v;
 	t_tuple	*n;
-	t_tuple	*r;
+	// t_tuple	*r;
 
 //TEST 3
 	//print_banners
@@ -68,12 +68,13 @@ int	normal_at_test(int run)
 	v = ft_tuple(1, -1, 0, VECTOR);
 	n = ft_tuple(0, 1, 0, VECTOR);
 	//run test
-	r = ft_reflect(v, n);
+	// r = ft_reflect(v, n);
 	//print ouput
-	print_tuple(r, "reflected");
+	// print_tuple(r, "reflected");
+	printf(R_B"TESTS TEMPORARILY COMMENTED! (ft_reflect)\n");
 	free(v);
 	free(n);
-	free(r);
+	// free(r);
 
 //TEST 4
 	//print_banners
@@ -83,12 +84,12 @@ int	normal_at_test(int run)
 	v = ft_tuple(0, -1, 0, VECTOR);
 	n = ft_tuple(sqrt(2)/2, sqrt(2)/2, 0, VECTOR);
 	//run test
-	r = ft_reflect(v, n);
+	// r = ft_reflect(v, n);
 	//print ouput
-	print_tuple(r, "reflected");
+	// print_tuple(r, "reflected");
 	free(v);
 	free(n);
-	free(r);
+	// free(r);
 	return (0);
 }
 

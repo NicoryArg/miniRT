@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:19:23 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:19:30 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/26 15:58:26 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/31 19:32:22 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,21 +103,92 @@ int	material_test(int run)
 }
 
 //#################################################################//
-//////////////////////////// LIGHTING ///////////////////////////////
+//////////////////////////// SHADING ///////////////////////////////
 //#################################################################//
 
-int	lighting_test(int run)
+int	shading_test(int run)
 {
 	if (run == 0)
 		return (0);
-	// int			i = 1;
-	// t_material	*m;
-	// t_light		*l;
-	// t_tuple		*pos;
-	// t_colour	*lum;
-	// t_tuple		*eyev;
-	// t_tuple		*normalv;
-	// t_tuple		*result;
+	int			i = 1;
+	// t_colour		*lum;
 
+	t_shading	L;
+	t_colour	result;
+
+//TEST 1
+	//print banners
+	print_test_banner("Eye between light and surface");
+	print_test_number(&i);
+	//initiate variables
+	L.m = ft_material();
+	L.point = *ft_tuple(0, 0, 0, POINT);
+	L.eyev = *ft_tuple(0, 0, -1, VECTOR);
+	L.normalv = *ft_tuple(0, 0, -1, VECTOR);
+	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
+	//run test
+	result = ft_shading(L);
+	//print output
+	printf(YEL"RESULT\n");
+	printf(YEL"R: "RES"%.1f\n", result.r);
+	printf(YEL"G: "RES"%.1f\n", result.g);
+	printf(YEL"B: "RES"%.1f\n", result.b);
+//TEST 2
+	//print banners
+	print_test_banner("Eye between light and surface, eye offset 45°");
+	print_test_number(&i);
+	//redefine variables
+	double	x = sqrt(2)/2;
+	L.eyev = *ft_tuple(0, x, -x, VECTOR);
+	//run test
+	result = ft_shading(L);
+	//print output
+	printf(YEL"RESULT\n");
+	printf(YEL"R: "RES"%.1f\n", result.r);
+	printf(YEL"G: "RES"%.1f\n", result.g);
+	printf(YEL"B: "RES"%.1f\n", result.b);
+//TEST 3
+	//print banners
+	print_test_banner("Eye opposite surface, light offset 45°");
+	print_test_number(&i);
+	//redefine variables
+	L.eyev = *ft_tuple(0, 0, -1, VECTOR);
+	free(L.l->pos);
+	L.l->pos = ft_tuple(0, 10, -10, POINT);
+	//run test
+	result = ft_shading(L);
+	//print output
+	printf(YEL"RESULT\n");
+	printf(YEL"R: "RES"%.4f\n", result.r);
+	printf(YEL"G: "RES"%.4f\n", result.g);
+	printf(YEL"B: "RES"%.4f\n", result.b);
+//TEST 4
+	//print banners
+	print_test_banner("Eye in path of the reflection vector of light");
+	print_test_number(&i);
+	//redefine variables
+	L.eyev = *ft_tuple(0, -x, -x, VECTOR);
+	//run test
+	result = ft_shading(L);
+	//print output
+	printf(YEL"RESULT\n");
+	printf(YEL"R: "RES"%.4f\n", result.r);
+	printf(YEL"G: "RES"%.4f\n", result.g);
+	printf(YEL"B: "RES"%.4f\n", result.b);
+//TEST 5
+	//print banners
+	print_test_banner("Light behind the surface");
+	print_test_number(&i);
+	//redefine variables
+	L.eyev = *ft_tuple(0, 0, -1, VECTOR);
+	free(L.l->pos);
+	L.l->pos = ft_tuple(0, 0, 10, POINT);
+	//run test
+	result = ft_shading(L);
+	//print output
+	printf(YEL"RESULT\n");
+	printf(YEL"R: "RES"%.1f\n", result.r);
+	printf(YEL"G: "RES"%.1f\n", result.g);
+	printf(YEL"B: "RES"%.1f\n", result.b);
 	return (0);
 }
