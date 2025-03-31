@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:08:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:09:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/31 18:16:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:16:47 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_sphere	*ft_sphere(double radius, t_matrix *transform)
+t_sphere	*ft_sphere(double radius)
 {
 	t_sphere	*sphere;
 	static int	id;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_phong.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 15:58:26 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 15:32:16 by ameechan         ###   ########.fr       */
+/*   Created: 2025/03/31 18:19:23 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:19:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	material_test(int run)
 	print_test_banner("Assign default material to sphere");
 	print_test_number(&i);
 	//initiate variables
-	sph = sphere(1);
+	sph = ft_sphere(1);
 	//print input
 	printf(G_B"Sphere->m:\n"RES);
 	print_material(sph->m);
@@ -89,7 +89,7 @@ int	material_test(int run)
 	print_test_banner("Assign material to sphere");
 	print_test_number(&i);
 	//initiate variables
-	sph = sphere(1);
+	sph = ft_sphere(1);
 	m = ft_material();
 	//print run test
 	sph->m = m;

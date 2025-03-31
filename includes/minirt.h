@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 19:07:55 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 19:07:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/31 18:17:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:17:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ t_tuple	*normal_at(t_sphere *sph, t_tuple *world_p);
  * @brief creates and returns a sphere with a unique ID
  * @param radius the radius of the sphere
  */
-t_sphere	*ft_sphere(double radius, t_matrix *transform);
+t_sphere	*ft_sphere(double radius);
 
 //#############################################
 //#############TRANSFORMATIONS#################

@@ -1,17 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_reflection.c                                  :+:      :+:    :+:   */
+/*   settings.json                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD:srcs/debug/test_reflection.c
-/*   Created: 2025/03/25 19:05:27 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 19:05:27 by nryser           ###   ########.ch       */
-=======
-/*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 14:46:43 by ameechan         ###   ########.fr       */
->>>>>>> andrew:srcs/debug/tests/test_normal_at.c
+/*   Created: 2025/03/31 18:13:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:13:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +26,8 @@ int	normal_at_test(int run)
 	//print banners
 	print_test_banner("normal on a translated sphere");
 	print_test_number(&i);
-<<<<<<< HEAD:srcs/debug/test_reflection.c
-	//define variables
-	s = ft_sphere(1, NULL);
-=======
 	//initiate variables
-	s = sphere(1);
->>>>>>> andrew:srcs/debug/tests/test_normal_at.c
+	s = ft_sphere(1);
 	set_transf(s, translate(0, 1, 0), SPHERE);
 	world_point = ft_tuple(0, 1.70711, -0.707111, POINT);
 	//run test
