@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objects.c                                          :+:      :+:    :+:   */
+/*   main_phong.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:08:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:09:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/31 18:10:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/03/31 18:10:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_sphere	*ft_sphere(double radius, t_matrix *transform)
+int	main(void)
 {
-	t_sphere	*sphere;
-	static int	id;
-
-	sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	if (!sphere)
-	{
-		printf(R_B"Error:"RES" failed to allocate memory for sphere.\n");
-		exit(1);
-	}
-	sphere->id = id++;
-	sphere->centre = ft_tuple(0, 0, 0, POINT);
-	sphere->radius = radius;
-	sphere->transf = create_identity_matrix(4);
-	sphere->m = malloc(sizeof(t_material));
-	id++;
-	return (sphere);
+	if (normal_at_test(0)) //1 to run , 0 to skip
+		printf("Error: normal_at_test failed\n");
+	if (light_test(0)) //1 to run , 0 to skip
+		printf("Error: light_test failed\n");
+	if (material_test(1)) //1 to run , 0 to skip
+		printf("Error: material_test failed\n");
+	printf(R_B"END OF REFLECTION TESTS\n"RES);
+	return (0);
 }
-
