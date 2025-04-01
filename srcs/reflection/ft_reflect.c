@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:59:08 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 15:29:05 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:36:52 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_tuple	ft_reflect(t_tuple in, t_tuple normal)
 	return (reflect);
 }
 
-t_light	*ft_light(t_tuple position, t_colour *lum)
+t_light	*ft_light(t_tuple position, t_colour lum)
 {
 	t_light	*light;
 

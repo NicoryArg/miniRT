@@ -6,22 +6,19 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:10:57 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/31 19:17:21 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:33:56 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-t_colour	*ft_colour(double r, double g, double b)
+t_colour	ft_colour(double r, double g, double b)
 {
-	t_colour	*c;
+	t_colour	c;
 
-	c = malloc(sizeof(t_colour));
-	if (!c)
-		malloc_err("ft_colour");//	debugging
-	c->r = r;
-	c->g = g;
-	c->b = b;
+	c.r = r;
+	c.g = g;
+	c.b = b;
 	return (c);
 }
 

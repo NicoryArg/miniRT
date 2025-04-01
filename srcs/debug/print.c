@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 14:59:05 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:35:22 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	print_light(t_light *l, char *name)
 	else
 		printf(R_B"ERROR:"RES" %s undefined\n", name);
 	printf(G_B"\tLUM:\n"RES);
-	printf(YEL"\tr:"RES" %.5f\n", l->lum->r);
-	printf(YEL"\tg:"RES" %.5f\n", l->lum->g);
-	printf(YEL"\tb:"RES" %.5f\n", l->lum->b);
+	printf(YEL"\tr:"RES" %.5f\n", l->lum.r);
+	printf(YEL"\tg:"RES" %.5f\n", l->lum.g);
+	printf(YEL"\tb:"RES" %.5f\n", l->lum.b);
 	printf("\t");
 	print_tuple(l->pos, "POS:");
 }
@@ -59,9 +59,9 @@ void	print_material(t_material *m)
 	if (!printable_material(m))
 		return ;
 	// printf(G_B"Material:\n"RES);
-	printf(YEL"\tr:"RES" %.1f\n", m->c->r);
-	printf(YEL"\tg:"RES" %.1f\n", m->c->g);
-	printf(YEL"\tb:"RES" %.1f\n", m->c->b);
+	printf(YEL"\tr:"RES" %.1f\n", m->c.r);
+	printf(YEL"\tg:"RES" %.1f\n", m->c.g);
+	printf(YEL"\tb:"RES" %.1f\n", m->c.b);
 	printf(YEL"\tambient:"RES" %.1f\n", m->ambient);
 	printf(YEL"\tdiffuse:"RES" %.1f\n", m->diffuse);
 	printf(YEL"\tspecular:"RES" %.1f\n", m->specular);
@@ -70,7 +70,7 @@ void	print_material(t_material *m)
 
 int		printable_material(t_material *m)
 {
-	if (m->c && m->ambient && m->diffuse && m->specular && m->shininess)
+	if (m->ambient && m->diffuse && m->specular && m->shininess)
 		{
 		printf(G_B"Material:\n"RES);
 		return (1);
@@ -82,8 +82,6 @@ int		printable_material(t_material *m)
 		else
 		{
 			printf(G_B"Material:\n"RES);
-			if (!m->c)
-				printf(YEL"\tmaterial colour "AKA"undefined\n");
 			if (!m->ambient)
 				printf(YEL"\tmaterial ambient "AKA"undefined\n");
 			if (!m->diffuse)

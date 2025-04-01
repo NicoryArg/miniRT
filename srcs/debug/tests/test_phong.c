@@ -20,7 +20,7 @@ int	light_test(int run)
 {
 	if (run == 0)
 		return (0);
-	t_colour	*lum;
+	t_colour	lum;
 	t_tuple		pos;
 	t_light		*light;
 	int			i = 1;
@@ -61,7 +61,6 @@ int	material_test(int run)
 	m = ft_material();
 	//print output
 	print_material(m);
-	free(m->c);
 	free(m);
 
 //TEST 2
@@ -81,7 +80,6 @@ int	material_test(int run)
 	printf(G_B"Sphere->m:\n"RES);
 	print_material(m);
 	//free memory
-	free(m->c);
 	free(m);
 	free(sph);
 //TEST 3
@@ -97,7 +95,6 @@ int	material_test(int run)
 	printf(G_B"Sphere->m:\n"RES);
 	print_material(sph->m);
 	//free memory
-	free(m->c);
 	free(m);
 	return (0);
 }

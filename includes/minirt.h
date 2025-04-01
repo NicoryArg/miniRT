@@ -139,12 +139,12 @@ typedef struct s_phong
 typedef struct s_light
 {
 	t_tuple		pos;
-	t_colour	*lum;
+	t_colour	lum;
 }	t_light;
 
 typedef struct s_material
 {
-	t_colour	*c;
+	t_colour	c;
 	double		ambient;
 	double		diffuse;
 	double		specular;
@@ -250,7 +250,7 @@ t_material	*ft_material(void);
  * @brief reflects a given vector around the normal provided
  */
 t_tuple		ft_reflect(t_tuple in, t_tuple normal);
-t_light		*ft_light(t_tuple position, t_colour *lum);
+t_light		*ft_light(t_tuple position, t_colour lum);
 
 //ft_shading.c
 t_colour	ft_shading(t_shading L);
@@ -334,7 +334,7 @@ t_tuple		ft_negate(t_tuple tup);
 //##################UTILS######################
 //#############################################
 //colours.c
-t_colour	*ft_colour(double r, double g, double b);
+t_colour	ft_colour(double r, double g, double b);
 t_colour	add_colours(t_colour	a, t_colour b);
 t_colour	mult_colour(t_colour c, double num);
 t_colour	mult_colours(t_colour c1, t_colour c2);
