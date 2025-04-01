@@ -6,29 +6,29 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:39:54 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 16:21:00 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:16:31 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-double	dot(t_tuple *a, t_tuple *b)
+double	dot(t_tuple a, t_tuple b)
 {
 	double	w_product;
 	double	x_product;
 	double	y_product;
 	double	z_product;
 
-	if(a->w == POINT || b->w == POINT)
+	if(a.w == POINT || b.w == POINT)
 	{
-		printf("[DEBUG] `dot` -> Attempting dot product of POINT\n");//	debugging
+		printf("[DEBUG] `dot` . Attempting dot product of POINT\n");//	debugging
 		exit(1);
 	}
 
-	w_product = a->w * b->w;
-	x_product = a->x * b->x;
-	y_product = a->y * b->y;
-	z_product = a->z * b->z;
+	w_product = a.w * b.w;
+	x_product = a.x * b.x;
+	y_product = a.y * b.y;
+	z_product = a.z * b.z;
 	return (w_product + x_product + y_product + z_product);
 }
 
@@ -38,19 +38,18 @@ double	dot(t_tuple *a, t_tuple *b)
  * @note the order of the arguments is important! `a cross b` is
  * NOT the same as `b cross a`
  */
-t_tuple	*cross(t_tuple *a, t_tuple *b)
+t_tuple	cross(t_tuple a, t_tuple b)
 {
-	t_tuple	*cross;
+	t_tuple	cross;
 
-	if(a->w == POINT || b->w == POINT)
+	if(a.w == POINT || b.w == POINT)
 	{
-		printf("[DEBUG] `cross` -> Attempting cross product of POINT\n");//	debugging
+		printf("[DEBUG] `cross` . Attempting cross product of POINT\n");//	debugging
 		exit(1);
 	}
-	cross = new_tuple();
-	cross->w = VECTOR;
-	cross->x = (a->y * b->z) - (a->z * b->y);
-	cross->y = (a->z * b->x) - (a->x * b->z);
-	cross->z = (a->x * b->y) - (a->y * b->x);
+	cross.w = VECTOR;
+	cross.x = (a.y * b.z) - (a.z * b.y);
+	cross.y = (a.z * b.x) - (a.x * b.z);
+	cross.z = (a.x * b.y) - (a.y * b.x);
 	return (cross);
 }

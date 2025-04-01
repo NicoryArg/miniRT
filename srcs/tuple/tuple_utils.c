@@ -12,28 +12,23 @@
 
 #include "../../includes/minirt.h"
 
-bool	is_point(t_tuple *tuple)
+bool	is_point(t_tuple tuple)
 {
-	return (tuple->w == POINT);
+	return (tuple.w == POINT);
 }
 
-bool	is_vector(t_tuple *tuple)
+bool	is_vector(t_tuple tuple)
 {
-	return (tuple->w == VECTOR);
+	return (tuple.w == VECTOR);
 }
 
 /**
  * @brief Compares if x, y, z coordinates of two tuples are equal
  * @return true if equal, false otherwise
  */
-bool	equal_tuple(t_tuple *t1, t_tuple *t2)
+bool	equal_tuple(t_tuple t1, t_tuple t2)
 {
-	if (!t1 || !t2)
-	{
-		printf("[DEBUG] `equal_tuple` -> Empty tuple in comparison\n"); // debugging
-		return (false);
-	}
-	if (ft_equal(t1->x, t2->x) && ft_equal(t1->y, t2->y) && ft_equal(t1->z, t2->z))
+	if (ft_equal(t1.x, t2.x) && ft_equal(t1.y, t2.y) && ft_equal(t1.z, t2.z))
 		return (true);
 	return (false);
 }
@@ -60,7 +55,7 @@ t_tuple	ft_negate(t_tuple tup)
 
 	if (tup.w == POINT)
 	{
-		printf("[DEBUG] `negate_tuple` -> trying to negate POINT\n");//debugging
+		printf("[DEBUG] `negate_tuple` . trying to negate POINT\n");//debugging
 		exit (1);
 	}
 	negated.x = 0 - tup.x;

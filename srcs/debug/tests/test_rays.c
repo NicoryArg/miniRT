@@ -18,7 +18,7 @@ int	position_test(int run)
 		return (0);
 	int	i = 1;
 	t_ray	*r = ft_ray(ft_tuple(2, 3, 4, POINT), ft_tuple(1, 0, 0, VECTOR));
-	t_tuple	*res;
+	t_tuple	res;
 
 
 	print_test_banner("POSITION");
@@ -91,8 +91,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 2
 	//redefine ray
@@ -108,8 +106,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 3
 	//redifine ray
@@ -130,8 +126,6 @@ int	sph_ray_intersect(int run)
 		printf(YEL"[DEBUG] TEST%d -> sph_ray_intersect\n"RES, i);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 4
 	//redefine ray
@@ -147,8 +141,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 5
 	//redefine ray
@@ -164,8 +156,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 	return (0);
 }

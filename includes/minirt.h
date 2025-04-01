@@ -22,30 +22,10 @@
 # include "tests.h"
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
-# include "engine.h"
 
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
 typedef struct s_phong t_phong;
-
-//#############################################
-//################ OBJECTS ####################
-//#############################################
-typedef enum e_obj_shape
-{
-	SPHERE,
-	CYLINDER,
-	PLANE,
-}	t_obj;
-
-typedef struct s_sphere
-{
-	t_tuple		*centre;
-	double		radius;
-	int			id;
-	t_matrix	*transf;
-	t_material	*m;
-}	t_sphere;
 
 //#############################################
 //############ TUPLES & MATRICES ##############
@@ -76,14 +56,35 @@ typedef struct s_matrix
 	double		**values;
 }	t_matrix;
 
+
+//#############################################
+//################ OBJECTS ####################
+//#############################################
+typedef enum e_obj_shape
+{
+	SPHERE,
+	CYLINDER,
+	PLANE,
+}	t_obj;
+
+typedef struct s_sphere
+{
+	t_tuple		centre;
+	double		radius;
+	int			id;
+	t_matrix	*transf;
+	t_material	*m;
+}	t_sphere;
+
+
 //#############################################
 //########## RAYS & INTERSECTIONS #############
 //#############################################
 
 typedef struct s_ray
 {
-	t_tuple		*origin;
-	t_tuple		*direction;
+	t_tuple		origin;
+	t_tuple		direction;
 }	t_ray;
 
 typedef struct s_hit
@@ -137,7 +138,7 @@ typedef struct s_phong
 
 typedef struct s_light
 {
-	t_tuple		*pos;
+	t_tuple		pos;
 	t_colour	*lum;
 }	t_light;
 
@@ -156,7 +157,7 @@ typedef struct s_material
 
 
 typedef struct s_render_ctx {
-	t_tuple		*ray_origin;
+	t_tuple		ray_origin;
 	t_sphere	*sph;
 	double		pixel_size;
 	double		half;
@@ -221,7 +222,7 @@ t_inters	*intersect(void *obj, t_ray *ray, t_obj type);
 t_hit		*intersection(double t, void *object, t_obj type);
 
 //ray_sphere.c
-double		discriminant(t_ray *ray, t_tuple *sph_to_ray);
+double		discriminant(t_ray *ray, t_tuple sph_to_ray);
 t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
 
 //rays.c
@@ -231,8 +232,8 @@ t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
  * @param direction the direction the ray is pointing
  * @return a pointer to the newly created ray
  */
-t_ray		*ft_ray(t_tuple *origin, t_tuple *direction);
-t_tuple		*get_point(t_ray *ray, double t);
+t_ray		*ft_ray(t_tuple origin, t_tuple direction);
+t_tuple		get_point(t_ray *ray, double t);
 
 //transform.c
 void		set_transf(void *obj, t_matrix *trans, t_obj type);
@@ -249,15 +250,15 @@ t_material	*ft_material(void);
  * @brief reflects a given vector around the normal provided
  */
 t_tuple		ft_reflect(t_tuple in, t_tuple normal);
-t_light		*ft_light(t_tuple *position, t_colour *lum);
+t_light		*ft_light(t_tuple position, t_colour *lum);
 
 //ft_shading.c
 t_colour	ft_shading(t_shading L);
 
 //normal_at.c
-t_tuple		*ft_world_normal(t_matrix *inverse, t_tuple *obj_normal);
-t_tuple		*ft_object_point(t_matrix *inverse, t_tuple *world_point);
-t_tuple		*normal_at(t_sphere *sph, t_tuple *world_p);
+t_tuple		ft_world_normal(t_matrix *inverse, t_tuple obj_normal);
+t_tuple		ft_object_point(t_matrix *inverse, t_tuple world_point);
+t_tuple		normal_at(t_sphere *sph, t_tuple world_p);
 
 //#############################################
 //############### SCENE #######################
@@ -287,8 +288,8 @@ t_matrix	*rotate_z(double rad);
  * @brief grabs values from a tuple and adds them to
  * a 1x4 matrix
  */
-t_matrix	*tuple_to_matrix(t_tuple *tup);
-t_tuple		*matrix_to_tuple(t_matrix *matrix);
+t_matrix	*tuple_to_matrix(t_tuple tup);
+t_tuple		matrix_to_tuple(t_matrix *matrix);
 
 
 //#############################################
@@ -299,11 +300,11 @@ t_tuple		*matrix_to_tuple(t_matrix *matrix);
  * @brief adds coordinates of two tuples
  * @return a new tuple created from the addition of t1 & t2
  */
-t_tuple		*add_tuple(t_tuple *t1, t_tuple *t2);
-t_tuple		*diff_tuple(t_tuple *t1, t_tuple *t2);
-t_tuple		*mult_tuple(t_tuple *vector, double t);
+t_tuple		add_tuple(t_tuple t1, t_tuple t2);
+t_tuple		diff_tuple(t_tuple t1, t_tuple t2);
+t_tuple		mult_tuple(t_tuple vector, double t);
 double		ft_sqr(double x);
-double		magnitude(t_tuple *v);
+double		magnitude(t_tuple v);
 
 //product.c
 /**
@@ -311,21 +312,21 @@ double		magnitude(t_tuple *v);
  * @note a dot of 1 means vectors are identical,
  * while a dot of -1 means they point in opposite directions.
  */
-double		dot(t_tuple *a, t_tuple *b);
-t_tuple		*cross(t_tuple *a, t_tuple *b);
+double		dot(t_tuple a, t_tuple b);
+t_tuple		cross(t_tuple a, t_tuple b);
 
 //tuples.c
 /**
  * @brief Fills a tuple with provided data
  */
-t_tuple		*ft_tuple(double x, double y, double z, t_tpl type);
-t_tuple		*new_tuple(void);
-t_tuple		*normalise(t_tuple *v);
+t_tuple		ft_tuple(double x, double y, double z, t_tpl type);
+t_tuple		new_tuple(void);
+t_tuple		normalise(t_tuple v);
 
 //tuple_utils.c
-bool		is_point(t_tuple *tuple);
-bool		is_vector(t_tuple *tuple);
-bool		equal_tuple(t_tuple *t1, t_tuple *t2);
+bool		is_point(t_tuple tuple);
+bool		is_vector(t_tuple tuple);
+bool		equal_tuple(t_tuple t1, t_tuple t2);
 bool		ft_equal(double a, double b);
 t_tuple		ft_negate(t_tuple tup);
 

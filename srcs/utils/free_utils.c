@@ -17,8 +17,6 @@ void	free_ray(t_ray *ray)
 {
 	if (!ray)
 		return ;
-	free(ray->origin);
-	free(ray->direction);
 	free(ray);
 }
 void	free_matrix(t_matrix *matrix)
@@ -45,7 +43,6 @@ void	free_sphere(t_sphere *sphere)
 {
 	if (!sphere)
 		return ;
-	free(sphere->centre);
 	free_matrix(sphere->transf);
 	free(sphere);
 }

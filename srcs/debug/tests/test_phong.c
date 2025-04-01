@@ -21,7 +21,7 @@ int	light_test(int run)
 	if (run == 0)
 		return (0);
 	t_colour	*lum;
-	t_tuple		*pos;
+	t_tuple		pos;
 	t_light		*light;
 	int			i = 1;
 
@@ -122,9 +122,9 @@ int	shading_test(int run)
 	print_test_number(&i);
 	//initiate variables
 	L.m = ft_material();
-	L.point = *ft_tuple(0, 0, 0, POINT);
-	L.eyev = *ft_tuple(0, 0, -1, VECTOR);
-	L.normalv = *ft_tuple(0, 0, -1, VECTOR);
+	L.point = ft_tuple(0, 0, 0, POINT);
+	L.eyev = ft_tuple(0, 0, -1, VECTOR);
+	L.normalv = ft_tuple(0, 0, -1, VECTOR);
 	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
 	//run test
 	result = ft_shading(L);
@@ -139,7 +139,7 @@ int	shading_test(int run)
 	print_test_number(&i);
 	//redefine variables
 	double	x = sqrt(2)/2;
-	L.eyev = *ft_tuple(0, x, -x, VECTOR);
+	L.eyev = ft_tuple(0, x, -x, VECTOR);
 	//run test
 	result = ft_shading(L);
 	//print output
@@ -152,8 +152,7 @@ int	shading_test(int run)
 	print_test_banner("Eye opposite surface, light offset 45°");
 	print_test_number(&i);
 	//redefine variables
-	L.eyev = *ft_tuple(0, 0, -1, VECTOR);
-	free(L.l->pos);
+	L.eyev = ft_tuple(0, 0, -1, VECTOR);
 	L.l->pos = ft_tuple(0, 10, -10, POINT);
 	//run test
 	result = ft_shading(L);
@@ -167,7 +166,7 @@ int	shading_test(int run)
 	print_test_banner("Eye in path of the reflection vector of light");
 	print_test_number(&i);
 	//redefine variables
-	L.eyev = *ft_tuple(0, -x, -x, VECTOR);
+	L.eyev = ft_tuple(0, -x, -x, VECTOR);
 	//run test
 	result = ft_shading(L);
 	//print output
@@ -180,8 +179,7 @@ int	shading_test(int run)
 	print_test_banner("Light behind the surface");
 	print_test_number(&i);
 	//redefine variables
-	L.eyev = *ft_tuple(0, 0, -1, VECTOR);
-	free(L.l->pos);
+	L.eyev = ft_tuple(0, 0, -1, VECTOR);
 	L.l->pos = ft_tuple(0, 0, 10, POINT);
 	//run test
 	result = ft_shading(L);

@@ -17,8 +17,8 @@ int	normal_at_test(int run)
 	if (run == 0)
 		return (0);
 	t_sphere	*s;
-	t_tuple		*world_point;
-	t_tuple		*normal;
+	t_tuple		world_point;
+	t_tuple		normal;
 	int			i = 1;
 
 
@@ -34,8 +34,6 @@ int	normal_at_test(int run)
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
 	print_normal(normal, 0, 1.70711, -0.707111);
-	free(world_point);
-	free(normal);
 
 //TEST 2
 	//print banners
@@ -49,16 +47,13 @@ int	normal_at_test(int run)
 	//print output and free relevant vars
 	print_normal(normal, 0, sqrt(2)/2, -(sqrt(2)/2));
 	//free all unused variables hereafter
-	free(s->centre);
 	free_matrix(s->transf);
 	free(s);
-	free(world_point);
-	free(normal);
 
 //define new variables for reflection tests
-	t_tuple	*v;
-	t_tuple	*n;
-	// t_tuple	*r;
+	t_tuple	v;
+	t_tuple	n;
+	t_tuple	r;
 
 //TEST 3
 	//print_banners
@@ -68,13 +63,9 @@ int	normal_at_test(int run)
 	v = ft_tuple(1, -1, 0, VECTOR);
 	n = ft_tuple(0, 1, 0, VECTOR);
 	//run test
-	// r = ft_reflect(v, n);
+	r = ft_reflect(v, n);
 	//print ouput
-	// print_tuple(r, "reflected");
-	printf(R_B"TESTS TEMPORARILY COMMENTED! (ft_reflect)\n");
-	free(v);
-	free(n);
-	// free(r);
+	print_tuple(r, "reflected");
 
 //TEST 4
 	//print_banners
@@ -84,12 +75,9 @@ int	normal_at_test(int run)
 	v = ft_tuple(0, -1, 0, VECTOR);
 	n = ft_tuple(sqrt(2)/2, sqrt(2)/2, 0, VECTOR);
 	//run test
-	// r = ft_reflect(v, n);
+	r = ft_reflect(v, n);
 	//print ouput
-	// print_tuple(r, "reflected");
-	free(v);
-	free(n);
-	// free(r);
+	print_tuple(r, "reflected");
 	return (0);
 }
 

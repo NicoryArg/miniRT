@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/31 18:06:55 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:52:52 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_material t_material;
 //#############################################
 //print.c
 
-void		print_tuple(t_tuple *tuple, char *name);
-void		print_normal(t_tuple *tuple, double x, double y, double z);
+void		print_tuple(t_tuple tuple, char *name);
+void		print_normal(t_tuple tuple, double x, double y, double z);
 void		print_light(t_light *l, char *name);
 void		print_material(t_material *m);
 int			printable_material(t_material *m);

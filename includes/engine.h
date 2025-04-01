@@ -44,14 +44,14 @@ typedef struct	s_data
 
 typedef struct	s_projectile
 {
-	t_tuple		*position;
-	t_tuple		*velocity;
+	t_tuple		position;
+	t_tuple		velocity;
 }	t_projectile;
 
 typedef struct	s_environment
 {
-	t_tuple		*gravity;
-	t_tuple		*wind;
+	t_tuple		gravity;
+	t_tuple		wind;
 }	t_environment;
 
 

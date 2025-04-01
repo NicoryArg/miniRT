@@ -12,51 +12,26 @@
 
 #include "../../includes/minirt.h"
 
-t_tuple *ft_tuple(double x, double y, double z, t_tpl type)
+t_tuple ft_tuple(double x, double y, double z, t_tpl type)
 {
-	t_tuple	*tuple;
+	t_tuple	tuple;
 
-	tuple = new_tuple();
-	if (!tuple)
-		return (NULL);
-	tuple->x = x;
-	tuple->y = y;
-	tuple->z = z;
-	tuple->w = type;
+	tuple.x = x;
+	tuple.y = y;
+	tuple.z = z;
+	tuple.w = type;
 	return (tuple);
 }
 
-/**
- * @brief Allocates memory for a new tuple
- */
-t_tuple	*new_tuple(void)
-{
-	t_tuple	*new;
-
-	new = malloc(sizeof(t_tuple));
-	if (!new)
-	{
-		printf("[DEBUG] `new_tuple` -> malloc failure\n");//	debugging
-		return (NULL);
-	}
-	return(new);
-}
-
-t_tuple	*normalise(t_tuple *v)
+t_tuple	normalise(t_tuple v)
 {
 	double	len;
-	t_tuple	*normal;
+	t_tuple	normal;
 
 	len = magnitude(v);
-	normal = new_tuple();
-	if (!normal)
-	{
-		printf("[DEBUG] `normalise` -> malloc failure\n");//	debugging
-		return (NULL);
-	}
-	normal->w = VECTOR;
-	normal->x = v->x/len;
-	normal->y = v->y/len;
-	normal->z = v->z/len;
+	normal.w = VECTOR;
+	normal.x = v.x/len;
+	normal.y = v.y/len;
+	normal.z = v.z/len;
 	return (normal);
 }
