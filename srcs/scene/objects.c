@@ -17,6 +17,8 @@ t_sphere	*ft_sphere(double radius)
 	t_sphere	*sphere;
 	static int	id;
 
+	if (id == 0)
+		id++;
 	sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!sphere)
 	{
@@ -28,7 +30,6 @@ t_sphere	*ft_sphere(double radius)
 	sphere->radius = radius;
 	sphere->transf = create_identity_matrix(4);
 	sphere->m = malloc(sizeof(t_material));
-	id++;
 	return (sphere);
 }
 

@@ -193,7 +193,7 @@ int	intersection_test(int run)
 	free(i1);
 //TEST 2
 	//print banners
-	print_test_banner("Aggregating intersections");
+	print_test_banner("intersect sets the object on the intersection");
 	print_test_number(&i);
 	//redefine variables
 	t_sphere	*s2 = ft_sphere(1);

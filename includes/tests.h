@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 14:52:52 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:52:41 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,11 @@ int		chained_test(int run);
 int		t_matrix_to_tuple(int run);
 int		t_tuple_to_matrix(int run);
 
+
+//main tests (used to run all tests at once)
+int		ft_main_tuples(void);
+int		ft_main_transform(void);
+int		ft_main_rays();
+int		ft_main_phong(void);
 
 #endif
