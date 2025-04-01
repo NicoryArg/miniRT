@@ -395,7 +395,7 @@ int	ray_transform_test2(int run)
 		printf(YEL"[DEBUG] TEST%d -> %s\n"RES, i, f);
 
 //TEST 4
-	print_test_banner("Intersecting a scaled sphere with a ray");
+	print_test_banner("Intersecting a translated sphere with a ray");
 	print_test_number(&i);
 	//define variables
 	free(s);

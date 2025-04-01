@@ -29,7 +29,7 @@ t_sphere	*ft_sphere(double radius)
 	sphere->centre = ft_tuple(0, 0, 0, POINT);
 	sphere->radius = radius;
 	sphere->transf = create_identity_matrix(4);
-	sphere->m = malloc(sizeof(t_material));
+	sphere->m = ft_material();
 	return (sphere);
 }
 

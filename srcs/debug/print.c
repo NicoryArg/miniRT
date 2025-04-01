@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 15:35:22 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:11:19 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	print_tuple(t_tuple tuple, char *name)
 }
 void	print_normal(t_tuple tuple, double x, double y, double z)
 {
-	if (tuple.w)
+	if (tuple.w == 0)
 		printf(G_B"normal"RES" at "YEL"(%.5f, %.5f, %.5f) "RES"is:\n", x, y , z);
 	else
 	{
-		printf(R_B"ERROR:"RES" tuple is undefined\n");
+		printf(R_B"ERROR:"RES" normal is a point\n");
 		return ;
 	}
 	printf(YEL"\tx:"RES" %.5f\n", tuple.x);
@@ -70,7 +70,7 @@ void	print_material(t_material *m)
 
 int		printable_material(t_material *m)
 {
-	if (m->ambient && m->diffuse && m->specular && m->shininess)
+	if (m && m->ambient && m->diffuse && m->specular && m->shininess)
 		{
 		printf(G_B"Material:\n"RES);
 		return (1);

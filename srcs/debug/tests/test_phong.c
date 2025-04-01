@@ -31,7 +31,7 @@ int	light_test(int run)
 	print_test_banner("light has a position and intensity (lum)");
 	print_test_number(&i);
 	//initiate variables
-	lum = ft_colour(255, 255, 255);
+	lum = ft_colour(1, 1, 1);
 	pos = ft_tuple(0, 0, 0, POINT);
 	//run test;
 	light = ft_light(pos, lum);
@@ -69,6 +69,8 @@ int	material_test(int run)
 	print_test_number(&i);
 	//initiate variables
 	sph = ft_sphere(1);
+	free(sph->m);//for purpose of test output
+	sph->m = NULL;
 	//print input
 	printf(G_B"Sphere->m:\n"RES);
 	print_material(sph->m);
