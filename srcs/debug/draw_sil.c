@@ -13,7 +13,7 @@
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-static t_tuple	*compute_wall_point(int x, int y, double px_size, double half)
+static t_tuple	compute_wall_point(int x, int y, double px_size, double half)
 {
 	double	world_x;
 	double	world_y;
@@ -23,17 +23,16 @@ static t_tuple	*compute_wall_point(int x, int y, double px_size, double half)
 	return (ft_tuple(world_x, world_y, WALL_Z, POINT));
 }
 
-static t_ray	*create_ray_to_point(t_tuple *origin, t_tuple *target)
+static t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
 {
-	t_tuple	*direction;
-	t_tuple	*origin_copy;
+	t_tuple	direction;
+	t_tuple	origin_copy;
 	t_ray	*ray;
-	t_tuple	*diff;
+	t_tuple	diff;
 
 	diff = diff_tuple(target, origin);
 	direction = normalise(diff);
-	free(diff);
-	origin_copy = ft_tuple(origin->x, origin->y, origin->z, origin->w);
+	origin_copy = ft_tuple(origin.x, origin.y, origin.z, origin.w);
 	ray = ft_ray(origin_copy, direction);
 	return (ray);
 }
@@ -63,7 +62,7 @@ static void	render_loop(t_render_ctx *ctx, t_image *img)
 {
 	int		x;
 	int		y;
-	t_tuple	*wall_point;
+	t_tuple	wall_point;
 	t_ray	*ray;
 	int		color;
 
@@ -77,7 +76,6 @@ static void	render_loop(t_render_ctx *ctx, t_image *img)
 			ray = create_ray_to_point(ctx->ray_origin, wall_point);
 			color = compute_pixel_color(ctx->sph, ray);
 			put_pixel(img, x, y, color);
-			free(wall_point);
 			free_ray(ray);
 			x++;
 		}
@@ -91,11 +89,10 @@ void	draw_silhouette(t_engine *engine)
 
 	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
 	ctx.sph = ft_sphere(1.0);
-	ctx.sph->centre->z = 10;
+	ctx.sph->centre.z = 10;
 	set_transf(ctx.sph, scale(5, 5, 5), SPHERE);
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
 	render_loop(&ctx, &engine->image);
-	free(ctx.ray_origin);
 	free_sphere(ctx.sph);
 }

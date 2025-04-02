@@ -12,7 +12,7 @@
 
 #include "../../includes/minirt.h"
 
-t_ray	*ft_ray(t_tuple *origin, t_tuple *direction)
+t_ray	*ft_ray(t_tuple origin, t_tuple direction)
 {
 	t_ray	*ray;
 
@@ -26,13 +26,12 @@ t_ray	*ft_ray(t_tuple *origin, t_tuple *direction)
 /**
  * @brief Finds the point at the given distance `t` along `ray`
  */
-t_tuple	*get_point(t_ray *ray, double t)
+t_tuple	get_point(t_ray *ray, double t)
 {
-	t_tuple	*point;
-	t_tuple	*mult_tup;
+	t_tuple	point;
+	t_tuple	mult_tup;
 
 	mult_tup = mult_tuple(ray->direction, t);
 	point = add_tuple(ray->origin, mult_tup);
-	free(mult_tup);
 	return (point);
 }

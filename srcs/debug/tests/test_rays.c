@@ -18,7 +18,7 @@ int	position_test(int run)
 		return (0);
 	int	i = 1;
 	t_ray	*r = ft_ray(ft_tuple(2, 3, 4, POINT), ft_tuple(1, 0, 0, VECTOR));
-	t_tuple	*res;
+	t_tuple	res;
 
 
 	print_test_banner("POSITION");
@@ -91,8 +91,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 2
 	//redefine ray
@@ -108,8 +106,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 3
 	//redifine ray
@@ -130,8 +126,6 @@ int	sph_ray_intersect(int run)
 		printf(YEL"[DEBUG] TEST%d -> sph_ray_intersect\n"RES, i);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 4
 	//redefine ray
@@ -147,8 +141,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 //TEST 5
 	//redefine ray
@@ -164,8 +156,6 @@ int	sph_ray_intersect(int run)
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	//free resources
 	free(xs);
-	free(r->direction);
-	free(r->origin);
 	free(r);
 	return (0);
 }
@@ -203,7 +193,7 @@ int	intersection_test(int run)
 	free(i1);
 //TEST 2
 	//print banners
-	print_test_banner("Aggregating intersections");
+	print_test_banner("intersect sets the object on the intersection");
 	print_test_number(&i);
 	//redefine variables
 	t_sphere	*s2 = ft_sphere(1);
@@ -405,7 +395,7 @@ int	ray_transform_test2(int run)
 		printf(YEL"[DEBUG] TEST%d -> %s\n"RES, i, f);
 
 //TEST 4
-	print_test_banner("Intersecting a scaled sphere with a ray");
+	print_test_banner("Intersecting a translated sphere with a ray");
 	print_test_number(&i);
 	//define variables
 	free(s);

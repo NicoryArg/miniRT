@@ -6,13 +6,13 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 15:18:46 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:11:19 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void	print_tuple(t_tuple *tuple, char *name)
+void	print_tuple(t_tuple tuple, char *name)
 {
 	if (is_vector(tuple))
 		printf(G_B"tuple `%s` is VECTOR:\n"RES, name);
@@ -20,21 +20,24 @@ void	print_tuple(t_tuple *tuple, char *name)
 		printf(G_B"tuple `%s` is POINT:\n"RES, name);
 	else
 		printf(R_B"ERROR:"RES" tuple type undefined\n");
-	printf(YEL"\tx:"RES" %.5f\n", tuple->x);
-	printf(YEL"\ty:"RES" %.5f\n", tuple->y);
-	printf(YEL"\tz:"RES" %.5f\n", tuple->z);
-	printf(YEL"\tw:"RES" %d\n", tuple->w);
+	printf(YEL"\tx:"RES" %.5f\n", tuple.x);
+	printf(YEL"\ty:"RES" %.5f\n", tuple.y);
+	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
+	printf(YEL"\tw:"RES" %d\n", tuple.w);
 }
-void	print_normal(t_tuple *tuple, double x, double y, double z)
+void	print_normal(t_tuple tuple, double x, double y, double z)
 {
-	if (tuple)
+	if (tuple.w == 0)
 		printf(G_B"normal"RES" at "YEL"(%.5f, %.5f, %.5f) "RES"is:\n", x, y , z);
 	else
-		printf(R_B"ERROR:"RES" tuple is undefined\n");
-	printf(YEL"\tx:"RES" %.5f\n", tuple->x);
-	printf(YEL"\ty:"RES" %.5f\n", tuple->y);
-	printf(YEL"\tz:"RES" %.5f\n", tuple->z);
-	printf(YEL"\tw:"RES" %d\n", tuple->w);
+	{
+		printf(R_B"ERROR:"RES" normal is a point\n");
+		return ;
+	}
+	printf(YEL"\tx:"RES" %.5f\n", tuple.x);
+	printf(YEL"\ty:"RES" %.5f\n", tuple.y);
+	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
+	printf(YEL"\tw:"RES" %d\n", tuple.w);
 }
 
 void	print_light(t_light *l, char *name)
@@ -44,9 +47,9 @@ void	print_light(t_light *l, char *name)
 	else
 		printf(R_B"ERROR:"RES" %s undefined\n", name);
 	printf(G_B"\tLUM:\n"RES);
-	printf(YEL"\tr:"RES" %.5f\n", l->lum->r);
-	printf(YEL"\tg:"RES" %.5f\n", l->lum->g);
-	printf(YEL"\tb:"RES" %.5f\n", l->lum->b);
+	printf(YEL"\tr:"RES" %.5f\n", l->lum.r);
+	printf(YEL"\tg:"RES" %.5f\n", l->lum.g);
+	printf(YEL"\tb:"RES" %.5f\n", l->lum.b);
 	printf("\t");
 	print_tuple(l->pos, "POS:");
 }
@@ -56,9 +59,9 @@ void	print_material(t_material *m)
 	if (!printable_material(m))
 		return ;
 	// printf(G_B"Material:\n"RES);
-	printf(YEL"\tr:"RES" %.1f\n", m->c->r);
-	printf(YEL"\tg:"RES" %.1f\n", m->c->g);
-	printf(YEL"\tb:"RES" %.1f\n", m->c->b);
+	printf(YEL"\tr:"RES" %.1f\n", m->c.r);
+	printf(YEL"\tg:"RES" %.1f\n", m->c.g);
+	printf(YEL"\tb:"RES" %.1f\n", m->c.b);
 	printf(YEL"\tambient:"RES" %.1f\n", m->ambient);
 	printf(YEL"\tdiffuse:"RES" %.1f\n", m->diffuse);
 	printf(YEL"\tspecular:"RES" %.1f\n", m->specular);
@@ -67,7 +70,7 @@ void	print_material(t_material *m)
 
 int		printable_material(t_material *m)
 {
-	if (m->c && m->ambient && m->diffuse && m->specular && m->shininess)
+	if (m && m->ambient && m->diffuse && m->specular && m->shininess)
 		{
 		printf(G_B"Material:\n"RES);
 		return (1);
@@ -79,8 +82,6 @@ int		printable_material(t_material *m)
 		else
 		{
 			printf(G_B"Material:\n"RES);
-			if (!m->c)
-				printf(YEL"\tmaterial colour "AKA"undefined\n");
 			if (!m->ambient)
 				printf(YEL"\tmaterial ambient "AKA"undefined\n");
 			if (!m->diffuse)

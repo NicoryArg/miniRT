@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/26 16:00:23 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:10:34 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static int	rotate_x_test()
 	t_matrix	*half_quarter = rotate_x(M_PI / 4);
 	t_matrix	*full_quarter = rotate_x(M_PI / 2);
 	t_matrix	*inverse = invert_matrix(half_quarter);
-	t_tuple		*point = ft_tuple(0, 1, 0, POINT);
+	t_tuple		point = ft_tuple(0, 1, 0, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
 
-	if (!half_quarter || !full_quarter || !point || !p)
+	if (!half_quarter || !full_quarter || !p)
 	{
 		printf("Error: one or more arguments are NULL\n");
 		return (1);
@@ -62,11 +62,11 @@ static int	rotate_y_test()
 	int	i = 1;
 	t_matrix	*half_quarter = rotate_y(M_PI / 4);
 	t_matrix	*full_quarter = rotate_y(M_PI / 2);
-	t_tuple		*point = ft_tuple(0, 0, 1, POINT);
+	t_tuple		point = ft_tuple(0, 0, 1, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
 
-	if (!half_quarter || !full_quarter || !point || !p)
+	if (!half_quarter || !full_quarter || !p)
 	{
 		printf("Error: one or more arguments are NULL\n");
 		return (1);
@@ -96,11 +96,11 @@ static int	rotate_z_test()
 	int	i = 1;
 	t_matrix	*half_quarter = rotate_z(M_PI / 4);
 	t_matrix	*full_quarter = rotate_z(M_PI / 2);
-	t_tuple		*point = ft_tuple(0, 1, 0, POINT);
+	t_tuple		point = ft_tuple(0, 1, 0, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
 
-	if (!half_quarter || !full_quarter || !point || !p)
+	if (!half_quarter || !full_quarter || !p)
 	{
 		printf("Error: one or more arguments are NULL\n");
 		return (1);
@@ -167,11 +167,11 @@ int	translate_test(int run)
 	t_matrix	*transform = translate(5, -3, 2);
 	t_matrix	*inverse = invert_matrix(transform);
 	t_matrix	*result = NULL;
-	t_tuple		*point = ft_tuple(-3, 4, 5, POINT);
-	t_tuple		*vector = ft_tuple(-3, 4, 5, VECTOR);
+	t_tuple		point = ft_tuple(-3, 4, 5, POINT);
+	t_tuple		vector = ft_tuple(-3, 4, 5, VECTOR);
 	t_matrix	*p = tuple_to_matrix(point);
 
-	if (!transform || !point || !inverse)
+	if (!transform || !inverse)
 	{
 		printf("Error: one or more arguments are NULL\n");
 		return (1);
@@ -202,7 +202,6 @@ int	translate_test(int run)
 	result = multiply_matrices(transform, p);
 	printf(GR"RESULT:\n"RES);
 	print_matrix(result);
-	free(point);
 	free_matrix(transform);
 	free_matrix(inverse);
 	return (0);
@@ -217,12 +216,12 @@ int	scale_test(int run)
 	t_matrix	*transform = scale(2, 3, 4);
 	t_matrix	*inverse = invert_matrix(transform);
 	t_matrix	*result = NULL;
-	t_tuple		*point = ft_tuple(-4, 6, 8, POINT);
-	t_tuple		*vector = ft_tuple(-4, 6, 8, VECTOR);
+	t_tuple		point = ft_tuple(-4, 6, 8, POINT);
+	t_tuple		vector = ft_tuple(-4, 6, 8, VECTOR);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*v = tuple_to_matrix(vector);
 
-	if (!transform || !point || !inverse || !p || !v)
+	if (!transform || !inverse || !p || !v)
 	{
 		printf("Error: one or more arguments are NULL\n");
 		return (1);
@@ -253,7 +252,6 @@ int	scale_test(int run)
 	printf("Reflection is scaling a POINT by a negative value\n");
 	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
 	free_matrix(transform);
-	free(point);
 	//adapt values to match example in book
 	point = ft_tuple(2, 3, 4, POINT);
 	p = tuple_to_matrix(point);

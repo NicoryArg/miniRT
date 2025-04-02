@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.json                                      :+:      :+:    :+:   */
+/*   test_normal_at.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:13:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:13:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
+/*   Updated: 2025/03/31 19:14:43 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	normal_at_test(int run)
 	if (run == 0)
 		return (0);
 	t_sphere	*s;
-	t_tuple		*world_point;
-	t_tuple		*normal;
+	t_tuple		world_point;
+	t_tuple		normal;
 	int			i = 1;
 
 
@@ -34,8 +34,6 @@ int	normal_at_test(int run)
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
 	print_normal(normal, 0, 1.70711, -0.707111);
-	free(world_point);
-	free(normal);
 
 //TEST 2
 	//print banners
@@ -49,16 +47,13 @@ int	normal_at_test(int run)
 	//print output and free relevant vars
 	print_normal(normal, 0, sqrt(2)/2, -(sqrt(2)/2));
 	//free all unused variables hereafter
-	free(s->centre);
 	free_matrix(s->transf);
 	free(s);
-	free(world_point);
-	free(normal);
 
 //define new variables for reflection tests
-	t_tuple	*v;
-	t_tuple	*n;
-	t_tuple	*r;
+	t_tuple	v;
+	t_tuple	n;
+	t_tuple	r;
 
 //TEST 3
 	//print_banners
@@ -71,9 +66,6 @@ int	normal_at_test(int run)
 	r = ft_reflect(v, n);
 	//print ouput
 	print_tuple(r, "reflected");
-	free(v);
-	free(n);
-	free(r);
 
 //TEST 4
 	//print_banners
@@ -86,9 +78,6 @@ int	normal_at_test(int run)
 	r = ft_reflect(v, n);
 	//print ouput
 	print_tuple(r, "reflected");
-	free(v);
-	free(n);
-	free(r);
 	return (0);
 }
 

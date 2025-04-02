@@ -19,12 +19,12 @@
 #define HOUR_COUNT 12
 #define ROTATION_STEP (M_PI / 6) // π/6 radians per hour
 
-static void	compute_hour_position(int hour, t_tuple **transformed)
+static void	compute_hour_position(int hour, t_tuple *transformed)
 {
 	t_matrix	*rotation;
 	t_matrix	*hour_matrix;
 	t_matrix	*result_matrix;
-	t_tuple		*hour_pos;
+	t_tuple		hour_pos;
 
 	hour_pos = ft_tuple(0, 0, 1, POINT);
 	hour_matrix = tuple_to_matrix(hour_pos);
@@ -34,12 +34,11 @@ static void	compute_hour_position(int hour, t_tuple **transformed)
 	free_matrix(rotation);
 	free_matrix(result_matrix);
 	free_matrix(hour_matrix);
-	free(hour_pos);
 }
 
 void	draw_hour_markers(t_image *img)
 {
-	t_tuple		*transformed;
+	t_tuple		transformed;
 	int			hour;
 	int			screen_x;
 	int			screen_y;
@@ -50,10 +49,9 @@ void	draw_hour_markers(t_image *img)
 		// Compute rotated position
 		compute_hour_position(hour, &transformed);
 		// Scale & Convert to screen coordinates
-		screen_x = CENTER_X + (int)(transformed->x * CLOCK_RADIUS);
-		screen_y = CENTER_Y - (int)(transformed->z * CLOCK_RADIUS); // Flip Y axis
+		screen_x = CENTER_X + (int)(transformed.x * CLOCK_RADIUS);
+		screen_y = CENTER_Y - (int)(transformed.z * CLOCK_RADIUS); // Flip Y axis
 		draw_marker(img, screen_x, screen_y, COLOR_X, MARKER_SIZE);
-		free(transformed);
 		hour++;
 	}
 }

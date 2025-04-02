@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/29 15:06:34 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:52:41 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_material t_material;
 //#############################################
 //print.c
 
-void		print_tuple(t_tuple *tuple, char *name);
-void		print_normal(t_tuple *tuple, double x, double y, double z);
+void		print_tuple(t_tuple tuple, char *name);
+void		print_normal(t_tuple tuple, double x, double y, double z);
 void		print_light(t_light *l, char *name);
 void		print_material(t_material *m);
 int			printable_material(t_material *m);
@@ -54,8 +54,11 @@ int		ray_transform_test2(int run);
 
 //test_reflection.c
 int		normal_at_test(int run);
+
+//test_phong.c
 int		light_test(int run);
 int		material_test(int run);
+int		shading_test(int run);
 
 //test_transform.c
 /**
@@ -74,5 +77,11 @@ int		chained_test(int run);
 int		t_matrix_to_tuple(int run);
 int		t_tuple_to_matrix(int run);
 
+
+//main tests (used to run all tests at once)
+int		ft_main_tuples(void);
+int		ft_main_transform(void);
+int		ft_main_rays();
+int		ft_main_phong(void);
 
 #endif
