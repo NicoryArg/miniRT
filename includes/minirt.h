@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 14:00:39 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 14:00:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/02 14:33:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 14:33:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,6 +338,7 @@ t_colour	ft_colour(double r, double g, double b);
 t_colour	add_colours(t_colour	a, t_colour b);
 t_colour	mult_colour(t_colour c, double num);
 t_colour	mult_colours(t_colour c1, t_colour c2);
+int			convert_colour_to_int(t_colour col);
 
 
 //message.c
@@ -352,7 +353,6 @@ void		free_hits(t_inters *xs);
 void		ft_swap(t_hit **a, t_hit **b);
 double		ft_max(double a, double b);
 double		ft_min(double a, double b);
-int			convert_colour_to_int(t_colour col);
 
 
 # ifndef M_PI
