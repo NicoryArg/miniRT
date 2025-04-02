@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 13:53:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 15:52:41 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/02 18:25:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 18:25:49 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,17 @@ int		chained_test(int run);
 int		t_matrix_to_tuple(int run);
 int		t_tuple_to_matrix(int run);
 
+//test_world.c
+int		world_test(int run);
+int		default_world_test(int run);
+int		intersect_world_test(int run);
 
 //main tests (used to run all tests at once)
 int		ft_main_tuples(void);
 int		ft_main_transform(void);
 int		ft_main_rays();
 int		ft_main_phong(void);
+int		ft_main_world(void);
+
 
 #endif

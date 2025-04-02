@@ -1,0 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   world.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 18:36:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 18:36:20 by nryser           ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minirt.h"
+#include "engine.h"
+
+t_world	*ft_world(void)
+{
+	t_world	*w;
+
+	w = malloc(sizeof(t_world));
+	if (!w)
+		return (NULL);
+	w->objects = NULL;
+	w->object_count = 0;
+	w->light = NULL;
+	return (w);
+}
+
+t_world	*default_world(void)
+{
+	t_world		*w;
+	t_material	*m1;
+	t_sphere	*s1;
+	t_sphere	*s2;
+
+	w = ft_world();
+	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	s1 = ft_sphere(1);
+	m1 = s1->m;
+	m1->c = ft_colour(0.8, 1.0, 0.6);
+	m1->diffuse = 0.7;
+	m1->specular = 0.2;
+	s2 = ft_sphere(1);
+	set_transf(s2, scale(0.5, 0.5, 0.5), SPHERE);
+	w->objects = malloc(sizeof(t_sphere *) * 2);
+	if (!w->objects)
+		return (NULL);
+	w->objects[0] = s1;
+	w->objects[1] = s2;
+	w->object_count = 2;
+	return (w);
+}
+
+void	copy_hits(t_inters *dst, t_inters *src)
+{
+	t_hit	*hit;
+	int		j;
+
+	j = 0;
+	while (j < src->count)
+	{
+		hit = src->hits[j];
+		dst->hits[dst->count] = hit;
+		dst->count++;
+		j++;
+	}
+}
+
+t_inters	*intersect_world(t_world *w, t_ray *r)
+{
+	t_inters	*xs;
+	t_inters	*temp;
+	int			i;
+
+	xs = init_intersections(256);
+	if (!xs)
+		return (NULL);
+	i = 0;
+	while (i < w->object_count)
+	{
+		temp = intersect(w->objects[i], r, SPHERE);
+		if (temp)
+		{
+			copy_hits(xs, temp);
+			free(temp->hits);
+			free(temp);
+		}
+		i++;
+	}
+	sort_intersections(xs->hits, xs->count);
+	return (xs);
+}

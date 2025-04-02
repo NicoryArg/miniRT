@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 14:33:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 14:33:07 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/02 18:31:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 18:31:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,17 @@ typedef struct s_material
 }	t_material;
 
 //#############################################
+//################# WORLD #####################
+//#############################################
+
+typedef struct s_world
+{
+	t_sphere	**objects;
+	int			object_count;
+	t_light		*light;
+}	t_world;
+
+//#############################################
 //################# OTHER #####################
 //#############################################
 
@@ -263,6 +274,12 @@ t_tuple		normal_at(t_sphere *sph, t_tuple world_p);
 //#############################################
 //############### SCENE #######################
 //#############################################
+//world.c
+t_world		*ft_world(void);
+t_world		*default_world(void);
+void		copy_hits(t_inters *dst, t_inters *src);
+t_inters	*intersect_world(t_world *w, t_ray *r);
+
 //objects.c
 /**
  * @brief creates and returns a sphere with a unique ID
@@ -348,6 +365,7 @@ int			convert_colour_to_int(t_colour col);
 void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
 void		free_hits(t_inters *xs);
+void		free_world(t_world *w);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);
@@ -385,17 +403,21 @@ double		ft_min(double a, double b);
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 
-// Define Colors
-# define B_B "\033[1;34m"
-# define LILA "\033[0;34m"
-# define R_B "\033[1;31m"
-# define AKA "\033[0;31m"
-# define G_B "\033[1;32m"
-# define YEL "\e[0;33m"
-# define CYAN "\033[0;36m"
-# define GR "\033[0;32m"
+// Define Terminal Colors
 # define BOLD "\033[1m"
-# define RES "\033[0m"
+# define RES  "\033[0m"
+
+// Regular colors
+# define AKA  "\033[0;31m" // Red
+# define GR   "\033[0;32m" // Green
+# define YEL  "\033[0;33m" // Yellow
+# define LILA "\033[0;34m" // Blue (dim)
+# define CYAN "\033[0;36m" // Cyan
+
+// Bold colors
+# define R_B  "\033[1;31m" // Bold Red
+# define G_B  "\033[1;32m" // Bold Green
+# define B_B  "\033[1;34m" // Bold Blue
 
 
 #endif
