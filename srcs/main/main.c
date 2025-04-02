@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 15:55:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 15:55:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/02 11:38:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 11:41:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@
 
 
 
-// int	main(void)
-// {
-// 	t_engine	engine;
+int	ft_main_engine(void)
+{
+	t_engine	engine;
 
-// 	init_engine(&engine);
-// 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
-// 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
-// 	mlx_loop(engine.mlx);
-// 	cleanup(&engine);
-// }
+	init_engine(&engine);
+	mlx_key_hook(engine.window, on_key_hook_event, &engine);
+	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
+	return (0);
+}
 
 int	main()
 {
@@ -49,6 +50,7 @@ int	main()
 	ft_main_transform();
 	ft_main_rays();
 	ft_main_phong();
+	ft_main_engine();
 	printf(R_B"END OF ALL TESTS\n"RES);
 	return (0);
 }

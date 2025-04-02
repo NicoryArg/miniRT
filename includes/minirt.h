@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:17:12 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:17:12 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/02 14:00:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 14:00:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,6 +346,13 @@ t_colour	mult_colours(t_colour c1, t_colour c2);
 //free_utils.c
 void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
+void		free_hits(t_inters *xs);
+
+//ft_utils.c
+void		ft_swap(t_hit **a, t_hit **b);
+double		ft_max(double a, double b);
+double		ft_min(double a, double b);
+int			convert_colour_to_int(t_colour col);
 
 
 # ifndef M_PI

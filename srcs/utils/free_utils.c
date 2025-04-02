@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 18:53:20 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:53:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/02 14:00:18 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/02 14:00:18 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ void	free_sphere(t_sphere *sphere)
 		return ;
 	free_matrix(sphere->transf);
 	free(sphere);
+}
+
+void	free_hits(t_inters *xs)
+{
+	int	i;
+
+	i = 0;
+	while (i < xs->count)
+		free(xs->hits[i++]);
+	free(xs->hits);
+	free(xs);
 }
