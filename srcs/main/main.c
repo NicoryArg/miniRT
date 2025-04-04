@@ -55,3 +55,21 @@ int	main()
 	printf(R_B"END OF ALL TESTS\n"RES);
 	return (0);
 }
+
+
+
+
+////////////////////////////////////////////////////////////////
+////////////////////// RUN ALL TESTS ///////////////////////////
+////////////////////////////////////////////////////////////////
+
+// int	main()
+// {
+// 	print_test_banner("RUNNING ALL TESTS");
+// 	ft_main_tuples();
+// 	ft_main_transform();
+// 	ft_main_rays();
+// 	ft_main_phong();
+// 	printf(R_B"END OF ALL TESTS\n"RES);
+// 	return (0);
+// }

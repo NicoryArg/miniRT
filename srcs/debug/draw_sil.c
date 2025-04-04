@@ -49,7 +49,7 @@ static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 	if (t >= 0)
 		color = RED;
 	else
-		color = WHITE;
+		color = BLACK;
 	i = 0;
 	while (i < xs->count)
 		free(xs->hits[i++]);
