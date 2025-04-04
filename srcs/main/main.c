@@ -31,24 +31,31 @@
 
 
 
-// int	main(void)
-// {
-// 	t_engine	engine;
-
-// 	init_engine(&engine);
-// 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
-// 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
-// 	mlx_loop(engine.mlx);
-// 	cleanup(&engine);
-// }
-
-int	main()
+int	main(void)
 {
-	print_test_banner("RUNNING ALL TESTS");
-	ft_main_tuples();
-	ft_main_transform();
-	ft_main_rays();
-	ft_main_phong();
-	printf(R_B"END OF ALL TESTS\n"RES);
-	return (0);
+	t_engine	engine;
+
+	init_engine(&engine);
+	mlx_key_hook(engine.window, on_key_hook_event, &engine);
+	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
 }
+
+
+
+
+////////////////////////////////////////////////////////////////
+////////////////////// RUN ALL TESTS ///////////////////////////
+////////////////////////////////////////////////////////////////
+
+// int	main()
+// {
+// 	print_test_banner("RUNNING ALL TESTS");
+// 	ft_main_tuples();
+// 	ft_main_transform();
+// 	ft_main_rays();
+// 	ft_main_phong();
+// 	printf(R_B"END OF ALL TESTS\n"RES);
+// 	return (0);
+// }
