@@ -166,8 +166,8 @@ int	ft_pre_compute_test(int run)
 
 	//object
 	printf(B_B"comps.object:   %p\n"RES"", comps.obj);
-	printf(G_B"expected: \t%p\n"RES"", hit->object);
-	if (comps.obj == hit->object)
+	printf(G_B"expected: \t%p\n"RES"", hit->obj);
+	if (comps.obj == hit->obj)
 		printf(GR"✔ values match\n"RES);
 	else
 		return(printf(AKA"❌ values don't match\n"RES));

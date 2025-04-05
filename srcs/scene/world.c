@@ -76,7 +76,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r)
 	i = 0;
 	while (i < w->object_count)
 	{
-		temp = intersect(w->objects[i], r, SPHERE);
+		temp = intersect(w->objects[i], r);
 		if (temp)
 		{
 			copy_hits(xs, temp);

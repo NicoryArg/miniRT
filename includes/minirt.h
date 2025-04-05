@@ -245,7 +245,7 @@ double		find_hit(t_hit	**intersections, int count);
 
 //intersect.c
 t_inters	*init_intersections(int initial_capacity);
-t_inters	*intersect(void *obj, t_ray *ray, t_obj type);
+t_inters	*intersect(void *obj, t_ray *ray);
 t_hit		*intersection(double t, void *object, t_obj type);
 
 //ray_sphere.c

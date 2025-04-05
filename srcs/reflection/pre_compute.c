@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 12:26:53 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/06 01:03:03 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/06 01:14:26 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 	t_computations	comps;
 
 	comps.t = hit->t;
-	comps.obj = hit->object;
+	comps.obj = hit->obj;
 	comps.point = get_point(ray, comps.t);
 	comps.eyev = ft_negate(ray->direction);
 	comps.normalv = normal_at(comps.obj, comps.point);

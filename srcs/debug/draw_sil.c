@@ -44,7 +44,7 @@ static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 	int			color;
 	int			i;
 
-	xs = intersect(sphere, ray, SPHERE);
+	xs = intersect(sphere, ray);
 	t = find_visible_hit(xs->hits, xs->count);
 	if (t >= 0)
 		color = RED;

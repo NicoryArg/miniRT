@@ -21,7 +21,7 @@ static int	compute_color(t_sphere *sph, t_ray *ray, t_light *l)
 	t_colour	c;
 	t_shading	shad;
 
-	xs = intersect(sph, ray, SPHERE);
+	xs = intersect(sph, ray);
 	t = find_visible_hit(xs->hits, xs->count);
 	if (t >= 0)
 	{

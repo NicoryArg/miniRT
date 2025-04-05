@@ -87,7 +87,7 @@ int	sph_ray_intersect(int run)
 	print_test_number(&i);
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
 	free(xs);
@@ -100,7 +100,7 @@ int	sph_ray_intersect(int run)
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	//print output
 	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
@@ -115,7 +115,7 @@ int	sph_ray_intersect(int run)
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	//print output
 	if (xs->count == 0)
 	{
@@ -135,7 +135,7 @@ int	sph_ray_intersect(int run)
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	//print output
 	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
@@ -150,7 +150,7 @@ int	sph_ray_intersect(int run)
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	//print output
 	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
 	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
@@ -187,7 +187,7 @@ int	intersection_test(int run)
 	i1 = intersection(3.5, s, SPHERE);
 	//print ouput
 	printf(BOLD"%15s "GR"%14f\n"RES, "i.t:", i1->t);
-	printf(BOLD"%15s "GR"%20p"RES"\n", "i.object:", i1->object);
+	printf(BOLD"%15s "GR"%20p"RES"\n", "i.object:", i1->obj);
 	printf(BOLD"%15s "LILA"%20p\n"RES"", "Sphere:", s);
 	//free variables
 	free(i1);
@@ -197,10 +197,10 @@ int	intersection_test(int run)
 	print_test_number(&i);
 	//redefine variables
 	t_sphere	*s2 = ft_sphere(1);
-	t_inters	*xs = intersect(s2, r, SPHERE);
+	t_inters	*xs = intersect(s2, r);
 	printf(BOLD"%15s "GR"%7d\n"RES, "xs.count:", xs->count);
-	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0]->object);
-	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", xs->hits[1]->object);
+	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0]->obj);
+	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", xs->hits[1]->obj);
 	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s2);
 	//free variables
 	free(xs->hits);
@@ -378,7 +378,7 @@ int	ray_transform_test2(int run)
 	t = scale(2, 2 ,2);
 	//run tests
 	set_transf(s, t, SPHERE);
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	//print output
 	if (xs->count == 0)
 	{
@@ -404,7 +404,7 @@ int	ray_transform_test2(int run)
 	t = translate(5, 0 ,0);
 	//run tests
 	set_transf(s, t, SPHERE);
-	xs = intersect(s, r, SPHERE);
+	xs = intersect(s, r);
 	//print output
 	if (xs->count == 0)
 	{
