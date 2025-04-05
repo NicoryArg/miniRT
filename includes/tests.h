@@ -81,6 +81,8 @@ int		t_tuple_to_matrix(int run);
 int		world_test(int run);
 int		default_world_test(int run);
 int		intersect_world_test(int run);
+int		ft_pre_compute_test(int run);
+
 
 //main tests (used to run all tests at once)
 int		ft_main_tuples(void);

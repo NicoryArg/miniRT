@@ -35,11 +35,13 @@ t_colour	add_colours(t_colour	a, t_colour b)
 t_colour	mult_colour(t_colour c, double num)
 {
 	t_colour	new;
+
 	new.r = c.r * num;
 	new.g = c.g * num;
 	new.b = c.b * num;
 	return (new);
 }
+
 t_colour	mult_colours(t_colour c1, t_colour c2)
 {
 	t_colour	new;

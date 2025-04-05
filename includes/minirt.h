@@ -151,6 +151,17 @@ typedef struct s_material
 	double		shininess;
 }	t_material;
 
+typedef struct s_computations
+{
+	bool		inside;
+	double		t;
+	t_sphere	*s;
+	t_tuple		point;
+	t_tuple		eyev;
+	t_tuple		normalv;
+}	t_computations;
+
+
 //#############################################
 //################# WORLD #####################
 //#############################################
@@ -270,6 +281,9 @@ t_colour	ft_shading(t_shading L);
 t_tuple		ft_world_normal(t_matrix *inverse, t_tuple obj_normal);
 t_tuple		ft_object_point(t_matrix *inverse, t_tuple world_point);
 t_tuple		normal_at(t_sphere *sph, t_tuple world_p);
+
+//pre_compute.c
+t_computations	pre_compute(t_hit	*hit, t_ray *ray);
 
 //#############################################
 //############### SCENE #######################

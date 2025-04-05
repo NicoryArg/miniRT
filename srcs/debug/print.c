@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 18:11:19 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/05 13:08:00 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	print_tuple(t_tuple tuple, char *name)
 {
 	if (is_vector(tuple))
-		printf(G_B"tuple `%s` is VECTOR:\n"RES, name);
+		printf(G_B"tuple `"YEL"%s"G_B"` is VECTOR:\n"RES, name);
 	else if (is_point(tuple))
-		printf(G_B"tuple `%s` is POINT:\n"RES, name);
+		printf(G_B"tuple `"YEL"%s"G_B"` is POINT:\n"RES, name);
 	else
 		printf(R_B"ERROR:"RES" tuple type undefined\n");
 	printf(YEL"\tx:"RES" %.5f\n", tuple.x);

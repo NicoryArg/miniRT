@@ -134,3 +134,124 @@ int	intersect_world_test(int run)
 	return (0);
 }
 
+int	ft_pre_compute_test(int run)
+{
+	if (run == 0)
+		return (0);
+	int				i = 1;
+	t_computations	comps;
+	t_sphere		*shape;
+	t_hit			*hit;
+	t_ray			*r;
+
+//TEST 1
+	//print banners
+	print_test_banner("Precomputing the state of an intersection");
+	print_test_number(&i);
+	//initiate variables
+	r = ft_ray(ft_tuple(0,0,-5,POINT), ft_tuple(0,0,1,VECTOR));
+	shape = ft_sphere(1);
+	hit = intersection(4, shape, SPHERE);
+	//run test
+	comps = pre_compute(hit, r);
+	//check & print output
+	//t value
+	printf(B_B"comps.t:   %.0f\n"RES"", comps.t);
+	printf(G_B"expected:  %.0f\n"RES"", hit->t);
+	if (ft_equal(comps.t, hit->t))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	printf("________________________________________________\n");
+
+	//object
+	printf(B_B"comps.object:   %p\n"RES"", comps.s);
+	printf(G_B"expected: \t%p\n"RES"", hit->object);
+	if (comps.s == hit->object)
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	printf("________________________________________________\n");
+
+	//point
+	printf(B_B"comps.point: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.point.x, comps.point.y, comps.point.z, comps.point.w);
+	printf(G_B"expected:    (0,0,-1,1)\n"RES"");
+	if (equal_tuple(comps.point, ft_tuple(0,0,-1,POINT)))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
+	printf("________________________________________________\n");
+
+	//eyev
+	printf(B_B"comps.eyev: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
+	printf(G_B"expected:   (0,0,-1,0)\n"RES"");
+	if (equal_tuple(comps.eyev, ft_tuple(0,0,-1,VECTOR)))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
+	printf("________________________________________________\n");
+
+	//normalv
+	printf(B_B"comps.normalv: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
+	printf(G_B"expected:      (0,0,-1,0)\n"RES"");
+	if (equal_tuple(comps.normalv, ft_tuple(0,0,-1,VECTOR)))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
+	printf("________________________________________________\n");
+
+//TEST 2
+	//print banners
+	print_test_banner("Hit when intersection occurs on the outside");
+	print_test_number(&i);
+	//inside
+	if (comps.inside == false)
+		printf(GR"✔ comps.inside properly set to FALSE\n"RES);
+	else
+		return(printf(AKA"❌ comps.inside is set to TRUE when it should be FALSE\n"RES));
+
+//TEST 3
+	//print banners
+	print_test_banner("Hit when intersection occurs on the inside");
+	print_test_number(&i);
+	//redefine variables
+	r->origin = ft_tuple(0,0,0,POINT);
+	r->direction = ft_tuple(0,0,1,VECTOR);
+	hit = intersection(1, shape, SPHERE);
+	//run test
+	comps = pre_compute(hit, r);
+	//check & print output
+	//point
+	printf(B_B"comps.point: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.point.x, comps.point.y, comps.point.z, comps.point.w);
+	printf(G_B"expected:    (0,0,1,1)\n"RES"");
+	if (equal_tuple(comps.point, ft_tuple(0,0,1,POINT)))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
+	printf("________________________________________________\n");
+
+	//eyev
+	printf(B_B"comps.eyev: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
+	printf(G_B"expected:   (0,0,-1,0)\n"RES"");
+	if (equal_tuple(comps.eyev, ft_tuple(0,0,-1,VECTOR)))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
+	printf("________________________________________________\n");
+
+	//inside
+	if (comps.inside == true)
+		printf(GR"✔ intersection properly occurs on the inside\n"RES);
+	else
+		return(printf(AKA"❌ intersection incorrectly occurs on the outside\n"RES));
+
+	//normalv
+	printf(B_B"comps.normalv: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
+	printf(G_B"expected:      (0,0,-1,0)\n"RES"");
+	if (equal_tuple(comps.normalv, ft_tuple(0,0,-1,VECTOR)))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
+	printf("________________________________________________\n");
+	return (0);
+}
