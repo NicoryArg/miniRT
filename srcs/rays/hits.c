@@ -49,8 +49,6 @@ double	find_hit(t_hit	**intersections, int count)
 {
 	double	hit;
 
-	// printf("xs[0]: %f\n", intersections[0]->t);
-	// printf("xs[1]: %f\n", intersections[1]->t);
 	sort_intersections(intersections, count);
 	hit = intersections[0]->t;
 	return (hit);

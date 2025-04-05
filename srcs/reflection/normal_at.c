@@ -44,7 +44,20 @@ t_tuple	ft_object_point(t_matrix *inverse, t_tuple world_point)
 	return (object_point);
 }
 
-t_tuple	normal_at(t_sphere *sph, t_tuple world_p)
+t_tuple	normal_at(void *obj, t_tuple world_p)
+{
+	t_tuple		ret;
+
+	if (((t_object *)obj)->type == SPHERE)
+		ret = sph_normal_at((t_sphere *)obj, world_p);
+	// if (((t_object *)obj)->type == CYLINDER)
+	// 	ret = cyl_normal_at((t_cyl *)obj, world_p);
+	// if (((t_object *)obj)->type == PLANE)
+	// 	ret = pl_normal_at((t_pl *)obj, world_p);
+	return (ret);
+}
+
+t_tuple	sph_normal_at(t_sphere *sph, t_tuple world_p)
 {
 	t_tuple		obj_p;
 	t_tuple		obj_normal;
