@@ -73,11 +73,11 @@ void	draw_sphere(t_engine *engine)
 	ctx.sph = ft_sphere(1.0);
 	ctx.sph->centre = ft_tuple(0, 0, 0, POINT); // Centered at origin
 	ctx.sph->m = ft_material();
-	ctx.sph->m->c = ft_colour(1, 0.2, 1);
-	ctx.sph->m->ambient = 0.1;
-	ctx.sph->m->diffuse = 0.9;
-	ctx.sph->m->specular = 0.9;
-	ctx.sph->m->shininess = 200.0;
+	ctx.sph->m.c = ft_colour(1, 0.2, 1);
+	ctx.sph->m.ambient = 0.1;
+	ctx.sph->m.diffuse = 0.9;
+	ctx.sph->m.specular = 0.9;
+	ctx.sph->m.shininess = 200.0;
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
 	//light on the left and above

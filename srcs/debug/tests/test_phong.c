@@ -50,18 +50,17 @@ int	material_test(int run)
 	if (run == 0)
 	return (0);
 	int			i = 1;
-	t_material	*m;
+	t_material	m;
 	t_sphere	*sph;
 
 //TEST 1
 	//print banners
-	print_test_banner("Assign default values to material");
+	print_test_banner("Default value of ft_material");
 	print_test_number(&i);
 	//run test;
 	m = ft_material();
 	//print output
 	print_material(m);
-	free(m);
 
 //TEST 2
 	//print banners
@@ -69,21 +68,12 @@ int	material_test(int run)
 	print_test_number(&i);
 	//initiate variables
 	sph = ft_sphere(1);
-	free(sph->m);//for purpose of test output
-	sph->m = NULL;
 	//print input
 	printf(G_B"Sphere->m:\n"RES);
 	print_material(sph->m);
 	//run test;
-	printf(LILA"Assigning default material to sphere\n"RES);
-	m = sph->m;
-	m = ft_material();
-	//print output
-	printf(G_B"Sphere->m:\n"RES);
-	print_material(m);
 	//free memory
-	free(m);
-	free(sph);
+	free_sphere(sph);
 //TEST 3
 	//print banners
 	print_test_banner("Assign material to sphere");
@@ -91,13 +81,13 @@ int	material_test(int run)
 	//initiate variables
 	sph = ft_sphere(1);
 	m = ft_material();
+	m.ambient = 1;
 	//print run test
 	sph->m = m;
 	//print output
 	printf(G_B"Sphere->m:\n"RES);
 	print_material(sph->m);
-	//free memory
-	free(m);
+	printf(G_B"Expected sphere->m.ambient = 1\n");
 	return (0);
 }
 

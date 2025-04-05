@@ -60,20 +60,42 @@ typedef struct s_matrix
 //#############################################
 //################ OBJECTS ####################
 //#############################################
-typedef enum e_obj_shape
+typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
 	PLANE,
 }	t_obj;
 
+typedef struct s_colour
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_colour;
+
+typedef struct s_material
+{
+	t_colour	c;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+}	t_material;
+
+typedef struct s_object
+{
+	t_obj		type;
+}	t_object;
+
 typedef struct s_sphere
 {
+	t_object	base;
 	t_tuple		centre;
 	double		radius;
 	int			id;
 	t_matrix	*transf;
-	t_material	*m;
+	t_material	m;
 }	t_sphere;
 
 
@@ -105,16 +127,9 @@ typedef struct s_intersection
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
 
-typedef struct s_colour
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_colour;
-
 typedef struct s_shading
 {
-	t_material	*m;
+	t_material	m;
 	t_light		*l;
 	t_tuple		point;
 	t_tuple		eyev;
@@ -135,21 +150,11 @@ typedef struct s_phong
 	double		factor;
 }	t_phong;
 
-
 typedef struct s_light
 {
 	t_tuple		pos;
 	t_colour	lum;
 }	t_light;
-
-typedef struct s_material
-{
-	t_colour	c;
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-}	t_material;
 
 typedef struct s_computations
 {
@@ -265,7 +270,7 @@ t_ray		*transform(t_ray *r, t_matrix *mtx);
 //############### REFLECTION ##################
 //#############################################
 //ft_material.c
-t_material	*ft_material(void);
+t_material	ft_material(void);
 
 //ft_reflect.c
 /**
