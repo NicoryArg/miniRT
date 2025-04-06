@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/05 13:08:00 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:47:35 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ void	print_matrix(t_matrix *matrix)
 	int		j;
 
 	i = 0;
+	if (!matrix)
+	{
+		printf(YEL"Matrix is Null\n");
+		return;
+	}
 	if (matrix->cols == 4)
 		printf(" -----------------------------------\n");
 	while (i < matrix->rows)
@@ -118,7 +123,7 @@ void	print_matrix(t_matrix *matrix)
 		printf("\n");
 		i++;
 	}
-	if (matrix->rows == 4)
+	if (matrix->cols == 4)
 		printf(" -----------------------------------\n");
 }
 
