@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 18:33:07 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 18:33:07 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/07 17:52:10 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/07 17:52:10 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	ft_main_engine(void)
 int	main()
 {
 	print_test_banner("RUNNING ALL TESTS");
-	if (ft_main_tuples())
-		return (-1);
+	// if (ft_main_tuples())
+	// 	return (-1);
 	// ft_main_transform();
 	// ft_main_rays();
 	// ft_main_phong();
-	// ft_main_world();
-	//ft_main_engine();
+	ft_main_world();
+	ft_main_engine();
 	printf(R_B"END OF ALL TESTS\n"RES);
 	return (0);
 }

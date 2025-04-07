@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 18:31:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 18:31:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/07 17:48:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/07 17:48:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef struct s_computations
 
 typedef struct s_world
 {
-	t_sphere	**objects;
+	void	**objects;
 	int			object_count;
 	t_light		*light;
 }	t_world;
