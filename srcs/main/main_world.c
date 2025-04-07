@@ -14,11 +14,11 @@
 
 int	ft_main_world(void)
 {
-	if (world_test(1))
+	if (world_test(0))
 		printf("Error: world_test failed\n");
-	if (default_world_test(1))
+	if (default_world_test(0))
 		printf(AKA"Error: default_world_test failed\n"RES);
-	if (intersect_world_test(1))
+	if (intersect_world_test(0))
 		printf(AKA"Error: intersect_world_test failed\n"RES);
 	if (ft_pre_compute_test(1))
 		printf(R_B"ft_pre_compute_test failed\n"RES);

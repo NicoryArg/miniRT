@@ -86,6 +86,7 @@ typedef struct s_material
 typedef struct s_object
 {
 	t_obj		type;
+	t_matrix	*transf;
 }	t_object;
 
 typedef struct s_sphere
