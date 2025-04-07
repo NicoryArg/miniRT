@@ -44,7 +44,6 @@ void	free_sphere(t_sphere *sphere)
 	if (!sphere)
 		return ;
 	free_matrix(sphere->transf);
-	free(sphere->m);
 	free(sphere);
 }
 

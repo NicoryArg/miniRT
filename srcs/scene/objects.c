@@ -25,6 +25,7 @@ t_sphere	*ft_sphere(double radius)
 		printf(R_B"Error:"RES" failed to allocate memory for sphere.\n");
 		exit(1);
 	}
+	sphere->base.type = SPHERE;
 	sphere->id = id++;
 	sphere->centre = ft_tuple(0, 0, 0, POINT);
 	sphere->radius = radius;

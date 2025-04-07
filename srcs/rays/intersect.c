@@ -30,30 +30,26 @@ t_inters	*init_intersections(int initial_capacity)
 	return (xs);
 }
 
-t_inters	*intersect(void *obj, t_ray *ray, t_obj type)
+t_inters	*intersect(void *obj, t_ray *ray)
 {
 	t_inters	*xs;
 	t_ray		*r2;
 	t_matrix	*inv;
-	t_inters	*result;
 
 	xs = init_intersections(256);
 	if (!xs)
 		return (NULL);
-	if (type == SPHERE)
-	{
-		inv = invert_matrix(((t_sphere *)obj)->transf);
-		r2 = transform(ray, inv);
-		free_matrix(inv);
-		result = intersect_sph((t_sphere *)obj, r2, xs);
-		free_ray(r2);
-		return (result);
-	}
-	// else if (type == CYLINDER)
-	// 	return (intersect_cyl((t_cyl *)obj, ray));
-	// else if (type == PLANE)
-	// 	return (intersect_pl((t_pl *)obj, ray));
-	return (NULL);
+	inv = invert_matrix(((t_sphere *)obj)->transf);
+	r2 = transform(ray, inv);
+	free_matrix(inv);
+	if (((t_object *)obj)->type == SPHERE)
+		xs = intersect_sph((t_sphere *)obj, r2, xs);
+	// else if (((t_object *)obj)->type == CYLINDER)
+	//  	xs = intersect_cyl((t_cyl *)obj, r2, xs);
+	// else if (((t_object *)obj)->type == PLANE)
+	// 	xs = intersect_pl((t_pl *)obj, r2, xs);
+	free_ray(r2);
+	return (xs);
 }
 
 t_hit	*intersection(double t, void *object, t_obj type)
@@ -63,7 +59,7 @@ t_hit	*intersection(double t, void *object, t_obj type)
 	hit = malloc(sizeof(t_hit));
 	if (!hit)
 		malloc_err("intersection");
-	hit->object = object;
+	hit->obj = object;
 	hit->t = t;
 	hit->type = type;
 	return (hit);

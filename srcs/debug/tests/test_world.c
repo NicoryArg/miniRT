@@ -78,10 +78,10 @@ int	default_world_test(int run)
 		printf(AKA"❌ World object count is incorrect\n"RES);
 	// Check first sphere's material
 	s1 = w->objects[0];
-	printf("First sphere material color: (%.1f, %.1f, %.1f)\n", s1->m->c.r, s1->m->c.g, s1->m->c.b);
-	printf("Diffuse: %.1f | Specular: %.1f\n", s1->m->diffuse, s1->m->specular);
-	if (ft_equal(s1->m->c.r, 0.8) && ft_equal(s1->m->c.g, 1.0) && ft_equal(s1->m->c.b, 0.6) &&
-		ft_equal(s1->m->diffuse, 0.7) && ft_equal(s1->m->specular, 0.2))
+	printf("First sphere material color: (%.1f, %.1f, %.1f)\n", s1->m.c.r, s1->m.c.g, s1->m.c.b);
+	printf("Diffuse: %.1f | Specular: %.1f\n", s1->m.diffuse, s1->m.specular);
+	if (ft_equal(s1->m.c.r, 0.8) && ft_equal(s1->m.c.g, 1.0) && ft_equal(s1->m.c.b, 0.6) &&
+		ft_equal(s1->m.diffuse, 0.7) && ft_equal(s1->m.specular, 0.2))
 		printf(G_B"✔ First sphere material matches expected values\n"RES);
 	else
 		printf(AKA"❌ First sphere material does not match expected values\n"RES);
@@ -165,9 +165,9 @@ int	ft_pre_compute_test(int run)
 	printf("________________________________________________\n");
 
 	//object
-	printf(B_B"comps.object:   %p\n"RES"", comps.s);
-	printf(G_B"expected: \t%p\n"RES"", hit->object);
-	if (comps.s == hit->object)
+	printf(B_B"comps.object:   %p\n"RES"", comps.obj);
+	printf(G_B"expected: \t%p\n"RES"", hit->obj);
+	if (comps.obj == hit->obj)
 		printf(GR"✔ values match\n"RES);
 	else
 		return(printf(AKA"❌ values don't match\n"RES));

@@ -60,20 +60,42 @@ typedef struct s_matrix
 //#############################################
 //################ OBJECTS ####################
 //#############################################
-typedef enum e_obj_shape
+typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
 	PLANE,
 }	t_obj;
 
+typedef struct s_colour
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_colour;
+
+typedef struct s_material
+{
+	t_colour	c;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+}	t_material;
+
+typedef struct s_object
+{
+	t_obj		type;
+}	t_object;
+
 typedef struct s_sphere
 {
+	t_object	base;
 	t_tuple		centre;
 	double		radius;
 	int			id;
 	t_matrix	*transf;
-	t_material	*m;
+	t_material	m;
 }	t_sphere;
 
 
@@ -90,7 +112,7 @@ typedef struct s_ray
 typedef struct s_hit
 {
 	double	t;
-	t_sphere	*object;
+	void	*obj;
 	t_obj	type;
 }	t_hit;
 
@@ -105,16 +127,9 @@ typedef struct s_intersection
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
 
-typedef struct s_colour
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_colour;
-
 typedef struct s_shading
 {
-	t_material	*m;
+	t_material	m;
 	t_light		*l;
 	t_tuple		point;
 	t_tuple		eyev;
@@ -135,27 +150,17 @@ typedef struct s_phong
 	double		factor;
 }	t_phong;
 
-
 typedef struct s_light
 {
 	t_tuple		pos;
 	t_colour	lum;
 }	t_light;
 
-typedef struct s_material
-{
-	t_colour	c;
-	double		ambient;
-	double		diffuse;
-	double		specular;
-	double		shininess;
-}	t_material;
-
 typedef struct s_computations
 {
 	bool		inside;
 	double		t;
-	t_sphere	*s;
+	void		*obj;
 	t_tuple		point;
 	t_tuple		eyev;
 	t_tuple		normalv;
@@ -240,7 +245,7 @@ double		find_hit(t_hit	**intersections, int count);
 
 //intersect.c
 t_inters	*init_intersections(int initial_capacity);
-t_inters	*intersect(void *obj, t_ray *ray, t_obj type);
+t_inters	*intersect(void *obj, t_ray *ray);
 t_hit		*intersection(double t, void *object, t_obj type);
 
 //ray_sphere.c
@@ -265,7 +270,7 @@ t_ray		*transform(t_ray *r, t_matrix *mtx);
 //############### REFLECTION ##################
 //#############################################
 //ft_material.c
-t_material	*ft_material(void);
+t_material	ft_material(void);
 
 //ft_reflect.c
 /**
@@ -280,7 +285,9 @@ t_colour	ft_shading(t_shading L);
 //normal_at.c
 t_tuple		ft_world_normal(t_matrix *inverse, t_tuple obj_normal);
 t_tuple		ft_object_point(t_matrix *inverse, t_tuple world_point);
-t_tuple		normal_at(t_sphere *sph, t_tuple world_p);
+t_tuple		normal_at(void *obj, t_tuple world_p);
+t_tuple		sph_normal_at(t_sphere *sph, t_tuple world_p);
+
 
 //pre_compute.c
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
