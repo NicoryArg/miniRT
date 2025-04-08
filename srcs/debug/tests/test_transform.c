@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/08 14:16:16 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:20:19 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,27 +154,51 @@ static int	rotate_z_test()
 	t_tuple		point = ft_tuple(0, 1, 0, POINT);
 	t_matrix	*p = tuple_to_matrix(point);
 	t_matrix	*result = NULL;
+	t_tuple		expected;
 
-	if (!half_quarter || !full_quarter || !p)
-	{
-		printf("Error: one or more arguments are NULL\n");
-		return (1);
-	}
+//TEST 1
+	//print banners
 	print_test_banner("Z ROTATION");
+	print_test_banner("[Z] Rotating a point half a quarter\n");
 	print_test_number(&i);
-	printf("Rotating a point half a quarter around the z-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
+	//initiate variables
+	expected = ft_tuple(-sqrt(2) / 2, sqrt(2) / 2, 0, POINT);
+	//run test
 	result = multiply_matrices(half_quarter, p);
-	printf(GR"RESULT:\n"RES);
+	//print output
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(result, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 2
+	//print banners
+	print_test_banner("[Z] Rotating a point full quarter\n");
 	print_test_number(&i);
-	printf("Rotating a point full quarter around the z-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
+	//initiate variables
+	free_matrix(result);
+	expected = ft_tuple(-1, 0, 0, POINT);
+	//run test
 	result = multiply_matrices(full_quarter, p);
-	printf(GR"RESULT:\n"RES);
+	//print output
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(result, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	//free resources
+	free_matrix(p);
+	free_matrix(result);
+	free_matrix(half_quarter);
+	free_matrix(full_quarter);
 	return (0);
 }
 
