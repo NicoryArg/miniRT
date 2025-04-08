@@ -46,14 +46,16 @@ int	ft_main_engine(void)
 int	main()
 {
 	// print_test_banner("RUNNING ALL TESTS");
-	// if (ft_main_tuples(0))
-		// return (-1);
-	// ft_main_transform();
-	// ft_main_rays();
+	if (ft_main_tuples(0)) //1 to run , 0 to skip
+		return (-1);
+	if (ft_main_transform(0)) //1 to run , 0 to skip
+		return (-1);
+	if (ft_main_rays(0)) //1 to run, 0 to skip
+		return (-1);
 	// ft_main_phong();
 	// ft_main_world();
 	// ft_main_engine();
-	printf(R_B"END OF ALL TESTS\n"RES);
+	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);
 }
 

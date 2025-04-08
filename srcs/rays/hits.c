@@ -41,7 +41,7 @@ double	find_visible_hit(t_hit **hits, int count)
 		i++;
 	if (i < count)
 		return (hits[i]->t);
-	return (-1);
+	return (-999);//no hit
 }
 
 

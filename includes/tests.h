@@ -86,8 +86,8 @@ int		ft_pre_compute_test(int run);
 
 //main tests (used to run all tests at once)
 int		ft_main_tuples(int run);
-int		ft_main_transform(void);
-int		ft_main_rays();
+int		ft_main_transform(int run);
+int		ft_main_rays(int run);
 int		ft_main_phong(void);
 int		ft_main_world(void);
 
