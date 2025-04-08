@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 15:10:34 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:13:08 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,43 +165,82 @@ int	translate_test(int run)
 		return (0);
 	int	i = 1;
 	t_matrix	*transform = translate(5, -3, 2);
-	t_matrix	*inverse = invert_matrix(transform);
+	t_matrix	*inverse;
 	t_matrix	*result = NULL;
 	t_tuple		point = ft_tuple(-3, 4, 5, POINT);
 	t_tuple		vector = ft_tuple(-3, 4, 5, VECTOR);
 	t_matrix	*p = tuple_to_matrix(point);
+	t_matrix	*expected_p = create_matrix(4, 1, 0);
+	t_matrix	*v;
+	t_matrix	*expected_v = create_matrix(4, 1, 0);
 
-	if (!transform || !inverse)
-	{
-		printf("Error: one or more arguments are NULL\n");
-		return (1);
-	}
+//TEST 1
+	//print banners
 	print_test_banner("TRANSLATION");
 	print_test_number(&i);
+	//initiate variables
+	expected_p->values[0][0] = 2;
+	expected_p->values[1][0] = 1;
+	expected_p->values[2][0] = 7;
+	expected_p->values[3][0] = 1;
+	//run test
+	result = multiply_matrices(transform, p);
+	//print output
 	printf("Multiplying `p` by translation matrix\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(transform, p);
-	printf(GR"RESULT:\n"RES);
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
-	free_matrix(p);
-	p = result;
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(expected_p);
+	//check output
+	if (equal_matrix(result, expected_p))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 2
+	//print banner
 	print_test_number(&i);
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
+	//redfine variables
+	inverse = invert_matrix(transform);
+	//run test
+	result = multiply_matrices(inverse, result);
+	//print output
 	printf("multiplying by inverse matrix:\n");
-	result = multiply_matrices(inverse, p);
-	printf(GR"RESULT:\n"RES);
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
-	free_matrix(result);
-	print_test_number(&i);
-	p = tuple_to_matrix(vector);
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
+	printf(GR"EXPECTED:\n"RES);
 	print_matrix(p);
+	//check output
+	if (equal_matrix(result, p))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	//free resources
+	free_matrix(result);
+	free_matrix(p);
+	free_matrix(expected_p);
+//TEST 3
+	//print banners
+	print_test_number(&i);
+	//initiate variables
+	v = tuple_to_matrix(vector);
+	expected_v->values[0][0] = -3;
+	expected_v->values[1][0] = 4;
+	expected_v->values[2][0] = 5;
+	expected_v->values[3][0] = 0;
+	//run test
+	result = multiply_matrices(transform, v);
+	//print ou tput
 	printf("Multiplying vector by tranlation matrix:\n");
-	result = multiply_matrices(transform, p);
-	printf(GR"RESULT:\n"RES);
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(expected_v);
+	//check output
+	if (equal_matrix(result, expected_v))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	//free resources
 	free_matrix(transform);
 	free_matrix(inverse);
 	return (0);
