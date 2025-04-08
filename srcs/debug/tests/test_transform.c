@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/08 14:20:19 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:31:31 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -446,35 +446,70 @@ int	scale_test(int run)
 int	chained_test(int run)
 {
 	if (run == 0)
-	return (0);
+		return (0);
+	//define variables
 	int	i = 1;
 	t_matrix	*p = tuple_to_matrix(ft_tuple(1, 0, 1, POINT));
 	t_matrix	*A = rotate_x(M_PI/2);
 	t_matrix	*B = scale(5, 5, 5);
 	t_matrix	*C = translate(10, 5, 7);
+	t_tuple		expected = ft_tuple(15, 0, 7, POINT);
 
+//TEST 1
+	//print banners
 	print_test_banner("CHAINED");
+	print_test_banner("Applying transformations one by one\n");
 	print_test_number(&i);
-	printf("Applying transformations one by one\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
+	//run test
+	printf(B_B"STARTING POINT:\n"RES);
 	print_matrix(p);
-	printf(GR"rotating..\n"RES);
+	printf(B_B"rotating..\n"RES);
 	t_matrix	*p2 = multiply_matrices(A, p);
 	print_matrix(p2);
-	printf(GR"scaling..\n"RES);
+	printf(B_B"scaling..\n"RES);
 	t_matrix	*p3 = multiply_matrices(B, p2);
 	print_matrix(p3);
-	printf(GR"translating..\n"RES);
+	printf(B_B"translating..\n"RES);
+	printf(B_B"FINAL RESULT:\n"RES);
 	t_matrix	*p4 = multiply_matrices(C, p3);
 	print_matrix(p4);
+	//print output
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(p4, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 2
+	//print banners
+	print_test_banner("Chaining transformations in one\n");
 	print_test_number(&i);
-	printf("Chaining transformations in one\n");
-	t_matrix	*T = multiply_matrices(C, B);
-	T = multiply_matrices(T, A);
-	printf("T Matrix:\n");
-	print_matrix(T);
-	printf("applying T matrix to p\n");
-	p = multiply_matrices(T, p);
+	//initiate variables
+	t_matrix	*chained = multiply_matrices(C, multiply_matrices(B, A));
+	//run test
+	p = multiply_matrices(chained, p);
+	//print output
+	printf("Chained Matrix:\n");
+	print_matrix(chained);
+	printf("applying chained matrix to p..\n");
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(p);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(p, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	//free resources
+	free_matrix(p);
+	free_matrix(p2);
+	free_matrix(p3);
+	free_matrix(p4);
+	free_matrix(chained);
+	free_matrix(A);
+	free_matrix(B);
+	free_matrix(C);
 	return (0);
 }
