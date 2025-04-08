@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 17:23:55 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/08 13:40:44 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:15:10 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_main_transform(void)
 		printf("Error: translate_test failed\n");
 	if (scale_test(0))	//1 to run, 0 to skip
 		printf("Error: scale_test failed\n");
-	if (rotate_test(1, 0, 0)) //1 to run, 0 to skip
+	if (rotate_test(0, 1, 0)) //1 to run, 0 to skip
 		printf("Error: rotate_test failed\n");
 	if (chained_test(0))
 		printf("Error: chained_test failed\n");
