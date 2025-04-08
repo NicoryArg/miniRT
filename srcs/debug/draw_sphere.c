@@ -13,7 +13,7 @@
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-static int	compute_color(t_sphere *sph, t_ray *ray, t_light *l)
+static int	compute_color(void *sph, t_ray *ray, t_light *l)
 {
 	t_inters	*xs;
 	double		t;
@@ -26,7 +26,7 @@ static int	compute_color(t_sphere *sph, t_ray *ray, t_light *l)
 	if (t >= 0)
 	{
 		pt = get_point(ray, t);
-		shad.m = sph->m;
+		shad.m = ((t_object *)sph)->m;
 		shad.l = l;
 		shad.point = pt;
 		shad.eyev = ft_negate(ray->direction);
@@ -72,12 +72,12 @@ void	draw_sphere(t_engine *engine)
 	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
 	ctx.sph = ft_sphere(1.0);
 	ctx.sph->centre = ft_tuple(0, 0, 0, POINT); // Centered at origin
-	ctx.sph->m = ft_material();
-	ctx.sph->m.c = ft_colour(1, 0.2, 1);
-	ctx.sph->m.ambient = 0.1;
-	ctx.sph->m.diffuse = 0.9;
-	ctx.sph->m.specular = 0.9;
-	ctx.sph->m.shininess = 200.0;
+	ctx.sph->base.m = ft_material();
+	ctx.sph->base.m.c = ft_colour(1, 0.2, 1);
+	ctx.sph->base.m.ambient = 0.1;
+	ctx.sph->base.m.diffuse = 0.9;
+	ctx.sph->base.m.specular = 0.9;
+	ctx.sph->base.m.shininess = 200.0;
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
 	//light on the left and above

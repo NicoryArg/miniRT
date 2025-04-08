@@ -66,7 +66,7 @@ t_tuple	sph_normal_at(t_sphere *sph, t_tuple world_p)
 	t_tuple		world_normal;
 
 	tuple = ft_tuple(0, 0, 0, POINT);
-	inverse = invert_matrix(sph->transf);
+	inverse = invert_matrix(sph->base.transf);
 	obj_p = ft_object_point(inverse, world_p);
 	obj_normal = diff_tuple(obj_p, tuple);
 	world_normal = ft_world_normal(inverse, obj_normal);

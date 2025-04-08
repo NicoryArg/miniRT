@@ -351,7 +351,7 @@ int	ray_transform_test2(int run)
 	s = ft_sphere(1);
 	//print output
 	printf(LILA"s->transf:\n"RES);
-	print_matrix(s->transf);
+	print_matrix(s->base.transf);
 
 //TEST 2
 	print_test_banner("Changing a sphere's transf (translation)");
@@ -360,13 +360,13 @@ int	ray_transform_test2(int run)
 	t = translate(2, 3, 4);
 	//print input
 	printf(LILA"s->transf BEFORE:\n"RES);
-	print_matrix(s->transf);
+	print_matrix(s->base.transf);
 	printf("\n");
 	//run test
-	set_transf(s, t, SPHERE);
+	set_transf(s, t);
 	//print output
 	printf(GR"s->transf AFTER:\n"RES);
-	print_matrix(s->transf);
+	print_matrix(s->base.transf);
 
 //TEST 3
 	print_test_banner("Intersecting a scaled sphere with a ray");
@@ -377,7 +377,7 @@ int	ray_transform_test2(int run)
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	t = scale(2, 2 ,2);
 	//run tests
-	set_transf(s, t, SPHERE);
+	set_transf(s, t);
 	xs = intersect(s, r);
 	//print output
 	if (xs->count == 0)
@@ -403,7 +403,7 @@ int	ray_transform_test2(int run)
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	t = translate(5, 0 ,0);
 	//run tests
-	set_transf(s, t, SPHERE);
+	set_transf(s, t);
 	xs = intersect(s, r);
 	//print output
 	if (xs->count == 0)

@@ -39,7 +39,7 @@ t_inters	*intersect(void *obj, t_ray *ray)
 	xs = init_intersections(256);
 	if (!xs)
 		return (NULL);
-	inv = invert_matrix(((t_sphere *)obj)->transf);
+	inv = invert_matrix(((t_object *)obj)->transf);
 	r2 = transform(ray, inv);
 	free_matrix(inv);
 	if (((t_object *)obj)->type == SPHERE)

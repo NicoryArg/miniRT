@@ -87,6 +87,7 @@ typedef struct s_object
 {
 	t_obj		type;
 	t_matrix	*transf;
+	t_material	m;
 }	t_object;
 
 typedef struct s_sphere
@@ -95,8 +96,8 @@ typedef struct s_sphere
 	t_tuple		centre;
 	double		radius;
 	int			id;
-	t_matrix	*transf;
-	t_material	m;
+	// t_matrix	*transf;
+	// t_material	m;
 }	t_sphere;
 
 
@@ -264,7 +265,7 @@ t_ray		*ft_ray(t_tuple origin, t_tuple direction);
 t_tuple		get_point(t_ray *ray, double t);
 
 //transform.c
-void		set_transf(void *obj, t_matrix *trans, t_obj type);
+void		set_transf(void *obj, t_matrix *trans);
 t_ray		*transform(t_ray *r, t_matrix *mtx);
 
 //#############################################
