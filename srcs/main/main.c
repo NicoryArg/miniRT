@@ -48,7 +48,7 @@ int	main()
 	// print_test_banner("RUNNING ALL TESTS");
 	// if (ft_main_tuples(0))
 		// return (-1);
-	ft_main_transform();
+	// ft_main_transform();
 	// ft_main_rays();
 	// ft_main_phong();
 	// ft_main_world();
