@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/08 13:13:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:53:19 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,69 @@ static int	rotate_x_test()
 	t_matrix	*full_quarter = rotate_x(M_PI / 2);
 	t_matrix	*inverse = invert_matrix(half_quarter);
 	t_tuple		point = ft_tuple(0, 1, 0, POINT);
-	t_matrix	*p = tuple_to_matrix(point);
+	t_matrix	*p;
 	t_matrix	*result = NULL;
+	t_tuple		expected;
 
-	if (!half_quarter || !full_quarter || !p)
-	{
-		printf("Error: one or more arguments are NULL\n");
-		return (1);
-	}
+//TEST 1
+	//print banners
 	print_test_banner("X ROTATION");
+	print_test_banner("Rotating a point half a quarter around the x-axis\n");
 	print_test_number(&i);
-	printf("Rotating a point half a quarter around the x-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
+	//initiate variables
+	p = tuple_to_matrix(point);
+	expected = ft_tuple(0, sqrt(2) / 2, sqrt(2) / 2, POINT);
+	//run test
 	result = multiply_matrices(half_quarter, p);
-	printf(GR"RESULT:\n"RES);
+	//print output
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(result, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 2
+	//print banners
+	print_test_banner("Rotating a point full quarter around the x-axis\n");
 	print_test_number(&i);
-	printf("Rotating a point full quarter around the x-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
+	//initiate variables
+	free_matrix(result);
+	expected = ft_tuple(0, 0, 1, POINT);
+	//run test
 	result = multiply_matrices(full_quarter, p);
-	printf(GR"RESULT:\n"RES);
+	//print output
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(result, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 3
+	//print banners
+	print_test_banner(R_B"[INVERSE]"B_B" Rotating a point half a quarter\n");
 	print_test_number(&i);
-	printf(R_B"[INVERSE]"RES" Rotating a point half a quarter around the x-axis\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
+	//initiate variables
+	free_matrix(result);
+	expected = ft_tuple(0, sqrt(2) / 2, -(sqrt(2) / 2), POINT);
+	//run test
 	result = multiply_matrices(inverse, p);
-	printf(GR"RESULT:\n"RES);
+	//print output
+	printf(B_B"RESULT:\n"RES);
 	print_matrix(result);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected));
+	//check output
+	if (equal_matrix(result, tuple_to_matrix(expected)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	//free resources
 	free_matrix(p);
 	free_matrix(result);
 	free_matrix(half_quarter);
@@ -252,55 +285,104 @@ int	scale_test(int run)
 	if (run == 0)
 		return (0);
 	int	i = 1;
+	t_tuple		point;
+	t_tuple		vector;
+
 	t_matrix	*transform = scale(2, 3, 4);
 	t_matrix	*inverse = invert_matrix(transform);
-	t_matrix	*result = NULL;
-	t_tuple		point = ft_tuple(-4, 6, 8, POINT);
-	t_tuple		vector = ft_tuple(-4, 6, 8, VECTOR);
-	t_matrix	*p = tuple_to_matrix(point);
-	t_matrix	*v = tuple_to_matrix(vector);
 
-	if (!transform || !inverse || !p || !v)
-	{
-		printf("Error: one or more arguments are NULL\n");
-		return (1);
-	}
+	t_matrix	*result_p = NULL;
+	t_matrix	*result_v = NULL;
+
+//TEST 1
+	//print banners
 	print_test_banner("SCALE");
+	print_test_banner("Multiplying a POINT by scaling matrix\n");
 	print_test_number(&i);
-	printf("Multiplying a POINT by scaling matrix\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(p);
-	result = multiply_matrices(transform, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
+	//initiate variables
+	point = ft_tuple(-4, 6, 8, POINT);
+	t_matrix	*p = tuple_to_matrix(point);
+	t_tuple		expected_p = ft_tuple(-8,18,32,POINT);
+	//run test
+	result_p = multiply_matrices(transform, p);
+	//print output
+	printf(B_B"RESULT:\n"RES);
+	print_matrix(result_p);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected_p));
+	//check output
+	if (equal_matrix(result_p, tuple_to_matrix(expected_p)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 2
+	//print banners
+	print_test_banner("Multiplying a VECTOR by scaling matrix\n");
 	print_test_number(&i);
-	printf("Multiplying a VECTOR by scaling matrix\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(v);
-	result = multiply_matrices(transform, v);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
+	//initiate variables
+	vector = ft_tuple(-4, 6, 8, VECTOR);
+	t_matrix	*v = tuple_to_matrix(vector);
+	t_tuple		expected_v = ft_tuple(-8,18,32,VECTOR);
+	//run test
+	result_v = multiply_matrices(transform, v);
+	//print output
+	printf(B_B"RESULT:\n"RES);
+	print_matrix(result_v);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected_v));
+	//check output
+	if (equal_matrix(result_v, tuple_to_matrix(expected_v)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 3
+	//print banners
+	print_test_banner("Multiplying a VECTOR by inverse scaling matrix\n");
 	print_test_number(&i);
-	printf("Multiplying a VECTOR by inverse scaling matrix\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
-	print_matrix(v);
-	result = multiply_matrices(inverse, v);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
+	//initiate variables
+	free_matrix(result_v);
+	expected_v = ft_tuple(-2, 2, 2, VECTOR);
+	//run test
+	result_v = multiply_matrices(inverse, v);
+	//print output
+	printf(B_B"RESULT:\n"RES);
+	print_matrix(result_v);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected_v));
+	//check output
+	if (equal_matrix(result_v, tuple_to_matrix(expected_v)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+//TEST 4
+	//print banners
+	print_test_banner("Reflection is scaling a POINT by a negative value\n");
 	print_test_number(&i);
-	printf("Reflection is scaling a POINT by a negative value\n");
-	printf(GR"CURRENT TUPPLE MATRIX:\n"RES);
+	//initiate variables
 	free_matrix(transform);
-	//adapt values to match example in book
+	free_matrix(result_p);
+	free_matrix(p);
+	transform = scale(-1, 1, 1);
 	point = ft_tuple(2, 3, 4, POINT);
 	p = tuple_to_matrix(point);
-	print_matrix(p);
-	transform = scale(-1, 1, 1);
-	result = multiply_matrices(transform, p);
-	printf(GR"RESULT:\n"RES);
-	print_matrix(result);
+	expected_p = ft_tuple(-2, 3, 4, POINT);
+	//run test
+	result_p = multiply_matrices(transform, p);
+	//print output
+	printf(B_B"RESULT:\n"RES);
+	print_matrix(result_p);
+	printf(GR"EXPECTED:\n"RES);
+	print_matrix(tuple_to_matrix(expected_p));
+	//check output
+	if (equal_matrix(result_p, tuple_to_matrix(expected_p)))
+		printf(GR"✔ values match\n"RES);
+	else
+		return(printf(AKA"❌ values don't match\n"RES));
+	//free resources
 	free_matrix(p);
 	free_matrix(v);
+	free_matrix(result_p);
+	free_matrix(result_v);
 	free_matrix(transform);
 	free_matrix(inverse);
 	return (0);
