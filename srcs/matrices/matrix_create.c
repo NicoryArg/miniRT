@@ -12,6 +12,18 @@
 
 #include "../../includes/minirt.h"
 
+static void	zero_matrix_row(double *row, int cols)
+{
+	int	i;
+
+	i = 0;
+	while (i < cols)
+	{
+		row[i] = 0.0;
+		i++;
+	}
+}
+
 t_matrix	*create_matrix(int rows, int cols, int is_tuple)
 {
 	t_matrix	*matrix;
@@ -33,30 +45,11 @@ t_matrix	*create_matrix(int rows, int cols, int is_tuple)
 		matrix->values[i] = (double *)malloc(cols * sizeof(double));
 		if (!matrix->values[i])
 			exit(1);
+		zero_matrix_row(matrix->values[i], cols);
 		i++;
 	}
 	return (matrix);
 }
-
-// void	fill_matrix(t_matrix *matrix)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	printf("Enter %d values for the %dx%d matrix:\n",
-// 		matrix->rows * matrix->cols, matrix->rows, matrix->cols);
-// 	i = 0;
-// 	while (i < matrix->rows)
-// 	{
-// 		j = 0;
-// 		while (j < matrix->cols)
-// 		{
-// 			scanf("%lf", &matrix->values[i][j]);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
 
 t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
 {

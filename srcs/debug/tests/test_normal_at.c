@@ -19,6 +19,8 @@ int	normal_at_test(int run)
 	t_sphere	*s;
 	t_tuple		world_point;
 	t_tuple		normal;
+	t_tuple		expected;
+	t_matrix	*transf;
 	int			i = 1;
 
 
@@ -28,27 +30,40 @@ int	normal_at_test(int run)
 	print_test_number(&i);
 	//initiate variables
 	s = ft_sphere(1);
-	set_transf(s, translate(0, 1, 0));
+	transf = translate(0, 1, 0);
+	set_transf(s, transf);
 	world_point = ft_tuple(0, 1.70711, -0.707111, POINT);
+	expected = ft_tuple(0, 0.70711, -0.707111, VECTOR);
 	//run test
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
-	print_normal(normal, 0, 1.70711, -0.707111);
+	print_normal(normal, expected);
+	//check output
+	if (equal_tuple(normal, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
 
 //TEST 2
 	//print banners
 	print_test_banner("normal on a transformed sphere");
 	print_test_number(&i);
 	//initiate variables
-	set_transf(s, multiply_matrices(scale(1, 0.5, 1), rotate_z(M_PI/5)));
+	transf = multiply_matrices(scale(1, 0.5, 1), rotate_z(M_PI/5));
+	set_transf(s, transf);
 	world_point = ft_tuple(0, sqrt(2)/2, -(sqrt(2)/2), POINT);
+	expected = ft_tuple(0, 0.97014, -0.24254, VECTOR);
 	//run test
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
-	print_normal(normal, 0, sqrt(2)/2, -(sqrt(2)/2));
+	print_normal(normal, expected);
+	//check output
+	if (equal_tuple(normal, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
 	//free all unused variables hereafter
-	free_matrix(s->base.transf);
-	free(s);
+	free_sphere(s);
 
 //define new variables for reflection tests
 	t_tuple	v;
@@ -62,10 +77,16 @@ int	normal_at_test(int run)
 	//initiate variables
 	v = ft_tuple(1, -1, 0, VECTOR);
 	n = ft_tuple(0, 1, 0, VECTOR);
+	expected = ft_tuple(1, 1, 0, VECTOR);
 	//run test
 	r = ft_reflect(v, n);
 	//print ouput
-	print_tuple(r, "reflected");
+	print_reflected(r, expected);
+	//check output
+	if (equal_tuple(r, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
 
 //TEST 4
 	//print_banners
@@ -74,10 +95,16 @@ int	normal_at_test(int run)
 	//initiate variables
 	v = ft_tuple(0, -1, 0, VECTOR);
 	n = ft_tuple(sqrt(2)/2, sqrt(2)/2, 0, VECTOR);
+	expected = ft_tuple(1, 0, 0, VECTOR);
 	//run test
 	r = ft_reflect(v, n);
 	//print ouput
-	print_tuple(r, "reflected");
+	print_reflected(r, expected);
+	//check output
+	if (equal_tuple(r, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return(printf(AKA"❌ tuples don't match\n"RES));
 	return (0);
 }
 

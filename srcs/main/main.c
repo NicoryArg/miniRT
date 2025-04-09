@@ -52,8 +52,8 @@ int	main()
 		return (-1);
 	if (ft_main_rays(0)) //1 to run, 0 to skip
 		return (-1);
-
-	// ft_main_phong();
+	if (ft_main_phong(0)) //1 to run, 0 to skip
+		return (-1);
 	if (ft_main_world(1)) //1 to run, 0 to skip
 		return (-1);
 	// ft_main_engine();
