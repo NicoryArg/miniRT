@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:50:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/06 11:52:30 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:42:11 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 // 	return (0);
 // }
 
-int	ft_main_tuples(void)
+int	ft_main_tuples(int run)
 {
+	if (run == 0)
+		return (0);
 	if (t_tuple_to_matrix(1))
 		return(printf(R_B"❌ tuple_to_matrix test failed\n"RES));
 	if (t_matrix_to_tuple(1))

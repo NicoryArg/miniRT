@@ -35,11 +35,11 @@ t_world	*default_world(void)
 	w = ft_world();
 	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
 	s1 = ft_sphere(1);
-	s1->m.c = ft_colour(0.8, 1.0, 0.6);
-	s1->m.diffuse = 0.7;
-	s1->m.specular = 0.2;
+	s1->base.m.c = ft_colour(0.8, 1.0, 0.6);
+	s1->base.m.diffuse = 0.7;
+	s1->base.m.specular = 0.2;
 	s2 = ft_sphere(1);
-	set_transf(s2, scale(0.5, 0.5, 0.5), SPHERE);
+	set_transf(s2, scale(0.5, 0.5, 0.5));
 	w->objects = malloc(sizeof(t_sphere *) * 2);
 	if (!w->objects)
 		return (NULL);

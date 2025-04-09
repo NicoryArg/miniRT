@@ -28,7 +28,7 @@ int	normal_at_test(int run)
 	print_test_number(&i);
 	//initiate variables
 	s = ft_sphere(1);
-	set_transf(s, translate(0, 1, 0), SPHERE);
+	set_transf(s, translate(0, 1, 0));
 	world_point = ft_tuple(0, 1.70711, -0.707111, POINT);
 	//run test
 	normal = normal_at(s, world_point);
@@ -40,14 +40,14 @@ int	normal_at_test(int run)
 	print_test_banner("normal on a transformed sphere");
 	print_test_number(&i);
 	//initiate variables
-	set_transf(s, multiply_matrices(scale(1, 0.5, 1), rotate_z(M_PI/5)), SPHERE);
+	set_transf(s, multiply_matrices(scale(1, 0.5, 1), rotate_z(M_PI/5)));
 	world_point = ft_tuple(0, sqrt(2)/2, -(sqrt(2)/2), POINT);
 	//run test
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
 	print_normal(normal, 0, sqrt(2)/2, -(sqrt(2)/2));
 	//free all unused variables hereafter
-	free_matrix(s->transf);
+	free_matrix(s->base.transf);
 	free(s);
 
 //define new variables for reflection tests

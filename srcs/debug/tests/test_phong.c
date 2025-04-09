@@ -70,7 +70,7 @@ int	material_test(int run)
 	sph = ft_sphere(1);
 	//print input
 	printf(G_B"Sphere->m:\n"RES);
-	print_material(sph->m);
+	print_material(sph->base.m);
 	//run test;
 	//free memory
 	free_sphere(sph);
@@ -83,10 +83,10 @@ int	material_test(int run)
 	m = ft_material();
 	m.ambient = 1;
 	//print run test
-	sph->m = m;
+	sph->base.m = m;
 	//print output
 	printf(G_B"Sphere->m:\n"RES);
-	print_material(sph->m);
+	print_material(sph->base.m);
 	printf(G_B"Expected sphere->m.ambient = 1\n");
 	return (0);
 }

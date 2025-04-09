@@ -78,10 +78,10 @@ int	default_world_test(int run)
 		printf(AKA"❌ World object count is incorrect\n"RES);
 	// Check first sphere's material
 	s1 = w->objects[0];
-	printf("First sphere material color: (%.1f, %.1f, %.1f)\n", s1->m.c.r, s1->m.c.g, s1->m.c.b);
-	printf("Diffuse: %.1f | Specular: %.1f\n", s1->m.diffuse, s1->m.specular);
-	if (ft_equal(s1->m.c.r, 0.8) && ft_equal(s1->m.c.g, 1.0) && ft_equal(s1->m.c.b, 0.6) &&
-		ft_equal(s1->m.diffuse, 0.7) && ft_equal(s1->m.specular, 0.2))
+	printf("First sphere material color: (%.1f, %.1f, %.1f)\n", s1->base.m.c.r, s1->base.m.c.g, s1->base.m.c.b);
+	printf("Diffuse: %.1f | Specular: %.1f\n", s1->base.m.diffuse, s1->base.m.specular);
+	if (ft_equal(s1->base.m.c.r, 0.8) && ft_equal(s1->base.m.c.g, 1.0) && ft_equal(s1->base.m.c.b, 0.6) &&
+		ft_equal(s1->base.m.diffuse, 0.7) && ft_equal(s1->base.m.specular, 0.2))
 		printf(G_B"✔ First sphere material matches expected values\n"RES);
 	else
 		printf(AKA"❌ First sphere material does not match expected values\n"RES);
@@ -89,10 +89,10 @@ int	default_world_test(int run)
 	s2 = w->objects[1];
 	expected_scale = scale(0.5, 0.5, 0.5);
 	printf("Second sphere transform:\n");
-	print_matrix(s2->transf);
+	print_matrix(s2->base.transf);
 	printf("Expected transform:\n");
 	print_matrix(expected_scale);
-	if (equal_matrix(s2->transf, expected_scale))
+	if (equal_matrix(s2->base.transf, expected_scale))
 		printf(G_B"✔ Second sphere transform is scaled correctly\n"RES);
 	else
 		printf(AKA"❌ Second sphere transform is incorrect\n"RES);

@@ -6,29 +6,16 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:56:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 17:33:31 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:28:41 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void	set_transf(void *obj, t_matrix *trans, t_obj type)
+void	set_transf(void *obj, t_matrix *trans)
 {
-	if (type == SPHERE)
-	{
-		free_matrix(((t_sphere *)obj)->transf);
-		((t_sphere *)obj)->transf = trans;
-	}
-	// else if (type == CYLINDER)
-	// {
-	// 	free_matrix(((t_cyl *)obj)->transf);
-	// 	((t_cyl *)obj)->transf = trans;
-	// }
-	// else if (type == PLANE)
-	// {
-	// 	free_matrix(((t_plane *)obj)->transf);
-	// 	((t_plane *)obj)->transf = trans;
-	// }
+		free_matrix(((t_object *)obj)->transf);
+		((t_object *)obj)->transf = trans;
 }
 
 t_ray	*transform(t_ray *r, t_matrix *inverse)

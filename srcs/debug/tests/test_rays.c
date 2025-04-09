@@ -19,25 +19,74 @@ int	position_test(int run)
 	int	i = 1;
 	t_ray	*r = ft_ray(ft_tuple(2, 3, 4, POINT), ft_tuple(1, 0, 0, VECTOR));
 	t_tuple	res;
+	t_tuple	expected;
 
 
-	print_test_banner("POSITION");
+	print_test_banner("Computing a point from a distance");
 //TEST 1
+	//print banners
+	print_test_banner("get_point(r, 0)");
 	print_test_number(&i);
+	//initiate variables
+	expected = ft_tuple(2, 3, 4, POINT);
+	//run test
 	res = get_point(r, 0);
-	print_tuple(res, "(r, 0)");
+	//print output
+	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
+	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+	//check output
+	if (equal_tuple(res, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return (printf(AKA"❌ tuples don't match\n"RES));
 //TEST 2
+	//print banners
+	print_test_banner("get_point(r, 1)");
 	print_test_number(&i);
+	//initiate variables
+	expected = ft_tuple(3, 3, 4, POINT);
+	//run test
 	res = get_point(r, 1);
-	print_tuple(res, "(r, 1)");
+	//print output
+	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
+	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+	//check output
+	if (equal_tuple(res, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return (printf(AKA"❌ tuples don't match\n"RES));
 //TEST 3
+	//print banners
+	print_test_banner("get_point(r, -1)");
 	print_test_number(&i);
+	//initiate variables
+	expected = ft_tuple(1, 3, 4, POINT);
+	//run test
 	res = get_point(r, -1);
-	print_tuple(res, "(r, -1)");
+	//print output
+	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
+	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+	//check output
+	if (equal_tuple(res, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return (printf(AKA"❌ tuples don't match\n"RES));
 //TEST 4
+	//print banners
+	print_test_banner("get_point(r, 2.5)");
 	print_test_number(&i);
+	//initiate variables
+	expected = ft_tuple(4.5, 3, 4, POINT);
+	//run test
 	res = get_point(r, 2.5);
-	print_tuple(res, "(r, 2.5)");
+	//print output
+	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
+	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+	//check output
+	if (equal_tuple(res, expected))
+		printf(GR"✔ tuples match\n"RES);
+	else
+		return (printf(AKA"❌ tuples don't match\n"RES));
 	return (0);
 }
 /**
@@ -58,9 +107,11 @@ int	sph_unique_id(int run, int num)
 	while (i < num)
 	{
 		t_sphere	*s0 = ft_sphere(1);
-		printf("sphere ID: %d\n", s0->id);
+		printf("sphere ID: \t"YEL"%d"RES"\n", s0->id);
 		i++;
 	}
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"All spheres should have unique IDs\n"RES);
 	return (0);
 }
 
@@ -79,39 +130,60 @@ int	sph_ray_intersect(int run)
 	t_sphere	*s = ft_sphere(1);
 	double		d;
 	t_inters	*xs = NULL;
-	if (!r || !s)
-		return (1);
-//TEST 1
+
 	print_test_banner("SPHERE-RAY");
+//TEST 1
+	//print banners
 	print_test_banner("two intersections");
 	print_test_number(&i);
+	//run test
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
-	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	xs = intersect(s, r);
-	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
-	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
+	//print output
+	printf(YEL"Discriminant: %.1f\n"RES, d);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: 4.0\n"RES, xs->hits[0]->t);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected: 6.0\n"RES, xs->hits[1]->t);
+	//check output
+	if (xs->count == 2)
+		printf(GR"✔ xs.count == 2\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 2\n"RES));
+	if (ft_equal(xs->hits[0]->t, 4.0) && ft_equal(xs->hits[1]->t, 6.0))
+		printf(GR"✔ t1 and t2 are correct\n"RES);
+	else
+		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
 	free(xs);
 	free(r);
 //TEST 2
-	//redefine ray
-	r = ft_ray(ft_tuple(-5, 1, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//print banners
 	print_test_banner("tangent");
 	print_test_number(&i);
+	//redefine ray
+	r = ft_ray(ft_tuple(-5, 1, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//run test
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
-	printf(G_B"Discriminant: "RES"%.2f\n", d);
-	//call function
 	xs = intersect(s, r);
 	//print output
-	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
-	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
-	//free resources
+	printf(YEL"Discriminant: %.1f\n"RES, d);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: 5.0\n"RES, xs->hits[0]->t);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected: 5.0\n"RES, xs->hits[1]->t);
+	//check output
+	if (xs->count == 2)
+		printf(GR"✔ xs.count == 2\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 2\n"RES));
+	if (ft_equal(xs->hits[0]->t, 5.0) && ft_equal(xs->hits[1]->t, 5.0))
+		printf(GR"✔ t1 and t2 are correct\n"RES);
+	else
+		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
 	free(xs);
 	free(r);
 //TEST 3
-	//redifine ray
-	r = ft_ray(ft_tuple(-5, 2, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//print banners
 	print_test_banner("no intersection");
 	print_test_number(&i);
+	//redifine ray
+	r = ft_ray(ft_tuple(-5, 2, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
@@ -119,42 +191,60 @@ int	sph_ray_intersect(int run)
 	//print output
 	if (xs->count == 0)
 	{
-		printf(AKA"NO INTERSECTIONS DETECTED!\n"RES"");
-		printf(LILA"xs.count: "GR"%d\n"RES, xs->count);
+		printf(GR"✔ NO INTERSECTIONS DETECTED!\n"RES"");
+		printf(GR"xs.count: %d\n"RES, xs->count);
 	}
 	else
-		printf(YEL"[DEBUG] TEST%d -> sph_ray_intersect\n"RES, i);
+		return(printf(AKA"❌xs.count != 0\txs.count: %d\n"RES, xs->count));
 	//free resources
 	free(xs);
 	free(r);
 //TEST 4
-	//redefine ray
-	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//print banners
 	print_test_banner("ray originates inside sphere");
 	print_test_number(&i);
+	//redefine ray
+	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//run test
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
-	printf(G_B"Discriminant: "RES"%.2f\n", d);
-	//call function
 	xs = intersect(s, r);
 	//print output
-	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
-	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
-	//free resources
+	printf(YEL"Discriminant: %.1f\n"RES, d);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: -1.0\n"RES, xs->hits[0]->t);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected:  1.0\n"RES, xs->hits[1]->t);
+	//check output
+	if (xs->count == 2)
+		printf(GR"✔ xs.count == 2\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 2\n"RES));
+	if (ft_equal(xs->hits[0]->t, -1.0) && ft_equal(xs->hits[1]->t, 1.0))
+		printf(GR"✔ t1 and t2 are correct\n"RES);
+	else
+		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
 	free(xs);
 	free(r);
 //TEST 5
-	//redefine ray
-	r = ft_ray(ft_tuple(5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//print banners
 	print_test_banner("sphere is behind ray");
 	print_test_number(&i);
+	//redefine ray
+	r = ft_ray(ft_tuple(5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+	//run test
 	d = discriminant(r, diff_tuple(r->origin, s->centre));
-	printf(G_B"Discriminant: "RES"%.2f\n", d);
-	//call function
 	xs = intersect(s, r);
 	//print output
-	printf(G_B"t1: "RES"%f\n", xs->hits[0]->t);
-	printf(G_B"t2: "RES"%f\n", xs->hits[1]->t);
-	//free resources
+	printf(YEL"Discriminant: %.1f\n"RES, d);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: -6.0\n"RES, xs->hits[0]->t);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected: -4.0\n"RES, xs->hits[1]->t);
+	//check output
+	if (xs->count == 2)
+		printf(GR"✔ xs.count == 2\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 2\n"RES));
+	if (ft_equal(xs->hits[0]->t, -6.0) && ft_equal(xs->hits[1]->t, -4.0))
+		printf(GR"✔ t1 and t2 are correct\n"RES);
+	else
+		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
 	free(xs);
 	free(r);
 	return (0);
@@ -189,11 +279,20 @@ int	intersection_test(int run)
 	printf(BOLD"%15s "GR"%14f\n"RES, "i.t:", i1->t);
 	printf(BOLD"%15s "GR"%20p"RES"\n", "i.object:", i1->obj);
 	printf(BOLD"%15s "LILA"%20p\n"RES"", "Sphere:", s);
+	//check output
+	if (ft_equal(i1->t, 3.5))
+		printf(GR"✔ i.t == 3.5\n"RES);
+	else
+		return(printf(AKA"❌ i.t != 3.5\n"RES));
+	if (i1->obj == s)
+		printf(GR"✔ i.object == Sphere\n"RES);
+	else
+		return(printf(AKA"❌ i.object != Sphere\n"RES));
 	//free variables
 	free(i1);
 //TEST 2
 	//print banners
-	print_test_banner("intersect sets the object on the intersection");
+	print_test_banner("`intersect` sets the object on the intersection");
 	print_test_number(&i);
 	//redefine variables
 	t_sphere	*s2 = ft_sphere(1);
@@ -202,6 +301,19 @@ int	intersection_test(int run)
 	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0]->obj);
 	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", xs->hits[1]->obj);
 	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s2);
+	//check output
+	if (xs->count == 2)
+		printf(GR"✔ xs.count == 2\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 2\n"RES));
+	if (xs->hits[0]->obj == s2)
+		printf(GR"✔ xs[0].object == Sphere\n"RES);
+	else
+		return(printf(AKA"❌ xs[0].object != Sphere\n"RES));
+	if (xs->hits[1]->obj == s2)
+		printf(GR"✔ xs[1].object == Sphere\n"RES);
+	else
+		return(printf(AKA"❌ xs[1].object != Sphere\n"RES));
 	//free variables
 	free(xs->hits);
 	free(xs);
@@ -220,10 +332,13 @@ int	intersection_test(int run)
 	intersections[1] = i2;
 	intersections[2] = NULL;
 	//run test
-	hit = find_hit(intersections, 2);
+	hit = find_visible_hit(intersections, 2);
 	//print output
 	print_intersections(intersections, 2, 1);
 	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//check output
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"hit should be 1.0\n"RES);
 	//free variables
 	free(i1);
 	free(i2);
@@ -239,10 +354,13 @@ int	intersection_test(int run)
 	intersections[1] = i2;
 	intersections[2] = NULL;
 	//run test
-	hit = find_hit(intersections, 2);
+	hit = find_visible_hit(intersections, 2);
 	//print output
 	print_intersections(intersections, 2, 1);
 	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//check output
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"hit should be 1.0\n"RES);
 	//free variables
 	free(i1);
 	free(i2);
@@ -258,10 +376,13 @@ int	intersection_test(int run)
 	intersections[1] = i2;
 	intersections[2] = NULL;
 	//run test
-	hit = find_hit(intersections, 2);
+	hit = find_visible_hit(intersections, 2);
 	//print output
 	print_intersections(intersections, 2, 1);
 	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//check output
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"hit should be -999 (indicates no hit)\n"RES);
 	//free variables
 	free(i1);
 	free(i2);
@@ -284,10 +405,13 @@ int	intersection_test(int run)
 	intersections[4] = NULL;
 	print_intersections(intersections, 4, 0);
 	//run test
-	hit = find_hit(intersections, 4);
+	hit = find_visible_hit(intersections, 4);
 	//print output
 	print_intersections(intersections, 4, 1);
 	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
+	//check output
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"hit should be 2.0\n"RES);
 	//free variables
 	free(i1);
 	free(i2);
@@ -304,31 +428,59 @@ int	ray_transform_test(int run)
 		return (0);
 	t_ray		*r = ft_ray(ft_tuple(1, 2, 3, POINT), ft_tuple(0, 1, 0, VECTOR));
 	t_ray		*transformed_ray = NULL;
-	t_matrix	*inverse = translate(3, 4, 5);
+	t_matrix	*transf = translate(3, 4, 5);
 	int			i = 1;
 
 //TEST 1
 	//print banners
 	print_test_banner("Translating a ray");
 	print_test_number(&i);
+	//initiate variables
+	t_tuple	expected_origin = ft_tuple(4, 6, 8, POINT);
+	t_tuple	expected_direction = ft_tuple(0, 1, 0, VECTOR);
 	//call function
-	transformed_ray = transform(r, inverse);
-	print_tuple(transformed_ray->origin, "origin");
-	print_tuple(transformed_ray->direction, "direction");
+	transformed_ray = transform(r, transf);
+	//print output
+	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (4, 6, 8, 1)\n"RES"", transformed_ray->origin.x, transformed_ray->origin.y, transformed_ray->origin.z, transformed_ray->origin.w);
+	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (0, 1, 0, 0)\n"RES"", transformed_ray->direction.x, transformed_ray->direction.y, transformed_ray->direction.z, transformed_ray->direction.w);
+	//check output
+	if (equal_tuple(transformed_ray->origin, expected_origin))
+		printf(GR"✔ origin is correct\n"RES);
+	else
+		return(printf(AKA"❌ origin is incorrect\n"RES));
+	if (equal_tuple(transformed_ray->direction, expected_direction))
+		printf(GR"✔ direction is correct\n"RES);
+	else
+		return(printf(AKA"❌ direction is incorrect\n"RES));
 	//free variables
 	free_ray(transformed_ray);
-	free_matrix(inverse);
+	free_matrix(transf);
 
 //TEST 2
 	//print banners
 	print_test_banner("Scaling a ray");
 	print_test_number(&i);
-	//redefine variables//				NOT WORKING
-	inverse = scale(2, 3, 4);
+	//redefine variables
+	transf = scale(2, 3, 4);
+	expected_origin = ft_tuple(2, 6, 12, POINT);
+	expected_direction = ft_tuple(0, 3, 0, VECTOR);
 	//call function
-	transformed_ray = transform(r, inverse);
-	print_tuple(transformed_ray->origin, "origin");
-	print_tuple(transformed_ray->direction, "direction");
+	transformed_ray = transform(r, transf);
+	//print output
+	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d)\t "G_B"expected: (2, 6, 12, 1)\n"RES"", transformed_ray->origin.x, transformed_ray->origin.y, transformed_ray->origin.z, transformed_ray->origin.w);
+	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (0, 3, 0, 0)\n"RES"", transformed_ray->direction.x, transformed_ray->direction.y, transformed_ray->direction.z, transformed_ray->direction.w);
+	//check output
+	if (equal_tuple(transformed_ray->origin, expected_origin))
+		printf(GR"✔ origin is correct\n"RES);
+	else
+		return(printf(AKA"❌ origin is incorrect\n"RES));
+	if (equal_tuple(transformed_ray->direction, expected_direction))
+		printf(GR"✔ direction is correct\n"RES);
+	else
+		return(printf(AKA"❌ direction is incorrect\n"RES));
+	//free variables
+	free_ray(transformed_ray);
+	free_matrix(transf);
 	return (0);
 }
 
@@ -338,11 +490,11 @@ int	ray_transform_test2(int run)
 		return (0);
 //initiate variables
 	int			i = 1;
-	char		*f = "ray_transform_test2";
 	t_sphere	*s;
 	t_matrix	*t;
 	t_ray		*r;
 	t_inters	*xs;
+	t_matrix	*identity = create_identity_matrix(4);
 
 //TEST 1
 	print_test_banner("Sphere Default `transf`");
@@ -351,23 +503,38 @@ int	ray_transform_test2(int run)
 	s = ft_sphere(1);
 	//print output
 	printf(LILA"s->transf:\n"RES);
-	print_matrix(s->transf);
-
+	print_matrix(s->base.transf);
+	printf(G_B"expected:\n"RES);
+	print_matrix(identity);
+	//check output
+	if (equal_matrix(s->base.transf, identity))
+		printf(GR"✔ transf is correct\n"RES);
+	else
+		return(printf(AKA"❌ transf is incorrect\n"RES));
 //TEST 2
 	print_test_banner("Changing a sphere's transf (translation)");
 	print_test_number(&i);
 	//define variables
 	t = translate(2, 3, 4);
+	identity->values[0][3] = 2;
+	identity->values[1][3] = 3;
+	identity->values[2][3] = 4;
 	//print input
 	printf(LILA"s->transf BEFORE:\n"RES);
-	print_matrix(s->transf);
+	print_matrix(s->base.transf);
 	printf("\n");
 	//run test
-	set_transf(s, t, SPHERE);
+	set_transf(s, t);
 	//print output
-	printf(GR"s->transf AFTER:\n"RES);
-	print_matrix(s->transf);
-
+	printf(LILA"s->transf AFTER:\n"RES);
+	print_matrix(s->base.transf);
+	printf(G_B"expected:\n"RES);
+	print_matrix(identity);
+	//check output
+	if (equal_matrix(s->base.transf, identity))
+		printf(GR"✔ transf is correct\n"RES);
+	else
+		return(printf(AKA"❌ transf is incorrect\n"RES));
 //TEST 3
 	print_test_banner("Intersecting a scaled sphere with a ray");
 	print_test_number(&i);
@@ -377,22 +544,25 @@ int	ray_transform_test2(int run)
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	t = scale(2, 2 ,2);
 	//run tests
-	set_transf(s, t, SPHERE);
+	set_transf(s, t);
 	xs = intersect(s, r);
 	//print output
-	if (xs->count == 0)
-	{
-		printf(AKA"NO INTERSECTIONS DETECTED!\n"RES"");
-		printf(LILA"xs.count: "GR"%d\n"RES, xs->count);
-	}
-	else if (xs->count == 2)
-	{
-		printf(LILA"xs.count: "RES"%8d\n", xs->count);
-		printf(G_B"t1: "RES"%21f\n", xs->hits[0]->t);
-		printf(G_B"t2: "RES"%21f\n", xs->hits[1]->t);
-	}
+	printf(LILA"xs.count: "RES"%8d \t"G_B"expected: 2\n", xs->count);
+	printf(LILA"t1: "RES"%16.1f \t"G_B"expected: 3.0\n", xs->hits[0]->t);
+	printf(LILA"t2: "RES"%16.1f \t"G_B"expected: 7.0\n", xs->hits[1]->t);
+	//check output
+	if (xs->count == 2)
+	printf(GR"✔ xs.count == 2\n"RES);
 	else
-		printf(YEL"[DEBUG] TEST%d -> %s\n"RES, i, f);
+		return(printf(AKA"❌ xs.count != 2\n"RES));
+	if (ft_equal(xs->hits[0]->t, 3.0))
+		printf(GR"✔ t1 is correct\n"RES);
+	else
+		return(printf(AKA"❌ t1 is incorrect\n"RES));
+	if (ft_equal(xs->hits[1]->t, 7.0))
+		printf(GR"✔ t2 is correct\n"RES);
+	else
+		return(printf(AKA"❌ t2 is incorrect\n"RES));
 
 //TEST 4
 	print_test_banner("Intersecting a translated sphere with a ray");
@@ -403,16 +573,18 @@ int	ray_transform_test2(int run)
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	t = translate(5, 0 ,0);
 	//run tests
-	set_transf(s, t, SPHERE);
+	set_transf(s, t);
 	xs = intersect(s, r);
 	//print output
+	printf(LILA"xs.count: "RES"%8d \t"G_B"expected: 0\n", xs->count);
+	//check output
 	if (xs->count == 0)
 	{
-		printf(AKA"NO INTERSECTIONS DETECTED!\n"RES"");
-		printf(LILA"xs.count: "RES"%8d\n", xs->count);
+		printf(GR"✔ NO INTERSECTIONS DETECTED!\n"RES"");
+		printf(GR"✔ xs.count == 0\n"RES);
 	}
 	else
-		printf(YEL"[DEBUG] TEST%d -> %s\n"RES, i, f);
+		return(printf(AKA"❌ xs.count != 0\n"RES));
 
 	return (0);
 }
