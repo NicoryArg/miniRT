@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:42:39 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:44:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 18:47:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 18:48:01 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,22 +358,15 @@ int	color_at_test(int run)
 	print_test_banner("The color with an intersection behind the ray");
 	print_test_number(&i);
 	w = default_world();
-
 	t_object *outer = w->objects[0];
 	t_object *inner = w->objects[1];
-
-	// Set both ambient to 1 so they fully contribute color
 	outer->m.ambient = 1;
 	inner->m.ambient = 1;
-
-	// Give inner a recognizable color
-	inner->m.c = ft_colour(1, 1, 1); // white
-	outer->m.c = ft_colour(0, 0, 0); // black
-
+	inner->m.c = ft_colour(1, 1, 1);
+	outer->m.c = ft_colour(0, 0, 0);
 	// Ray starts between the two objects, heading toward the camera
 	r = ft_ray(ft_tuple(0, 0, 0.75, POINT), ft_tuple(0, 0, -1, VECTOR));
 	col = color_at(w, r);
-
 	printf(B_B"returned color: (%.2f, %.2f, %.2f)\n"RES"", col.r, col.g, col.b);
 	printf(G_B"expected:       (1.00, 1.00, 1.00)\n"RES"");
 	if (ft_equal(col.r, 1.0) && ft_equal(col.g, 1.0) && ft_equal(col.b, 1.0))
@@ -383,6 +376,5 @@ int	color_at_test(int run)
 	printf("________________________________________________\n");
 	free_ray(r);
 	free_world(w);
-
 	return (0);
 }

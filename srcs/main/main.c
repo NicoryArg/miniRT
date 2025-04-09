@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:41:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:41:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 18:57:22 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 18:58:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@
 
 
 
-int	ft_main_engine(void)
+int	ft_main_engine(int run)
 {
+	if (run == 0)
+		return (0);
 	t_engine	engine;
 
 	init_engine(&engine);
@@ -56,7 +58,8 @@ int	main()
 	// ft_main_phong();
 	if (ft_main_world(1)) //1 to run, 0 to skip
 		return (-1);
-	// ft_main_engine();
+	if (ft_main_engine(1))
+		return (-1);
 	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);
 }

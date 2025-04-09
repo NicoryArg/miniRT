@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 12:52:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 12:52:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 19:30:16 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 19:30:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	draw_sphere(t_engine *engine);
 
 
 
-#define WALL_Z 10
+#define WALL_Z 5
 #define WALL_SIZE 7
 #define CANVAS_SIZE 500
 

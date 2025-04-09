@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:36:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:36:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 19:27:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 19:27:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ typedef struct s_computations
 
 typedef struct s_world
 {
-	void	**objects;
+	void		**objects;
 	int			object_count;
 	t_light		*light;
 }	t_world;
@@ -186,6 +186,7 @@ typedef struct s_world
 
 
 typedef struct s_render_ctx {
+	t_world		*world;
 	t_tuple		ray_origin;
 	t_sphere	*sph;
 	double		pixel_size;

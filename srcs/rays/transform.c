@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:56:44 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/08 12:28:41 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/09 19:18:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 19:19:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void	set_transf(void *obj, t_matrix *trans)
+void    set_transf(void *obj, t_matrix *trans)
 {
-		free_matrix(((t_object *)obj)->transf);
-		((t_object *)obj)->transf = trans;
+	t_object	*o;
+
+	o = (t_object *)obj;
+	if (o->transf && o->transf != trans)
+	{
+		free_matrix(o->transf);
+		o->transf = NULL;
+	}
+	((t_object *)obj)->transf = trans;
 }
 
 t_ray	*transform(t_ray *r, t_matrix *inverse)

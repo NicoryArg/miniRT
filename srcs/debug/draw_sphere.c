@@ -5,47 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:31:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:31:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 19:32:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 19:32:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-static int	compute_color(void *sph, t_ray *ray, t_light *l)
+static int	compute_color(t_world *w, t_ray *ray)
 {
-	t_inters	*xs;
-	t_hit		*hit;
-	t_tuple		pt;
-	t_colour	c;
-	t_shading	shad;
-
-	xs = intersect(sph, ray);
-	hit = find_visible_hit(xs->hits, xs->count);
-	if (hit->t >= 0)
-	{
-		pt = get_point(ray, hit->t);
-		shad.m = ((t_object *)sph)->m;
-		shad.l = l;
-		shad.point = pt;
-		shad.eyev = ft_negate(ray->direction);
-		shad.normalv = normal_at(sph, pt);
-		c = ft_shading(shad);
-	}
-	else
-		c = ft_colour(0, 0, 0);
-	free_hits(xs);
+	t_colour c = color_at(w, ray);
 	return (convert_colour_to_int(c));
 }
 
-static void	render_loop(t_render_ctx *ctx, t_image *img, t_light *light)
+static void	render_loop(t_render_ctx *ctx, t_image *img)
 {
-	int		x;
-	int		y;
+	int		x, y, color;
 	t_tuple	wall_point;
 	t_ray	*ray;
-	int		color;
 
 	y = 0;
 	while (y < CANVAS_SIZE)
@@ -55,7 +33,7 @@ static void	render_loop(t_render_ctx *ctx, t_image *img, t_light *light)
 		{
 			wall_point = compute_wall_point(x, y, ctx->pixel_size, ctx->half);
 			ray = create_ray_to_point(ctx->ray_origin, wall_point);
-			color = compute_color(ctx->sph, ray, light);
+			color = compute_color(ctx->world, ray);
 			put_pixel(img, x, y, color);
 			free_ray(ray);
 			x++;
@@ -67,22 +45,87 @@ static void	render_loop(t_render_ctx *ctx, t_image *img, t_light *light)
 void	draw_sphere(t_engine *engine)
 {
 	t_render_ctx	ctx;
-	t_light			*light;
 
-	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
-	ctx.sph = ft_sphere(1.0);
-	ctx.sph->centre = ft_tuple(0, 0, 0, POINT); // Centered at origin
-	ctx.sph->base.m = ft_material();
-	ctx.sph->base.m.c = ft_colour(1, 0.2, 1);
-	ctx.sph->base.m.ambient = 0.1;
-	ctx.sph->base.m.diffuse = 0.9;
-	ctx.sph->base.m.specular = 0.9;
-	ctx.sph->base.m.shininess = 200.0;
+	ctx.world = default_world();
+	ctx.ray_origin = ft_tuple(0, 0, -7, POINT);
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
-	//light on the left and above
-	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
-	render_loop(&ctx, &engine->image, light);
-	free_sphere(ctx.sph);
-	free(light);
+
+	render_loop(&ctx, &engine->image);
+	free_world(ctx.world);
 }
+
+
+// static int	compute_color(void *sph, t_ray *ray, t_light *l)
+// {
+// 	t_inters	*xs;
+// 	t_hit		*hit;
+// 	t_tuple		pt;
+// 	t_colour	c;
+// 	t_shading	shad;
+
+// 	xs = intersect(sph, ray);
+// 	hit = find_visible_hit(xs->hits, xs->count);
+// 	if (hit->t >= 0)
+// 	{
+// 		pt = get_point(ray, hit->t);
+// 		shad.m = ((t_object *)sph)->m;
+// 		shad.l = l;
+// 		shad.point = pt;
+// 		shad.eyev = ft_negate(ray->direction);
+// 		shad.normalv = normal_at(sph, pt);
+// 		c = ft_shading(shad);
+// 	}
+// 	else
+// 		c = ft_colour(0, 0, 0);
+// 	free_hits(xs);
+// 	return (convert_colour_to_int(c));
+// }
+
+// static void	render_loop(t_render_ctx *ctx, t_image *img, t_light *light)
+// {
+// 	int		x;
+// 	int		y;
+// 	t_tuple	wall_point;
+// 	t_ray	*ray;
+// 	int		color;
+
+// 	y = 0;
+// 	while (y < CANVAS_SIZE)
+// 	{
+// 		x = 0;
+// 		while (x < CANVAS_SIZE)
+// 		{
+// 			wall_point = compute_wall_point(x, y, ctx->pixel_size, ctx->half);
+// 			ray = create_ray_to_point(ctx->ray_origin, wall_point);
+// 			color = compute_color(ctx->sph, ray, light);
+// 			put_pixel(img, x, y, color);
+// 			free_ray(ray);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
+// void	draw_sphere(t_engine *engine)
+// {
+// 	t_render_ctx	ctx;
+// 	t_light			*light;
+
+// 	ctx.ray_origin = ft_tuple(0, 0, -5, POINT);
+// 	ctx.sph = ft_sphere(1.0);
+// 	ctx.sph->centre = ft_tuple(0, 0, 0, POINT); // Centered at origin
+// 	ctx.sph->base.m = ft_material();
+// 	ctx.sph->base.m.c = ft_colour(1, 0.2, 1);
+// 	ctx.sph->base.m.ambient = 0.1;
+// 	ctx.sph->base.m.diffuse = 0.9;
+// 	ctx.sph->base.m.specular = 0.9;
+// 	ctx.sph->base.m.shininess = 200.0;
+// 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
+// 	ctx.half = WALL_SIZE / 2.0;
+// 	//light on the left and above
+// 	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+// 	render_loop(&ctx, &engine->image, light);
+// 	free_sphere(ctx.sph);
+// 	free(light);
+// }
