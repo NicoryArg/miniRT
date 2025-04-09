@@ -43,8 +43,8 @@ SRCS_DIR			= srcs/
 DEBUG_FILES			= $(addprefix debug/, draw_sil.c draw_sphere.c print.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_transform.c \
 									test_tuples.c test_projectile.c test_circle.c test_clock.c \
-									test_phong.c test_world.c)
-MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_phong.c main_transform.c main_tuples.c main_world.c)
+									test_phong.c test_world.c view_transform_test.c)
+MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_phong.c main_transform.c main_tuples.c main_world.c main_view.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c rays.c transform.c)
@@ -54,12 +54,13 @@ TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
 UTILS_FILES			= $(addprefix utils/, colours.c free_utils.c messages.c ft_utils.c)
+VIEW_FILES			= $(addprefix view/, view_transform.c)
 
 
 SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
-					$(REFLECTION_FILES)
+					$(REFLECTION_FILES) $(VIEW_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
@@ -115,6 +116,7 @@ $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)/transformations
 	@$(MKDIR) $(OBJS_DIR)/tuple
 	@$(MKDIR) $(OBJS_DIR)/utils
+	@$(MKDIR) $(OBJS_DIR)/view
 
 
 

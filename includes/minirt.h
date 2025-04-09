@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 19:27:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 19:27:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 20:53:36 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 20:54:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,6 +396,12 @@ void		ft_swap(t_hit **a, t_hit **b);
 double		ft_max(double a, double b);
 double		ft_min(double a, double b);
 
+//#############################################
+//##################VIEW#######################
+//#############################################
+//view_transform.c
+t_matrix	*orientation_matrix(t_tuple forward, t_tuple up);
+t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 
 # ifndef M_PI
 #  define M_PI 3.1415926535897932384626433
