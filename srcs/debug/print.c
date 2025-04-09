@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/09 16:50:24 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/09 18:53:00 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,26 @@ void	print_material(t_material m)
 	printf(YEL"\tdiffuse:"RES" %.1f\n", m.diffuse);
 	printf(YEL"\tspecular:"RES" %.1f\n", m.specular);
 	printf(YEL"\tshininess:"RES" %.1f\n", m.shininess);
+}
+
+int	equal_material(t_material m, t_material expected)
+{
+	if (equal_colour(m.c, expected.c) &&
+		ft_equal(m.ambient, expected.ambient) &&
+		ft_equal(m.diffuse, expected.diffuse) &&
+		ft_equal(m.specular, expected.specular) &&
+		ft_equal(m.shininess, expected.shininess))
+		return (1);
+	else
+		return (0);
+}
+
+int	equal_colour(t_colour c1, t_colour c2)
+{
+	if (ft_equal(c1.r, c2.r) && ft_equal(c1.g, c2.g) && ft_equal(c1.b, c2.b))
+		return (1);
+	else
+		return (0);
 }
 
 // int		printable_material(t_material m)
