@@ -5,16 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 16:58:20 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:00:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 18:40:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 18:40:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+/**
+ * @brief Applies the Phong reflection model to compute surface color.
+ *
+ * Calculates ambient, diffuse, and specular lighting based on the
+ * material, light source, eye vector, and surface normal. Returns
+ * the final color contribution at a given point on the surface.
+ *
+ * @param L A struct containing lighting and geometry information.
+ * @return The resulting color at the shaded point.
+ */
 t_colour	ft_shading(t_shading L)
 {
-	t_colour	result = ft_colour(3, 3, 3);
+	t_colour	result;
 	t_phong		ph;
 
 	ph.effective_colour = mult_colours(L.m.c, L.l->lum);

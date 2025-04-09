@@ -5,13 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:45:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:45:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 18:40:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 18:41:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+/**
+ * @brief Prepares the data needed to shade an intersection.
+ *
+ * Computes the intersection point, eye vector, and normal vector.
+ * Also determines if the hit occurred inside the object (i.e.,
+ * if the normal vector needs to be flipped).
+ *
+ * @param hit The hit (intersection) information.
+ * @param ray The ray that produced the intersection.
+ * @return A t_computations struct containing precomputed data for shading.
+ */
 t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 {
 	t_computations	comps;
@@ -31,6 +42,17 @@ t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 	return (comps);
 }
 
+/**
+ * @brief Computes the color at the point of intersection.
+ *
+ * Uses the Phong reflection model (ambient, diffuse, specular)
+ * to calculate the visible color at the intersection point
+ * based on lighting, surface material, eye vector, and normal.
+ *
+ * @param world Pointer to the scene (objects + light).
+ * @param comps Precomputed intersection information (position, normal, etc).
+ * @return The final color at the intersection.
+ */
 t_colour	shade_hit(t_world *w, t_computations comps)
 {
 	t_shading	light_args;
@@ -43,6 +65,17 @@ t_colour	shade_hit(t_world *w, t_computations comps)
 	return (ft_shading(light_args));
 }
 
+/**
+ * @brief Determines the color seen by a given ray in the world.
+ *
+ * Intersects the ray with the scene, finds the closest visible
+ * intersection, and returns the color at that point using shading.
+ * Returns black if no object is hit.
+ *
+ * @param world Pointer to the scene (objects + light).
+ * @param ray The ray to trace from the camera/viewpoint.
+ * @return The resulting color seen along the ray.
+ */
 t_colour	color_at(t_world *world, t_ray *ray)
 {
 	t_inters		*xs;
