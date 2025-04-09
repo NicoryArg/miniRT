@@ -22,6 +22,7 @@ typedef struct s_ray_sphere t_ray_sphere;
 typedef struct s_hit t_hit;
 typedef struct s_light t_light;
 typedef struct s_material t_material;
+typedef struct s_colour t_colour;
 
 //#############################################
 //####################DEBUG####################
@@ -29,9 +30,12 @@ typedef struct s_material t_material;
 //print.c
 
 void		print_tuple(t_tuple tuple, char *name);
-void		print_normal(t_tuple tuple, double x, double y, double z);
+void		print_normal(t_tuple tuple, t_tuple expected);
+void		print_reflected(t_tuple tuple, t_tuple expected);
 void		print_light(t_light *l, char *name);
 void		print_material(t_material m);
+int			equal_material(t_material m, t_material expected);
+int			equal_colour(t_colour c1, t_colour c2);
 int			printable_material(t_material m);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
@@ -91,7 +95,7 @@ int		color_at_test(int run);
 int		ft_main_tuples(int run);
 int		ft_main_transform(int run);
 int		ft_main_rays(int run);
-int		ft_main_phong(void);
+int		ft_main_phong(int run);
 int		ft_main_world(int run);
 
 

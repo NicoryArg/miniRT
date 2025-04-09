@@ -96,8 +96,6 @@ typedef struct s_sphere
 	t_tuple		centre;
 	double		radius;
 	int			id;
-	// t_matrix	*transf;
-	// t_material	m;
 }	t_sphere;
 
 
