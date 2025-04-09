@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/07 17:28:19 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:50:24 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,32 @@ void	print_tuple(t_tuple tuple, char *name)
 	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
 	printf(YEL"\tw:"RES" %d\n", tuple.w);
 }
-void	print_normal(t_tuple tuple, double x, double y, double z)
+void	print_normal(t_tuple tuple, t_tuple expected)
 {
 	if (tuple.w == 0)
-		printf(G_B"normal"RES" at "YEL"(%.5f, %.5f, %.5f) "RES"is:\n", x, y , z);
+	{
+		printf(BOLD"normal:   (%.0f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
+		printf(G_B"expected: (%.0f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
+	}
 	else
 	{
 		printf(R_B"ERROR:"RES" normal is a point\n");
 		return ;
 	}
-	printf(YEL"\tx:"RES" %.5f\n", tuple.x);
-	printf(YEL"\ty:"RES" %.5f\n", tuple.y);
-	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
-	printf(YEL"\tw:"RES" %d\n", tuple.w);
+}
+
+void	print_reflected(t_tuple tuple, t_tuple expected)
+{
+	if (tuple.w == 0)
+	{
+		printf(BOLD"reflected: (%.0f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
+		printf(G_B"expected:  (%.0f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
+	}
+	else
+	{
+		printf(R_B"ERROR:"RES" normal is a point\n");
+		return ;
+	}
 }
 
 void	print_light(t_light *l, char *name)
