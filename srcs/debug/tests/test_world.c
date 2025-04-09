@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 18:32:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 18:32:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:42:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:44:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,5 +253,136 @@ int	ft_pre_compute_test(int run)
 	else
 		return(printf(AKA"❌ tuples don't match\n"RES));
 	printf("________________________________________________\n");
+	return (0);
+}
+
+int	shade_hit_test(int run)
+{
+	if (run == 0)
+		return (0);
+
+	int i = 1;
+	t_world	*w;
+	t_ray	*r;
+	t_hit	*hit;
+	t_computations comps;
+	t_colour col;
+
+	// TEST 1 — shading an intersection from the outside
+	print_test_banner("Shading an intersection (outside)");
+	print_test_number(&i);
+	// setup
+	w = default_world();
+	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
+	hit = intersection(4.0, w->objects[0], SPHERE);
+	comps = pre_compute(hit, r);
+	col = shade_hit(w, comps);
+	// color check
+	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
+	printf(G_B"expected:        (0.38066, 0.47583, 0.28550)\n"RES"");
+	if (ft_equal(col.r, 0.38066) && ft_equal(col.g, 0.47583) && ft_equal(col.b, 0.2855))
+		printf(GR"✔ color matches expected value\n"RES);
+	else
+		return (printf(AKA"❌ color does not match expected value\n"RES));
+	printf("________________________________________________\n");
+	free_ray(r);
+	free(hit);
+	free_world(w);
+	// TEST 2 — shading an intersection from the inside
+	print_test_banner("Shading an intersection (inside)");
+	print_test_number(&i);
+	w = default_world();
+	w->light = ft_light(ft_tuple(0, 0.25, 0, POINT), ft_colour(1, 1, 1));
+	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
+	hit = intersection(0.5, w->objects[1], SPHERE);
+	comps = pre_compute(hit, r);
+	col = shade_hit(w, comps);
+	// color check
+	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
+	printf(G_B"expected:        (0.90498, 0.90498, 0.90498)\n"RES"");
+	if (ft_equal(col.r, 0.90498) && ft_equal(col.g, 0.90498) && ft_equal(col.b, 0.90498))
+		printf(GR"✔ color matches expected value\n"RES);
+	else
+		return (printf(AKA"❌ color does not match expected value\n"RES));
+	printf("________________________________________________\n");
+	free_ray(r);
+	free(hit);
+	free_world(w);
+	return (0);
+}
+
+int	color_at_test(int run)
+{
+	if (run == 0)
+		return (0);
+	int i = 1;
+	t_world *w;
+	t_ray *r;
+	t_colour col;
+
+	// TEST 1 — Ray misses everything
+	print_test_banner(" The color when a ray misses all objects");
+	print_test_number(&i);
+	w = default_world();
+	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 1, 0, VECTOR));
+	col = color_at(w, r);
+
+	printf(B_B"returned color: (%.0f, %.0f, %.0f)\n"RES"", col.r, col.g, col.b);
+	printf(G_B"expected:       (0, 0, 0)\n"RES"");
+	if (ft_equal(col.r, 0) && ft_equal(col.g, 0) && ft_equal(col.b, 0))
+		printf(GR"✔ background color is correct (black)\n"RES);
+	else
+		return (printf(AKA"❌ background color is incorrect\n"RES));
+	printf("________________________________________________\n");
+	free_ray(r);
+	free_world(w);
+
+	// TEST 2 — Ray hits object
+	print_test_banner("The color when a ray hits an object");
+	print_test_number(&i);
+	w = default_world();
+	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
+	col = color_at(w, r);
+
+	printf(B_B"returned color: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
+	printf(G_B"expected:       (0.38066, 0.47583, 0.28550)\n"RES"");
+	if (ft_equal(col.r, 0.38066) && ft_equal(col.g, 0.47583) && ft_equal(col.b, 0.2855))
+		printf(GR"✔ color matches expected surface color\n"RES);
+	else
+		return (printf(AKA"❌ color does not match expected\n"RES));
+	printf("________________________________________________\n");
+	free_ray(r);
+	free_world(w);
+
+	// TEST 3 — The color with an intersection behind the ray
+	print_test_banner("The color with an intersection behind the ray");
+	print_test_number(&i);
+	w = default_world();
+
+	t_object *outer = w->objects[0];
+	t_object *inner = w->objects[1];
+
+	// Set both ambient to 1 so they fully contribute color
+	outer->m.ambient = 1;
+	inner->m.ambient = 1;
+
+	// Give inner a recognizable color
+	inner->m.c = ft_colour(1, 1, 1); // white
+	outer->m.c = ft_colour(0, 0, 0); // black
+
+	// Ray starts between the two objects, heading toward the camera
+	r = ft_ray(ft_tuple(0, 0, 0.75, POINT), ft_tuple(0, 0, -1, VECTOR));
+	col = color_at(w, r);
+
+	printf(B_B"returned color: (%.2f, %.2f, %.2f)\n"RES"", col.r, col.g, col.b);
+	printf(G_B"expected:       (1.00, 1.00, 1.00)\n"RES"");
+	if (ft_equal(col.r, 1.0) && ft_equal(col.g, 1.0) && ft_equal(col.b, 1.0))
+		printf(GR"✔ correct: inner sphere is shaded\n"RES);
+	else
+		return (printf(AKA"❌ incorrect: wrong sphere is shaded\n"RES));
+	printf("________________________________________________\n");
+	free_ray(r);
+	free_world(w);
+
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shading.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/29 15:33:26 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/05 23:22:43 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/09 16:58:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:00:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

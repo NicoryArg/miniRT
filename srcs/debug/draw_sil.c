@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 12:44:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 12:52:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:32:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:32:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
 static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 {
 	t_inters	*xs;
-	double		t;
+	t_hit		*hit;
 	int			color;
 	int			i;
 
 	xs = intersect(sphere, ray);
-	t = find_visible_hit(xs->hits, xs->count);
-	if (t >= 0)
+	hit = find_visible_hit(xs->hits, xs->count);
+	if (hit->t >= 0)
 		color = RED;
 	else
 		color = BLACK;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 16:34:06 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/24 16:34:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:09:56 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:10:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,16 @@ void	sort_intersections(t_hit	**xs, int count)
 	}
 }
 
-//Rendering camera-facing images (like silhouette)
-double	find_visible_hit(t_hit **hits, int count)
+t_hit	*find_visible_hit(t_hit **hits, int count)
 {
-	int		i = 0;
+	int	i = 0;
 
-	sort_intersections(hits, count);//optional
+	sort_intersections(hits, count);
 	while (i < count && hits[i]->t < 0)
 		i++;
 	if (i < count)
-		return (hits[i]->t);
-	return (-999);//no hit
+		return (hits[i]);
+	return (NULL);
 }
 
 

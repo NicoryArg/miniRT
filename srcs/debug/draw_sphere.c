@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 17:49:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/07 17:49:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:31:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:31:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 static int	compute_color(void *sph, t_ray *ray, t_light *l)
 {
 	t_inters	*xs;
-	double		t;
+	t_hit		*hit;
 	t_tuple		pt;
 	t_colour	c;
 	t_shading	shad;
 
 	xs = intersect(sph, ray);
-	t = find_visible_hit(xs->hits, xs->count);
-	if (t >= 0)
+	hit = find_visible_hit(xs->hits, xs->count);
+	if (hit->t >= 0)
 	{
-		pt = get_point(ray, t);
+		pt = get_point(ray, hit->t);
 		shad.m = ((t_object *)sph)->m;
 		shad.l = l;
 		shad.point = pt;

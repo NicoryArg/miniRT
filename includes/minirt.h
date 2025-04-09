@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 17:48:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/07 17:48:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:36:19 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:36:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void		free_matrix(t_matrix *matrix);
 //hits.c
 void		ft_swap(t_hit **a, t_hit **b);
 void		sort_intersections(t_hit	**xs, int count);
-double		find_visible_hit(t_hit **hits, int count);
+t_hit		*find_visible_hit(t_hit **hits, int count);
 double		find_hit(t_hit	**intersections, int count);
 
 //intersect.c
@@ -293,6 +293,8 @@ t_tuple		sph_normal_at(t_sphere *sph, t_tuple world_p);
 
 //pre_compute.c
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
+t_colour		shade_hit(t_world *w, t_computations comps);
+t_colour		color_at(t_world *world, t_ray *ray);
 
 //#############################################
 //############### SCENE #######################

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 18:25:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 18:25:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:41:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:41:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int		world_test(int run);
 int		default_world_test(int run);
 int		intersect_world_test(int run);
 int		ft_pre_compute_test(int run);
+int		shade_hit_test(int run);
+int		shade_hit_test(int run);
+int		color_at_test(int run);
 
 
 //main tests (used to run all tests at once)
@@ -89,7 +92,7 @@ int		ft_main_tuples(int run);
 int		ft_main_transform(int run);
 int		ft_main_rays(int run);
 int		ft_main_phong(void);
-int		ft_main_world(void);
+int		ft_main_world(int run);
 
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:20:00 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:20:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/09 17:32:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/09 17:32:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ int	intersection_test(int run)
 	t_hit		*i2 = NULL;
 	t_hit		*i3 = NULL;
 	t_hit		*i4 = NULL;
-	double		hit;
+	t_hit		*hit;
 
 //TEST 1
 	//print banners
@@ -317,104 +317,101 @@ int	intersection_test(int run)
 	//free variables
 	free(xs->hits);
 	free(xs);
-//TEST 3
-	//print banners
+	//TEST 3
 	print_test_banner("hit when all inters have positive `t`");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
-	//redifine variables;
 	i1 = intersection(1, s, SPHERE);
 	i2 = intersection(2, s, SPHERE);
-	t_hit	**intersections = malloc(sizeof(t_hit *) * (2 + 1));
-	for (int x = 0; x < 3; x++)
-		intersections[x] = malloc(sizeof(t_hit));
+	t_hit **intersections = malloc(sizeof(t_hit *) * 3);
 	intersections[0] = i1;
 	intersections[1] = i2;
 	intersections[2] = NULL;
-	//run test
 	hit = find_visible_hit(intersections, 2);
-	//print output
 	print_intersections(intersections, 2, 1);
-	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
-	//check output
+	if (hit)
+		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
+	else
+		printf(AKA"❌ no visible hit found\n"RES);
 	printf(R_B"Attention: Manual check required!\n"RES"");
 	printf(B_B"hit should be 1.0\n"RES);
-	//free variables
-	free(i1);
-	free(i2);
-//TEST 4
-	//print banners
-	print_test_banner("hit when some inters have nagative `t`");
-	print_test_number(&i);
-	printf(BOLD"_________________________________\n\n"RES);
-	//redefine variables
-	i1 = intersection(-1, s, SPHERE);
-	i2 = intersection(1, s, SPHERE);
-	intersections[0] = i1;
-	intersections[1] = i2;
-	intersections[2] = NULL;
-	//run test
-	hit = find_visible_hit(intersections, 2);
-	//print output
-	print_intersections(intersections, 2, 1);
-	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
-	//check output
-	printf(R_B"Attention: Manual check required!\n"RES"");
-	printf(B_B"hit should be 1.0\n"RES);
-	//free variables
-	free(i1);
-	free(i2);
-//TEST 5
-	//print banners
-	print_test_banner("hit when all inters have nagative `t`");
-	print_test_number(&i);
-	printf(BOLD"_________________________________\n\n"RES);
-	//redefine variables
-	i1 = intersection(-2, s, SPHERE);
-	i2 = intersection(-1, s, SPHERE);
-	intersections[0] = i1;
-	intersections[1] = i2;
-	intersections[2] = NULL;
-	//run test
-	hit = find_visible_hit(intersections, 2);
-	//print output
-	print_intersections(intersections, 2, 1);
-	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
-	//check output
-	printf(R_B"Attention: Manual check required!\n"RES"");
-	printf(B_B"hit should be -999 (indicates no hit)\n"RES);
-	//free variables
 	free(i1);
 	free(i2);
 	free(intersections);
-//TEST 6
-	//print banners
+
+	//TEST 4
+	print_test_banner("hit when some inters have nagative `t`");
+	print_test_number(&i);
+	printf(BOLD"_________________________________\n\n"RES);
+	i1 = intersection(-1, s, SPHERE);
+	i2 = intersection(1, s, SPHERE);
+	intersections = malloc(sizeof(t_hit *) * 3);
+	intersections[0] = i1;
+	intersections[1] = i2;
+	intersections[2] = NULL;
+	hit = find_visible_hit(intersections, 2);
+	print_intersections(intersections, 2, 1);
+	if (hit)
+		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
+	else
+		printf(AKA"❌ no visible hit found\n"RES);
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"hit should be 1.0\n"RES);
+	free(i1);
+	free(i2);
+	free(intersections);
+
+	//TEST 5
+	print_test_banner("hit when all inters have nagative `t`");
+	print_test_number(&i);
+	printf(BOLD"_________________________________\n\n"RES);
+	i1 = intersection(-2, s, SPHERE);
+	i2 = intersection(-1, s, SPHERE);
+	intersections = malloc(sizeof(t_hit *) * 3);
+	intersections[0] = i1;
+	intersections[1] = i2;
+	intersections[2] = NULL;
+	hit = find_visible_hit(intersections, 2);
+	print_intersections(intersections, 2, 1);
+	if (hit)
+		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
+	else
+		printf(GR"✔ no hit found (correct)\n"RES);
+	printf(R_B"Attention: Manual check required!\n"RES"");
+	printf(B_B"hit should be -999 (indicates no hit)\n"RES);
+	free(i1);
+	free(i2);
+	free(intersections);
+
+	//TEST 6
 	print_test_banner("hit when unsorted array of inters");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
-	//redefine variables
 	i1 = intersection(5, s, SPHERE);
 	i2 = intersection(7, s, SPHERE);
 	i3 = intersection(-3, s, SPHERE);
 	i4 = intersection(2, s, SPHERE);
-	intersections = malloc(sizeof(t_hit *) * (4 + 1));
+	intersections = malloc(sizeof(t_hit *) * 5);
 	intersections[0] = i1;
 	intersections[1] = i2;
 	intersections[2] = i3;
 	intersections[3] = i4;
 	intersections[4] = NULL;
 	print_intersections(intersections, 4, 0);
-	//run test
 	hit = find_visible_hit(intersections, 4);
-	//print output
 	print_intersections(intersections, 4, 1);
-	printf(G_B"%6s "GR"%7.0f\n"RES, "hit:", hit);
-	//check output
+	if (hit)
+		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
+	else
+		printf(AKA"❌ no visible hit found\n"RES);
 	printf(R_B"Attention: Manual check required!\n"RES"");
 	printf(B_B"hit should be 2.0\n"RES);
-	//free variables
 	free(i1);
 	free(i2);
+	free(i3);
+	free(i4);
+	free(intersections);
+
 	return (0);
 }
 
