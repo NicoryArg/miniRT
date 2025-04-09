@@ -12,16 +12,18 @@
 
 #include "../../includes/minirt.h"
 
-int	ft_main_world(void)
+int	ft_main_world(int run)
 {
-	if (world_test(0))
-		printf("Error: world_test failed\n");
-	if (default_world_test(0))
-		printf(AKA"Error: default_world_test failed\n"RES);
-	if (intersect_world_test(0))
-		printf(AKA"Error: intersect_world_test failed\n"RES);
+	if (run == 0)
+		return (0);
+	if (world_test(1))
+		return(printf("Error: world_test failed\n"));
+	if (default_world_test(1))
+		return(printf(AKA"Error: default_world_test failed\n"RES));
+	if (intersect_world_test(1))
+		return(printf(AKA"Error: intersect_world_test failed\n"RES));
 	if (ft_pre_compute_test(1))
-		printf(R_B"ft_pre_compute_test failed\n"RES);
-	printf(R_B"END OF WORLD TESTS\n"RES);
+		return(printf(R_B"ft_pre_compute_test failed\n"RES));
+	printf(G_B"END OF WORLD TESTS\n"RES);
 	return (0);
 }

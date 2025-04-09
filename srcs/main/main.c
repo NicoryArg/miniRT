@@ -52,9 +52,10 @@ int	main()
 		return (-1);
 	if (ft_main_rays(0)) //1 to run, 0 to skip
 		return (-1);
-	if (ft_main_phong(1)) //1 to run, 0 to skip
+	if (ft_main_phong(0)) //1 to run, 0 to skip
 		return (-1);
-	// ft_main_world();
+	if (ft_main_world(1))
+		return (-1);
 	// ft_main_engine();
 	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);

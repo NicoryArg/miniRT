@@ -93,7 +93,7 @@ int		ft_main_tuples(int run);
 int		ft_main_transform(int run);
 int		ft_main_rays(int run);
 int		ft_main_phong(int run);
-int		ft_main_world(void);
+int		ft_main_world(int run);
 
 
 #endif
