@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 19:32:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 19:32:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/10 13:38:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/10 13:43:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,63 @@ static void	render_loop(t_render_ctx *ctx, t_image *img)
 		y++;
 	}
 }
+t_world	*default_scene(void)
+{
+	t_world		*w;
+	t_sphere	*s1;
+	t_sphere	*s2;
+	t_sphere	*floor;
+	t_sphere	*left_wall;
+	t_sphere	*right_wall;
+	t_matrix	*transform;
 
+	w = ft_world();
+	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	s1 = ft_sphere(1);
+	s1->base.m.c = ft_colour(1, 0, 0);
+	s1->base.m.diffuse = 0.7;
+	s1->base.m.specular = 0.2;
+	set_transf(s1, translate(-0.5, 0, 0));
+	s2 = ft_sphere(1);
+	s2->base.m.c = ft_colour(0, 1, 0);
+	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(1.5, -1.5, -0.5));
+	set_transf(s2, transform);
+	floor = ft_sphere(1);
+	floor->base.m.c = ft_colour(0.8, 0.8, 0.8);
+	floor->base.m.specular = 0;
+	transform = multiply_matrices(translate(0, -1.5, -1), scale(10, 0.01, 10));
+	set_transf(floor, transform);
+	left_wall = ft_sphere(1);
+	left_wall->base.m.c = ft_colour(0.3, 0.3, 1);
+	left_wall->base.m.specular = 0;
+	transform = multiply_matrices(translate(0, 0, 5),
+		multiply_matrices( rotate_y(-M_PI / 4),
+			multiply_matrices(rotate_x(M_PI / 2),scale(10, 0.01, 10)))
+	);
+	set_transf(left_wall, transform);
+	right_wall = ft_sphere(1);
+	right_wall->base.m.c = ft_colour(0.3, 0.6, 0.9);
+	right_wall->base.m.specular = 0;
+	transform = multiply_matrices(translate(0, 0, 5),
+		multiply_matrices(
+			multiply_matrices( rotate_y(M_PI / 4),rotate_x(M_PI / 2)),scale(10, 0.01, 10)));
+	set_transf(right_wall, transform);
+	w->objects = malloc(sizeof(t_object *) * 5);
+	if (!w->objects)
+		return (NULL);
+	w->objects[0] = s1;
+	w->objects[1] = s2;
+	w->objects[2] = floor;
+	w->objects[3] = left_wall;
+	w->objects[4] = right_wall;
+	w->object_count = 5;
+	return (w);
+}
 void	draw_sphere(t_engine *engine)
 {
 	t_render_ctx	ctx;
 
-	ctx.world = default_world();
+	ctx.world = default_scene();
 	ctx.ray_origin = ft_tuple(0, 0, -7, POINT);
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
