@@ -16,8 +16,10 @@ int	ft_main_view(int run)
 {
 	if (run == 0)
 		return (0);
-	if(view_transform_test(1))
-		return (printf(AKA"Error: view_transform_test failed\n"RES));
+	if (view_transform_test(0))
+		return (printf(AKA"view_transform_test failed\n"RES));
+	if (camera_test(1))
+		return (printf(AKA"camera_test failed\n"RES));
 	printf(G_B"END OF VIEW TESTS\n"RES);
 	return (0);
 }

@@ -23,6 +23,7 @@ typedef struct s_hit t_hit;
 typedef struct s_light t_light;
 typedef struct s_material t_material;
 typedef struct s_colour t_colour;
+typedef struct s_camera t_camera;
 
 //#############################################
 //####################DEBUG####################
@@ -92,6 +93,7 @@ int		color_at_test(int run);
 
 //view_transform_test.c
 int		view_transform_test(int run);
+int		camera_test(int run);
 
 //main tests (used to run all tests at once)
 int		ft_main_tuples(int run);
