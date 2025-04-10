@@ -187,8 +187,8 @@ typedef struct s_camera
 	double		half_width;
 	double		half_height;
 	t_matrix	*transf;
+}	t_camera;
 
-}
 //#############################################
 //################# OTHER #####################
 //#############################################
