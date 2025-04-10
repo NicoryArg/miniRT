@@ -410,6 +410,16 @@ double		ft_min(double a, double b);
 //#############################################
 //##################VIEW#######################
 //#############################################
+//camera.c
+/**
+ * @brief creates a new camera, calculating pixel_size, half_width and half_height
+ * according to given arguments. Also converts and stores fov in radians.
+ * @param hsize the horizontal size in pixels of the canvas.
+ * @param vsize the vertical size in pixels of the canvas.
+ * @param fov Field of view or angle that describes how much the camera can see.
+ */
+t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
+
 //view_transform.c
 t_matrix	*orientation_matrix(t_tuple forward, t_tuple up);
 t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);

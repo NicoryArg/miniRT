@@ -112,3 +112,77 @@ int	view_transform_test(int run)
 	return (0);
 }
 
+int	camera_test(int run)
+{
+	if (!run)
+		return (0);
+
+	int i = 1;
+	t_camera	c;
+	double		expected_hsize;
+	double		expected_vsize;
+	double		expected_fov;
+	t_matrix	*expected_transf = create_identity_matrix(4);
+
+//TEST 1
+	//print banners
+	print_test_banner("Constructing a camera");
+	print_test_number(&i);
+	//define variables
+	expected_hsize = 160;
+	expected_vsize = 120;
+	expected_fov = M_PI / 2;
+	//run test
+	c = ft_camera(160, 120, 90);
+	//print output
+	printf(B_B"c.hsize: %.0f\t"G_B"expected: %.0f\n"RES, c.hsize, expected_hsize);
+	printf(B_B"c.vsize: %.0f\t"G_B"expected: %.0f\n"RES, c.vsize, expected_vsize);
+	printf(B_B"c.fov:   %.2f\t"G_B"expected: %.2f\n"RES, c.fov, expected_fov);
+	printf(B_B"c.transf:\n"RES);
+	print_matrix(c.transf);
+	printf(G_B"expected:\n"RES);
+	print_matrix(expected_transf);
+	//check output
+	if (ft_equal(c.hsize, expected_hsize) && ft_equal(c.vsize, expected_vsize) && ft_equal(c.fov, expected_fov))
+		printf(GR"✔ camera created successfully\n"RES);
+	else
+		return(printf(AKA"❌ camera creation failed\n"RES));
+	if (equal_matrix(c.transf, expected_transf))
+		printf(GR"✔ camera transformation is identity\n"RES);
+	else
+		return(printf(AKA"❌ camera transformation is not identity\n"RES));
+//TEST 2
+	//print banners
+	print_test_banner("Pixel size for horizontal canvas");
+	print_test_number(&i);
+	//define variables
+	double expected_pixel_size = 0.01;
+	//run test
+	c = ft_camera(200, 125, 90);
+	//print output
+	printf(B_B"c.pixel_size: %.2f\t"G_B"expected: %.2f\n"RES, c.pixel_size, expected_pixel_size);
+	//check output
+	if (ft_equal(c.pixel_size, expected_pixel_size))
+		printf(GR"✔ pixel size is correct\n"RES);
+	else
+		return(printf(AKA"❌ pixel size is incorrect\n"RES));
+//TEST 3
+	//print banners
+	print_test_banner("Pixel size for vertical canvas");
+	print_test_number(&i);
+	//define variables
+	expected_pixel_size = 0.01;
+	//run test
+	c = ft_camera(125, 200, 90);
+	//print output
+	printf(B_B"c.pixel_size: %.2f\t"G_B"expected: %.2f\n"RES, c.pixel_size, expected_pixel_size);
+	//check output
+	if (ft_equal(c.pixel_size, expected_pixel_size))
+		printf(GR"✔ pixel size is correct\n"RES);
+	else
+		return(printf(AKA"❌ pixel size is incorrect\n"RES));
+//FREE RESOURCES
+	free_matrix(expected_transf);
+	free_matrix(c.transf);
+	return (0);
+}
