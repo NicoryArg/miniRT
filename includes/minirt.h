@@ -178,6 +178,17 @@ typedef struct s_world
 	t_light		*light;
 }	t_world;
 
+typedef struct s_camera
+{
+	double		hsize;
+	double		vsize;
+	double		fov;
+	double		pixel_size;
+	double		half_width;
+	double		half_height;
+	t_matrix	*transf;
+
+}
 //#############################################
 //################# OTHER #####################
 //#############################################
