@@ -55,7 +55,7 @@ TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
 UTILS_FILES			= $(addprefix utils/, colours.c free_utils.c messages.c ft_utils.c)
-VIEW_FILES			= $(addprefix view/, camera.c view_transform.c)
+VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c)
 
 
 SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(TEST_FILES) \

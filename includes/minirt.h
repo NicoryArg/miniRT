@@ -419,6 +419,15 @@ double		ft_min(double a, double b);
  * @param fov Field of view or angle that describes how much the camera can see.
  */
 t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
+
+//ray_for_pixel.c
+/**
+ * @brief calculates the ray that goes through a pixel on the canvas
+ * @param cam the camera object
+ * @param px the x coordinate of the pixel
+ * @param py the y coordinate of the pixel
+ * @return a pointer to the ray object
+ */
 t_ray		*ray_for_pixel(t_camera cam, int px, int py);
 
 //view_transform.c
