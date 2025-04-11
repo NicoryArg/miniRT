@@ -40,7 +40,7 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 # Sources
 SRCS_DIR			= srcs/
-DEBUG_FILES			= $(addprefix debug/, draw_sil.c draw_sphere.c print.c)
+DEBUG_FILES			= $(addprefix debug/, draw_sil.c draw_sphere.c draw_world.c print.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_transform.c \
 									test_tuples.c test_projectile.c test_circle.c test_clock.c \
 									test_phong.c test_world.c view_transform_test.c \

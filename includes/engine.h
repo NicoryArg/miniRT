@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 19:30:16 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 19:30:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 17:04:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 17:04:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct	s_environment
 }	t_environment;
 
 
+t_image		render(t_camera cam, t_world *world, t_image img);
+
 void	error_message(char *text, int mode);
 void	init_engine(t_engine *engine);
 int		on_destroy_event(t_engine *engine);
@@ -75,8 +77,11 @@ t_ray	*create_ray_to_point(t_tuple origin, t_tuple target);
 
 void	draw_silhouette(t_engine *engine);
 void	draw_sphere(t_engine *engine);
+t_world	*default_scene(void);
 
 
+void	draw_world(t_engine *engine);
+void	init_engine_world(t_engine *engine);
 
 #define WALL_Z 5
 #define WALL_SIZE 7

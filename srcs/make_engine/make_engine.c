@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 12:53:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 12:53:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 16:58:41 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 16:58:41 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_engine(t_engine *engine)
 	//draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, RED);
 	//draw_hour_markers(&engine->image);
 	//draw_silhouette(engine);
-	draw_sphere(engine);
-	mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr,(WIN_SIZE - CANVAS_SIZE) / 2, (WIN_SIZE - CANVAS_SIZE) / 2);
+	// draw_sphere(engine);
+	// mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr,(WIN_SIZE - CANVAS_SIZE) / 2, (WIN_SIZE - CANVAS_SIZE) / 2);
 	//display_help_message(engine);
 }

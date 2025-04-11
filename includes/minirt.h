@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 20:53:36 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 20:54:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 16:54:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 16:54:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,6 +419,7 @@ double		ft_min(double a, double b);
  * @param fov Field of view or angle that describes how much the camera can see.
  */
 t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
+
 
 //ray_for_pixel.c
 /**

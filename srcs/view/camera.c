@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 11:14:19 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/11 12:07:50 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/11 16:48:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 16:49:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 {
@@ -40,3 +41,26 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 	return (camera);
 }
 
+t_image	render(t_camera cam, t_world *world, t_image img)
+{
+	int		x;
+	int		y;
+	t_ray	*ray;
+	t_colour col;
+
+	y = 0;
+	while (y < (int)cam.vsize)
+	{
+		x = 0;
+		while (x < (int)cam.hsize)
+		{
+			ray = ray_for_pixel(cam, x, y);
+			col = color_at(world, ray);
+			put_pixel(&img, x, y, convert_colour_to_int(col));
+			free_ray(ray);
+			x++;
+		}
+		y++;
+	}
+	return (img);
+}
