@@ -45,6 +45,10 @@ void		print_intersections(t_hit **xs, int count, int sorted);
 void		malloc_err(char *func_name);
 // void		print_rs(t_ray_sphere *rs);//	obsolete
 
+//test_ray_for_pixel.c
+int		ray_for_pixel_test(int run);
+
+
 //test_rays.c
 /**
  * @brief runs tests for position (p.58)

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 11:14:19 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/10 15:26:55 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/11 11:36:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 static double	w_pt(t_camera cam, int p, char c)
 {
 	double	offset;
-	double	world_p;
 
 	offset = (p + 0.5) * cam.pixel_size;
 	if (c == 'x')
@@ -73,6 +72,22 @@ static t_tuple	get_pxl(t_camera cam, double world_x, double world_y)
 	return (pixel);
 }
 
+static t_tuple	rfp_origin(t_matrix *transf)
+{
+	t_matrix	*point;
+	t_matrix	*inverse;
+	t_matrix	*temp;
+	t_tuple		res;
+
+	point = tuple_to_matrix(ft_tuple(0,0,0,POINT));
+	inverse = invert_matrix(transf);
+	temp = multiply_matrices(inverse, point);
+	res = matrix_to_tuple(temp);
+	free(point);
+	free(inverse);
+	free(temp);
+	return (res);
+}
 
 t_ray	*ray_for_pixel(t_camera cam, int px, int py)
 {
@@ -82,5 +97,8 @@ t_ray	*ray_for_pixel(t_camera cam, int px, int py)
 	t_tuple	direction;
 
 	pixel = get_pxl(cam, w_pt(cam,px,'x'), w_pt(cam,py,'y'));
-	origin =
+	origin = rfp_origin(cam.transf);
+	direction = normalise(diff_tuple(pixel, origin));
+	ray = ft_ray(origin, direction);
+	return (ray);
 }

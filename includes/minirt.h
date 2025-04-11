@@ -419,6 +419,7 @@ double		ft_min(double a, double b);
  * @param fov Field of view or angle that describes how much the camera can see.
  */
 t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
+t_ray		*ray_for_pixel(t_camera cam, int px, int py);
 
 //view_transform.c
 t_matrix	*orientation_matrix(t_tuple forward, t_tuple up);
