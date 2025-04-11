@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 16:48:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 16:49:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 18:21:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 18:21:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 
 	camera.hsize = hsize;
 	camera.vsize = vsize;
-	fov_radians = fov_degrees * M_PI/180;
+	fov_radians = fov_degrees;
+	// fov_degrees * M_PI/180;
 	camera.fov = fov_radians;
 	camera.transf = create_identity_matrix(4);
 	half_view = tan(fov_radians / 2);
@@ -41,7 +42,7 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 	return (camera);
 }
 
-t_image	render(t_camera cam, t_world *world, t_image img)
+t_image	*render(t_camera cam, t_world *world, t_image *img)
 {
 	int		x;
 	int		y;
@@ -56,7 +57,7 @@ t_image	render(t_camera cam, t_world *world, t_image img)
 		{
 			ray = ray_for_pixel(cam, x, y);
 			col = color_at(world, ray);
-			put_pixel(&img, x, y, convert_colour_to_int(col));
+			put_pixel(img, x, y, convert_colour_to_int(col));
 			free_ray(ray);
 			x++;
 		}

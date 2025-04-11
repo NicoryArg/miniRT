@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:04:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:04:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 17:29:56 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 17:30:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_environment
 }	t_environment;
 
 
-t_image		render(t_camera cam, t_world *world, t_image img);
+t_image		*render(t_camera cam, t_world *world, t_image *img);
 
 void	error_message(char *text, int mode);
 void	init_engine(t_engine *engine);

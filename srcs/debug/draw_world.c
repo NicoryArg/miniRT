@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:09:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:09:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 22:49:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 22:56:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,36 @@ void	draw_world(t_engine *engine)
 	t_camera	cam;
 
 	w = default_scene();
-	cam = ft_camera(WIDTH, HEIGHT, M_PI / 3);
+	cam = ft_camera(500, 500, M_PI/3 );//try to not change
 	cam.transf = view_transform(
-		ft_tuple(0, 1.5, -5, POINT),
-		ft_tuple(0, 1, 0, POINT),
-		ft_tuple(0, 1, 0, VECTOR));
-
-	render(cam, w, engine->image);
+		ft_tuple(0, 10, 0, POINT),//from camera
+		ft_tuple(0, 0, 0, POINT),//look at target
+		ft_tuple(0, 0, -1, VECTOR));//up vector
+	render(cam, w, &engine->image);
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->image.img_ptr, 0, 0);
 	free_world(w);
 	free_matrix(cam.transf);
 }
+
+/*(Eye-level View)
+cam.transf = view_transform(
+	ft_tuple(0, 0, -5, POINT),     // from: camera position
+	ft_tuple(0, 0, 0, POINT),      // to: where camera is looking
+	ft_tuple(0, 1, 0, VECTOR));    // up: camera's "up" direction
+
+	(Top-down View)
+	cam.transf = view_transform(
+	ft_tuple(0, 10, 0, POINT),     // from: camera placed 10 units "above"
+	ft_tuple(0, 0, 0, POINT),      // to: looking at the origin
+	ft_tuple(0, 0, -1, VECTOR));   // up: z-axis now defines camera's "up"
+
+	(from above and behind)
+	cam.transf = view_transform(
+	ft_tuple(5, 5, -5, POINT),     // camera up and back
+	ft_tuple(0, 0, 0, POINT),      // looking at the center
+	ft_tuple(0, 1, 0, VECTOR));    // standard up
+	*/
 
 
 void	init_engine_world(t_engine *engine)

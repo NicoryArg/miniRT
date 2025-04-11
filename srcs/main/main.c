@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:00:51 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:00:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 17:36:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 17:36:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_main_engine(int run)
 	t_engine	engine;
 
 	init_engine(&engine);
+	// draw_sphere(&engine);
 	draw_world(&engine);
 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);

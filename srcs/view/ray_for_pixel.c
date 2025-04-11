@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_for_pixel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 12:07:59 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/11 12:09:48 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/11 17:56:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 17:56:44 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static t_tuple	rfp_origin(t_matrix *transf)
 	inverse = invert_matrix(transf);
 	temp = multiply_matrices(inverse, point);
 	res = matrix_to_tuple(temp);
+	res.w = POINT;
 	free(point);
 	free(inverse);
 	free(temp);

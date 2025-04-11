@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 16:47:13 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 14:21:57 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/11 17:57:29 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 17:57:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

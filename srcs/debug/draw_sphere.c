@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:10:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:11:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/11 22:44:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/11 22:46:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_world	*default_scene(void)
 	t_sphere	*s1;
 	t_sphere	*s2;
 	t_sphere	*s3;
-	// t_sphere	*floor;
-	// t_sphere	*left_wall;
-	// t_sphere	*right_wall;
+	t_sphere	*floor;
+	t_sphere	*left_wall;
+	t_sphere	*right_wall;
 	t_matrix	*transform;
 
 	w = ft_world();
@@ -73,35 +73,35 @@ t_world	*default_scene(void)
 	transform = multiply_matrices(scale(0.33, 0.33, 0.33), translate(-5, -3.5, 0.7));
 	set_transf(s3, transform);
 	//floor
-	// floor = ft_sphere(1);
-	// floor->base.m.c = ft_colour(0.8, 0.8, 0.8);
-	// floor->base.m.specular = 0;
-	// transform = multiply_matrices(translate(0, -1.5, -1), scale(10, 0.01, 10));
-	// set_transf(floor, transform);
-	// left_wall = ft_sphere(1);
-	// left_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
-	// left_wall->base.m.specular = 0;
-	// transform = multiply_matrices(translate(0, 0, 5),
-	// 	multiply_matrices( rotate_y(-M_PI / 4),
-	// 		multiply_matrices(rotate_x(M_PI / 2),scale(10, 0.01, 10))));
-	// set_transf(left_wall, transform);
-	// right_wall = ft_sphere(1);
-	// right_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
-	// right_wall->base.m.specular = 0;
-	// transform = multiply_matrices(translate(0, 0, 5),
-	// 	multiply_matrices(
-	// 		multiply_matrices( rotate_y(M_PI / 4),rotate_x(M_PI / 2)),scale(10, 0.01, 10)));
-	// set_transf(right_wall, transform);
-	w->objects = malloc(sizeof(t_object *) * 3);
+	floor = ft_sphere(1);
+	floor->base.m.c = ft_colour(0.8, 0.8, 0.8);
+	floor->base.m.specular = 0;
+	transform = multiply_matrices(translate(0, -1.5, -1), scale(10, 0.01, 10));
+	set_transf(floor, transform);
+	left_wall = ft_sphere(1);
+	left_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
+	left_wall->base.m.specular = 0;
+	transform = multiply_matrices(translate(0, 0, 5),
+		multiply_matrices( rotate_y(-M_PI / 4),
+			multiply_matrices(rotate_x(M_PI / 2),scale(10, 0.01, 10))));
+	set_transf(left_wall, transform);
+	right_wall = ft_sphere(1);
+	right_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
+	right_wall->base.m.specular = 0;
+	transform = multiply_matrices(translate(0, 0, 5),
+		multiply_matrices(
+			multiply_matrices( rotate_y(M_PI / 4),rotate_x(M_PI / 2)),scale(10, 0.01, 10)));
+	set_transf(right_wall, transform);
+	w->objects = malloc(sizeof(t_object *) * 6);
 	if (!w->objects)
 		return (NULL);
 	w->objects[0] = s1;
 	w->objects[1] = s2;
 	w->objects[2] = s3;
-	// w->objects[3] = floor;
-	// w->objects[4] = left_wall;
-	// w->objects[5] = right_wall;
-	w->object_count = 3;
+	w->objects[3] = floor;
+	w->objects[4] = left_wall;
+	w->objects[5] = right_wall;
+	w->object_count = 6;
 	return (w);
 }
 
@@ -115,6 +115,8 @@ void	draw_sphere(t_engine *engine)
 	ctx.half = WALL_SIZE / 2.0;
 
 	render_loop(&ctx, &engine->image);
+	mlx_put_image_to_window(engine->mlx, engine->window,
+		engine->image.img_ptr, 0, 0);
 	free_world(ctx.world);
 }
 
