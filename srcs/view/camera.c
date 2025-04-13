@@ -22,7 +22,7 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 
 	camera.hsize = hsize;
 	camera.vsize = vsize;
-	fov_radians = fov_degrees;
+	fov_radians = fov_degrees * M_PI / 180;
 	// fov_degrees * M_PI/180;
 	camera.fov = fov_radians;
 	camera.transf = create_identity_matrix(4);
@@ -56,8 +56,11 @@ t_image	*render(t_camera cam, t_world *world, t_image *img)
 		while (x < (int)cam.hsize)
 		{
 			ray = ray_for_pixel(cam, x, y);
+			printf("[DEBUG] ray created\n");
 			col = color_at(world, ray);
+			printf("[DEBUG] color found\n");
 			put_pixel(img, x, y, convert_colour_to_int(col));
+			printf("[DEBUG] pixel putted\n");
 			free_ray(ray);
 			x++;
 		}

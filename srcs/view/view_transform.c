@@ -57,11 +57,17 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_matrix	*translation;
 	t_matrix	*result;
 
+	// printf("[DEBUG] view_transform\n");
 	forward = normalise(diff_tuple(to, from));
+	// printf("[DEBUG] forward calculated\n");
 	upn = normalise(up);
+	// printf("[DEBUG] upn calculated\n");
 	orientation = orientation_matrix(forward, upn);
+	// printf("[DEBUG] orientation calculated\n");
 	translation = translate(-from.x, -from.y, -from.z);
+	// printf("[DEBUG] translation calculated\n");
 	result = multiply_matrices(orientation, translation);
+	// printf("[DEBUG] result calculated\n");
 	free_matrix(orientation);
 	free_matrix(translation);
 	return (result);

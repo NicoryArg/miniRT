@@ -42,6 +42,7 @@ static t_tuple	rfp_pixel(t_camera cam, double world_x, double world_y)
 	point = tuple_to_matrix(ft_tuple(world_x, world_y, -1, POINT));
 	pixel_mtx = multiply_matrices(inverse, point);
 	pixel = matrix_to_tuple(pixel_mtx);
+	pixel.w = POINT;
 	free_matrix(pixel_mtx);
 	free_matrix(point);
 	free_matrix(inverse);
@@ -75,9 +76,16 @@ t_ray	*ray_for_pixel(t_camera cam, int px, int py)
 	t_tuple	origin;
 	t_tuple	direction;
 
+	// printf("[DEBUG] finding pixel..\n");
 	pixel = rfp_pixel(cam, w_pt(cam,px,'x'), w_pt(cam,py,'y'));
+	// printf("[DEBUG] pixel found\n");
 	origin = rfp_origin(cam.transf);
+	// printf("[DEBUG] origin found\n");
+	// print_tuple(pixel, "pixel");
+	// print_tuple(origin, "origin");
 	direction = normalise(diff_tuple(pixel, origin));
+	// printf("[DEBUG] direction found\n");
 	ray = ft_ray(origin, direction);
+	// printf("[DEBUG] ray created\n");
 	return (ray);
 }
