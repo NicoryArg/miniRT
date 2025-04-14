@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 19:42:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 20:49:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 15:33:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 15:33:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ t_matrix	*orientation_matrix(t_tuple forward, t_tuple up)
 	return (orientation);
 }
 
+t_tuple	safe_up(t_tuple forward)
+{
+	t_tuple	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
+	if (fabs(dot(forward, up)) > 0.999)
+		up = ft_tuple(1, 0, 0, VECTOR); // switch to X-up if too close
+	return (up);
+}
+
+
 /**
  * @brief Computes a view transformation matrix from camera orientation.
  *
@@ -57,17 +66,17 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_matrix	*translation;
 	t_matrix	*result;
 
-	// printf("[DEBUG] view_transform\n");
 	forward = normalise(diff_tuple(to, from));
-	// printf("[DEBUG] forward calculated\n");
+	// Safety check: if up vector is parallel to forward, pick a new up
+	if (fabs(dot(forward, normalise(up))) > 0.999)
+	{
+		up = safe_up(forward); // Switch to z-up if y-up breaks
+		printf(AKA"[DEBUG] Up vector was adjusted to prevent invalid camera orientation\n"RES);
+	}
 	upn = normalise(up);
-	// printf("[DEBUG] upn calculated\n");
 	orientation = orientation_matrix(forward, upn);
-	// printf("[DEBUG] orientation calculated\n");
 	translation = translate(-from.x, -from.y, -from.z);
-	// printf("[DEBUG] translation calculated\n");
 	result = multiply_matrices(orientation, translation);
-	// printf("[DEBUG] result calculated\n");
 	free_matrix(orientation);
 	free_matrix(translation);
 	return (result);

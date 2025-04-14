@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 22:49:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 22:56:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 15:33:22 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 15:33:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	draw_world(t_engine *engine)
 	t_camera	cam;
 
 	w = default_scene();
-	cam = ft_camera(500, 500, 120);//try to not change
+	cam = ft_camera(500, 500, 60);//try to not change
 	cam.transf = view_transform(
-		ft_tuple(0, 1, -4, POINT),//from camera
+		ft_tuple(0, 0, -10, POINT),//from camera
 		ft_tuple(0, 0, 0, POINT),//look at target
 		ft_tuple(0, 1, 0, VECTOR));//up vector
 	render(cam, w, &engine->image);
