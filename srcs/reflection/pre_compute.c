@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 18:40:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 18:41:00 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 17:18:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 17:49:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,37 @@ t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 	return (comps);
 }
 
+static bool	check_shadow_hit(t_world *w, t_ray *r, double ligth_distance)
+{
+	t_inters	*xs;
+	t_hit		*hit;
+	bool		shadowed;
+
+	xs = intersect_world(w, r);
+	hit = find_visible_hit(xs->hits, xs->count);
+	if (hit && hit->t < ligth_distance)
+		shadowed = true;
+	else
+		shadowed = false;
+	free_ray(r);
+	free_hits(xs);
+	return (shadowed);
+}
+
+bool	is_shadowed(t_world *w, t_tuple point)
+{
+	t_ray		*r;
+	t_tuple		lightv;
+	double		light_distance;
+	t_tuple		direction;
+
+	lightv = diff_tuple(w->light->pos, point);
+	light_distance = magnitude(lightv);
+	direction = normalise(lightv);
+	r = ft_ray(point, direction);
+	return (check_shadow_hit(w, r, light_distance));
+}
+
 /**
  * @brief Computes the color at the point of intersection.
  *
@@ -56,7 +87,9 @@ t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 t_colour	shade_hit(t_world *w, t_computations comps)
 {
 	t_shading	light_args;
+	bool		shadowed;
 
+	shadowed = is_shadowed(w, comps.point);
 	light_args.m = ((t_object *)comps.obj)->m;
 	light_args.l = w->light;
 	light_args.point = comps.point;

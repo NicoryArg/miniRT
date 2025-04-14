@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 18:40:17 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 18:40:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 17:16:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 17:17:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param L A struct containing lighting and geometry information.
  * @return The resulting color at the shaded point.
  */
-t_colour	ft_shading(t_shading L)
+t_colour	ft_shading(t_shading L, bool in_shadow)
 {
 	t_colour	result;
 	t_phong		ph;
@@ -30,6 +30,8 @@ t_colour	ft_shading(t_shading L)
 	ph.effective_colour = mult_colours(L.m.c, L.l->lum);
 	ph.lightv = normalise(diff_tuple(L.l->pos, L.point));
 	ph.ambient = mult_colour(ph.effective_colour, L.m.ambient);
+	if (in_shadow)
+		return (ph.ambient);
 	ph.light_dot_normal = dot(ph.lightv, L.normalv);
 	if (ph.light_dot_normal < 0)
 	{

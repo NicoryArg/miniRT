@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 15:33:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 15:33:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 15:40:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 15:41:49 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ t_matrix	*orientation_matrix(t_tuple forward, t_tuple up)
 	return (orientation);
 }
 
-t_tuple	safe_up(t_tuple forward)
+/**
+ * @brief Computes a safe up vector to avoid singularities in view_transform()
+ */
+static t_tuple	safe_up(t_tuple forward)
 {
-	t_tuple	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
+	t_tuple	up;
+
+	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
 	if (fabs(dot(forward, up)) > 0.999)
 		up = ft_tuple(1, 0, 0, VECTOR); // switch to X-up if too close
 	return (up);
 }
-
 
 /**
  * @brief Computes a view transformation matrix from camera orientation.
