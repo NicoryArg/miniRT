@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 19:42:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 20:49:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 15:40:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 15:41:49 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ static t_tuple	safe_up(t_tuple forward)
 }
 
 /**
+ * @brief Computes a safe up vector to avoid singularities in view_transform()
+ */
+static t_tuple	safe_up(t_tuple forward)
+{
+	t_tuple	up;
+
+	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
+	if (fabs(dot(forward, up)) > 0.999)
+		up = ft_tuple(1, 0, 0, VECTOR); // switch to X-up if too close
+	return (up);
+}
+
+/**
  * @brief Computes a view transformation matrix from camera orientation.
  *
  * @param from Camera position
@@ -69,7 +82,8 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_matrix	*translation;
 	t_matrix	*result;
 
-	forward = normalise(diff_tuple(to, from)); //user will give a normalized orientation vector
+	forward = normalise(diff_tuple(to, from));
+	// Safety check: if up vector is parallel to forward, pick a new up
 	if (fabs(dot(forward, normalise(up))) > 0.999)
 	{
 		up = safe_up(forward); // Switch to z-up if y-up breaks
