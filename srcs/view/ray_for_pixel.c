@@ -38,14 +38,22 @@ static t_tuple	rfp_pixel(t_camera cam, double world_x, double world_y)
 	t_matrix	*point;
 	t_matrix	*inverse;
 
+	// printf("[DEBUG] rfp_pixel\n");
 	inverse = invert_matrix(cam.transf);
+	// printf("[DEBUG] inverse\n");
 	point = tuple_to_matrix(ft_tuple(world_x, world_y, -1, POINT));
+	// printf("[DEBUG] point\n");
+	// print_matrix(point);
+	// print_matrix(inverse);
 	pixel_mtx = multiply_matrices(inverse, point);
+	// printf("[DEBUG] pixel_mtx\n");
 	pixel = matrix_to_tuple(pixel_mtx);
+	// printf("[DEBUG] pixel found\n");
 	pixel.w = POINT;
 	free_matrix(pixel_mtx);
 	free_matrix(point);
 	free_matrix(inverse);
+	// printf("[DEBUG] freed\n");
 	return (pixel);
 }
 /**

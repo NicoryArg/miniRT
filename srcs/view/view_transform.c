@@ -40,6 +40,18 @@ t_matrix	*orientation_matrix(t_tuple forward, t_tuple up)
 	orientation->values[2][2] = -forward.z;
 	return (orientation);
 }
+/**
+ * @brief Computes a safe up vector to avoid singularities in view_transform()
+ */
+static t_tuple	safe_up(t_tuple forward)
+{
+	t_tuple	up;
+
+	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
+	if (fabs(dot(forward, up)) > 0.999)
+		up = ft_tuple(1, 0, 0, VECTOR); // switch to X-up if too close
+	return (up);
+}
 
 /**
  * @brief Computes a view transformation matrix from camera orientation.
@@ -58,6 +70,11 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_matrix	*result;
 
 	forward = normalise(diff_tuple(to, from)); //user will give a normalized orientation vector
+	if (fabs(dot(forward, normalise(up))) > 0.999)
+	{
+		up = safe_up(forward); // Switch to z-up if y-up breaks
+		printf(AKA"[DEBUG] Up vector was adjusted to prevent invalid camera orientation\n"RES);
+	}
 	upn = normalise(up);
 	orientation = orientation_matrix(forward, upn);
 	translation = translate(-from.x, -from.y, -from.z);

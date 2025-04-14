@@ -19,9 +19,9 @@ void	draw_world(t_engine *engine)
 	t_camera	cam;
 
 	w = default_scene();
-	cam = ft_camera(500, 500, 120);//try to not change
+	cam = ft_camera(500, 500, 60);//try to not change
 	cam.transf = view_transform(
-		ft_tuple(0, 1, -4, POINT),//from camera
+		ft_tuple(0, 5, -7, POINT),//from camera
 		ft_tuple(0, 0, 0, POINT),//look at target
 		ft_tuple(0, 1, 0, VECTOR));//up vector
 	render(cam, w, &engine->image);
