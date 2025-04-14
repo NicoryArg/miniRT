@@ -54,19 +54,6 @@ static t_tuple	safe_up(t_tuple forward)
 }
 
 /**
- * @brief Computes a safe up vector to avoid singularities in view_transform()
- */
-static t_tuple	safe_up(t_tuple forward)
-{
-	t_tuple	up;
-
-	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
-	if (fabs(dot(forward, up)) > 0.999)
-		up = ft_tuple(1, 0, 0, VECTOR); // switch to X-up if too close
-	return (up);
-}
-
-/**
  * @brief Computes a view transformation matrix from camera orientation.
  *
  * @param from Camera position
