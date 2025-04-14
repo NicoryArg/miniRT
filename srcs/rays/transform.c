@@ -16,7 +16,7 @@ void    set_transf(void *obj, t_matrix *trans)
 {
 	t_object	*o;
 
-	o = (t_object *)obj;
+	o = (t_object *)obj;//equivalent to a pointer to obj->base
 	if (o->transf && o->transf != trans)
 	{
 		free_matrix(o->transf);

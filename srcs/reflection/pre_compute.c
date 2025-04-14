@@ -26,6 +26,7 @@
 t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 {
 	t_computations	comps;
+	t_tuple			offset;
 
 	comps.t = hit->t;
 	comps.obj = hit->obj;
@@ -39,6 +40,8 @@ t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 	}
 	else
 		comps.inside = false;
+	offset = mult_tuple(comps.normalv, EPSILON);
+	comps.over_point = add_tuple(comps.point, offset);
 	return (comps);
 }
 
@@ -56,13 +59,15 @@ t_computations	pre_compute(t_hit	*hit, t_ray *ray)
 t_colour	shade_hit(t_world *w, t_computations comps)
 {
 	t_shading	light_args;
+	bool		in_shadow;
 
 	light_args.m = ((t_object *)comps.obj)->m;
 	light_args.l = w->light;
-	light_args.point = comps.point;
+	light_args.point = comps.over_point;
 	light_args.eyev = comps.eyev;
 	light_args.normalv = comps.normalv;
-	return (ft_shading(light_args));
+	in_shadow = is_shadowed(w, comps.over_point);
+	return (ft_shading(light_args, in_shadow));
 }
 
 /**

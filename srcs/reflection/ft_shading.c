@@ -22,7 +22,7 @@
  * @param L A struct containing lighting and geometry information.
  * @return The resulting color at the shaded point.
  */
-t_colour	ft_shading(t_shading L)
+t_colour	ft_shading(t_shading L, bool in_shadow)
 {
 	t_colour	result;
 	t_phong		ph;

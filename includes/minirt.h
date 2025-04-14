@@ -162,6 +162,7 @@ typedef struct s_computations
 	double		t;
 	void		*obj;
 	t_tuple		point;
+	t_tuple		over_point;
 	t_tuple		eyev;
 	t_tuple		normalv;
 }	t_computations;
@@ -292,7 +293,7 @@ t_tuple		ft_reflect(t_tuple in, t_tuple normal);
 t_light		*ft_light(t_tuple position, t_colour lum);
 
 //ft_shading.c
-t_colour	ft_shading(t_shading L);
+t_colour	ft_shading(t_shading L, bool in_shadow);
 
 //normal_at.c
 t_tuple		ft_world_normal(t_matrix *inverse, t_tuple obj_normal);
