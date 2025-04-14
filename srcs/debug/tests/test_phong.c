@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 15:58:26 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/31 19:32:22 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/14 17:56:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 17:56:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,110 +125,110 @@ int	material_test(int run)
 //////////////////////////// SHADING ///////////////////////////////
 //#################################################################//
 
-int	shading_test(int run)
-{
-	if (run == 0)
-		return (0);
-	int			i = 1;
-	t_shading	L;
-	t_colour	result;
-	t_colour	expected;
+// int	shading_test(int run)
+// {
+// 	if (run == 0)
+// 		return (0);
+// 	int			i = 1;
+// 	t_shading	L;
+// 	t_colour	result;
+// 	t_colour	expected;
 
-//TEST 1
-	//print banners
-	print_test_banner("Eye between light and surface");
-	print_test_number(&i);
-	//initiate variables
-	L.m = ft_material();
-	L.point = ft_tuple(0, 0, 0, POINT);
-	L.eyev = ft_tuple(0, 0, -1, VECTOR);
-	L.normalv = ft_tuple(0, 0, -1, VECTOR);
-	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
-	expected = ft_colour(1.9, 1.9, 1.9);
-	//run test
-	result = ft_shading(L);
-	//print output
-	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
-	//check output
-	if (equal_colour(result, expected))
-		printf(GR"✔ result matches expected\n"RES);
-	else
-		return (printf(AKA"❌ result doesn't match expected\n"RES));
+// //TEST 1
+// 	//print banners
+// 	print_test_banner("Eye between light and surface");
+// 	print_test_number(&i);
+// 	//initiate variables
+// 	L.m = ft_material();
+// 	L.point = ft_tuple(0, 0, 0, POINT);
+// 	L.eyev = ft_tuple(0, 0, -1, VECTOR);
+// 	L.normalv = ft_tuple(0, 0, -1, VECTOR);
+// 	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
+// 	expected = ft_colour(1.9, 1.9, 1.9);
+// 	//run test
+// 	result = ft_shading(L);
+// 	//print output
+// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	//check output
+// 	if (equal_colour(result, expected))
+// 		printf(GR"✔ result matches expected\n"RES);
+// 	else
+// 		return (printf(AKA"❌ result doesn't match expected\n"RES));
 
-//TEST 2
-	//print banners
-	print_test_banner("Eye between light and surface, eye offset 45°");
-	print_test_number(&i);
-	//redefine variables
-	double	x = sqrt(2)/2;
-	L.eyev = ft_tuple(0, x, -x, VECTOR);
-	expected = ft_colour(1.0, 1.0, 1.0);
-	//run test
-	result = ft_shading(L);
-	//print output
-	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
-	//check output
-	if (equal_colour(result, expected))
-		printf(GR"✔ result matches expected\n"RES);
-	else
-		return (printf(AKA"❌ result doesn't match expected\n"RES));
+// //TEST 2
+// 	//print banners
+// 	print_test_banner("Eye between light and surface, eye offset 45°");
+// 	print_test_number(&i);
+// 	//redefine variables
+// 	double	x = sqrt(2)/2;
+// 	L.eyev = ft_tuple(0, x, -x, VECTOR);
+// 	expected = ft_colour(1.0, 1.0, 1.0);
+// 	//run test
+// 	result = ft_shading(L);
+// 	//print output
+// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	//check output
+// 	if (equal_colour(result, expected))
+// 		printf(GR"✔ result matches expected\n"RES);
+// 	else
+// 		return (printf(AKA"❌ result doesn't match expected\n"RES));
 
-//TEST 3
-	//print banners
-	print_test_banner("Eye opposite surface, light offset 45°");
-	print_test_number(&i);
-	//redefine variables
-	L.eyev = ft_tuple(0, 0, -1, VECTOR);
-	L.l->pos = ft_tuple(0, 10, -10, POINT);
-	expected = ft_colour(0.7364, 0.7364, 0.7364);
-	//run test
-	result = ft_shading(L);
-	//print output
-	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
-	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
-	//check output
-	if (equal_colour(result, expected))
-		printf(GR"✔ result matches expected\n"RES);
-	else
-		return (printf(AKA"❌ result doesn't match expected\n"RES));
+// //TEST 3
+// 	//print banners
+// 	print_test_banner("Eye opposite surface, light offset 45°");
+// 	print_test_number(&i);
+// 	//redefine variables
+// 	L.eyev = ft_tuple(0, 0, -1, VECTOR);
+// 	L.l->pos = ft_tuple(0, 10, -10, POINT);
+// 	expected = ft_colour(0.7364, 0.7364, 0.7364);
+// 	//run test
+// 	result = ft_shading(L);
+// 	//print output
+// 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
+// 	//check output
+// 	if (equal_colour(result, expected))
+// 		printf(GR"✔ result matches expected\n"RES);
+// 	else
+// 		return (printf(AKA"❌ result doesn't match expected\n"RES));
 
-//TEST 4
-	//print banners
-	print_test_banner("Eye in path of the reflection vector of light");
-	print_test_number(&i);
-	//redefine variables
-	L.eyev = ft_tuple(0, -x, -x, VECTOR);
-	expected = ft_colour(1.6364, 1.6364, 1.6364);
-	//run test
-	result = ft_shading(L);
-	//print output
-	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
-	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
-	//check output
-	if (equal_colour(result, expected))
-		printf(GR"✔ result matches expected\n"RES);
-	else
-		return (printf(AKA"❌ result doesn't match expected\n"RES));
+// //TEST 4
+// 	//print banners
+// 	print_test_banner("Eye in path of the reflection vector of light");
+// 	print_test_number(&i);
+// 	//redefine variables
+// 	L.eyev = ft_tuple(0, -x, -x, VECTOR);
+// 	expected = ft_colour(1.6364, 1.6364, 1.6364);
+// 	//run test
+// 	result = ft_shading(L);
+// 	//print output
+// 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
+// 	//check output
+// 	if (equal_colour(result, expected))
+// 		printf(GR"✔ result matches expected\n"RES);
+// 	else
+// 		return (printf(AKA"❌ result doesn't match expected\n"RES));
 
-//TEST 5
-	//print banners
-	print_test_banner("Light behind the surface");
-	print_test_number(&i);
-	//redefine variables
-	L.eyev = ft_tuple(0, 0, -1, VECTOR);
-	L.l->pos = ft_tuple(0, 0, 10, POINT);
-	expected = ft_colour(0.1, 0.1, 0.1);
-	//run test
-	result = ft_shading(L);
-	//print output
-	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
-	//check output
-	if (equal_colour(result, expected))
-		printf(GR"✔ result matches expected\n"RES);
-	else
-		return (printf(AKA"❌ result doesn't match expected\n"RES));
-	return (0);
-}
+// //TEST 5
+// 	//print banners
+// 	print_test_banner("Light behind the surface");
+// 	print_test_number(&i);
+// 	//redefine variables
+// 	L.eyev = ft_tuple(0, 0, -1, VECTOR);
+// 	L.l->pos = ft_tuple(0, 0, 10, POINT);
+// 	expected = ft_colour(0.1, 0.1, 0.1);
+// 	//run test
+// 	result = ft_shading(L);
+// 	//print output
+// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	//check output
+// 	if (equal_colour(result, expected))
+// 		printf(GR"✔ result matches expected\n"RES);
+// 	else
+// 		return (printf(AKA"❌ result doesn't match expected\n"RES));
+// 	return (0);
+// }

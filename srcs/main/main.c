@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:36:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:36:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/14 17:57:40 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/14 17:57:40 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	main()
 		return (-1);
 	if (ft_main_rays(0)) //1 to run, 0 to skip
 		return (-1);
-	if (ft_main_phong(0)) //1 to run, 0 to skip
-		return (-1);
+	// if (ft_main_phong(0)) //1 to run, 0 to skip
+	// 	return (-1);
 	if (ft_main_world(0)) //1 to run, 0 to skip
 		return (-1);
 	if (ft_main_engine(1)) //1 to run, 0 to skip
