@@ -52,15 +52,13 @@ t_image	*render(t_camera cam, t_world *world, t_image *img)
 	y = 0;
 	while (y < (int)cam.vsize)
 	{
+		printf(YEL"[DEBUG]"RES" (%d)\n", y);
 		x = 0;
 		while (x < (int)cam.hsize)
 		{
 			ray = ray_for_pixel(cam, x, y);
-			printf("[DEBUG] ray created\n");
 			col = color_at(world, ray);
-			printf("[DEBUG] color found\n");
 			put_pixel(img, x, y, convert_colour_to_int(col));
-			printf("[DEBUG] pixel putted\n");
 			free_ray(ray);
 			x++;
 		}
