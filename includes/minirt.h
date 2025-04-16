@@ -306,6 +306,8 @@ t_tuple		sph_normal_at(t_sphere *sph, t_tuple world_p);
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
 t_colour		shade_hit(t_world *w, t_computations comps);
 t_colour		color_at(t_world *world, t_ray *ray);
+bool			is_shadowed(t_world *w, t_tuple point);
+
 
 //#############################################
 //############### SCENE #######################
@@ -442,7 +444,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 200
+# define WIN_SIZE 300
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

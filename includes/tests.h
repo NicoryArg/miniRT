@@ -61,6 +61,9 @@ int		intersection_test(int run);
 int		ray_transform_test(int run);
 int		ray_transform_test2(int run);
 
+//test_shadows.c
+int		shadows_test(int run);
+
 //test_reflection.c
 int		normal_at_test(int run);
 
@@ -106,5 +109,6 @@ int		ft_main_rays(int run);
 int		ft_main_phong(int run);
 int		ft_main_world(int run);
 int		ft_main_view(int run);
+int		ft_main_shadows(int run);
 
 #endif

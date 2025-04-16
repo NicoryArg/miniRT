@@ -61,9 +61,11 @@ int	main()
 		return (-1);
 	if (ft_main_world(0)) //1 to run, 0 to skip
 		return (-1);
-	if (ft_main_view(1)) //1 to run, 0 to skip
+	if (ft_main_view(0)) //1 to run, 0 to skip
 		return (-1);
-	if (ft_main_engine(1)) //1 to run, 0 to skip
+	if (ft_main_shadows(1)) //1 to run, 0 to skip
+		return (-1);
+	if (ft_main_engine(0)) //1 to run, 0 to skip
 		return (-1);
 	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);

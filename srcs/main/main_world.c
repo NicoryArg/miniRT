@@ -25,7 +25,7 @@ int	ft_main_world(int run)
 		return(printf(AKA"Error: intersect_world_test failed\n"RES));
 	if (ft_pre_compute_test(1))
 		return(printf(R_B"ft_pre_compute_test failed\n"RES));
-	if (shade_hit_test(0))
+	if (shade_hit_test(1))
 		printf(AKA"Error: shade_hit_test failed\n"RES);
 	if (color_at_test(1))
 		printf(AKA"Error: color_at_test failed\n"RES);
