@@ -146,7 +146,7 @@ int	shading_test(int run)
 	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
 	expected = ft_colour(1.9, 1.9, 1.9);
 	//run test
-	result = ft_shading(L);
+	result = ft_shading(L, false);
 	//print output
 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
@@ -165,7 +165,7 @@ int	shading_test(int run)
 	L.eyev = ft_tuple(0, x, -x, VECTOR);
 	expected = ft_colour(1.0, 1.0, 1.0);
 	//run test
-	result = ft_shading(L);
+	result = ft_shading(L, false);
 	//print output
 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
@@ -184,7 +184,7 @@ int	shading_test(int run)
 	L.l->pos = ft_tuple(0, 10, -10, POINT);
 	expected = ft_colour(0.7364, 0.7364, 0.7364);
 	//run test
-	result = ft_shading(L);
+	result = ft_shading(L, false);
 	//print output
 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
@@ -202,7 +202,7 @@ int	shading_test(int run)
 	L.eyev = ft_tuple(0, -x, -x, VECTOR);
 	expected = ft_colour(1.6364, 1.6364, 1.6364);
 	//run test
-	result = ft_shading(L);
+	result = ft_shading(L, false);
 	//print output
 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
@@ -221,7 +221,7 @@ int	shading_test(int run)
 	L.l->pos = ft_tuple(0, 0, 10, POINT);
 	expected = ft_colour(0.1, 0.1, 0.1);
 	//run test
-	result = ft_shading(L);
+	result = ft_shading(L, false);
 	//print output
 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
