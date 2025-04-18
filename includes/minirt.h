@@ -98,6 +98,13 @@ typedef struct s_sphere
 	int			id;
 }	t_sphere;
 
+typedef struct s_cylinder
+{
+	t_object	base;
+	t_tuple		centre;
+	double		radius;
+}	t_cylinder;
+
 typedef struct s_plane
 {
 	t_object	base;
@@ -321,6 +328,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r);
  */
 t_sphere	*ft_sphere(double radius);
 t_plane		*ft_plane(void);
+t_cylinder	*ft_cylinder(void);
 
 //#############################################
 //#############TRANSFORMATIONS#################
