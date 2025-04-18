@@ -26,6 +26,7 @@
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
 typedef struct s_phong t_phong;
+typedef struct t_cylinder t_cyl;
 
 //#############################################
 //############ TUPLES & MATRICES ##############
@@ -265,7 +266,7 @@ t_inters	*intersect(void *obj, t_ray *ray);
 t_hit		*intersection(double t, void *object);
 
 //ray_sphere.c
-double		discriminant(t_ray *ray, t_tuple sph_to_ray);
+double		discriminant_sph(t_ray *ray, t_tuple sph_to_ray);
 t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
 
 //rays.c

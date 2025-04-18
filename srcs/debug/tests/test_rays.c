@@ -138,7 +138,7 @@ int	sph_ray_intersect(int run)
 	print_test_banner("two intersections");
 	print_test_number(&i);
 	//run test
-	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
 	xs = intersect(s, r);
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
@@ -162,7 +162,7 @@ int	sph_ray_intersect(int run)
 	//redefine ray
 	r = ft_ray(ft_tuple(-5, 1, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	//run test
-	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
 	xs = intersect(s, r);
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
@@ -185,7 +185,7 @@ int	sph_ray_intersect(int run)
 	print_test_number(&i);
 	//redifine ray
 	r = ft_ray(ft_tuple(-5, 2, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
-	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
 	xs = intersect(s, r);
@@ -207,7 +207,7 @@ int	sph_ray_intersect(int run)
 	//redefine ray
 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	//run test
-	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
 	xs = intersect(s, r);
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
@@ -231,7 +231,7 @@ int	sph_ray_intersect(int run)
 	//redefine ray
 	r = ft_ray(ft_tuple(5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	//run test
-	d = discriminant(r, diff_tuple(r->origin, s->centre));
+	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
 	xs = intersect(s, r);
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
