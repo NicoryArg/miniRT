@@ -25,6 +25,7 @@
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
 typedef struct s_phong t_phong;
+typedef struct t_cylinder t_cyl;
 
 //#############################################
 //############ TUPLES & MATRICES ##############
@@ -96,6 +97,13 @@ typedef struct s_sphere
 	double		radius;
 	int			id;
 }	t_sphere;
+
+typedef struct s_cylinder
+{
+	t_object	base;
+	t_tuple		centre;
+	double		radius;
+}	t_cylinder;
 
 typedef struct s_plane
 {
@@ -268,7 +276,7 @@ t_inters	*intersect(void *obj, t_ray *ray);
 t_hit		*intersection(double t, void *object);
 
 //ray_sphere.c
-double		discriminant(t_ray *ray, t_tuple sph_to_ray);
+double		discriminant_sph(t_ray *ray, t_tuple sph_to_ray);
 t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
 
 //rays.c
@@ -331,6 +339,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r);
  */
 t_sphere	*ft_sphere(double radius);
 t_plane		*ft_plane(void);
+t_cylinder	*ft_cylinder(void);
 
 //#############################################
 //############ TRANSFORMATIONS ################

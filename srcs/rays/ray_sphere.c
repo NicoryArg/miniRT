@@ -13,7 +13,7 @@
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-double	discriminant(t_ray *ray, t_tuple sph_to_ray)
+double	discriminant_sph(t_ray *ray, t_tuple sph_to_ray)
 {
 	double	a;
 	double	b;
@@ -37,7 +37,7 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 
 	i = xs->count;
 	origin_centre = diff_tuple(ray->origin, sph->centre);
-	d = discriminant(ray, origin_centre);
+	d = discriminant_sph(ray, origin_centre);
 	if (d < 0)
 		return (xs);
 	a = dot(ray->direction, ray->direction);
