@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:57:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 17:57:40 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:16:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:16:02 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	main()
 	if (ft_main_engine(1)) //1 to run, 0 to skip
 		return (-1);
 	if (ft_main_view(0)) //1 to run, 0 to skip
+		return (-1);
+	if(ft_main_patterns(1))
 		return (-1);
 	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 18:26:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 18:26:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:11:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:12:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,32 @@ typedef struct s_matrix
 	double		**values;
 }	t_matrix;
 
+//#############################################
+//############## PATTERNS #####################
+//#############################################
+
+typedef struct s_colour
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_colour;
+
+typedef enum e_pattern_type
+{
+	PATTERN_STRIPE,
+	PATTERN_GRADIENT,
+	PATTERN_RING,
+	PATTERN_CHECKERS
+} t_pattern_type;
+
+typedef struct s_pattern
+{
+	t_pattern_type type;
+	t_colour a;
+	t_colour b;
+	t_matrix *transform;
+} t_pattern;
 
 //#############################################
 //################ OBJECTS ####################
@@ -67,12 +93,6 @@ typedef enum e_obj_type
 	PLANE,
 }	t_obj;
 
-typedef struct s_colour
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_colour;
 
 typedef struct s_material
 {
@@ -81,6 +101,7 @@ typedef struct s_material
 	double		diffuse;
 	double		specular;
 	double		shininess;
+	t_pattern	*pattern;
 }	t_material;
 
 typedef struct s_object
@@ -135,6 +156,7 @@ typedef struct s_shading
 	t_tuple		eyev;
 	t_tuple		normalv;
 	t_phong		*ph;
+	void		*obj;
 }	t_shading;
 
 typedef struct s_phong
@@ -246,6 +268,17 @@ t_matrix	*transpose_matrix(t_matrix *input);
 
 //matrix_free.c
 void		free_matrix(t_matrix *matrix);
+
+//#############################################
+//##############PATTERNS#######################
+//#############################################
+double		ft_floor(double x);
+t_pattern	stripe_pattern(t_colour a, t_colour b);
+t_colour	stripe_at(t_pattern *pattern, t_tuple point);
+t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
+t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
+t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
+t_pattern	test_pattern(void);//test
 
 //#############################################
 //##################RAYS#######################

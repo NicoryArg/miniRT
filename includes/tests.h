@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 20:58:18 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 20:58:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:13:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:13:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ int		color_at_test(int run);
 int		view_transform_test(int run);
 int		camera_test(int run);
 
+//test_patterns.c
+int		stripe_pattern_test(int run);
+int		pattern_lighting_test(int run);
+int		stripe_transform_test(int run);
+int		pattern_generalization_test(int run);
+
 //main tests (used to run all tests at once)
 int		ft_main_tuples(int run);
 int		ft_main_transform(int run);
@@ -106,5 +112,6 @@ int		ft_main_rays(int run);
 int		ft_main_phong(int run);
 int		ft_main_world(int run);
 int		ft_main_view(int run);
+int		ft_main_patterns(int run);
 
 #endif

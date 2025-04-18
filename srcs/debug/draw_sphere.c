@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 22:44:51 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 22:46:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:18:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:20:18 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,44 @@ t_world	*default_scene(void)
 
 	w = ft_world();
 	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+
+	// Sphere 1
 	s1 = ft_sphere(1);
 	s1->base.m.c = ft_colour(0.1, 1, 0.5);
 	s1->base.m.diffuse = 0.7;
 	s1->base.m.specular = 0.3;
 	transform = multiply_matrices(scale(0.9, 0.9, 0.9), translate(-0.5, -0.5, 0.5));
 	set_transf(s1, transform);
+
+	// Sphere 2
 	s2 = ft_sphere(1);
 	s2->base.m.c = ft_colour(0.5, 1, 0.1);
 	s2->base.m.diffuse = 0.7;
 	s2->base.m.specular = 0.3;
 	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(3, -2, 0.5));
 	set_transf(s2, transform);
+
+	// Sphere 3
 	s3 = ft_sphere(1);
 	s3->base.m.c = ft_colour(1, 0.8, 1);
 	s3->base.m.diffuse = 0.7;
 	s3->base.m.specular = 0.3;
 	transform = multiply_matrices(scale(0.33, 0.33, 0.33), translate(-5, -3.5, 0.7));
 	set_transf(s3, transform);
-	//floor
+
+	// Floor with stripe pattern
 	floor = ft_sphere(1);
 	floor->base.m.c = ft_colour(0.8, 0.8, 0.8);
 	floor->base.m.specular = 0;
+	t_pattern *stripe = malloc(sizeof(t_pattern));
+	*stripe = stripe_pattern(ft_colour(1, 1, 1), ft_colour(0, 0, 0)); // white + black
+	free_matrix(stripe->transform);
+	stripe->transform = scale(0.2, 0.2, 0.2); // tighter stripes
+	floor->base.m.pattern = stripe;
 	transform = multiply_matrices(translate(0, -1.5, -1), scale(10, 0.01, 10));
 	set_transf(floor, transform);
+
+	// Left wall
 	left_wall = ft_sphere(1);
 	left_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
 	left_wall->base.m.specular = 0;
@@ -85,6 +99,8 @@ t_world	*default_scene(void)
 		multiply_matrices( rotate_y(-M_PI / 4),
 			multiply_matrices(rotate_x(M_PI / 2),scale(10, 0.01, 10))));
 	set_transf(left_wall, transform);
+
+	// Right wall
 	right_wall = ft_sphere(1);
 	right_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
 	right_wall->base.m.specular = 0;

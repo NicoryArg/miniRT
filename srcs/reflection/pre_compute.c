@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:18:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 17:49:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:02:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:02:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_colour	shade_hit(t_world *w, t_computations comps)
 	light_args.point = comps.over_point;
 	light_args.eyev = comps.eyev;
 	light_args.normalv = comps.normalv;
+	light_args.obj = comps.obj;
 	in_shadow = is_shadowed(w, comps.over_point);
 	return (ft_shading(light_args, in_shadow));
 }
