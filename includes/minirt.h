@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 18:26:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 18:26:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:17:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:17:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
-# include "tests.h"
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
 
@@ -127,6 +126,12 @@ typedef struct s_intersection
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
 
+typedef struct s_light
+{
+	t_tuple		pos;
+	t_colour	lum;
+}	t_light;
+
 typedef struct s_shading
 {
 	t_material	m;
@@ -150,11 +155,7 @@ typedef struct s_phong
 	double		factor;
 }	t_phong;
 
-typedef struct s_light
-{
-	t_tuple		pos;
-	t_colour	lum;
-}	t_light;
+
 
 typedef struct s_computations
 {
@@ -215,7 +216,16 @@ typedef struct s_render_ctx {
 // }	t_ray_sphere;
 
 //#############################################
-//#################MATRICES####################
+//################ MAIN #######################
+//#############################################
+//main.c
+// int			ft_main_render(int run);
+// int			run_render_with(void (*render_func)(t_engine *));
+// int			ft_main_engine(int run);
+
+
+//#############################################
+//################ MATRICES ###################
 //#############################################
 //determinant.c
 double		minor(t_matrix *matrix, int row, int col);
@@ -248,7 +258,7 @@ t_matrix	*transpose_matrix(t_matrix *input);
 void		free_matrix(t_matrix *matrix);
 
 //#############################################
-//##################RAYS#######################
+//################# RAYS ######################
 //#############################################
 //hits.c
 void		ft_swap(t_hit **a, t_hit **b);
@@ -304,8 +314,8 @@ t_tuple		sph_normal_at(t_sphere *sph, t_tuple world_p);
 
 //pre_compute.c
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
-t_colour		shade_hit(t_world *w, t_computations comps);
-t_colour		color_at(t_world *world, t_ray *ray);
+t_colour		shade_hit(t_world *w, t_computations comps, bool ignore_shadows);
+t_colour		color_at(t_world *world, t_ray *ray, bool ignore_shadows);
 
 //#############################################
 //############### SCENE #######################
@@ -324,7 +334,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r);
 t_sphere	*ft_sphere(double radius);
 
 //#############################################
-//#############TRANSFORMATIONS#################
+//############ TRANSFORMATIONS ################
 //#############################################
 //transformations.c
 /**
@@ -346,7 +356,7 @@ t_tuple		matrix_to_tuple(t_matrix *matrix);
 
 
 //#############################################
-//##################TUPLE######################
+//################# TUPLE #####################
 //#############################################
 //operations.c
 /**
@@ -384,7 +394,7 @@ bool		ft_equal(double a, double b);
 t_tuple		ft_negate(t_tuple tup);
 
 //#############################################
-//##################UTILS######################
+//################# UTILS #####################
 //#############################################
 //colours.c
 t_colour	ft_colour(double r, double g, double b);
@@ -393,9 +403,6 @@ t_colour	mult_colour(t_colour c, double num);
 t_colour	mult_colours(t_colour c1, t_colour c2);
 int			convert_colour_to_int(t_colour col);
 
-
-//message.c
-//void	display_help_message(t_engine *engine);
 
 //free_utils.c
 void		free_ray(t_ray *ray);
@@ -409,7 +416,7 @@ double		ft_max(double a, double b);
 double		ft_min(double a, double b);
 
 //#############################################
-//##################VIEW#######################
+//################# VIEW ######################
 //#############################################
 //camera.c
 /**
@@ -420,6 +427,7 @@ double		ft_min(double a, double b);
  * @param fov Field of view or angle that describes how much the camera can see.
  */
 t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
+
 
 
 //ray_for_pixel.c

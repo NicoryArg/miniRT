@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 18:43:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:43:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:55:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:55:49 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 double	discriminant(t_ray *ray, t_tuple sph_to_ray)
 {

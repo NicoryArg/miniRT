@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:16:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 17:17:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:56:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 /**
  * @brief Applies the Phong reflection model to compute surface color.

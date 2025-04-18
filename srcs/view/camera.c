@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 18:21:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 18:21:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:20:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:20:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_image	*render(t_camera cam, t_world *world, t_image *img)
 		while (x < (int)cam.hsize)
 		{
 			ray = ray_for_pixel(cam, x, y);
-			col = color_at(world, ray);
+			col = color_at(world, ray, false);
 			put_pixel(img, x, y, convert_colour_to_int(col));
 			free_ray(ray);
 			x++;

@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:18:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 17:49:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:11:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:13:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 /**
  * @brief Prepares the data needed to shade an intersection.
@@ -87,7 +88,7 @@ bool	is_shadowed(t_world *w, t_tuple point)
  * @param comps Precomputed intersection information (position, normal, etc).
  * @return The final color at the intersection.
  */
-t_colour	shade_hit(t_world *w, t_computations comps)
+t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 {
 	t_shading	light_args;
 	bool		in_shadow;
@@ -97,7 +98,10 @@ t_colour	shade_hit(t_world *w, t_computations comps)
 	light_args.point = comps.over_point;
 	light_args.eyev = comps.eyev;
 	light_args.normalv = comps.normalv;
-	in_shadow = is_shadowed(w, comps.over_point);
+	if (ignore_shadows)
+		in_shadow = false;
+	else
+		in_shadow = is_shadowed(w, light_args.point);
 	return (ft_shading(light_args, in_shadow));
 }
 
@@ -112,7 +116,7 @@ t_colour	shade_hit(t_world *w, t_computations comps)
  * @param ray The ray to trace from the camera/viewpoint.
  * @return The resulting color seen along the ray.
  */
-t_colour	color_at(t_world *world, t_ray *ray)
+t_colour	color_at(t_world *world, t_ray *ray, bool ignore_shadows)
 {
 	t_inters		*xs;
 	t_hit			*hit;
@@ -126,7 +130,7 @@ t_colour	color_at(t_world *world, t_ray *ray)
 	else
 	{
 		comps = pre_compute(hit, ray);
-		color = shade_hit(world, comps);
+		color = shade_hit(world, comps, ignore_shadows);
 	}
 	free_hits(xs);
 	return (color);

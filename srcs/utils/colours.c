@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_colour	ft_colour(double r, double g, double b)
 {

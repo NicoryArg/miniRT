@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/09 18:53:00 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:58:42 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:58:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 void	print_tuple(t_tuple tuple, char *name)
 {
@@ -99,28 +101,27 @@ int	equal_colour(t_colour c1, t_colour c2)
 		return (0);
 }
 
-// int		printable_material(t_material m)
-// {
-// 	if (m.ambient && m.diffuse && m.specular && m.shininess)
-// 		{
-// 		printf(G_B"Material:\n"RES);
-// 		return (1);
-// 		}
-// 	else
-// 	{
-// 			printf(G_B"Material:\n"RES);
-// 			if (!m.ambient)
-// 				printf(YEL"\tmaterial ambient "AKA"undefined\n");
-// 			if (!m.diffuse)
-// 				printf(YEL"\tmaterial diffuse "AKA"undefined\n");
-// 			if (!m.specular)
-// 				printf(YEL"\tmaterial specular "AKA"undefined\n");
-// 			if (!m.shininess)
-// 				printf(YEL"\tmaterial shininess "AKA"undefined\n");
-// 		}
-// 	}
-// 	return (0);
-// }
+int		printable_material(t_material m)
+{
+	if (m.ambient && m.diffuse && m.specular && m.shininess)
+		{
+		printf(G_B"Material:\n"RES);
+		return (1);
+		}
+	else
+	{
+			printf(G_B"Material:\n"RES);
+			if (!m.ambient)
+				printf(YEL"\tmaterial ambient "AKA"undefined\n");
+			if (!m.diffuse)
+				printf(YEL"\tmaterial diffuse "AKA"undefined\n");
+			if (!m.specular)
+				printf(YEL"\tmaterial specular "AKA"undefined\n");
+			if (!m.shininess)
+				printf(YEL"\tmaterial shininess "AKA"undefined\n");
+	}
+	return (0);
+}
 
 void	print_matrix(t_matrix *matrix)
 {
@@ -157,7 +158,7 @@ void	print_matrix(t_matrix *matrix)
 void	print_test_banner(const char *word)
 {
 	int total_width = 62;  // Adjust if needed
-	int word_length = strlen(word);
+	int word_length = ft_strlen(word);
 	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
 	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
 
@@ -187,11 +188,6 @@ void	print_intersections(t_hit **xs, int count, int sorted)
 	printf(BOLD"_________________________________\n\n"RES);
 }
 
-void	malloc_err(char *func_name)
-{
-	printf(R_B"Error:"RES" [%s] -> failed to allocate memory\n", func_name);
-	exit(1);
-}
 
 
 

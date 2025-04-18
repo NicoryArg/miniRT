@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:53:55 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 17:56:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:49:18 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:49:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_ray	*ft_ray(t_tuple origin, t_tuple direction)
 {

@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:56:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:56:44 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:57:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:57:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 /**
  * @brief calculates world_x or world_y for rfp_pixel

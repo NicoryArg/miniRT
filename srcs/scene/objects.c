@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/31 18:16:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/31 18:16:47 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:56:16 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_sphere	*ft_sphere(double radius)
 {

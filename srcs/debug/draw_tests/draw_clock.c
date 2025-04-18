@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_clock.c                                       :+:      :+:    :+:   */
+/*   draw_clock.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 22:06:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/19 22:06:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 18:55:42 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 18:55:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 #include "engine.h"
 
-#define CLOCK_RADIUS (WIN_SIZE / 4)  // Clock radius = 3/8 of canvas width
-#define CENTER_X (WIN_SIZE / 2)  // Center of screen (X)
-#define CENTER_Y (WIN_SIZE / 2)  // Center of screen (Y)
+#define CLOCK_RADIUS (WIN_SIZE / 4)
+#define CENTER_X (WIN_SIZE / 2)
+#define CENTER_Y (WIN_SIZE / 2)
 #define HOUR_COUNT 12
-#define ROTATION_STEP (M_PI / 6) // π/6 radians per hour
+#define ROTATION_STEP (M_PI / 6)
 
 static void	compute_hour_position(int hour, t_tuple *transformed)
 {
@@ -36,24 +36,32 @@ static void	compute_hour_position(int hour, t_tuple *transformed)
 	free_matrix(hour_matrix);
 }
 
-void	draw_hour_markers(t_image *img)
+static void	draw_clock_loop(t_image *img)
 {
-	t_tuple		transformed;
-	int			hour;
-	int			screen_x;
-	int			screen_y;
+	t_tuple	transformed;
+	int		hour;
+	int		screen_x;
+	int		screen_y;
 
 	hour = 0;
 	while (hour < HOUR_COUNT)
 	{
-		// Compute rotated position
 		compute_hour_position(hour, &transformed);
-		// Scale & Convert to screen coordinates
 		screen_x = CENTER_X + (int)(transformed.x * CLOCK_RADIUS);
-		screen_y = CENTER_Y - (int)(transformed.z * CLOCK_RADIUS); // Flip Y axis
+		screen_y = CENTER_Y - (int)(transformed.z * CLOCK_RADIUS);
 		draw_marker(img, screen_x, screen_y, COLOR_X, MARKER_SIZE);
 		hour++;
 	}
 }
 
+void	draw_clock_scene(t_engine *engine)
+{
+	draw_clock_loop(&engine->image);
+}
 
+int	draw_hour_markers(int run)
+{
+	if (run == 0)
+		return (0);
+	return (1);
+}

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_material.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 16:22:34 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/05 23:07:54 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:55:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:55:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_material	ft_material(void)
 {

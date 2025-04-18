@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:32:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:32:32 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:45:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:45:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	position_test(int run)
 {

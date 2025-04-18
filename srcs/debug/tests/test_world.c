@@ -5,13 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 18:47:03 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 18:48:01 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:20:18 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:20:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 #include "engine.h"
+#include "tests.h"
+
 
 int	world_test(int run)
 {
@@ -276,7 +278,7 @@ int	shade_hit_test(int run)
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
 	hit = intersection(4.0, w->objects[0], SPHERE);
 	comps = pre_compute(hit, r);
-	col = shade_hit(w, comps);
+	col = shade_hit(w, comps, false);
 	// color check
 	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
 	printf(G_B"expected:        (0.38066, 0.47583, 0.28550)\n"RES"");
@@ -296,7 +298,7 @@ int	shade_hit_test(int run)
 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 	hit = intersection(0.5, w->objects[1], SPHERE);
 	comps = pre_compute(hit, r);
-	col = shade_hit(w, comps);
+	col = shade_hit(w, comps, false);
 	// color check
 	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
 	printf(G_B"expected:        (0.90498, 0.90498, 0.90498)\n"RES"");
@@ -325,7 +327,7 @@ int	color_at_test(int run)
 	print_test_number(&i);
 	w = default_world();
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 1, 0, VECTOR));
-	col = color_at(w, r);
+	col = color_at(w, r, false);
 
 	printf(B_B"returned color: (%.0f, %.0f, %.0f)\n"RES"", col.r, col.g, col.b);
 	printf(G_B"expected:       (0, 0, 0)\n"RES"");
@@ -342,7 +344,7 @@ int	color_at_test(int run)
 	print_test_number(&i);
 	w = default_world();
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
-	col = color_at(w, r);
+	col = color_at(w, r, false);
 
 	printf(B_B"returned color: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
 	printf(G_B"expected:       (0.38066, 0.47583, 0.28550)\n"RES"");
@@ -366,7 +368,7 @@ int	color_at_test(int run)
 	outer->m.c = ft_colour(0, 0, 0);
 	// Ray starts between the two objects, heading toward the camera
 	r = ft_ray(ft_tuple(0, 0, 0.75, POINT), ft_tuple(0, 0, -1, VECTOR));
-	col = color_at(w, r);
+	col = color_at(w, r, false);
 	printf(B_B"returned color: (%.2f, %.2f, %.2f)\n"RES"", col.r, col.g, col.b);
 	printf(G_B"expected:       (1.00, 1.00, 1.00)\n"RES"");
 	if (ft_equal(col.r, 1.0) && ft_equal(col.g, 1.0) && ft_equal(col.b, 1.0))

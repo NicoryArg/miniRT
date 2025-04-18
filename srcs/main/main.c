@@ -5,41 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:57:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 17:57:40 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:27:23 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:27:28 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
+#include "tests.h"
 
-// int	main(void)
-// {
-// 	t_matrix	*a;
-// 	t_matrix	*b;
-
-// 	a = create_matrix(2, 2, 0);
-// 	b = create_matrix(2, 2, 0);
-// 	fill_matrix(a);
-// 	fill_matrix(b);
-// 	if (equal_matrix(a, b))
-// 		printf("Equal!\n");
-// 	else
-// 		printf("Not Equal\n");
-// 	return (0);
-// }
-
-
-
-int	ft_main_engine(int run)
+int	ft_main_render(int run)
 {
 	if (run == 0)
 		return (0);
+
+	// Run any of the render scenes below by toggling their run flag to 1
+	if (ft_main_draw_2d(0))
+		return (printf(AKA"❌ draw_2d failed\n"RES));
+	if (ft_main_draw_silhouette(0))
+		return (printf(AKA"❌ draw_silhouette failed\n"RES));
+	if (ft_main_draw_sphere(0))
+		return (printf(AKA"❌ draw_sphere failed\n"RES));
+	if (ft_main_draw_world(0))
+		return (printf(AKA"❌ draw_world failed\n"RES));
+	if (ft_main_draw_world_shadows(1))
+		return (printf(AKA"❌ draw_world failed\n"RES));
+	// if (ft_main_draw_patterns(1))
+	// 	return (printf(AKA"❌ draw_patterns failed\n"RES));
+
+	printf(G_B"END OF RENDER DEMOS\n"RES);
+	return (0);
+}
+
+
+int	run_render_with(void (*render_func)(t_engine *))
+{
 	t_engine	engine;
 
 	init_engine(&engine);
-	// draw_sphere(&engine);
-	draw_world(&engine);
+	render_func(&engine);
+	mlx_put_image_to_window(engine.mlx, engine.window,
+		engine.image.img_ptr, 0, 0);
 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
 	mlx_loop(engine.mlx);
@@ -60,7 +66,7 @@ int	main()
 	// 	return (-1);
 	if (ft_main_world(0)) //1 to run, 0 to skip
 		return (-1);
-	if (ft_main_engine(1)) //1 to run, 0 to skip
+	if (ft_main_render(1)) //1 to run, 0 to skip
 		return (-1);
 	if (ft_main_view(0)) //1 to run, 0 to skip
 		return (-1);

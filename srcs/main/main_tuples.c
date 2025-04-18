@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main_tuples.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 14:50:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/07 17:42:11 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:23:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:23:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-// int	main(void)
-// {
-// 	t_tuple_to_matrix(0);
-// 	t_matrix_to_tuple(0);
-// 	printf(R_B"END OF TUPLE TESTS\n"RES);
-// 	return (0);
-// }
+#include "tests.h"
+#include "engine.h"
 
 int	ft_main_tuples(int run)
 {

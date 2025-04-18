@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_tuple	ft_reflect(t_tuple in, t_tuple normal)
 {

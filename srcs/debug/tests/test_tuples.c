@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_tuples.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 14:55:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/06 12:09:04 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:46:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:46:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	t_matrix_to_tuple(int run)
 {

@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 21:02:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 21:02:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:46:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:46:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 #include "engine.h"
+#include "tests.h"
 
 int	view_transform_test(int run)
 {

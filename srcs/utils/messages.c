@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 20:13:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/18 20:13:11 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:57:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:57:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-#include "../../includes/engine.h"
+#include "engine.h"
 
 void	put_help_text(t_engine *engine, int *y, char *text)
 {
@@ -37,4 +37,10 @@ void	display_help_message(t_engine *engine)
 	put_help_text(engine, &y, "Cylinder: cy <x,y,z> <axis_x,axis_y,axis_z> <diameter> <height> <R,G,B>");
 	y += 20;
 	put_help_text(engine, &y, "Press ESC to close the window.");
+}
+
+void	malloc_err(char *func_name)
+{
+	printf(R_B"Error:"RES" [%s] -> failed to allocate memory\n", func_name);
+	exit(1);
 }

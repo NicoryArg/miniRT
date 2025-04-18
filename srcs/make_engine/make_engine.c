@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 16:58:41 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 16:58:41 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 18:45:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 18:46:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	on_key_hook_event(int key, t_engine *engine)
 	return (0);
 }
 
-//Initializes the engine with command-line arguments.
+
 void	init_engine(t_engine *engine)
 {
 	int	pixel_bits;
@@ -34,8 +34,6 @@ void	init_engine(t_engine *engine)
 
 	if (!engine)
 		return ;
-	// reset_engine(engine, SPHERE);//TODO
-	// set_shape_type(engine, arg);//TODO
 	engine->mlx = mlx_init();
 	if (!engine->mlx)
 		error_message("[MLX ERROR]: can't do mlx_init!\n", 1);
@@ -53,11 +51,4 @@ void	init_engine(t_engine *engine)
 	engine->image.pixel_bits = pixel_bits;
 	engine->image.line_len = line_len;
 	engine->image.endian = endian;
-	//draw_trajectory(&engine->image);
-	//draw_circle(&engine->image, WIN_SIZE / 2, WIN_SIZE / 2, RADIUS, RED);
-	//draw_hour_markers(&engine->image);
-	//draw_silhouette(engine);
-	// draw_sphere(engine);
-	// mlx_put_image_to_window(engine->mlx, engine->window, engine->image.img_ptr,(WIN_SIZE - CANVAS_SIZE) / 2, (WIN_SIZE - CANVAS_SIZE) / 2);
-	//display_help_message(engine);
 }

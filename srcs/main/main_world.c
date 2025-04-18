@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:41:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:41:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:48:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:48:47 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "tests.h"
+#include "engine.h"
 
 int	ft_main_world(int run)
 {

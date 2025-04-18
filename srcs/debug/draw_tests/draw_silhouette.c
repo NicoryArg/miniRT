@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_sil.c                                         :+:      :+:    :+:   */
+/*   draw_silhouette.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:32:03 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:32:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:23:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:24:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../../../includes/minirt.h"
 #include "engine.h"
 
-t_tuple	compute_wall_point(int x, int y, double px_size, double half)
+static t_tuple	compute_wall_point(int x, int y, double px_size, double half)
 {
 	double	world_x;
 	double	world_y;
@@ -23,7 +23,7 @@ t_tuple	compute_wall_point(int x, int y, double px_size, double half)
 	return (ft_tuple(world_x, world_y, WALL_Z, POINT));
 }
 
-t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
+static t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
 {
 	t_tuple	direction;
 	t_tuple	origin_copy;
@@ -46,7 +46,7 @@ static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 
 	xs = intersect(sphere, ray);
 	hit = find_visible_hit(xs->hits, xs->count);
-	if (hit->t >= 0)
+	if (hit && hit->t >= 0)
 		color = RED;
 	else
 		color = BLACK;

@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:57:29 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/11 17:57:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:58:10 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:58:10 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 /**
  * @brief adds coordinates of two tuples
@@ -47,8 +48,8 @@ t_tuple	diff_tuple(t_tuple t1, t_tuple t2)
 	if (t1.w == VECTOR && t2.w == POINT)
 	{
 		printf("[DEBUG] `diff_tuple` . Trying to substract point from vector\n");
-		print_tuple(t1, "t1");
-		print_tuple(t2, "t2");
+		// print_tuple(t1, "t1");
+		// print_tuple(t2, "t2");
 		exit(1);
 	}
 	res.w = t1.w - t2.w;

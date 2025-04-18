@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 bool	is_point(t_tuple tuple)
 {

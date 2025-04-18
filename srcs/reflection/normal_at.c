@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:58:07 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:00:11 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:56:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:09 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_tuple	ft_world_normal(t_matrix *inverse, t_tuple obj_normal)
 {

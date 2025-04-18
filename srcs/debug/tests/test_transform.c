@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_transform.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 13:49:03 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/08 14:31:31 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:46:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:46:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 static int	rotate_x_test()
 {

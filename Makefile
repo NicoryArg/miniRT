@@ -40,12 +40,13 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 # Sources
 SRCS_DIR			= srcs/
-DEBUG_FILES			= $(addprefix debug/, draw_sil.c draw_sphere.c draw_world.c print.c)
+DEBUG_FILES			= $(addprefix debug/, print.c)
+DRAW_FILES			= $(addprefix debug/draw_tests/, draw_circle.c draw_clock.c draw_projectile.c \
+									draw_silhouette.c draw_sphere.c draw_world_shadow.c draw_world.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_transform.c \
-									test_tuples.c test_projectile.c test_circle.c test_clock.c \
-									test_phong.c test_world.c view_transform_test.c \
+									test_tuples.c test_phong.c test_world.c view_transform_test.c \
 									test_ray_for_pixel.c)
-MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_phong.c main_transform.c main_tuples.c main_world.c main_view.c)
+MAIN_FILES			= $(addprefix main/, main.c main_rays.c main_renders.c main_phong.c main_transform.c main_tuples.c main_world.c main_view.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c matrix_invert.c matrix_utils.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c rays.c transform.c)
@@ -58,7 +59,7 @@ UTILS_FILES			= $(addprefix utils/, colours.c free_utils.c messages.c ft_utils.c
 VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c)
 
 
-SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(TEST_FILES) \
+SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(DRAW_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
 					$(REFLECTION_FILES) $(VIEW_FILES)
@@ -107,6 +108,7 @@ $(MLX) :
 $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)
 	@$(MKDIR) $(OBJS_DIR)/debug
+	@$(MKDIR) $(OBJS_DIR)/debug/draw_tests
 	@$(MKDIR) $(OBJS_DIR)/debug/tests
 	@$(MKDIR) $(OBJS_DIR)/main
 	@$(MKDIR) $(OBJS_DIR)/make_engine

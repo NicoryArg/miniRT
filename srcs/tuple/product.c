@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   product.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 14:39:54 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 14:16:31 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:56:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 double	dot(t_tuple a, t_tuple b)
 {

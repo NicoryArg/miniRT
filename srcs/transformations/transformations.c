@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 17:20:47 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 15:55:06 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:56:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_matrix	*translate(double x, double y, double z)
 {

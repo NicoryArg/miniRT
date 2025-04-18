@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 14:52:31 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 15:25:12 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:56:28 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:28 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_matrix	*tuple_to_matrix(t_tuple tup)
 {

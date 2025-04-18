@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect.c                                        :+:      :+:    :+:   */
+/*   hits.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 18:42:31 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:43:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:55:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:55:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_inters	*init_intersections(int initial_capacity)
 {

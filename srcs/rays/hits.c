@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 17:09:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/09 17:10:12 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 19:49:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:49:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 void	sort_intersections(t_hit	**xs, int count)
 {

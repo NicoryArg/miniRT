@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 12:32:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/31 19:14:43 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:45:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:45:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	normal_at_test(int run)
 {

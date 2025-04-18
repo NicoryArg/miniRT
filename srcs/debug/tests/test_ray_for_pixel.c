@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_ray_for_pixel.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 11:21:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/11 12:03:04 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:45:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:45:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	ray_for_pixel_test(int run)
 {

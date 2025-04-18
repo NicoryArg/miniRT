@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 14:50:52 by ameechan          #+#    #+#             */
-/*   Updated: 2025/02/25 16:18:53 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 19:56:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 19:56:52 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
 
 t_tuple ft_tuple(double x, double y, double z, t_tpl type)
 {
