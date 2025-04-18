@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:18:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 16:20:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 17:00:18 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 17:00:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,18 @@ t_world	*default_scene(void)
 	floor->base.m.c = ft_colour(0.8, 0.8, 0.8);
 	floor->base.m.specular = 0;
 	t_pattern *stripe = malloc(sizeof(t_pattern));
-	*stripe = stripe_pattern(ft_colour(1, 1, 1), ft_colour(0, 0, 0)); // white + black
-	free_matrix(stripe->transform);
-	stripe->transform = scale(0.2, 0.2, 0.2); // tighter stripes
+	if (!stripe)
+	{
+		printf(AKA"❌ ERROR: failed to allocate stripe pattern\n"RES);
+		exit(1);
+	}
+	stripe->type = PATTERN_STRIPE;
+	stripe->a = ft_colour(1, 1, 1);
+	stripe->b = ft_colour(0, 0, 0);
+	stripe->transform = scale(0.2, 0.2, 0.2); // apply transformation directly
+
 	floor->base.m.pattern = stripe;
+
 	transform = multiply_matrices(translate(0, -1.5, -1), scale(10, 0.01, 10));
 	set_transf(floor, transform);
 

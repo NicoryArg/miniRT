@@ -6,29 +6,43 @@
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:16:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 16:16:02 by nryser           ###   ########.ch       */
+/*   Updated: 2025/04/18 17:23:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-// int	main(void)
-// {
-// 	t_matrix	*a;
-// 	t_matrix	*b;
+int	ft_main_render(int run)
+{
+	if (run == 0)
+		return (0);
+	// Run any of the render scenes below by toggling their run flag to 1
+	if (ft_main_draw_silhouette(0))
+		return (printf(AKA"❌ draw_silhouette failed\n"RES));
+	if (ft_main_draw_sphere(0))
+		return (printf(AKA"❌ draw_sphere failed\n"RES));
+	if (ft_main_draw_world(0))
+		return (printf(AKA"❌ draw_world failed\n"RES));
+	if (ft_main_draw_patterns(1))
+		return (printf(AKA"❌ draw_patterns failed\n"RES));
 
-// 	a = create_matrix(2, 2, 0);
-// 	b = create_matrix(2, 2, 0);
-// 	fill_matrix(a);
-// 	fill_matrix(b);
-// 	if (equal_matrix(a, b))
-// 		printf("Equal!\n");
-// 	else
-// 		printf("Not Equal\n");
-// 	return (0);
-// }
+	printf(G_B"END OF RENDER DEMOS\n"RES);
+	return (0);
+}
 
+int	run_render_with(void (*render_func)(t_engine *))
+{
+	t_engine	engine;
+
+	init_engine(&engine);
+	render_func(&engine);
+	mlx_key_hook(engine.window, on_key_hook_event, &engine);
+	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
+	return (0);
+}
 
 
 int	ft_main_engine(int run)

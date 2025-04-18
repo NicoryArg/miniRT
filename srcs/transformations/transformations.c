@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 17:20:47 by ameechan          #+#    #+#             */
-/*   Updated: 2025/03/24 15:55:06 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 17:02:16 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 17:02:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ t_matrix	*translate(double x, double y, double z)
 	t_matrix	*matrix;
 
 	matrix = create_identity_matrix(4);
+	if (!matrix || !matrix->values)
+	{
+		printf(AKA"❌ ERROR: scale() failed to allocate identity matrix\n"RES);
+		exit(1);
+	}
 	matrix->values[0][3] = x;
 	matrix->values[1][3] = y;
 	matrix->values[2][3] = z;

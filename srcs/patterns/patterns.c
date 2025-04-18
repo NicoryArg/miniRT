@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:12:27 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 16:12:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:29:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:29:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,16 @@ t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_p
 	t_tuple		pattern_point;
 	t_colour	result;
 
+	if (!object || !object->transf)
+	{
+		printf(AKA"❌ ERROR: object or its transform is NULL!\n"RES);
+		exit(1);
+	}
+	if (!pattern || !pattern->transform)
+	{
+		printf(AKA"❌ ERROR: pattern or its transform is NULL!\n"RES);
+		exit(1);
+	}
 	object_inverse = invert_matrix(object->transf);
 	object_point = matrix_to_tuple(multiply_matrices(object_inverse, tuple_to_matrix(world_point)));
 	pattern_inverse = invert_matrix(pattern->transform);

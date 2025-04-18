@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 18:36:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 18:37:12 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:26:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:26:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	free_sphere(t_sphere *sphere)
 {
 	if (!sphere)
 		return ;
-	free_matrix(sphere->base.transf);
+	if (sphere->base.transf)
+		free_matrix(sphere->base.transf);
+	free_material(&sphere->base.m); // <— Use your helper here
 	free(sphere);
 }
 
@@ -73,4 +75,13 @@ void	free_world(t_world *w)
 	free(w->objects);
 	free(w->light);
 	free(w);
+}
+void	free_material(t_material *m)
+{
+	if (m->pattern)
+	{
+		if (m->pattern->transform)
+			free_matrix(m->pattern->transform);
+		free(m->pattern);
+	}
 }

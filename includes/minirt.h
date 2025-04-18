@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:11:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 16:12:00 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:26:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:26:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -435,6 +435,7 @@ void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);
+void		free_material(t_material *m);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);
