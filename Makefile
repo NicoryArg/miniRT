@@ -41,6 +41,7 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 # Sources
 SRCS_DIR			= srcs/
 DEBUG_FILES			= $(addprefix debug/, draw_sil.c draw_sphere.c draw_world.c print.c)
+TEST_SCENE_FILES	= $(addprefix debug/scenes/, scene_planes.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_transform.c \
 									test_tuples.c test_projectile.c test_circle.c test_clock.c \
 									test_phong.c test_world.c view_transform_test.c \
@@ -66,7 +67,7 @@ VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c)
 SRC_FILES		= 	$(MATRIX_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
-					$(REFLECTION_FILES) $(VIEW_FILES)
+					$(REFLECTION_FILES) $(VIEW_FILES) $(TEST_SCENE_FILES)
 
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
@@ -113,6 +114,7 @@ $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)
 	@$(MKDIR) $(OBJS_DIR)/debug
 	@$(MKDIR) $(OBJS_DIR)/debug/tests
+	@$(MKDIR) $(OBJS_DIR)/debug/scenes
 	@$(MKDIR) $(OBJS_DIR)/main
 	@$(MKDIR) $(OBJS_DIR)/make_engine
 	@$(MKDIR) $(OBJS_DIR)/matrices

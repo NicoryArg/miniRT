@@ -34,7 +34,7 @@ t_sphere	*ft_sphere(double radius)
 	return (sphere);
 }
 
-t_plane	*ft__plane(void)
+t_plane	*ft_plane(void)
 {
 	t_plane	*plane;
 

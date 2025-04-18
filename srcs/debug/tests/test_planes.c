@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:34:33 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 15:16:07 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:42:56 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	local_normal_plane_test(int run)
 	print_test_banner("The normal of a plane is constant");
 	print_test_number(&i);
 	//initiate variables
-	plane = ft__plane();
+	plane = ft_plane();
 	p1 = ft_tuple(0, 0, 0, POINT);
 	p2 = ft_tuple(10, 0, -10, POINT);
 	p3 = ft_tuple(-5, 0, 150, POINT);
@@ -76,7 +76,7 @@ int	intersect_plane_test(int run)
 	print_test_banner("Intersecting rays with planes");
 	print_sub_header("Ray parallel to the plane", &i);
 	//initiate variables
-	plane = ft__plane();
+	plane = ft_plane();
 	ray = ft_ray(ft_tuple(0, 10, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 	//run test
 	xs = intersect(plane, ray);

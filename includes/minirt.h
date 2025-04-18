@@ -320,7 +320,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r);
  * @param radius the radius of the sphere
  */
 t_sphere	*ft_sphere(double radius);
-t_plane		*ft__plane(void);
+t_plane		*ft_plane(void);
 
 //#############################################
 //#############TRANSFORMATIONS#################
@@ -441,7 +441,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 300
+# define WIN_SIZE 1500
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

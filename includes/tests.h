@@ -119,4 +119,12 @@ int		ft_main_view(int run);
 int		ft_main_shadows(int run);
 int		ft_main_plane(int run);
 
+//#############################################
+//################# SCENES ####################
+//#############################################
+
+typedef struct	s_world t_world;
+
+t_world	*scene_planes();
+
 #endif

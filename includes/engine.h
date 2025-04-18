@@ -81,6 +81,7 @@ t_world	*default_scene(void);
 
 
 void	draw_world(t_engine *engine);
+void	draw_planes(t_engine *engine);
 void	init_engine_world(t_engine *engine);
 
 #define WALL_Z 5
