@@ -133,7 +133,8 @@ int	sph_ray_intersect(int run)
 	double		d;
 	t_inters	*xs = NULL;
 
-	print_test_banner("SPHERE-RAY");
+	print_test_banner("Sphere Intersections");
+	print_test_number(&i);
 //TEST 1
 	//print banners
 	print_test_banner("two intersections");
@@ -276,7 +277,7 @@ int	intersection_test(int run)
 	print_test_banner("Intersection encapsulates t and object");
 	print_test_number(&i);
 	//call function
-	i1 = intersection(3.5, s, SPHERE);
+	i1 = intersection(3.5, s);
 	//print ouput
 	printf(BOLD"%15s "GR"%14f\n"RES, "i.t:", i1->t);
 	printf(BOLD"%15s "GR"%20p"RES"\n", "i.object:", i1->obj);
@@ -323,8 +324,8 @@ int	intersection_test(int run)
 	print_test_banner("hit when all inters have positive `t`");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
-	i1 = intersection(1, s, SPHERE);
-	i2 = intersection(2, s, SPHERE);
+	i1 = intersection(1, s);
+	i2 = intersection(2, s);
 	t_hit **intersections = malloc(sizeof(t_hit *) * 3);
 	intersections[0] = i1;
 	intersections[1] = i2;
@@ -345,8 +346,8 @@ int	intersection_test(int run)
 	print_test_banner("hit when some inters have nagative `t`");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
-	i1 = intersection(-1, s, SPHERE);
-	i2 = intersection(1, s, SPHERE);
+	i1 = intersection(-1, s);
+	i2 = intersection(1, s);
 	intersections = malloc(sizeof(t_hit *) * 3);
 	intersections[0] = i1;
 	intersections[1] = i2;
@@ -367,8 +368,8 @@ int	intersection_test(int run)
 	print_test_banner("hit when all inters have nagative `t`");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
-	i1 = intersection(-2, s, SPHERE);
-	i2 = intersection(-1, s, SPHERE);
+	i1 = intersection(-2, s);
+	i2 = intersection(-1, s);
 	intersections = malloc(sizeof(t_hit *) * 3);
 	intersections[0] = i1;
 	intersections[1] = i2;
@@ -389,10 +390,10 @@ int	intersection_test(int run)
 	print_test_banner("hit when unsorted array of inters");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
-	i1 = intersection(5, s, SPHERE);
-	i2 = intersection(7, s, SPHERE);
-	i3 = intersection(-3, s, SPHERE);
-	i4 = intersection(2, s, SPHERE);
+	i1 = intersection(5, s);
+	i2 = intersection(7, s);
+	i3 = intersection(-3, s);
+	i4 = intersection(2, s);
 	intersections = malloc(sizeof(t_hit *) * 5);
 	intersections[0] = i1;
 	intersections[1] = i2;

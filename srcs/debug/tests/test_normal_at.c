@@ -39,7 +39,7 @@ int	normal_at_test(int run)
 	//run test
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
-	print_normal(normal, expected);
+	print_normal(normal, expected, SPHERE);
 	//check output
 	if (equal_tuple(normal, expected))
 		printf(GR"✔ tuples match\n"RES);
@@ -58,7 +58,7 @@ int	normal_at_test(int run)
 	//run test
 	normal = normal_at(s, world_point);
 	//print output and free relevant vars
-	print_normal(normal, expected);
+	print_normal(normal, expected, SPHERE);
 	//check output
 	if (equal_tuple(normal, expected))
 		printf(GR"✔ tuples match\n"RES);

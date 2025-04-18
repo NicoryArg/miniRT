@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:17:27 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:17:32 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:34:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:34:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ typedef struct s_sphere
 	int			id;
 }	t_sphere;
 
+typedef struct s_plane
+{
+	t_object	base;
+}	t_plane;
 
 //#############################################
 //########## RAYS & INTERSECTIONS #############
@@ -204,17 +208,6 @@ typedef struct s_render_ctx {
 	double		half;
 }	t_render_ctx;
 
-
-// typedef struct s_ray_sphere
-// {
-// 	int		x_count;
-// 	double	tc;
-// 	t_tuple	*l;
-// 	double	l_len;
-// 	double	d;
-// 	double	offset;
-// }	t_ray_sphere;
-
 //#############################################
 //################ MAIN #######################
 //#############################################
@@ -266,10 +259,13 @@ void		sort_intersections(t_hit	**xs, int count);
 t_hit		*find_visible_hit(t_hit **hits, int count);
 double		find_hit(t_hit	**intersections, int count);
 
+//intersect_pl.c
+t_inters	*intersect_pl(t_plane *pl, t_ray *ray, t_inters *xs);
+
 //intersect.c
 t_inters	*init_intersections(int initial_capacity);
 t_inters	*intersect(void *obj, t_ray *ray);
-t_hit		*intersection(double t, void *object, t_obj type);
+t_hit		*intersection(double t, void *object);
 
 //ray_sphere.c
 double		discriminant(t_ray *ray, t_tuple sph_to_ray);
@@ -307,15 +303,17 @@ t_colour	ft_shading(t_shading L, bool in_shadow);
 
 //normal_at.c
 t_tuple		ft_world_normal(t_matrix *inverse, t_tuple obj_normal);
-t_tuple		ft_object_point(t_matrix *inverse, t_tuple world_point);
+t_tuple		ft_local_point(t_matrix *inverse, t_tuple world_point);
 t_tuple		normal_at(void *obj, t_tuple world_p);
-t_tuple		sph_normal_at(t_sphere *sph, t_tuple world_p);
+t_tuple		local_normal_at(void *shape, t_tuple world_p);
 
 
 //pre_compute.c
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
 t_colour		shade_hit(t_world *w, t_computations comps, bool ignore_shadows);
 t_colour		color_at(t_world *world, t_ray *ray, bool ignore_shadows);
+bool			is_shadowed(t_world *w, t_tuple point);
+
 
 //#############################################
 //############### SCENE #######################
@@ -332,6 +330,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r);
  * @param radius the radius of the sphere
  */
 t_sphere	*ft_sphere(double radius);
+t_plane		*ft_plane(void);
 
 //#############################################
 //############ TRANSFORMATIONS ################
@@ -450,7 +449,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 500
+# define WIN_SIZE 300
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

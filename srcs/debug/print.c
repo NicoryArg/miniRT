@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:58:42 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:58:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:41:01 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:41:01 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,18 @@ void	print_tuple(t_tuple tuple, char *name)
 	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
 	printf(YEL"\tw:"RES" %d\n", tuple.w);
 }
-void	print_normal(t_tuple tuple, t_tuple expected)
+void	print_normal(t_tuple tuple, t_tuple expected, t_obj type)
+
 {
-	if (tuple.w == 0)
+	if (type == PLANE && tuple.w == 0)
 	{
-		printf(BOLD"normal:   (%.0f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
-		printf(G_B"expected: (%.0f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
+		printf(B_B"normal:   (%.0f, %.0f, %.0f)\n"RES, tuple.x, tuple.y, tuple.z);
+		printf(G_B"expected: (%.0f, %.0f, %.0f)\n"RES, expected.x, expected.y, expected.z);
+	}
+	else if (type == SPHERE && tuple.w == 0)
+	{
+		printf(B_B"normal:   (%.5f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
+		printf(G_B"expected: (%.5f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
 	}
 	else
 	{
@@ -167,15 +173,41 @@ void	print_test_banner(const char *word)
 	printf("##############################################################\n"RES);
 }
 
+// void	print_test_number(int *i)
+// {
+// 	printf(CYAN"##### TEST %d #####\n"RES, (*i)++);
+// }
 void	print_test_number(int *i)
 {
-	printf(CYAN"##### TEST %d #####\n"RES, (*i)++);
+	int total_width = 57;  // Adjust if needed
+	int word_length = 1;
+	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
+	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+	char *word = "TEST";
+
+	printf(CYAN"#####%*s%s %d%*s#####\n"RES, padding, "", word, (*i)++, padding + extra, "");
+}
+
+void	print_sub_header(const char *word, int *i)
+{
+	int total_width = 62;  // Adjust if needed
+	int word_length = strlen(word);
+	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
+	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+
+	print_test_number(i);
+	printf(CYAN"#####%*s%s%*s#####\n"RES, padding, "", word, padding + extra, "");
 }
 
 void	print_intersections(t_hit **xs, int count, int sorted)
 {
 	int	i = 0;
 
+	if (count == 0)
+	{
+		printf(YEL"No intersections or intersections are NULL\n"RES);
+		return ;
+	}
 	if (sorted)
 		printf(BOLD"%15s\n"RES, "Sorted Array:");
 	else

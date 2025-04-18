@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:46:03 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:46:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:40:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:40:02 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "tests.h"
 
-int	t_matrix_to_tuple(int run)
+int	test_matrix_to_tuple(int run)
 {
 	if (run == 0)
 		return (0);
@@ -67,7 +67,7 @@ int	t_matrix_to_tuple(int run)
 	return (0);
 }
 
-int	t_tuple_to_matrix(int run)
+int	test_tuple_to_matrix(int run)
 {
 	if (run == 0)
 		return (0);

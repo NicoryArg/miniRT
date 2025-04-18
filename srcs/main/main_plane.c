@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_tuples.c                                      :+:      :+:    :+:   */
+/*   main_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
+/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:35:36 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:35:36 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 13:29:11 by ameechan          #+#    #+#             */
+/*   Updated: 2025/04/18 14:53:56 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-#include "tests.h"
-#include "engine.h"
 
-int	ft_main_tuples(int run)
+int	ft_main_plane(int run)
 {
 	if (run == 0)
 		return (0);
-	if (test_tuple_to_matrix(1))
-		return(printf(R_B"❌ tuple_to_matrix test failed\n"RES));
-	if (test_matrix_to_tuple(1))
-		return(printf(R_B"❌ matrix_to_tuple test failed\n"RES));
-	printf(R_B"END OF TUPLE TESTS\n"RES);
+	if (local_normal_plane_test(1))
+		return (-1);
+	if (intersect_plane_test(1))
+		return (-1);
 	return (0);
 }

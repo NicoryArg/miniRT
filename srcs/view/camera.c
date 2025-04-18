@@ -42,6 +42,22 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 	return (camera);
 }
 
+static void	print_progress_bar(int y, int total)
+{
+	int		percent = (y * 100) / total;
+	int		filled = (percent * 50) / 100;
+
+	printf("\r["); // Start of bar
+	for (int i = 0; i < filled; i++)
+		printf("\033[32m=\033[0m"); // Green fill
+	for (int i = filled; i < 50; i++)
+		printf(" "); // Empty part
+	printf("] %3d%% (%d/%d)", percent, y, total);
+	fflush(stdout);
+	if (y == total)
+		printf("\n");
+}
+
 t_image	*render(t_camera cam, t_world *world, t_image *img)
 {
 	int		x;
@@ -52,7 +68,7 @@ t_image	*render(t_camera cam, t_world *world, t_image *img)
 	y = 0;
 	while (y < (int)cam.vsize)
 	{
-		printf(YEL"[DEBUG]"RES" (%d)\n", y);
+		print_progress_bar(y, WIN_SIZE - 1);
 		x = 0;
 		while (x < (int)cam.hsize)
 		{

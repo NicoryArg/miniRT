@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:48:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:48:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:35:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:35:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_main_view(int run)
 {
 	if (run == 0)
 		return (0);
-	if (view_transform_test(0))
+	if (view_transform_test(1))
 		return (printf(AKA"view_transform_test failed\n"RES));
-	if (camera_test(0))
+	if (camera_test(1))
 		return (printf(AKA"camera_test failed\n"RES));
 	if (ray_for_pixel_test(1))
 		return (printf(AKA"ray_for_pixel_test failed\n"RES));

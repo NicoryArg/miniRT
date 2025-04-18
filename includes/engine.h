@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:54:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:54:28 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:33:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:33:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void	display_help_message(t_engine *engine);
 void	malloc_err(char *func_name);
 
 t_image		*render(t_camera cam, t_world *world, t_image *img);
+void	draw_planes(t_engine *engine);
+void	init_engine_world(t_engine *engine);
 
 #define WALL_Z 5
 #define WALL_SIZE 7

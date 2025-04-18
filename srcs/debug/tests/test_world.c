@@ -153,7 +153,7 @@ int	ft_pre_compute_test(int run)
 	//initiate variables
 	r = ft_ray(ft_tuple(0,0,-5,POINT), ft_tuple(0,0,1,VECTOR));
 	shape = ft_sphere(1);
-	hit = intersection(4, shape, SPHERE);
+	hit = intersection(4, shape);
 	//run test
 	comps = pre_compute(hit, r);
 	//check & print output
@@ -219,7 +219,7 @@ int	ft_pre_compute_test(int run)
 	//redefine variables
 	r->origin = ft_tuple(0,0,0,POINT);
 	r->direction = ft_tuple(0,0,1,VECTOR);
-	hit = intersection(1, shape, SPHERE);
+	hit = intersection(1, shape);
 	//run test
 	comps = pre_compute(hit, r);
 	//check & print output
@@ -276,7 +276,7 @@ int	shade_hit_test(int run)
 	// setup
 	w = default_world();
 	r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
-	hit = intersection(4.0, w->objects[0], SPHERE);
+	hit = intersection(4.0, w->objects[0]);
 	comps = pre_compute(hit, r);
 	col = shade_hit(w, comps, false);
 	// color check
@@ -296,7 +296,7 @@ int	shade_hit_test(int run)
 	w = default_world();
 	w->light = ft_light(ft_tuple(0, 0.25, 0, POINT), ft_colour(1, 1, 1));
 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
-	hit = intersection(0.5, w->objects[1], SPHERE);
+	hit = intersection(0.5, w->objects[1]);
 	comps = pre_compute(hit, r);
 	col = shade_hit(w, comps, false);
 	// color check

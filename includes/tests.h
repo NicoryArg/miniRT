@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:52:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:52:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 20:34:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:35:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
 # include "minirt.h"
 # include "engine.h"
 
-typedef struct s_tuple t_tuple;
-typedef struct s_matrix t_matrix;
-typedef struct s_ray_sphere t_ray_sphere;
-typedef struct s_hit t_hit;
-typedef struct s_light t_light;
-typedef struct s_material t_material;
-typedef struct s_colour t_colour;
-typedef struct s_camera t_camera;
+typedef struct	s_tuple t_tuple;
+typedef struct	s_matrix t_matrix;
+typedef struct	s_ray_sphere t_ray_sphere;
+typedef struct	s_hit t_hit;
+typedef struct	s_light t_light;
+typedef struct	s_material t_material;
+typedef struct	s_colour t_colour;
+typedef struct	s_camera t_camera;
+typedef enum	e_obj_type t_obj;
+
 
 //#############################################
 //################# DEBUG #####################
@@ -32,7 +34,7 @@ typedef struct s_camera t_camera;
 //print.c
 
 void		print_tuple(t_tuple tuple, char *name);
-void		print_normal(t_tuple tuple, t_tuple expected);
+void		print_normal(t_tuple tuple, t_tuple expected, t_obj type);
 void		print_reflected(t_tuple tuple, t_tuple expected);
 void		print_light(t_light *l, char *name);
 void		print_material(t_material m);
@@ -42,6 +44,7 @@ int			printable_material(t_material m);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);
+void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
 // void		print_rs(t_ray_sphere *rs);//	obsolete
 
@@ -85,6 +88,10 @@ int		light_test(int run);
 int		material_test(int run);
 int		shading_test(int run);
 
+//test_planes.c
+int		local_normal_plane_test(int run);
+int		intersect_plane_test(int run);
+
 //test_ray_for_pixel.c
 int		ray_for_pixel_test(int run);
 
@@ -101,6 +108,8 @@ int		intersection_test(int run);
 int		ray_transform_test(int run);
 int		ray_transform_test2(int run);
 
+//test_shadows.c
+int		shadows_test(int run);
 
 //test_transform.c
 /**
@@ -115,11 +124,9 @@ int		scale_test(int run);
 int		translate_test(int run);
 int		chained_test(int run);
 
-
 //test_tuples.c
-
-int		t_matrix_to_tuple(int run);
-int		t_tuple_to_matrix(int run);
+int		test_matrix_to_tuple(int run);
+int		test_tuple_to_matrix(int run);
 
 //test_world.c
 int		world_test(int run);
@@ -158,6 +165,16 @@ int		ft_main_tuples(int run);
 
 //main_view.c
 int		ft_main_view(int run);
+int		ft_main_shadows(int run);
+int		ft_main_plane(int run);
+
+//#############################################
+//################# SCENES ####################
+//#############################################
+
+typedef struct	s_world t_world;
+
+t_world	*scene_planes();
 
 //main_world.c
 int		ft_main_world(int run);
