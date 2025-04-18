@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:21:53 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 16:18:43 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:24:35 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ t_world	*scene_planes()
 	floor->base.m.specular = 0;
 	object_count++;
 
+// //right wall
+// 	t_plane	*right_wall = ft_plane();
+// 	set_transf(right_wall, multiply_matrices(rotate_y(M_PI/4), rotate_x(M_PI/2)));
+// 	set_transf(right_wall, multiply_matrices(translate(0,0,10), right_wall->base.transf));
+// 	right_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
+// 	right_wall->base.m.specular = 0;
+// 	object_count++;
+
+// //left wall
+// 	t_plane	*left_wall = ft_plane();
+// 	set_transf(left_wall, multiply_matrices(rotate_y(-M_PI/4), rotate_x(M_PI/2)));
+// 	set_transf(left_wall, multiply_matrices(translate(0,0,10), left_wall->base.transf));
+// 	left_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
+// 	left_wall->base.m.specular = 0;
+// 	object_count++;
+
 //World
 	w = ft_world();
 	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
@@ -66,6 +82,8 @@ t_world	*scene_planes()
 	w->objects[1] = s2;
 	w->objects[2] = s3;
 	w->objects[3] = floor;
+	// w->objects[4] = right_wall;
+	// w->objects[5] = left_wall;
 	w->object_count = object_count;
 	return (w);
 }
@@ -78,7 +96,7 @@ void	draw_planes(t_engine *engine)
 	w = scene_planes();
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
-		ft_tuple(0, 2, -7, POINT),//from camera
+		ft_tuple(10, 2, -7, POINT),//from camera
 		ft_tuple(0, 0, 10, POINT),//look at target
 		ft_tuple(0, 1, 0, VECTOR));//up vector
 	render(cam, w, &engine->image);
