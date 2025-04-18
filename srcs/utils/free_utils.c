@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:58 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 22:36:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 22:38:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	free_sphere(t_sphere *sphere)
 {
 	if (!sphere)
 		return ;
-	free_matrix(sphere->base.transf);
+	if (sphere->base.transf)
+		free_matrix(sphere->base.transf);
+	free_material(&sphere->base.m); // <— Use your helper here
 	free(sphere);
 }
 
@@ -60,17 +62,39 @@ void	free_hits(t_inters *xs)
 
 void	free_world(t_world *w)
 {
-	int	i;
+	int			i;
+	t_object	*obj;
 
 	if (!w)
 		return ;
+
 	i = 0;
 	while (i < w->object_count)
 	{
-		free_sphere(w->objects[i]);
+		obj = (t_object *)w->objects[i];
+
+		// Free object by type
+		if (obj->type == SPHERE)
+			free_sphere((t_sphere *)obj);
+		else if (obj->type == PLANE)
+			free(((t_plane *)obj));
+		else if (obj->type == CYLINDER)
+			free(((t_cylinder *)obj));
+
 		i++;
 	}
 	free(w->objects);
 	free(w->light);
 	free(w);
+}
+
+
+void	free_material(t_material *m)
+{
+	if (m->pattern)
+	{
+		if (m->pattern->transform)
+			free_matrix(m->pattern->transform);
+		free(m->pattern);
+	}
 }

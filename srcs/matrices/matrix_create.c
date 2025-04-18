@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 18:03:31 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:03:31 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 17:02:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 17:02:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,14 @@ t_matrix	*create_identity_matrix(int size)
 	t_matrix	*identity;
 
 	identity = create_matrix(size, size, 0);
+	if (!identity || !identity->values)
+	{
+		printf(AKA"❌ ERROR: create_identity_matrix() failed\n"RES);
+		exit(1);
+	}
 	identity->is_identity = 1;
+	identity->is_invertible = 1;
+	identity->det = 1.0;
 	i = 0;
 	while (i < size)
 	{

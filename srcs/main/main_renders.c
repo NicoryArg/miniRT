@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:15:17 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:16:46 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:55:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:56:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ int	ft_main_draw_world_planes(int run)
 	if (run == 0)
 		return (0);
 	return (run_render_with(draw_planes));
+}
+
+int	ft_main_draw_patterns(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_patterns));
 }

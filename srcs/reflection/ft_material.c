@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:55:59 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:55:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:51:01 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:51:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_material	ft_material(void)
 	m.diffuse = 0.9;
 	m.specular = 0.9;
 	m.shininess = 200;
+	m.pattern = NULL;
 	return (m);
 }

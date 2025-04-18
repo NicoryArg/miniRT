@@ -6,7 +6,7 @@
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 20:22:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 20:23:04 by nryser           ###   ########.ch       */
+/*   Updated: 2025/04/18 22:59:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
 	}
 	result = create_matrix(a->rows, b->cols, 0);
 	compute_product_matrix(a, b, result);
+	if (!result)
+	{
+		printf("❌ Failed to allocate result matrix\n");
+		exit(1);
+	}
 	return (result);
 }
 

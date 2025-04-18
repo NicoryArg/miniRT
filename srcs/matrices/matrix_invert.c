@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inver_matrix.c                                     :+:      :+:    :+:   */
+/*   matrix_invert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:35:07 by nryser            #+#    #+#             */
-/*   Updated: 2025/02/24 20:35:36 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 16:34:35 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 16:41:23 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,38 @@ void	scale_matrix(t_matrix *matrix, double scalar)
 		i++;
 	}
 }
-
+/*
+** NOTE:
+** This function used to modify the input matrix by setting its `det` and `is_invertible` fields.
+** That caused serious side effects when the matrix was part of shared data (e.g., pattern->transform),
+** leading to undefined behavior, invalid writes, and segmentation faults during rendering.
+**
+** To avoid side effects, this version of `invertable()` is now read-only and purely checks
+** whether the matrix is invertible based on its determinant, without altering the input.
+*/
 bool	invertable(t_matrix *matrix)
 {
-	matrix->is_invertible = 0;
 	if (matrix->rows != matrix->cols)
 		return (false);
-	matrix->det = determinant(matrix);
-	if (matrix->det != 0)
-	{
-		matrix->is_invertible = 1;
-		return (true);
-	}
-	return (false);
+	return (determinant(matrix) != 0);
 }
+
 
 t_matrix	*invert_matrix(t_matrix *matrix)
 {
 	t_matrix	*cofactor_matrix;
 	t_matrix	*inverse;
+	double		d;
 
 	if (!(invertable(matrix)))
 		return (NULL);
 	cofactor_matrix = compute_cofactor_matrix(matrix);
 	inverse = transpose_matrix(cofactor_matrix);
+	d = determinant(matrix);
+	if (d == 0)
+		return (NULL);
 	free_matrix(cofactor_matrix);
-	scale_matrix(inverse, 1.0 / matrix->det);
+	scale_matrix(inverse, 1.0 / d);
 	return (inverse);
 }
 

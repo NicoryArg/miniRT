@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:11:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:13:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:25:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 23:22:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,21 @@
  * @param ray The ray that produced the intersection.
  * @return A t_computations struct containing precomputed data for shading.
  */
-t_computations	pre_compute(t_hit	*hit, t_ray *ray)
+t_computations	pre_compute(t_hit *hit, t_ray *ray)
 {
 	t_computations	comps;
 	t_tuple			offset;
+	bool			inside;
 
 	comps.t = hit->t;
 	comps.obj = hit->obj;
-	comps.point = get_point(ray, comps.t);
+	comps.point = get_point(ray, hit->t);
 	comps.eyev = ft_negate(ray->direction);
-	comps.normalv = normal_at(comps.obj, comps.point);
-	if (dot(comps.normalv, comps.eyev) < 0)
-	{
-		comps.inside = true;
+	comps.normalv = normal_at(hit->obj, comps.point);
+	inside = (dot(comps.normalv, comps.eyev) < 0);
+	comps.inside = inside;
+	if (inside)
 		comps.normalv = ft_negate(comps.normalv);
-	}
-	else
-		comps.inside = false;
 	offset = mult_tuple(comps.normalv, EPSILON);
 	comps.over_point = add_tuple(comps.point, offset);
 	return (comps);
@@ -65,10 +63,10 @@ static bool	check_shadow_hit(t_world *w, t_ray *r, double ligth_distance)
 
 bool	is_shadowed(t_world *w, t_tuple point)
 {
-	t_ray		*r;
 	t_tuple		lightv;
-	double		light_distance;
 	t_tuple		direction;
+	t_ray		*r;
+	double		light_distance;
 
 	lightv = diff_tuple(w->light->pos, point);
 	light_distance = magnitude(lightv);
@@ -76,6 +74,7 @@ bool	is_shadowed(t_world *w, t_tuple point)
 	r = ft_ray(point, direction);
 	return (check_shadow_hit(w, r, light_distance));
 }
+
 
 /**
  * @brief Computes the color at the point of intersection.
@@ -98,6 +97,7 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 	light_args.point = comps.over_point;
 	light_args.eyev = comps.eyev;
 	light_args.normalv = comps.normalv;
+	light_args.obj = comps.obj;
 	if (ignore_shadows)
 		in_shadow = false;
 	else

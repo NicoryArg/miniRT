@@ -5,34 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:18:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:18:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:38:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:39:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 #include "engine.h"
-
-
-static t_tuple	compute_wall_point(int x, int y, double px_size, double half)
-{
-	double	world_x;
-	double	world_y;
-
-	world_x = -half + px_size * x;
-	world_y = half - px_size * y;
-	return (ft_tuple(world_x, world_y, WALL_Z, POINT));
-}
-
-static t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
-{
-	t_tuple	diff;
-	t_tuple	direction;
-
-	diff = diff_tuple(target, origin);
-	direction = normalise(diff);
-	return (ft_ray(origin, direction));
-}
+#include "tests.h"
 
 static int	compute_color(void *sph, t_ray *ray, t_light *l)
 {

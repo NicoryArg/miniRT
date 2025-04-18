@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:57:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:57:11 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 23:04:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 23:06:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minirt.h"
 
 #include "../../includes/minirt.h"
 #include "engine.h"
@@ -39,24 +41,17 @@ static t_tuple	rfp_pixel(t_camera cam, double world_x, double world_y)
 	t_matrix	*point;
 	t_matrix	*inverse;
 
-	// printf("[DEBUG] rfp_pixel\n");
 	inverse = invert_matrix(cam.transf);
-	// printf("[DEBUG] inverse\n");
 	point = tuple_to_matrix(ft_tuple(world_x, world_y, -1, POINT));
-	// printf("[DEBUG] point\n");
-	// print_matrix(point);
-	// print_matrix(inverse);
 	pixel_mtx = multiply_matrices(inverse, point);
-	// printf("[DEBUG] pixel_mtx\n");
 	pixel = matrix_to_tuple(pixel_mtx);
-	// printf("[DEBUG] pixel found\n");
 	pixel.w = POINT;
 	free_matrix(pixel_mtx);
 	free_matrix(point);
 	free_matrix(inverse);
-	// printf("[DEBUG] freed\n");
 	return (pixel);
 }
+
 /**
  * @brief calculates the origin of the ray for ray_for_pixel
  */
@@ -67,34 +62,28 @@ static t_tuple	rfp_origin(t_matrix *transf)
 	t_matrix	*temp;
 	t_tuple		res;
 
-	point = tuple_to_matrix(ft_tuple(0,0,0,POINT));
+	point = tuple_to_matrix(ft_tuple(0, 0, 0, POINT));
 	inverse = invert_matrix(transf);
 	temp = multiply_matrices(inverse, point);
 	res = matrix_to_tuple(temp);
 	res.w = POINT;
-	free(point);
-	free(inverse);
-	free(temp);
+	free_matrix(point);
+	free_matrix(inverse);
+	free_matrix(temp);
 	return (res);
 }
 
+/**
+ * @brief calculates the ray that passes through a given pixel
+ */
 t_ray	*ray_for_pixel(t_camera cam, int px, int py)
 {
 	t_tuple	pixel;
-	t_ray	*ray;
 	t_tuple	origin;
 	t_tuple	direction;
 
-	// printf("[DEBUG] finding pixel..\n");
-	pixel = rfp_pixel(cam, w_pt(cam,px,'x'), w_pt(cam,py,'y'));
-	// printf("[DEBUG] pixel found\n");
+	pixel = rfp_pixel(cam, w_pt(cam, px, 'x'), w_pt(cam, py, 'y'));
 	origin = rfp_origin(cam.transf);
-	// printf("[DEBUG] origin found\n");
-	// print_tuple(pixel, "pixel");
-	// print_tuple(origin, "origin");
 	direction = normalise(diff_tuple(pixel, origin));
-	// printf("[DEBUG] direction found\n");
-	ray = ft_ray(origin, direction);
-	// printf("[DEBUG] ray created\n");
-	return (ray);
+	return (ft_ray(origin, direction));
 }

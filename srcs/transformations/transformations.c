@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:25:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:25:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ t_matrix	*translate(double x, double y, double z)
 	t_matrix	*matrix;
 
 	matrix = create_identity_matrix(4);
+	if (!matrix || !matrix->values)
+	{
+		printf(AKA"❌ ERROR: scale() failed to allocate identity matrix\n"RES);
+		exit(1);
+	}
 	matrix->values[0][3] = x;
 	matrix->values[1][3] = y;
 	matrix->values[2][3] = z;

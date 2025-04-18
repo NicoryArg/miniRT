@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:16:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:16:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:56:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:57:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ int			draw_hour_markers(int run);
 void		draw_trajectory_scene(t_engine *engine);
 int			draw_trajectory(int run);
 
+//draw_scene_pattern.c
+void		draw_patterns(t_engine *engine);
+
 //draw_silhouette.c
 void		draw_silhouette(t_engine *engine);
 
@@ -76,6 +79,10 @@ void		draw_world_with_shadows(t_engine *engine);
 
 //draw_world.c
 void		draw_world(t_engine *engine);
+
+//draw_utils.c
+t_tuple		compute_wall_point(int x, int y, double px_size, double half);
+t_ray		*create_ray_to_point(t_tuple origin, t_tuple target);
 
 //#############################################
 //################## TESTS ####################
@@ -144,6 +151,8 @@ int			camera_test(int run);
 //#############################################
 //################## MAIN #####################
 //#############################################
+//main_patterns.c
+int		ft_main_patterns(int run);
 //main_phong.c
 int			ft_main_phong(int run);
 
@@ -158,6 +167,7 @@ int			ft_main_draw_world(int run);
 int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
+int			ft_main_draw_patterns(int run);
 
 //main_transform.c
 int			ft_main_transform(int run);
@@ -181,5 +191,10 @@ t_world		*scene_planes();
 //main_world.c
 int			ft_main_world(int run);
 
+//test_patterns.c
+int		stripe_pattern_test(int run);
+int		pattern_lighting_test(int run);
+int		stripe_transform_test(int run);
+int		pattern_generalization_test(int run);
 
 #endif

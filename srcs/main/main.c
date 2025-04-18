@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:18:12 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:19:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 22:42:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 22:42:54 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_world_shadows(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
-	// if (ft_main_draw_patterns(1))
-	// 	return (printf(AKA"❌ draw_patterns failed\n"RES));
-	if (ft_main_draw_world_planes(1))
+	if (ft_main_draw_patterns(1))
+		return (printf(AKA"❌ draw_patterns failed\n"RES));
+	if (ft_main_draw_world_planes(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
@@ -73,7 +73,8 @@ int	main()
 		return (-1);
 	if (ft_main_plane(0))
 		return (-1);
-		
+	if(ft_main_patterns(0))
+		return (-1);
 	///////////////////////////////////////////////
 	if (ft_main_render(1)) //1 to run, 0 to skip
 		return (-1);
