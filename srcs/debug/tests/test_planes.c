@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:34:33 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 14:09:49 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:16:07 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,95 @@ int	local_normal_plane_test(int run)
 		printf(GR"✔ normal is correct\n"RES);
 	else
 		return(printf(AKA"❌ normal is incorrect\n"RES));
+	return (0);
+}
+
+int	intersect_plane_test(int run)
+{
+	if (run == 0)
+		return (0);
+
+	t_plane		*plane;
+	t_ray		*ray;
+	t_inters	*xs;
+	int			i = 1;
+
+//TEST 1
+	//print banners
+	print_test_banner("Intersecting rays with planes");
+	print_sub_header("Ray parallel to the plane", &i);
+	//initiate variables
+	plane = ft__plane();
+	ray = ft_ray(ft_tuple(0, 10, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
+	//run test
+	xs = intersect(plane, ray);
+	//print output
+	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	if (xs->count == 0)
+		printf(GR"✔ No intersections!\n\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 0\n"RES));
+	//free resources
+	free_ray(ray);
+	free_hits(xs);
+
+//TEST 2
+	//print banners
+	print_sub_header("Ray coplanar to the plane",&i);
+	//redefine ray
+	ray = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
+	//run test
+	xs = intersect(plane, ray);
+	//print output
+	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	if (xs->count == 0)
+		printf(GR"✔ No intersections!\n\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 0\n"RES));
+	//free resources
+	free_ray(ray);
+	free_hits(xs);
+
+//TEST 3
+	//print banners
+	print_sub_header("Ray intersecting from above",&i);
+	//redefine ray
+	ray = ft_ray(ft_tuple(0, 1, 0, POINT), ft_tuple(0, -1, 0, VECTOR));
+	//run test
+	xs = intersect(plane, ray);
+	//print output
+	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(G_B"expected: 1\n"RES);
+	printf(B_B"xs[0]->t: %.1f\n"RES, xs->hits[0]->t);
+	printf(G_B"expected: 1.0\n"RES);
+	if (xs->count == 1 && ft_equal(xs->hits[0]->t, 1))
+		printf(GR"✔ Intersection at t=1\n\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 1 or t != 1\n"RES));
+	//free resources
+	free_ray(ray);
+	free_hits(xs);
+
+//TEST 4
+	//print banners
+	print_sub_header("Ray intersecting from below",&i);
+	//redefine ray
+	ray = ft_ray(ft_tuple(0, -1, 0, POINT), ft_tuple(0, 1, 0, VECTOR));
+	//run test
+	xs = intersect(plane, ray);
+	//print output
+	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(G_B"expected: 1\n"RES);
+	printf(B_B"xs[0]->t: %.1f\n"RES, xs->hits[0]->t);
+	printf(G_B"expected: 1.0\n"RES);
+	if (xs->count == 1 && ft_equal(xs->hits[0]->t, 1))
+		printf(GR"✔ Intersection at t=1\n\n"RES);
+	else
+		return(printf(AKA"❌ xs.count != 1 or t != 1\n"RES));
+	//free resources
+	free_ray(ray);
+	free_hits(xs);
 	return (0);
 }

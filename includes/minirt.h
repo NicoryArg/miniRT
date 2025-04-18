@@ -249,10 +249,13 @@ void		sort_intersections(t_hit	**xs, int count);
 t_hit		*find_visible_hit(t_hit **hits, int count);
 double		find_hit(t_hit	**intersections, int count);
 
+//intersect_pl.c
+t_inters	*intersect_pl(t_plane *pl, t_ray *ray, t_inters *xs);
+
 //intersect.c
 t_inters	*init_intersections(int initial_capacity);
 t_inters	*intersect(void *obj, t_ray *ray);
-t_hit		*intersection(double t, void *object, t_obj type);
+t_hit		*intersection(double t, void *object);
 
 //ray_sphere.c
 double		discriminant(t_ray *ray, t_tuple sph_to_ray);

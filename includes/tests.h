@@ -43,6 +43,7 @@ int			printable_material(t_material m);
 void		print_matrix(t_matrix *matrix);
 void		print_test_banner(const char *word);
 void		print_test_number(int *i);
+void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
 void		malloc_err(char *func_name);
 // void		print_rs(t_ray_sphere *rs);//	obsolete
@@ -57,6 +58,7 @@ int		shading_test(int run);
 
 //test_planes.c
 int		local_normal_plane_test(int run);
+int		intersect_plane_test(int run);
 
 //test_ray_for_pixel.c
 int		ray_for_pixel_test(int run);

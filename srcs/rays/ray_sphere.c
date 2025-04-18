@@ -31,18 +31,18 @@ t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
 	double	d;
 	double	a;
 	double	b;
-	t_tuple	oc;
+	t_tuple	origin_centre;
 	int 	i;
 
 	i = xs->count;
-	oc = diff_tuple(ray->origin, sph->centre);
-	d = discriminant(ray, oc);
+	origin_centre = diff_tuple(ray->origin, sph->centre);
+	d = discriminant(ray, origin_centre);
 	if (d < 0)
 		return (xs);
 	a = dot(ray->direction, ray->direction);
-	b = 2 * dot(ray->direction, oc);
-	xs->hits[i] = intersection(((-b - sqrt(d)) / (2 * a)), sph, SPHERE);
-	xs->hits[i + 1] = intersection(((-b + sqrt(d)) / (2 * a)), sph, SPHERE);
+	b = 2 * dot(ray->direction, origin_centre);
+	xs->hits[i] = intersection(((-b - sqrt(d)) / (2 * a)), sph);
+	xs->hits[i + 1] = intersection(((-b + sqrt(d)) / (2 * a)), sph);
 	xs->count += 2;
 	return (xs);
 }

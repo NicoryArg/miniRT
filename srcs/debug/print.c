@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 14:05:39 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:10:55 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,15 +172,41 @@ void	print_test_banner(const char *word)
 	printf("##############################################################\n"RES);
 }
 
+// void	print_test_number(int *i)
+// {
+// 	printf(CYAN"##### TEST %d #####\n"RES, (*i)++);
+// }
 void	print_test_number(int *i)
 {
-	printf(CYAN"##### TEST %d #####\n"RES, (*i)++);
+	int total_width = 57;  // Adjust if needed
+	int word_length = 1;
+	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
+	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+	char *word = "TEST";
+
+	printf(CYAN"#####%*s%s %d%*s#####\n"RES, padding, "", word, (*i)++, padding + extra, "");
+}
+
+void	print_sub_header(const char *word, int *i)
+{
+	int total_width = 62;  // Adjust if needed
+	int word_length = strlen(word);
+	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
+	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+
+	print_test_number(i);
+	printf(CYAN"#####%*s%s%*s#####\n"RES, padding, "", word, padding + extra, "");
 }
 
 void	print_intersections(t_hit **xs, int count, int sorted)
 {
 	int	i = 0;
 
+	if (count == 0)
+	{
+		printf(YEL"No intersections or intersections are NULL\n"RES);
+		return ;
+	}
 	if (sorted)
 		printf(BOLD"%15s\n"RES, "Sorted Array:");
 	else

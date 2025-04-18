@@ -46,22 +46,22 @@ t_inters	*intersect(void *obj, t_ray *ray)
 		xs = intersect_sph((t_sphere *)obj, r2, xs);
 	// else if (((t_object *)obj)->type == CYLINDER)
 	//  	xs = intersect_cyl((t_cyl *)obj, r2, xs);
-	// else if (((t_object *)obj)->type == PLANE)
-	// 	xs = intersect_pl((t_pl *)obj, r2, xs);
+	else if (((t_object *)obj)->type == PLANE)
+		xs = intersect_pl((t_plane *)obj, r2, xs);
 	free_ray(r2);
 	return (xs);
 }
 
-t_hit	*intersection(double t, void *object, t_obj type)
+t_hit	*intersection(double t, void *shape)
 {
 	t_hit	*hit;
 
 	hit = malloc(sizeof(t_hit));
 	if (!hit)
 		malloc_err("intersection");
-	hit->obj = object;
+	hit->obj = shape;
 	hit->t = t;
-	hit->type = type;
+	hit->type = ((t_object *)shape)->type;
 	return (hit);
 }
 
