@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_tuples.c                                      :+:      :+:    :+:   */
+/*   main_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 14:50:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 13:38:07 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 13:29:11 by ameechan          #+#    #+#             */
+/*   Updated: 2025/04/18 14:09:49 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-// int	main(void)
-// {
-// 	test_tuple_to_matrix(0);
-// 	test_matrix_to_tuple(0);
-// 	printf(R_B"END OF TUPLE TESTS\n"RES);
-// 	return (0);
-// }
-
-int	ft_main_tuples(int run)
+int	ft_main_plane(int run)
 {
 	if (run == 0)
 		return (0);
-	if (test_tuple_to_matrix(1))
-		return(printf(R_B"❌ tuple_to_matrix test failed\n"RES));
-	if (test_matrix_to_tuple(1))
-		return(printf(R_B"❌ matrix_to_tuple test failed\n"RES));
-	printf(R_B"END OF TUPLE TESTS\n"RES);
+	if (local_normal_plane_test(1))
+		return (-1);
 	return (0);
 }

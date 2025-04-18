@@ -6,13 +6,13 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:55:49 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/06 12:09:04 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 13:38:07 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 
-int	t_matrix_to_tuple(int run)
+int	test_matrix_to_tuple(int run)
 {
 	if (run == 0)
 		return (0);
@@ -65,7 +65,7 @@ int	t_matrix_to_tuple(int run)
 	return (0);
 }
 
-int	t_tuple_to_matrix(int run)
+int	test_tuple_to_matrix(int run)
 {
 	if (run == 0)
 		return (0);

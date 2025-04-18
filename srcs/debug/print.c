@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/09 18:53:00 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 14:05:39 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ void	print_tuple(t_tuple tuple, char *name)
 	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
 	printf(YEL"\tw:"RES" %d\n", tuple.w);
 }
-void	print_normal(t_tuple tuple, t_tuple expected)
+void	print_normal(t_tuple tuple, t_tuple expected, t_obj type)
+
 {
-	if (tuple.w == 0)
+	if (type == PLANE && tuple.w == 0)
 	{
-		printf(BOLD"normal:   (%.0f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
-		printf(G_B"expected: (%.0f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
+		printf(B_B"normal:   (%.0f, %.0f, %.0f)\n"RES, tuple.x, tuple.y, tuple.z);
+		printf(G_B"expected: (%.0f, %.0f, %.0f)\n"RES, expected.x, expected.y, expected.z);
+	}
+	else if (type == SPHERE && tuple.w == 0)
+	{
+		printf(B_B"normal:   (%.5f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
+		printf(G_B"expected: (%.5f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
 	}
 	else
 	{

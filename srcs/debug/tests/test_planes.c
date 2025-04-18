@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_planes.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 13:34:33 by ameechan          #+#    #+#             */
+/*   Updated: 2025/04/18 14:09:49 by ameechan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../includes/minirt.h"
+
+int	local_normal_plane_test(int run)
+{
+	if (run == 0)
+		return (0);
+	t_plane	*plane;
+	t_tuple	n1;
+	t_tuple	n2;
+	t_tuple	n3;
+	t_tuple	p1;
+	t_tuple	p2;
+	t_tuple	p3;
+	t_tuple	expected = ft_tuple(0, 1, 0, VECTOR);
+	int		i = 1;
+
+//TEST 1
+	//print banners
+	print_test_banner("The normal of a plane is constant");
+	print_test_number(&i);
+	//initiate variables
+	plane = ft__plane();
+	p1 = ft_tuple(0, 0, 0, POINT);
+	p2 = ft_tuple(10, 0, -10, POINT);
+	p3 = ft_tuple(-5, 0, 150, POINT);
+	//run test
+	n1 = local_normal_at(plane, p1);
+	n2 = local_normal_at(plane, p2);
+	n3 = local_normal_at(plane, p3);
+	//print output
+	printf(YEL"point:    (%.0f, %.0f, %.0f)\n"RES, p1.x, p1.y, p1.z);
+	print_normal(n1, expected, PLANE);
+	if (equal_tuple(n1, expected))
+		printf(GR"✔ normal is correct\n\n"RES);
+	else
+		return(printf(AKA"❌ normal is incorrect\n"RES));
+	printf(YEL"point:    (%.0f, %.0f, %.0f)\n"RES, p2.x, p2.y, p2.z);
+	print_normal(n2, expected, PLANE);
+	if (equal_tuple(n2, expected))
+		printf(GR"✔ normal is correct\n\n"RES);
+	else
+		return(printf(AKA"❌ normal is incorrect\n"RES));
+	printf(YEL"point:    (%.0f, %.0f, %.0f)\n"RES, p3.x, p3.y, p3.z);
+	print_normal(n3, expected, PLANE);
+	if (equal_tuple(n3, expected))
+		printf(GR"✔ normal is correct\n"RES);
+	else
+		return(printf(AKA"❌ normal is incorrect\n"RES));
+	return (0);
+}

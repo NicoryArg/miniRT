@@ -16,14 +16,16 @@
 # include <string.h>
 # include "minirt.h"
 
-typedef struct s_tuple t_tuple;
-typedef struct s_matrix t_matrix;
-typedef struct s_ray_sphere t_ray_sphere;
-typedef struct s_hit t_hit;
-typedef struct s_light t_light;
-typedef struct s_material t_material;
-typedef struct s_colour t_colour;
-typedef struct s_camera t_camera;
+typedef struct	s_tuple t_tuple;
+typedef struct	s_matrix t_matrix;
+typedef struct	s_ray_sphere t_ray_sphere;
+typedef struct	s_hit t_hit;
+typedef struct	s_light t_light;
+typedef struct	s_material t_material;
+typedef struct	s_colour t_colour;
+typedef struct	s_camera t_camera;
+typedef enum	e_obj_type t_obj;
+
 
 //#############################################
 //####################DEBUG####################
@@ -31,7 +33,7 @@ typedef struct s_camera t_camera;
 //print.c
 
 void		print_tuple(t_tuple tuple, char *name);
-void		print_normal(t_tuple tuple, t_tuple expected);
+void		print_normal(t_tuple tuple, t_tuple expected, t_obj type);
 void		print_reflected(t_tuple tuple, t_tuple expected);
 void		print_light(t_light *l, char *name);
 void		print_material(t_material m);
@@ -44,6 +46,17 @@ void		print_test_number(int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
 void		malloc_err(char *func_name);
 // void		print_rs(t_ray_sphere *rs);//	obsolete
+
+//test_reflection.c
+int		normal_at_test(int run);
+
+//test_phong.c
+int		light_test(int run);
+int		material_test(int run);
+int		shading_test(int run);
+
+//test_planes.c
+int		local_normal_plane_test(int run);
 
 //test_ray_for_pixel.c
 int		ray_for_pixel_test(int run);
@@ -64,14 +77,6 @@ int		ray_transform_test2(int run);
 //test_shadows.c
 int		shadows_test(int run);
 
-//test_reflection.c
-int		normal_at_test(int run);
-
-//test_phong.c
-int		light_test(int run);
-int		material_test(int run);
-int		shading_test(int run);
-
 //test_transform.c
 /**
  * @brief runs all tests for translation, scaling and rotation
@@ -84,10 +89,10 @@ int		rotate_test(int x, int y, int z);
 int		scale_test(int run);
 int		translate_test(int run);
 int		chained_test(int run);
-//test_tuples.c
 
-int		t_matrix_to_tuple(int run);
-int		t_tuple_to_matrix(int run);
+//test_tuples.c
+int		test_matrix_to_tuple(int run);
+int		test_tuple_to_matrix(int run);
 
 //test_world.c
 int		world_test(int run);
@@ -110,5 +115,6 @@ int		ft_main_phong(int run);
 int		ft_main_world(int run);
 int		ft_main_view(int run);
 int		ft_main_shadows(int run);
+int		ft_main_plane(int run);
 
 #endif

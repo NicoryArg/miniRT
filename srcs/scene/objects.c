@@ -34,3 +34,15 @@ t_sphere	*ft_sphere(double radius)
 	return (sphere);
 }
 
+t_plane	*ft__plane(void)
+{
+	t_plane	*plane;
+
+	plane = (t_plane *)malloc(sizeof(t_plane));
+	if (!plane)
+		malloc_err("ft_plane");	//debug
+	plane->base.transf = create_identity_matrix(4);
+	plane->base.m = ft_material();
+	plane->base.type = PLANE;
+	return (plane);
+}

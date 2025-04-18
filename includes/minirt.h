@@ -98,6 +98,10 @@ typedef struct s_sphere
 	int			id;
 }	t_sphere;
 
+typedef struct s_plane
+{
+	t_object	base;
+}	t_plane;
 
 //#############################################
 //########## RAYS & INTERSECTIONS #############
@@ -203,17 +207,6 @@ typedef struct s_render_ctx {
 	double		half;
 }	t_render_ctx;
 
-
-// typedef struct s_ray_sphere
-// {
-// 	int		x_count;
-// 	double	tc;
-// 	t_tuple	*l;
-// 	double	l_len;
-// 	double	d;
-// 	double	offset;
-// }	t_ray_sphere;
-
 //#############################################
 //#################MATRICES####################
 //#############################################
@@ -297,9 +290,9 @@ t_colour	ft_shading(t_shading L, bool in_shadow);
 
 //normal_at.c
 t_tuple		ft_world_normal(t_matrix *inverse, t_tuple obj_normal);
-t_tuple		ft_object_point(t_matrix *inverse, t_tuple world_point);
+t_tuple		ft_local_point(t_matrix *inverse, t_tuple world_point);
 t_tuple		normal_at(void *obj, t_tuple world_p);
-t_tuple		sph_normal_at(t_sphere *sph, t_tuple world_p);
+t_tuple		local_normal_at(void *shape, t_tuple world_p);
 
 
 //pre_compute.c
@@ -324,6 +317,7 @@ t_inters	*intersect_world(t_world *w, t_ray *r);
  * @param radius the radius of the sphere
  */
 t_sphere	*ft_sphere(double radius);
+t_plane		*ft__plane(void);
 
 //#############################################
 //#############TRANSFORMATIONS#################
