@@ -257,6 +257,9 @@ void		sort_intersections(t_hit	**xs, int count);
 t_hit		*find_visible_hit(t_hit **hits, int count);
 double		find_hit(t_hit	**intersections, int count);
 
+//intersect_cyl.c
+t_inters	*intersect_cyl(t_cyl *cyl, t_ray *ray, t_inters *xs);
+
 //intersect_pl.c
 t_inters	*intersect_pl(t_plane *pl, t_ray *ray, t_inters *xs);
 
