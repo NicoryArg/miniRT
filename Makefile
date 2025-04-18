@@ -47,12 +47,12 @@ TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_trans
 									test_tuples.c test_phong.c test_world.c view_transform_test.c \
 									test_ray_for_pixel.c test_shadows.c test_planes.c)
 TEST_SCENE_FILES	= $(addprefix debug/scenes/, scene_planes.c)
-MAIN_FILES			= $(addprefix main/, main.c main_shadows.c main_rays.c main_phong.c \
+MAIN_FILES			= $(addprefix main/, main.c main_shadows.c main_rays.c main_renders.c main_phong.c \
 									main_transform.c main_tuples.c main_world.c \
-									main_view.c main_plane.c)
+									main_view.c main_plane.c )
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
-									matrix_invert.c matrix_utils.c)
+									matrix_invert.c matrix_utils.c )
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c rays.c transform.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)

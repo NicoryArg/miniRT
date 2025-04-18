@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main_shadows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 15:21:54 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/16 15:31:18 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 20:44:13 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:44:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	ft_main_shadows(int run)
 {

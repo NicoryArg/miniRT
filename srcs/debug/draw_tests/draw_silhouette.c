@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:23:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:24:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:00:31 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:00:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_silhouette(t_engine *engine)
 	ctx.sph = ft_sphere(1.0);
 	ctx.sph->centre.z = 10;
 	set_transf(ctx.sph, scale(5, 5, 5));
-	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
+	ctx.pixel_size = WALL_SIZE / (double)WIN_SIZE;//before was WALL_SIZE / (double)CANVAS_SIZE
 	ctx.half = WALL_SIZE / 2.0;
 	render_loop(&ctx, &engine->image);
 	free_sphere(ctx.sph);

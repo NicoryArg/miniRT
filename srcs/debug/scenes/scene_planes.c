@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   scene_planes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 15:21:53 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 18:41:25 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 20:43:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:43:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 #include "engine.h"
+#include "tests.h"
 
 t_world	*scene_planes()
 {

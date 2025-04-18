@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 13:29:11 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 14:53:56 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 20:44:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:44:44 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
+
 
 int	ft_main_plane(int run)
 {

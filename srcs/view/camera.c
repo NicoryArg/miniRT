@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:20:51 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:20:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:10:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:10:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
+#include "tests.h"
 
 t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 {
@@ -40,22 +41,6 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees)
 	}
 	camera.pixel_size = (camera.half_width * 2) / camera.hsize;
 	return (camera);
-}
-
-static void	print_progress_bar(int y, int total)
-{
-	int		percent = (y * 100) / total;
-	int		filled = (percent * 50) / 100;
-
-	printf("\r["); // Start of bar
-	for (int i = 0; i < filled; i++)
-		printf("\033[32m=\033[0m"); // Green fill
-	for (int i = filled; i < 50; i++)
-		printf(" "); // Empty part
-	printf("] %3d%% (%d/%d)", percent, y, total);
-	fflush(stdout);
-	if (y == total)
-		printf("\n");
 }
 
 t_image	*render(t_camera cam, t_world *world, t_image *img)

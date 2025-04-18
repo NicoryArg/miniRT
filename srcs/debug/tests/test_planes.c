@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_planes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 13:34:33 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 15:42:56 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 20:44:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:44:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	local_normal_plane_test(int run)
 {

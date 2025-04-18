@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:33:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:33:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:00:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:00:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ void	init_engine_world(t_engine *engine);
 
 #define WALL_Z 5
 #define WALL_SIZE 7
-#define CANVAS_SIZE 500
+#define CANVAS_SIZE 300
 
 #endif

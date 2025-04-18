@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:34:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:35:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:16:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:16:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		print_test_banner(const char *word);
 void		print_test_number(int *i);
 void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
+void		print_progress_bar(int y, int total);
 // void		print_rs(t_ray_sphere *rs);//	obsolete
 
 
@@ -53,44 +54,44 @@ void		print_intersections(t_hit **xs, int count, int sorted);
 //############### DRAW TESTS ##################
 //#############################################
 //draw_circle.c
-void	draw_circle_scene(t_engine *engine);
-int		draw_circle(int run);
+void		draw_circle_scene(t_engine *engine);
+int			draw_circle(int run);
 
 //draw_clock.c
-void	draw_clock_scene(t_engine *engine);
-int		draw_hour_markers(int run);
+void		draw_clock_scene(t_engine *engine);
+int			draw_hour_markers(int run);
 
 //draw_projectile.c
-void	draw_trajectory_scene(t_engine *engine);
-int		draw_trajectory(int run);
+void		draw_trajectory_scene(t_engine *engine);
+int			draw_trajectory(int run);
 
 //draw_silhouette.c
-void	draw_silhouette(t_engine *engine);
+void		draw_silhouette(t_engine *engine);
 
 //draw_sphere.c
-void	draw_sphere(t_engine *engine);
+void		draw_sphere(t_engine *engine);
 
 //draw_world_shadow.c
-void	draw_world_with_shadows(t_engine *engine);
+void		draw_world_with_shadows(t_engine *engine);
 
 //draw_world.c
-void	draw_world(t_engine *engine);
+void		draw_world(t_engine *engine);
 
 //#############################################
 //################## TESTS ####################
 //#############################################
 
 //test_normal_at.c
-int		normal_at_test(int run);
+int			normal_at_test(int run);
 
 //test_phong.c
-int		light_test(int run);
-int		material_test(int run);
-int		shading_test(int run);
+int			light_test(int run);
+int			material_test(int run);
+int			shading_test(int run);
 
 //test_planes.c
-int		local_normal_plane_test(int run);
-int		intersect_plane_test(int run);
+int			local_normal_plane_test(int run);
+int			intersect_plane_test(int run);
 
 //test_ray_for_pixel.c
 int		ray_for_pixel_test(int run);
@@ -101,12 +102,12 @@ int		ray_for_pixel_test(int run);
  * @brief runs tests for position (p.58)
  * @note tests for `get_point(t_ray *ray, double t)`
  */
-int		position_test(int run);
-int		sph_unique_id(int run, int num);
-int		sph_ray_intersect(int run);
-int		intersection_test(int run);
-int		ray_transform_test(int run);
-int		ray_transform_test2(int run);
+int			position_test(int run);
+int			sph_unique_id(int run, int num);
+int			sph_ray_intersect(int run);
+int			intersection_test(int run);
+int			ray_transform_test(int run);
+int			ray_transform_test2(int run);
 
 //test_shadows.c
 int		shadows_test(int run);
@@ -119,54 +120,55 @@ int		shadows_test(int run);
  * @param z 1 to run z rotation tests, 0 to skip
  * @return 0 if all tests pass, 1 if any test fails
  */
-int		rotate_test(int x, int y, int z);
-int		scale_test(int run);
-int		translate_test(int run);
-int		chained_test(int run);
+int			rotate_test(int x, int y, int z);
+int			scale_test(int run);
+int			translate_test(int run);
+int			chained_test(int run);
 
 //test_tuples.c
-int		test_matrix_to_tuple(int run);
-int		test_tuple_to_matrix(int run);
+int			test_matrix_to_tuple(int run);
+int			test_tuple_to_matrix(int run);
 
 //test_world.c
-int		world_test(int run);
-int		default_world_test(int run);
-int		intersect_world_test(int run);
-int		ft_pre_compute_test(int run);
-int		shade_hit_test(int run);
-int		color_at_test(int run);
+int			world_test(int run);
+int			default_world_test(int run);
+int			intersect_world_test(int run);
+int			ft_pre_compute_test(int run);
+int			shade_hit_test(int run);
+int			color_at_test(int run);
 
 //view_transform_test.c
-int		view_transform_test(int run);
-int		camera_test(int run);
+int			view_transform_test(int run);
+int			camera_test(int run);
 
 //#############################################
 //################## MAIN #####################
 //#############################################
 //main_phong.c
-int		ft_main_phong(int run);
+int			ft_main_phong(int run);
 
 //main_rays.c
-int		ft_main_rays(int run);
+int			ft_main_rays(int run);
 
 //main_renders.c
-int		ft_main_draw_2d(int run);
-int		ft_main_draw_silhouette(int run);
-int		ft_main_draw_sphere(int run);
-int		ft_main_draw_world(int run);
-int		ft_main_draw_world_shadows(int run);
-int		ft_main_draw_world_shadows(int run);
+int			ft_main_draw_2d(int run);
+int			ft_main_draw_silhouette(int run);
+int			ft_main_draw_sphere(int run);
+int			ft_main_draw_world(int run);
+int			ft_main_draw_world_shadows(int run);
+int			ft_main_draw_world_shadows(int run);
+int			ft_main_draw_world_planes(int run);
 
 //main_transform.c
-int		ft_main_transform(int run);
+int			ft_main_transform(int run);
 
 //main_tuples.c
-int		ft_main_tuples(int run);
+int			ft_main_tuples(int run);
 
 //main_view.c
-int		ft_main_view(int run);
-int		ft_main_shadows(int run);
-int		ft_main_plane(int run);
+int			ft_main_view(int run);
+int			ft_main_shadows(int run);
+int			ft_main_plane(int run);
 
 //#############################################
 //################# SCENES ####################
@@ -174,10 +176,10 @@ int		ft_main_plane(int run);
 
 typedef struct	s_world t_world;
 
-t_world	*scene_planes();
+t_world		*scene_planes();
 
 //main_world.c
-int		ft_main_world(int run);
+int			ft_main_world(int run);
 
 
 #endif

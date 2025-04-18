@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_shadows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 15:23:37 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/16 15:37:57 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/18 20:42:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 20:42:35 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
+#include "engine.h"
+#include "tests.h"
 
 int	shadows_test(int run)
 {

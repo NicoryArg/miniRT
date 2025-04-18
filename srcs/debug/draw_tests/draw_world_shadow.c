@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:06:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:06:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:05:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:05:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,11 @@ void	draw_world_with_shadows(t_engine *engine)
 	t_world		*w;
 
 	w = shadow_scene();
-	cam = ft_camera(500, 500, 60);
+	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);
 	cam.transf = view_transform(ft_tuple(0, 0, -5, POINT),
 								ft_tuple(0, 0, 0, POINT),
 								ft_tuple(0, 1, 0, VECTOR));
 	render(cam, w, &engine->image);
-	mlx_put_image_to_window(engine->mlx, engine->window,
-		engine->image.img_ptr, 0, 0);
 	free_matrix(cam.transf);
 	free_world(w);
 }

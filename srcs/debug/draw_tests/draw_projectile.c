@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:43:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 18:45:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:05:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:05:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_projectile	*update_projectile(t_projectile *p, t_environment *e)
 		new_pos.y = 0;
 		new_vel.y *= -0.8;
 	}
-	if (magnitude(new_vel) > 500)
+	if (magnitude(new_vel) > WIN_SIZE)
 		new_vel = mult_tuple(normalise(new_vel), 20);
 	p->position = new_pos;
 	p->velocity = new_vel;

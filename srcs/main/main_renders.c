@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:00:31 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:01:10 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/18 21:15:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/18 21:16:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_main_draw_2d(int run)
 		return (0);
 	if (draw_circle(0))
 		return (run_render_with(draw_circle_scene));
-	if(draw_hour_markers(0))
+	if(draw_hour_markers(1))
 		return (run_render_with(draw_clock_scene));
 	if (draw_trajectory(0))
 		return (run_render_with(draw_trajectory_scene));
@@ -53,4 +53,11 @@ int	ft_main_draw_world_shadows(int run)
 	if (run == 0)
 		return (0);
 	return (run_render_with(draw_world_with_shadows));
+}
+
+int	ft_main_draw_world_planes(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_planes));
 }
