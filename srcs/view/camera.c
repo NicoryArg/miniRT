@@ -52,7 +52,7 @@ t_image	*render(t_camera cam, t_world *world, t_image *img)
 	y = 0;
 	while (y < (int)cam.vsize)
 	{
-		printf(YEL"[DEBUG]"RES" (%d)\n", y);
+		printf(YEL"[DEBUG]"RES" %d/%d\n", y, WIN_SIZE - 1);
 		x = 0;
 		while (x < (int)cam.hsize)
 		{
