@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:21:53 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/18 18:24:35 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/18 18:41:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	draw_planes(t_engine *engine)
 	w = scene_planes();
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
-		ft_tuple(10, 2, -7, POINT),//from camera
+		ft_tuple(0, 2, -7, POINT),//from camera
 		ft_tuple(0, 0, 10, POINT),//look at target
 		ft_tuple(0, 1, 0, VECTOR));//up vector
 	render(cam, w, &engine->image);

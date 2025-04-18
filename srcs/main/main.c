@@ -40,8 +40,8 @@ int	ft_main_engine(int run)
 	// draw_sphere(&engine);
 	// draw_world(&engine);
 	draw_planes(&engine);
-	printf("⚠️\t"AKA"Resizing the window causes the image to disappear \t⚠️\n");
-	printf("\tPlease refrain from resizing the window.\n"RES);
+	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	printf("\tPlease refrain from resizing the window\n"RES);
 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
 	mlx_loop(engine.mlx);
