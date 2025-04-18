@@ -5,13 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 23:01:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 23:01:56 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 00:14:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 00:17:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
+/**
+ * @brief Returns the largest integer less than or equal to x.
+ *
+ * Handles both positive and negative values, simulating math-style floor behavior.
+ */
 double	ft_floor(double x)
 {
 	int		i;
@@ -30,6 +35,11 @@ double	ft_floor(double x)
 	return (result);
 }
 
+/**
+ * @brief Creates a stripe pattern between two colors.
+ *
+ * The pattern initially uses an identity transform.
+ */
 t_pattern	stripe_pattern(t_colour a, t_colour b)
 {
 	t_pattern	p;
@@ -41,7 +51,11 @@ t_pattern	stripe_pattern(t_colour a, t_colour b)
 	return (p);
 }
 
-
+/**
+ * @brief Determines the color at a specific point for a stripe pattern.
+ *
+ * Alternates between color a and b based on the floor of x-coordinate.
+ */
 t_colour	stripe_at(t_pattern *pattern, t_tuple point)
 {
 	if ((int)ft_floor(point.x) % 2 == 0)
@@ -50,6 +64,11 @@ t_colour	stripe_at(t_pattern *pattern, t_tuple point)
 		return (pattern->b);
 }
 
+/**
+ * @brief Calculates the pattern color at a world-space point on a given object.
+ *
+ * Transforms the point from world space → object space → pattern space.
+ */
 t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point)
 {
 	t_matrix	*object_inverse;
@@ -67,12 +86,23 @@ t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_po
 	free_matrix(pattern_inverse);
 	return (result);
 }
+
+/**
+ * @brief A pattern used for testing: maps x/y/z to RGB.
+ *
+ * This helps visualize coordinates on surfaces.
+ */
 t_colour	test_pattern_at(t_pattern *pattern, t_tuple point)
 {
 	(void)pattern;
 	return (ft_colour(point.x, point.y, point.z));
 }
 
+/**
+ * @brief Creates a basic test pattern.
+ *
+ * Type is set to 99 for test identification. Colors are unused.
+ */
 t_pattern	test_pattern(void)
 {
 	t_pattern	p;
@@ -84,6 +114,9 @@ t_pattern	test_pattern(void)
 	return (p);
 }
 
+/**
+ * @brief Transforms a world point to object space using the inverse transform.
+ */
 static t_tuple	transform_world_to_object(t_tuple world_point, t_matrix *inverse)
 {
 	t_matrix	*wm;
@@ -98,6 +131,9 @@ static t_tuple	transform_world_to_object(t_tuple world_point, t_matrix *inverse)
 	return (result);
 }
 
+/**
+ * @brief Transforms a point from object space to pattern space.
+ */
 static t_tuple	transform_object_to_pattern(t_tuple object_point, t_matrix *inverse)
 {
 	t_matrix	*objm;
@@ -112,6 +148,17 @@ static t_tuple	transform_object_to_pattern(t_tuple object_point, t_matrix *inver
 	return (result);
 }
 
+/**
+ * @brief Computes the color at a world-space point using an object's pattern.
+ *
+ * Transforms the point from world space to object space, then to pattern space,
+ * and applies the pattern function (e.g., stripes or test) at that point.
+ * Exits if the object or pattern is invalid.
+ * @param pattern The pattern applied to the object.
+ * @param object The object receiving the pattern.
+ * @param world_point The point in world coordinates to evaluate.
+ * @return The resulting color from the pattern.
+ */
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point)
 {
 	t_matrix	*object_inv;
