@@ -30,9 +30,11 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_world_shadows(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_patterns(1))
+	if (ft_main_draw_patterns(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_world_planes(0))
+		return (printf(AKA"❌ draw_world failed\n"RES));
+	if (ft_main_draw_world_cylinders(1))
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);

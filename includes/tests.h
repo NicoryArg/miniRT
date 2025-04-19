@@ -173,6 +173,7 @@ int			ft_main_draw_world(int run);
 int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
+int			ft_main_draw_world_cylinders(int run);
 int			ft_main_draw_patterns(int run);
 
 //main_transform.c
@@ -193,6 +194,7 @@ int			ft_main_plane(int run);
 typedef struct	s_world t_world;
 
 t_world		*scene_planes();
+t_world		*scene_cyl_uncapped();
 
 //main_world.c
 int			ft_main_world(int run);
