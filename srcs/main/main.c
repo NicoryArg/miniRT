@@ -79,13 +79,11 @@ int	main()
 		return (-1);
 	if(ft_main_patterns(0))
 		return (-1);
-	if (ft_main_cylinder(0))
+	if (ft_main_cylinder(1))
 		return (-1);
 	///////////////////////////////////////////////
-	if (ft_main_render(1)) //1 to run, 0 to skip
+	if (ft_main_render(0)) //1 to run, 0 to skip
 		return (-1);
-	// if (ft_main_engine(0)) //1 to run, 0 to skip
-	// 	return (-1);
 	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);
 }

@@ -99,6 +99,7 @@ int			shading_test(int run);
 //test_cylinders.c
 int		test_intersect_cylinder(int run);
 int		test_normal_at_cylinder(int run);
+int		test_truncate_cylinder(int run);
 
 //test_planes.c
 int			local_normal_plane_test(int run);
