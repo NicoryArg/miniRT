@@ -43,11 +43,10 @@ SRCS_DIR			= srcs/
 DEBUG_FILES			= $(addprefix debug/, print.c)
 DRAW_FILES			= $(addprefix debug/draw_tests/, draw_circle.c draw_clock.c draw_projectile.c \
 									draw_scene_pattern.c draw_silhouette.c draw_sphere.c \
-									draw_world_shadow.c draw_world.c draw_utils.c)
+									draw_world_shadow.c draw_world.c draw_utils.c draw_planes.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_patterns.c test_transform.c \
 									test_tuples.c test_phong.c test_world.c view_transform_test.c \
 									test_ray_for_pixel.c test_shadows.c test_planes.c test_cylinders.c)
-TEST_SCENE_FILES	= $(addprefix debug/scenes/, scene_planes.c)
 MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_rays.c main_renders.c \
 									main_phong.c main_transform.c main_tuples.c main_world.c \
 									main_view.c main_plane.c main_cyl.c)
@@ -69,8 +68,7 @@ VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c)
 SRC_FILES		= 	$(MATRIX_FILES) $(PATTERNS_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(DRAW_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
-					$(REFLECTION_FILES) $(VIEW_FILES) $(TEST_SCENE_FILES)
-
+					$(REFLECTION_FILES) $(VIEW_FILES)
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
 
