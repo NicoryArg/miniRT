@@ -56,6 +56,9 @@ int		light_test(int run);
 int		material_test(int run);
 int		shading_test(int run);
 
+//test_cylinders.c
+int		test_intersect_cylinder(int run);
+
 //test_planes.c
 int		local_normal_plane_test(int run);
 int		intersect_plane_test(int run);
@@ -118,6 +121,7 @@ int		ft_main_world(int run);
 int		ft_main_view(int run);
 int		ft_main_shadows(int run);
 int		ft_main_plane(int run);
+int		ft_main_cylinder(int run);
 
 //#############################################
 //################# SCENES ####################
