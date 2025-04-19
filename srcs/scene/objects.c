@@ -53,11 +53,12 @@ t_cylinder	*ft_cylinder(void)
 	t_cylinder	*cyl;
 
 	cyl = (t_cylinder *)malloc(sizeof(t_cylinder));
-	if (cyl)
+	if (!cyl)
 		malloc_err("ft_cylinder");	//debug
 	cyl->base.transf = create_identity_matrix(4);
 	cyl->base.m = ft_material();
 	cyl->base.type = CYLINDER;
 	cyl->radius = 1;
+	cyl->centre = ft_tuple(0, 0, 0, POINT);
 	return (cyl);
 }

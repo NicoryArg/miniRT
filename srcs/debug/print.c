@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:08:54 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:08:54 by nryser           ###   ########.ch       */
+/*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
+/*   Updated: 2025/04/19 02:46:44 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_tuple(t_tuple tuple, char *name)
 void	print_normal(t_tuple tuple, t_tuple expected, t_obj type)
 
 {
-	if (type == PLANE && tuple.w == 0)
+	if ((type == PLANE || type == CYLINDER) && tuple.w == 0)
 	{
 		printf(B_B"normal:   (%.0f, %.0f, %.0f)\n"RES, tuple.x, tuple.y, tuple.z);
 		printf(G_B"expected: (%.0f, %.0f, %.0f)\n"RES, expected.x, expected.y, expected.z);
@@ -185,7 +185,7 @@ void	print_test_number(int *i)
 	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
 	char *word = "TEST";
 
-	printf(CYAN"#####%*s%s %d%*s#####\n"RES, padding, "", word, (*i)++, padding + extra, "");
+	printf(C_B"#####%*s%s %d%*s#####\n"RES, padding, "", word, (*i)++, padding + extra, "");
 }
 
 void	print_sub_header(const char *word, int *i)

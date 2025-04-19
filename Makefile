@@ -46,17 +46,17 @@ DRAW_FILES			= $(addprefix debug/draw_tests/, draw_circle.c draw_clock.c draw_pr
 									draw_world_shadow.c draw_world.c draw_utils.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_patterns.c test_transform.c \
 									test_tuples.c test_phong.c test_world.c view_transform_test.c \
-									test_ray_for_pixel.c test_shadows.c test_planes.c)
+									test_ray_for_pixel.c test_shadows.c test_planes.c test_cylinders.c)
 TEST_SCENE_FILES	= $(addprefix debug/scenes/, scene_planes.c)
 MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_rays.c main_renders.c \
 									main_phong.c main_transform.c main_tuples.c main_world.c \
-									main_view.c main_plane.c )
+									main_view.c main_plane.c main_cyl.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, patterns.c )
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
-						intersect_cyl.c intersect_pl.c rays.c transform.c)
+						intersect_pl.c intersect_cyl.c rays.c transform.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)
 SCENE_FILES			= $(addprefix scene/, world.c objects.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)

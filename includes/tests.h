@@ -96,6 +96,10 @@ int			light_test(int run);
 int			material_test(int run);
 int			shading_test(int run);
 
+//test_cylinders.c
+int		test_intersect_cylinder(int run);
+int		test_normal_at_cylinder(int run);
+
 //test_planes.c
 int			local_normal_plane_test(int run);
 int			intersect_plane_test(int run);
@@ -151,8 +155,10 @@ int			camera_test(int run);
 //#############################################
 //################## MAIN #####################
 //#############################################
+//main_cyl.c
+int			ft_main_cylinder(int run);
 //main_patterns.c
-int		ft_main_patterns(int run);
+int			ft_main_patterns(int run);
 //main_phong.c
 int			ft_main_phong(int run);
 
