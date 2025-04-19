@@ -124,6 +124,8 @@ typedef struct s_cylinder
 	t_object	base;
 	t_tuple		centre;
 	double		radius;
+	double		min;
+	double		max;
 }	t_cylinder;
 
 typedef struct s_plane

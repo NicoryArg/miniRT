@@ -48,7 +48,7 @@ t_plane	*ft_plane(void)
 	return (plane);
 }
 
-t_cylinder	*ft_cylinder(void)
+t_cylinder	*ft_cylinder()
 {
 	t_cylinder	*cyl;
 
@@ -60,5 +60,7 @@ t_cylinder	*ft_cylinder(void)
 	cyl->base.type = CYLINDER;
 	cyl->radius = 1;
 	cyl->centre = ft_tuple(0, 0, 0, POINT);
+	cyl->min = -INFINITY;
+	cyl->max = INFINITY;
 	return (cyl);
 }
