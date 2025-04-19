@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:39:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:55:30 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 16:16:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 16:17:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	draw_sphere_pattern(t_engine *engine)
 
 	// 🎨 Choose the pattern type and colors
 	pattern = malloc(sizeof(t_pattern));
-	pattern->type = PATTERN_RING; // Options: PATTERN_RING, PATTERN_GRADIENT, PATTERN_CHECKERS
+	pattern->type = PATTERN_STRIPE; // Options: PATTERN_RING, PATTERN_GRADIENT, PATTERN_CHECKERS
 	pattern->a = ft_colour(1, 0.2, 1);
 	pattern->b = ft_colour(1, 1, 0);
-	pattern->transform = scale(0.2, 0.2, 0.2); // Controls pattern frequency
+	pattern->transform = scale(0.05, 1, 0.05); // Stretch vertically // Controls pattern frequency
 	ctx.sph->base.m.pattern = pattern;
 
 	// 💎 Material properties
