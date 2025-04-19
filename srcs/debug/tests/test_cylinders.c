@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 01:32:50 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 02:22:22 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/19 02:44:42 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,84 @@ int	test_intersect_cylinder(int run)
 	//free memory
 	free_hits(xs);
 	free_ray(ray);
+	return (0);
+}
+
+int	test_normal_at_cylinder(int run)
+{
+	if (run == 0)
+		return (0);
+	t_cylinder	*cyl;
+	t_tuple		p;
+	t_tuple		n;
+	t_tuple		expected_normal;
+	int			i = 1;
+
+//TEST 1
+	//print banners
+	print_test_banner("Normal at cylinder");
+	print_sub_header("point -> (1,0,0)", &i);
+	//initialise variables
+	cyl = ft_cylinder();
+	p = ft_tuple(1, 0, 0, POINT);
+	expected_normal = ft_tuple(1, 0, 0, VECTOR);
+	//run test
+	n = local_normal_at(cyl, p);
+	//print output
+	print_normal(n, expected_normal, CYLINDER);
+	//check result
+	if (equal_tuple(n, expected_normal))
+		printf(GR"✔ normal is correct\n\n"RES);
+	else
+		return (printf(AKA"❌ normal is incorrect\n"RES));
+
+//TEST 2
+	//print banners
+	print_sub_header("point -> (0,5,-1)", &i);
+	//redefine variables
+	p = ft_tuple(0, 5, -1, POINT);
+	expected_normal = ft_tuple(0, 0, -1, VECTOR);
+	//run test
+	n = local_normal_at(cyl, p);
+	//print output
+	print_normal(n, expected_normal, CYLINDER);
+	//check result
+	if (equal_tuple(n, expected_normal))
+		printf(GR"✔ normal is correct\n\n"RES);
+	else
+		return (printf(AKA"❌ normal is incorrect\n"RES));
+
+//TEST 3
+	//print banners
+	print_sub_header("point -> (0,-2,1)", &i);
+	//redefine variables
+	p = ft_tuple(0, -2, 1, POINT);
+	expected_normal = ft_tuple(0, 0, 1, VECTOR);
+	//run test
+	n = local_normal_at(cyl, p);
+	//print output
+	print_normal(n, expected_normal, CYLINDER);
+	//check result
+	if (equal_tuple(n, expected_normal))
+		printf(GR"✔ normal is correct\n\n"RES);
+	else
+		return (printf(AKA"❌ normal is incorrect\n"RES));
+
+//TEST 4
+	//print banners
+	print_sub_header("point -> (-1,1,0)", &i);
+	//redefine variables
+	p = ft_tuple(-1, 1, 0, POINT);
+	expected_normal = ft_tuple(-1, 0, 0, VECTOR);
+	//run test
+	n = local_normal_at(cyl, p);
+	//print output
+	print_normal(n, expected_normal, CYLINDER);
+	//check result
+	if (equal_tuple(n, expected_normal))
+		printf(GR"✔ normal is correct\n\n"RES);
+	else
+		return (printf(AKA"❌ normal is incorrect\n"RES));
 	return (0);
 }
 

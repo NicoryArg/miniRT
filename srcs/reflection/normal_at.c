@@ -69,7 +69,7 @@ t_tuple	local_normal_at(void *shape, t_tuple local_p)
 		normal = (diff_tuple(local_p,((t_sphere *)shape)->centre));
 	else if (obj->type == PLANE)
 		normal = ft_tuple(0, 1, 0, VECTOR);
-	// else if (obj->type = CYLINDER)
-		// normal = {handle cylinder}
+	else if (obj->type == CYLINDER)
+		normal = ft_tuple(local_p.x, 0, local_p.z, VECTOR);
 	return (normal);
 }
