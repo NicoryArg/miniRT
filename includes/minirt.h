@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:41:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:41:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:17:22 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:17:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,12 +286,17 @@ void		free_matrix(t_matrix *matrix);
 //##############PATTERNS#######################
 //#############################################
 double		ft_floor(double x);
-t_pattern	stripe_pattern(t_colour a, t_colour b);
-t_colour	stripe_at(t_pattern *pattern, t_tuple point);
 t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
 t_pattern	test_pattern(void);//test
+
+//type_patterns.c
+t_pattern	stripe_pattern(t_colour a, t_colour b);
+t_colour	stripe_at(t_pattern *pattern, t_tuple point);
+t_colour	gradient_at(t_pattern *pattern, t_tuple point);
+t_colour	ring_at(t_pattern *pattern, t_tuple point);
+t_colour	checkers_at(t_pattern *pattern, t_tuple point);
 
 //#############################################
 //##################RAYS#######################
@@ -445,6 +450,7 @@ t_tuple		ft_negate(t_tuple tup);
 //colours.c
 t_colour	ft_colour(double r, double g, double b);
 t_colour	add_colours(t_colour	a, t_colour b);
+t_colour	diff_colours(t_colour a, t_colour b);
 t_colour	mult_colour(t_colour c, double num);
 t_colour	mult_colours(t_colour c1, t_colour c2);
 int			convert_colour_to_int(t_colour col);
@@ -497,7 +503,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 300
+# define WIN_SIZE 600
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

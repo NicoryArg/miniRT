@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 23:29:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 00:09:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:21:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:21:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_world	*scene_pattern(void)
 	s1 = ft_sphere(1);
 	s1->base.m = ft_material();
 	pat1 = malloc(sizeof(t_pattern));
-	pat1->type = PATTERN_STRIPE;
+	pat1->type = PATTERN_RING;
 	pat1->a = ft_colour(1, 0.2, 1);   // reddish
 	pat1->b = ft_colour(1, 1, 0);     // yellow
 	pat1->transform = multiply_matrices(rotate_y(M_PI / 4), scale(0.2, 0.2, 0.2));
@@ -55,7 +55,7 @@ t_world	*scene_pattern(void)
 	s2 = ft_sphere(1);
 	s2->base.m = ft_material();
 	pat2 = malloc(sizeof(t_pattern));
-	pat2->type = PATTERN_STRIPE;
+	pat2->type = PATTERN_GRADIENT;
 	pat2->a = ft_colour(0, 0.5, 0);   // dark green
 	pat2->b = ft_colour(0, 0.9, 0);   // bright green
 	pat2->transform = scale(0.1, 0.1, 0.1);
@@ -70,7 +70,7 @@ t_world	*scene_pattern(void)
 	s3 = ft_sphere(1);
 	s3->base.m = ft_material();
 	pat3 = malloc(sizeof(t_pattern));
-	pat3->type = PATTERN_STRIPE;
+	pat3->type = PATTERN_GRADIENT;
 	pat3->a = ft_colour(1, 0.8, 1); // pink
 	pat3->b = ft_colour(1, 0.2, 1); // deep pink
 	pat3->transform = multiply_matrices(rotate_z(M_PI / 3), scale(0.05, 0.05, 0.05));
@@ -86,7 +86,7 @@ t_world	*scene_pattern(void)
 	floor->base.m = ft_material();
 	floor->base.m.specular = 0;
 	floor_pat = malloc(sizeof(t_pattern));
-	floor_pat->type = PATTERN_STRIPE;
+	floor_pat->type = PATTERN_CHECKERS;
 	floor_pat->a = ft_colour(0.5, 0, 0.9); // blueish
 	floor_pat->b = ft_colour(0, 0.8, 0.8); // cyan
 	floor_pat->transform = scale(0.2, 0.2, 0.2);
@@ -115,7 +115,7 @@ t_world	*scene_pattern(void)
 	right_wall->base.m = ft_material();
 	right_wall->base.m.specular = 0;
 	wall_pat_right = malloc(sizeof(t_pattern));
-	wall_pat_right->type = PATTERN_STRIPE;
+	wall_pat_right->type = PATTERN_RING;
 	wall_pat_right->a = ft_colour(0.5, 0, 0.9); // yellow
 	wall_pat_right->b = ft_colour(0, 0.8, 0.8); // red
 	wall_pat_right->transform = multiply_matrices(

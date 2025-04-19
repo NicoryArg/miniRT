@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 00:14:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 00:21:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:18:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:18:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,6 @@ double	ft_floor(double x)
 			result = (double)(i - 1);
 	}
 	return (result);
-}
-
-/**
- * @brief Creates a stripe pattern between two colors.
- *
- * The pattern initially uses an identity transform.
- */
-t_pattern	stripe_pattern(t_colour a, t_colour b)
-{
-	t_pattern	p;
-
-	p.type = PATTERN_STRIPE;
-	p.a = a;
-	p.b = b;
-	p.transform = create_identity_matrix(4);
-	return (p);
-}
-
-/**
- * @brief Determines the color at a specific point for a stripe pattern.
- *
- * Alternates between color a and b based on the floor of x-coordinate.
- */
-t_colour	stripe_at(t_pattern *pattern, t_tuple point)
-{
-	if ((int)ft_floor(point.x) % 2 == 0)
-		return (pattern->a);
-	else
-		return (pattern->b);
 }
 
 /**
@@ -183,31 +154,11 @@ t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_p
 		return (stripe_at(pattern, pattern_point));
 	if (pattern->type == 99)
 		return (test_pattern_at(pattern, pattern_point));
+	else if (pattern->type == PATTERN_GRADIENT)
+		return (gradient_at(pattern, pattern_point));
+	else if (pattern->type == PATTERN_RING)
+		return (ring_at(pattern, pattern_point));
+	else if (pattern->type == PATTERN_CHECKERS)
+		return (checkers_at(pattern, pattern_point));
 	return (ft_colour(0, 0, 0));
 }
-
-/*
-✅ Implemented:
-
-t_pattern struct with type, colors a and b, and transform matrix.
-stripe_pattern() for creating default stripe patterns with identity transform.
-stripe_at() to return color a or b based on the floor of point.x.
-test_pattern_at() for debugging, returning point.x/y/z as RGB color.
-pattern_at_object():
-Converts a world_point → object space → pattern space.
-Applies pattern based on final point.
-Added helper functions:
-transform_world_to_object()
-transform_object_to_pattern()
-⚠️ Fixed Issues:
-Memory leaks due to missing free_matrix() calls.
-Segfaults from accessing uninitialized or invalid pattern/transform pointers.
-Uninitialized values in shade_hit() → fixed by always setting valid t_hit->obj.
-Ensured pattern->transform is initialized using create_identity_matrix() or a valid scale/rotate.
-💡 Design Notes:
-Each object gets its own dynamically allocated pattern with a unique transform.
-Patterns are modular — different colors and angles applied per object.
-Stripe density is controlled by scale(x, y, z) — smaller scale = denser stripes.
-Pattern logic is handled after object/world transforms, allowing flexible appearance.
-Patterns are optional: if no pattern is set, fallback to object’s base color.
-*/

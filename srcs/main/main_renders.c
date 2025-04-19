@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:55:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:56:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:35:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:36:01 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,10 @@ int	ft_main_draw_patterns(int run)
 	if (run == 0)
 		return (0);
 	return (run_render_with(draw_patterns));
+}
+int	ft_main_draw_sphere_pattern(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_sphere_pattern));
 }

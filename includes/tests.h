@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:56:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:57:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:18:22 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:37:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ void		draw_patterns(t_engine *engine);
 //draw_silhouette.c
 void		draw_silhouette(t_engine *engine);
 
+//draw_sphere_pattern.c
+void		draw_sphere_pattern(t_engine *engine);
+
 //draw_sphere.c
 void		draw_sphere(t_engine *engine);
 
@@ -90,6 +93,15 @@ t_ray		*create_ray_to_point(t_tuple origin, t_tuple target);
 
 //test_normal_at.c
 int			normal_at_test(int run);
+
+//test_patterns.c
+int		stripe_pattern_test(int run);
+int		pattern_lighting_test(int run);
+int		stripe_transform_test(int run);
+int		pattern_generalization_test(int run);
+int		gradient_pattern_test(int run);
+int		ring_pattern_test(int run);
+int		checkers_pattern_test(int run);
 
 //test_phong.c
 int			light_test(int run);
@@ -175,6 +187,8 @@ int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
 int			ft_main_draw_world_cylinders(int run);
 int			ft_main_draw_patterns(int run);
+int			ft_main_draw_sphere_pattern(int run);
+
 
 //main_transform.c
 int			ft_main_transform(int run);
@@ -199,10 +213,6 @@ t_world		*scene_cyl_uncapped();
 //main_world.c
 int			ft_main_world(int run);
 
-//test_patterns.c
-int		stripe_pattern_test(int run);
-int		pattern_lighting_test(int run);
-int		stripe_transform_test(int run);
-int		pattern_generalization_test(int run);
+
 
 #endif

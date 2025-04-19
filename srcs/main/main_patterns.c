@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 22:00:58 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 22:00:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:18:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:18:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ int	ft_main_patterns(int run)
 		return(printf(R_B"pattern_lighting_test failed\n"RES));
 	if (stripe_transform_test(0))//	0 to skip, 1 to run
 		return(printf(R_B"stripe_transform_test failed\n"RES));
-	if (pattern_generalization_test(1))//	0 to skip, 1 to run
+	if (pattern_generalization_test(0))//	0 to skip, 1 to run
 		return(printf(R_B"pattern_generalization_test failed\n"RES));
+	if (gradient_pattern_test(0))//	0 to skip, 1 to run
+		return(printf(R_B"gradient_pattern_test failed\n"RES));
+	if (ring_pattern_test(0))//	0 to skip, 1 to run
+		return(printf(R_B"ring_pattern_test failed\n"RES));
+	if (checkers_pattern_test(1))//	0 to skip, 1 to run
+		return(printf(R_B"checkers_pattern_test failed\n"RES));
 
 	printf(G_B"END OF RAYS TESTS\n"RES);
 	return (0);

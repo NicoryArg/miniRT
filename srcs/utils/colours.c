@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 14:32:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 14:32:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 15:02:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 15:02:21 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ t_colour	add_colours(t_colour	a, t_colour b)
 	return (new);
 }
 
+t_colour	diff_colours(t_colour a, t_colour b)
+{
+	t_colour result;
+
+	result.r = a.r - b.r;
+	result.g = a.g - b.g;
+	result.b = a.b - b.b;
+	return (result);
+}
 t_colour	mult_colour(t_colour c, double num)
 {
 	t_colour	new;
