@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:30:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 15:18:47 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:13:08 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_swap_t_cyl(t_cyl_vals *data)
 {
-	data->t0 = data->temp;
+	data->temp = data->t0;
 	data->t0 = data->t1;
 	data->t1 = data->temp;
 }
@@ -58,8 +58,8 @@ t_inters	*intersect_cyl(t_cylinder *cyl, t_ray *ray, t_inters *xs)
 	disc = ft_sqr(b) - 4 * a * c;
 	if (disc < 0) // ray does not intersect cylinder
 		return (xs);
-	data.t0 = -b - sqrt(disc) / (2*a);
-	data.t1 = -b + sqrt(disc) / (2*a);
+	data.t0 = (-b - sqrt(disc)) / (2 * a);
+	data.t1 = (-b + sqrt(disc)) / (2 * a);
 	// xs->hits[0] = intersection((-b - sqrt(disc)) / (2*a), cyl);
 	// xs->hits[1] = intersection((-b + sqrt(disc)) / (2*a), cyl);
 	validate(xs, cyl, ray, data);

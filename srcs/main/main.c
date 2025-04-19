@@ -34,8 +34,10 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_world_planes(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_world_cylinders(1))
-		return (printf(AKA"❌ draw_world failed\n"RES));
+	if (ft_main_draw_infinite_cylinders(0))
+		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
+	if (ft_main_draw_truncated_cylinders(1))
+		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
 }
@@ -79,10 +81,10 @@ int	main()
 		return (-1);
 	if(ft_main_patterns(0))
 		return (-1);
-	if (ft_main_cylinder(1))
+	if (ft_main_cylinder(0))
 		return (-1);
 	///////////////////////////////////////////////
-	if (ft_main_render(0)) //1 to run, 0 to skip
+	if (ft_main_render(1)) //1 to run, 0 to skip
 		return (-1);
 	printf(G_B"END OF ALL TESTS\n"RES);
 	return (0);

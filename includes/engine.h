@@ -122,8 +122,6 @@ void	display_help_message(t_engine *engine);
 void	malloc_err(char *func_name);
 
 t_image		*render(t_camera cam, t_world *world, t_image *img);
-void	draw_planes(t_engine *engine);
-void	draw_cyl_uncapped(t_engine *engine);
 void	init_engine_world(t_engine *engine);
 
 #define WALL_Z 5
