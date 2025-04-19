@@ -30,9 +30,9 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_world_shadows(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_patterns(1))
+	if (ft_main_draw_patterns(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
-	if (ft_main_draw_world_planes(0))
+	if (ft_main_draw_world_planes(1))
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
@@ -47,6 +47,8 @@ int	run_render_with(void (*render_func)(t_engine *))
 	render_func(&engine);
 	mlx_put_image_to_window(engine.mlx, engine.window,
 		engine.image.img_ptr, 0, 0);
+	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	printf("\tPlease refrain from resizing the window\n"RES);
 	mlx_key_hook(engine.window, on_key_hook_event, &engine);
 	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
 	mlx_loop(engine.mlx);
