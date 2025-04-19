@@ -62,6 +62,13 @@ int	ft_main_draw_world_planes(int run)
 	return (run_render_with(draw_planes));
 }
 
+int	ft_main_draw_world_cylinders(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_cyl_uncapped));
+}
+
 int	ft_main_draw_patterns(int run)
 {
 	if (run == 0)

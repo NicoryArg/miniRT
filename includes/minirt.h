@@ -124,6 +124,8 @@ typedef struct s_cylinder
 	t_object	base;
 	t_tuple		centre;
 	double		radius;
+	double		min;
+	double		max;
 }	t_cylinder;
 
 typedef struct s_plane
@@ -534,6 +536,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define R_B  "\033[1;31m" // Bold Red
 # define G_B  "\033[1;32m" // Bold Green
 # define B_B  "\033[1;34m" // Bold Blue
+# define C_B "\033[1;36m" // Bold Cyan
 
 
 #endif

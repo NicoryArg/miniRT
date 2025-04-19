@@ -51,6 +51,7 @@ static void	render_sphere_loop(t_render_ctx *ctx, t_image *img, t_light *light)
 	y = 0;
 	while (y < CANVAS_SIZE)
 	{
+		print_progress_bar(y, CANVAS_SIZE - 1);
 		x = 0;
 		while (x < CANVAS_SIZE)
 		{
