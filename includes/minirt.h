@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:17:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:17:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 14:03:13 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 14:03:21 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_pattern
 	t_colour a;
 	t_colour b;
 	t_matrix *transform;
+	double frequency;
 } t_pattern;
 
 //#############################################

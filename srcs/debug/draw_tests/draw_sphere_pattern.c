@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 16:16:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 16:17:31 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 14:25:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 14:28:18 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void	render_sphere_loop(t_render_ctx *ctx, t_image *img, t_light *light)
 		y++;
 	}
 }
-
 void	draw_sphere_pattern(t_engine *engine)
 {
 	t_render_ctx	ctx;
@@ -83,25 +82,29 @@ void	draw_sphere_pattern(t_engine *engine)
 	ctx.sph->centre = ft_tuple(0, 0, 0, POINT);
 	ctx.sph->base.m = ft_material();
 
-	// 🎨 Choose the pattern type and colors
+	// 🎨 Pattern: clean concentric rings
 	pattern = malloc(sizeof(t_pattern));
-	pattern->type = PATTERN_STRIPE; // Options: PATTERN_RING, PATTERN_GRADIENT, PATTERN_CHECKERS
-	pattern->a = ft_colour(1, 0.2, 1);
-	pattern->b = ft_colour(1, 1, 0);
-	pattern->transform = scale(0.05, 1, 0.05); // Stretch vertically // Controls pattern frequency
+	pattern->type = PATTERN_RING;
+	pattern->a = ft_colour(1, 0.2, 1); // Magenta
+	pattern->b = ft_colour(1, 1, 0);   // Yellow
+
+	// 💡 Scale X and Z to compress the rings
+	// Lower values = more rings
+	pattern->transform = scale(0.1, 1.0, 0.1);
+	pattern->frequency = 5.0;
 	ctx.sph->base.m.pattern = pattern;
 
-	// 💎 Material properties
+	// 💎 Material
 	ctx.sph->base.m.ambient = 0.1;
 	ctx.sph->base.m.diffuse = 0.9;
 	ctx.sph->base.m.specular = 0.9;
 	ctx.sph->base.m.shininess = 200.0;
 
-	// 🔄 Apply sphere transformation: scale → rotate → translate
-	scale_mat = scale(1.0, 1.0, 1.0); // no squashing
+	// 🌀 Sphere transformation: rotate for nice perspective
 	rot = multiply_matrices(rotate_y(M_PI / 6), rotate_x(M_PI / 8));
+	scale_mat = scale(1.0, 1.0, 1.0); // optional identity scale
 	transform = multiply_matrices(rot, scale_mat);
-	translate_mat = translate(0, 0, 0); // center it in world
+	translate_mat = translate(0, 0, 0); // no translation
 	final_transform = multiply_matrices(translate_mat, transform);
 
 	set_transf(ctx.sph, final_transform);
@@ -113,6 +116,6 @@ void	draw_sphere_pattern(t_engine *engine)
 	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
 	render_sphere_loop(&ctx, &engine->image, light);
 
-	free_sphere(ctx.sph); // handles internal matrix and pattern
+	free_sphere(ctx.sph); // also frees pattern and matrix inside
 	free(light);
 }
