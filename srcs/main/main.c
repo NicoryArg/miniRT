@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 15:32:07 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 15:32:07 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 17:38:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 17:38:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_sphere_pattern failed\n"RES));
 	if (ft_main_draw_sphere_uv(1))
 		return (printf(AKA"❌ draw_sphere_checkers failed\n"RES));
+	if (ft_main_draw_sphere_nested(0))
+		return (printf(AKA"❌ draw_sphere_nested failed\n"RES));
 	if (ft_main_draw_world_planes(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_infinite_cylinders(0))
 		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
-	if (ft_main_draw_truncated_cylinders(1))
+	if (ft_main_draw_truncated_cylinders(0))
 		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);

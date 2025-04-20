@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 15:31:51 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 15:31:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 16:22:24 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 16:22:35 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,10 @@ int	ft_main_draw_sphere_uv(int run)
 	if (run == 0)
 		return (0);
 	return (run_render_with(draw_sphere_uv));
+}
+int	ft_main_draw_sphere_nested(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_sphere_nested));
 }

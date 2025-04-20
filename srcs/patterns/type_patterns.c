@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 15:26:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 15:26:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 17:01:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 17:11:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_pattern	stripe_pattern(t_colour a, t_colour b)
 	p.type = PATTERN_STRIPE;
 	p.a = a;
 	p.b = b;
+	p.a_pattern = NULL;
+	p.b_pattern = NULL;
 	p.transform = create_identity_matrix(4);
 	p.frequency = 10.0;
 	return (p);
@@ -48,16 +50,28 @@ t_pattern	stripe_pattern(t_colour a, t_colour b)
 t_colour	stripe_at(t_pattern *pattern, t_tuple point)
 {
 	double	freq;
+	int		stripe_index;
 
 	if (pattern->frequency > 0)
 		freq = pattern->frequency;
 	else
 		freq = 1.0;
-	if ((int)floor(point.x * freq) % 2 == 0)
+	stripe_index = (int)floor(point.x * freq);
+	if (stripe_index % 2 == 0)
+	{
+		if (pattern->a_pattern)
+			return (pattern_colour_at(pattern->a_pattern, point));
 		return (pattern->a);
+	}
 	else
+	{
+		if (pattern->b_pattern)
+			return (pattern_colour_at(pattern->b_pattern, point));
 		return (pattern->b);
+	}
 }
+
+
 
 /**
  * @brief Returns a gradient color between two base colors.
@@ -98,10 +112,10 @@ t_colour	gradient_at(t_pattern *pattern, t_tuple point)
  */
 t_colour	ring_at(t_pattern *pattern, t_tuple point)
 {
-	double	dist;
-	int		ring_index;
-	double	ring_offset;
-	double	freq;
+	double		dist;
+	int			ring_index;
+	double		ring_offset;
+	double		freq;
 
 	ring_offset = 0.01;
 	if (pattern->frequency > 0)
@@ -112,9 +126,17 @@ t_colour	ring_at(t_pattern *pattern, t_tuple point)
 	dist += ring_offset;
 	ring_index = (int)floor(dist * freq);
 	if (ring_index % 2 == 0)
+	{
+		if (pattern->a_pattern)
+			return (pattern_colour_at(pattern->a_pattern, point));
 		return (pattern->a);
+	}
 	else
+	{
+		if (pattern->b_pattern)
+			return (pattern_colour_at(pattern->b_pattern, point));
 		return (pattern->b);
+	}
 }
 
 /**
@@ -129,17 +151,26 @@ t_colour	ring_at(t_pattern *pattern, t_tuple point)
  */
 t_colour	checkers_at(t_pattern *pattern, t_tuple point)
 {
-	int		sum;
-	double	freq;
+	int			sum;
+	double		freq;
 
 	if (pattern->frequency > 0)
 		freq = pattern->frequency;
 	else
 		freq = 1.0;
 	sum = (int)(floor(point.x * freq)
-			+ floor(point.y * freq) + floor(point.z * freq));
+			+ floor(point.y * freq)
+			+ floor(point.z * freq));
 	if (sum % 2 == 0)
+	{
+		if (pattern->a_pattern)
+			return (pattern_colour_at(pattern->a_pattern, point));
 		return (pattern->a);
+	}
 	else
+	{
+		if (pattern->b_pattern)
+			return (pattern_colour_at(pattern->b_pattern, point));
 		return (pattern->b);
+	}
 }

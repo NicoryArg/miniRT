@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 15:25:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 15:25:52 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 17:16:24 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 17:16:24 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,22 @@ typedef enum e_pattern_type
 	PATTERN_CHECKERS,
 	PATTERN_UV_STRIPE,
 	PATTERN_UV_GRADIENT,
-	PATTERN_UV_CHECKERS
+	PATTERN_UV_CHECKERS,
+	PATTERN_SOLID
 } t_pattern_type;
 
 typedef struct s_pattern
 {
-	t_pattern_type	type;
-	t_colour		a;
-	t_colour		b;
-	t_matrix		*transform;
-	double			frequency;
-	int				width;		// number of columns for UV checkers
-	int				height;		// number of rows for UV checkers
-} t_pattern;
+	t_pattern_type		type;
+	t_colour			a;
+	t_colour			b;
+	t_matrix			*transform;
+	double				frequency;
+	int					width;		// number of columns for UV checkers
+	int					height;		// number of rows for UV checkers
+	struct s_pattern	*a_pattern;
+	struct s_pattern	*b_pattern;
+}	t_pattern;
 
 typedef struct s_uv
 {
@@ -104,7 +107,6 @@ typedef enum e_obj_type
 	CYLINDER,
 	PLANE,
 }	t_obj;
-
 
 typedef struct s_material
 {
@@ -303,7 +305,13 @@ void		free_matrix(t_matrix *matrix);
 //#############################################
 //##############PATTERNS#######################
 //#############################################
+//nested_patterns.c
+t_pattern	*solid_pattern(t_colour c);
+t_pattern	*make_diagonal_stripe(t_colour a, t_colour b, double angle);
+
+//patterns.c
 t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
+t_colour	pattern_colour_at(t_pattern *patt, t_tuple pattern_point);
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 // t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
 // t_pattern	test_pattern(void);//test
@@ -489,6 +497,7 @@ void		free_material(t_material *m);
 void		ft_swap(t_hit **a, t_hit **b);
 double		ft_max(double a, double b);
 double		ft_min(double a, double b);
+t_tuple		uv_to_tuple(t_uv uv);
 
 //#############################################
 //################# VIEW ######################
@@ -525,7 +534,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 600
+# define WIN_SIZE 300
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256
