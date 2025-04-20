@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 14:03:13 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 14:03:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 14:41:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 14:41:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,8 +295,8 @@ void		free_matrix(t_matrix *matrix);
 double		ft_floor(double x);
 t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
-t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
-t_pattern	test_pattern(void);//test
+// t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
+// t_pattern	test_pattern(void);//test
 
 //type_patterns.c
 t_pattern	stripe_pattern(t_colour a, t_colour b);
