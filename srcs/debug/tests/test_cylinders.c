@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 01:32:50 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 03:05:25 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:35:06 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,186 @@ int	test_normal_at_cylinder(int run)
 		printf(GR"✔ normal is correct\n\n"RES);
 	else
 		return (printf(AKA"❌ normal is incorrect\n"RES));
+	return (0);
+}
+
+static int	check_truncated_result(bool intersect, int expected, int xs_count)
+{
+	if (intersect == false)
+	{
+
+		if (xs_count == expected)
+			printf(GR"✔ ray does not intersect truncated cylinder\n\n"RES);
+		else
+			return (printf(AKA"❌ ray intersects truncated cylinder\n"RES));
+	}
+	else
+	{
+		if (xs_count == expected)
+			printf(GR"✔ ray intersects truncated cylinder\n\n"RES);
+		else
+			return (printf(AKA"❌ ray does not intersect truncated cylinder\n"RES));
+	}
+	return (0);
+}
+
+int	test_truncate_cylinder(int run)
+{
+	if (run == 0)
+		return (0);
+	//define variables
+	t_cylinder	*cyl;
+	t_ray		*ray;
+	t_tuple		origin;
+	t_tuple		direction;
+	t_inters	*xs;
+	int			i = 1;
+
+//TEST 1
+	//print banners
+	print_test_banner("Truncating cylinders");
+	print_sub_header("default cylinder", &i);
+	//initialise variables
+	cyl = ft_cylinder();
+	//print output
+	printf(B_B"cylinder max: %.0f\t"RES, cyl->max);
+	printf(G_B"expected: inf\n"RES);
+	printf(B_B"cylinder min: %.0f\t"RES, cyl->min);
+	printf(G_B"expected: -inf\n"RES);
+	//check result
+	if (cyl->min == -INFINITY && cyl->max == INFINITY)
+		printf(GR"✔ cylinder is not truncated\n\n"RES);
+	else
+		return (printf(AKA"❌ cylinder is truncated\n"RES));
+
+//TEST 2
+	//print banners
+	print_sub_header("cylinder max = 2, min = 1", &i);
+	//redefine variables
+	cyl->min = 1;
+	cyl->max = 2;
+	//print output
+	printf(B_B"cylinder max: %.0f\t"RES, cyl->max);
+	printf(G_B"expected: 2\n"RES);
+	printf(B_B"cylinder min: %.0f\t"RES, cyl->min);
+	printf(G_B"expected: 1\n"RES);
+	//check result
+	if (cyl->min == 1 && cyl->max == 2)
+		printf(GR"✔ cylinder is truncated\n\n"RES);
+	else
+		return (printf(AKA"❌ cylinder is not truncated\n"RES));
+
+//TEST 3
+	//print banners
+	print_sub_header("ray -> origin (0, 1.5, 0) direction (0.1, 1, 0)", &i);
+	//redefine variables
+	origin = ft_tuple(0, 1.5, 0, VECTOR);
+	direction = normalise(ft_tuple(0.1, 1, 0, VECTOR));
+	ray = ft_ray(origin, direction);
+	int		count = 0;
+	//run test
+	xs = intersect(cyl, ray);
+	//print output
+	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	//check result
+	if (check_truncated_result(false, count, xs->count))
+		return (-1);
+	//free memory
+	free_hits(xs);
+	free_ray(ray);
+
+//TEST 4
+	//print banners
+	print_sub_header("ray -> origin (0, 3, -5) direction (0, 0, 1)", &i);
+	//redefine variables
+	origin = ft_tuple(0, 3, -5, VECTOR);
+	direction = normalise(ft_tuple(0, 0, 1, VECTOR));
+	ray = ft_ray(origin, direction);
+	count = 0;
+	//run test
+	xs = intersect(cyl, ray);
+	//print output
+	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	//check result
+	if (check_truncated_result(false, count, xs->count))
+		return (-1);
+	//free memory
+	free_hits(xs);
+	free_ray(ray);
+
+//TEST 5
+	print_sub_header("ray -> origin (0, 0, -5) direction (0, 0, 1)", &i);
+	//redefine variables
+	origin = ft_tuple(0, 0, -5, VECTOR);
+	ray = ft_ray(origin, direction);
+	count = 0;
+	//run test
+	xs = intersect(cyl, ray);
+	//print output
+	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	//check result
+	if (check_truncated_result(false, count, xs->count))
+		return (-1);
+	//free memory
+	free_hits(xs);
+	free_ray(ray);
+
+//TEST 6
+	print_sub_header("ray -> origin (0, 2, -5) direction (0, 0, 1)", &i);
+	//redefine variables
+	origin = ft_tuple(0, 2, -5, VECTOR);
+	ray = ft_ray(origin, direction);
+	count = 0;
+	//run test
+	xs = intersect(cyl, ray);
+	//print output
+	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	//check result
+	if (check_truncated_result(false, count, xs->count))
+		return (-1);
+	//free memory
+	free_hits(xs);
+	free_ray(ray);
+
+//TEST 7
+	print_sub_header("ray -> origin (0, 1, -5) direction (0, 0, 1)", &i);
+	//redefine variables
+	origin = ft_tuple(0, 1, -5, VECTOR);
+	ray = ft_ray(origin, direction);
+	count = 0;
+	//run test
+	xs = intersect(cyl, ray);
+	//print output
+	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(G_B"expected: 0\n"RES);
+	//check result
+	if (check_truncated_result(false, count, xs->count))
+		return (-1);
+	//free memory
+	free_hits(xs);
+	free_ray(ray);
+
+//TEST 8
+	print_sub_header("ray -> origin (0, 1.5, -2) direction (0, 0, 1)", &i);
+	//redefine variables
+	origin = ft_tuple(0, 1.5, -2, VECTOR);
+	ray = ft_ray(origin, direction);
+	count = 2;
+	//run test
+	xs = intersect(cyl, ray);
+	//print output
+	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(G_B"expected: 2\n"RES);
+	//check result
+	if (check_truncated_result(true, count, xs->count))
+	return (-1);
+	//free memory
+	free_hits(xs);
+	free_ray(ray);
 	return (0);
 }
 

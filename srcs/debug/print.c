@@ -195,7 +195,8 @@ void	print_sub_header(const char *word, int *i)
 	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
 	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
 
-	print_test_number(i);
+	if (*i != 0)
+		print_test_number(i);
 	printf(CYAN"#####%*s%s%*s#####\n"RES, padding, "", word, padding + extra, "");
 }
 

@@ -46,7 +46,7 @@ t_inters	*intersect(void *obj, t_ray *ray)
 	if (((t_object *)obj)->type == SPHERE)
 		xs = intersect_sph((t_sphere *)obj, r2, xs);
 	else if (((t_object *)obj)->type == CYLINDER)
-	 	xs = intersect_cyl((t_cyl *)obj, r2, xs);
+	 	xs = intersect_cyl((t_cylinder *)obj, r2, xs);
 	else if (((t_object *)obj)->type == PLANE)
 		xs = intersect_pl((t_plane *)obj, r2, xs);
 	free_ray(r2);

@@ -61,6 +61,13 @@ int			draw_circle(int run);
 void		draw_clock_scene(t_engine *engine);
 int			draw_hour_markers(int run);
 
+//draw cylinders
+void		draw_cyl_infinite(t_engine *engine);
+void		draw_cyl_truncated(t_engine *engine);
+
+//draw_planes.c
+void		draw_planes(t_engine *engine);
+
 //draw_projectile.c
 void		draw_trajectory_scene(t_engine *engine);
 int			draw_trajectory(int run);
@@ -111,6 +118,7 @@ int			shading_test(int run);
 //test_cylinders.c
 int		test_intersect_cylinder(int run);
 int		test_normal_at_cylinder(int run);
+int		test_truncate_cylinder(int run);
 
 //test_planes.c
 int			local_normal_plane_test(int run);
@@ -185,7 +193,8 @@ int			ft_main_draw_world(int run);
 int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
-int			ft_main_draw_world_cylinders(int run);
+int			ft_main_draw_infinite_cylinders(int run);
+int			ft_main_draw_truncated_cylinders(int run);
 int			ft_main_draw_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
 
@@ -204,11 +213,6 @@ int			ft_main_plane(int run);
 //#############################################
 //################# SCENES ####################
 //#############################################
-
-typedef struct	s_world t_world;
-
-t_world		*scene_planes();
-t_world		*scene_cyl_uncapped();
 
 //main_world.c
 int			ft_main_world(int run);

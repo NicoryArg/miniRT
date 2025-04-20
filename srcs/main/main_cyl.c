@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 01:34:38 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 03:08:43 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:36:08 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_main_cylinder(int run)
 		return(printf(AKA"❌ test_intersect_cylinder failed\n"RES));
 	if (test_normal_at_cylinder(1))
 		return(printf(AKA"❌ test_normal_at_cylinder failed\n"RES));
+	if (test_truncate_cylinder(1))
+		return(printf(AKA"❌ test_truncate_cylinder failed\n"RES));
 	return (0);
 }
 

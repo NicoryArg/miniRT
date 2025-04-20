@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cyl_uncapped.c                                :+:      :+:    :+:   */
+/*   draw_cyl_infinite.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 03:30:04 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 03:53:25 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:04:51 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "tests.h"
 
-t_world	*scene_cyl_uncapped()
+t_world	*scene_cyl_infinite()
 {
 	t_world		*w;
 	t_cylinder	*cyl1;
@@ -88,12 +88,12 @@ t_world	*scene_cyl_uncapped()
 	return (w);
 }
 
-void	draw_cyl_uncapped(t_engine *engine)
+void	draw_cyl_infinite(t_engine *engine)
 {
 	t_world		*w;
 	t_camera	cam;
 
-	w = scene_cyl_uncapped();
+	w = scene_cyl_infinite();
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
 		ft_tuple(6, 2, -15, POINT),//from camera
@@ -104,5 +104,4 @@ void	draw_cyl_uncapped(t_engine *engine)
 		engine->image.img_ptr, 0, 0);
 	free_world(w);
 	free_matrix(cam.transf);
-
 }
