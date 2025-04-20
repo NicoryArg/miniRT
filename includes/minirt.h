@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 14:41:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 14:41:32 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 15:25:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 15:25:52 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,28 @@ typedef enum e_pattern_type
 	PATTERN_STRIPE,
 	PATTERN_GRADIENT,
 	PATTERN_RING,
-	PATTERN_CHECKERS
+	PATTERN_CHECKERS,
+	PATTERN_UV_STRIPE,
+	PATTERN_UV_GRADIENT,
+	PATTERN_UV_CHECKERS
 } t_pattern_type;
 
 typedef struct s_pattern
 {
-	t_pattern_type type;
-	t_colour a;
-	t_colour b;
-	t_matrix *transform;
-	double frequency;
+	t_pattern_type	type;
+	t_colour		a;
+	t_colour		b;
+	t_matrix		*transform;
+	double			frequency;
+	int				width;		// number of columns for UV checkers
+	int				height;		// number of rows for UV checkers
 } t_pattern;
+
+typedef struct s_uv
+{
+	double	u;
+	double	v;
+}	t_uv;
 
 //#############################################
 //################ OBJECTS ####################
@@ -292,7 +303,6 @@ void		free_matrix(t_matrix *matrix);
 //#############################################
 //##############PATTERNS#######################
 //#############################################
-double		ft_floor(double x);
 t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 // t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
@@ -305,6 +315,11 @@ t_colour	gradient_at(t_pattern *pattern, t_tuple point);
 t_colour	ring_at(t_pattern *pattern, t_tuple point);
 t_colour	checkers_at(t_pattern *pattern, t_tuple point);
 
+//uv_mapping.c
+t_uv		uv_spherical(t_tuple point);
+t_colour	uv_checkers_at(t_pattern *pattern, t_uv uv);
+t_colour	uv_stripe_at(t_pattern *pattern, t_uv uv);
+t_colour	uv_gradient_at(t_pattern *pattern, t_uv uv);
 //#############################################
 //##################RAYS#######################
 //#############################################

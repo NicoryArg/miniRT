@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:18:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:37:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 15:31:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 15:31:35 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ void		draw_silhouette(t_engine *engine);
 
 //draw_sphere_pattern.c
 void		draw_sphere_pattern(t_engine *engine);
+
+//draw_spehere_checkers.c
+void		draw_sphere_uv(t_engine *engine);
 
 //draw_sphere.c
 void		draw_sphere(t_engine *engine);
@@ -197,6 +200,7 @@ int			ft_main_draw_infinite_cylinders(int run);
 int			ft_main_draw_truncated_cylinders(int run);
 int			ft_main_draw_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
+int			ft_main_draw_sphere_uv(int run);
 
 
 //main_transform.c

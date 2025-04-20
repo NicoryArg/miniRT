@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 14:30:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 14:33:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 15:26:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 15:26:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_colour	stripe_at(t_pattern *pattern, t_tuple point)
 		freq = pattern->frequency;
 	else
 		freq = 1.0;
-	if ((int)ft_floor(point.x * freq) % 2 == 0)
+	if ((int)floor(point.x * freq) % 2 == 0)
 		return (pattern->a);
 	else
 		return (pattern->b);
@@ -75,7 +75,7 @@ t_colour	gradient_at(t_pattern *pattern, t_tuple point)
 	double		fraction;
 
 	distance = diff_colours(pattern->b, pattern->a);
-	fraction = point.x - ft_floor(point.x);
+	fraction = point.x - floor(point.x);
 	return (add_colours(pattern->a, mult_colour(distance, fraction)));
 }
 
@@ -136,8 +136,8 @@ t_colour	checkers_at(t_pattern *pattern, t_tuple point)
 		freq = pattern->frequency;
 	else
 		freq = 1.0;
-	sum = (int)(ft_floor(point.x * freq)
-			+ ft_floor(point.y * freq) + ft_floor(point.z * freq));
+	sum = (int)(floor(point.x * freq)
+			+ floor(point.y * freq) + floor(point.z * freq));
 	if (sum % 2 == 0)
 		return (pattern->a);
 	else
