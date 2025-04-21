@@ -239,6 +239,23 @@ void	print_progress_bar(int y, int total)
 
 
 
+void	print_hitlist(t_hitlist **xs)
+{
+	t_hitlist	*current;
+
+	if (!xs || !*xs)
+	{
+		printf(YEL"Hitlist is NULL\n");
+		return ;
+	}
+	current = *xs;
+	while (current)
+	{
+		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", current->hit->t);
+		current = current->next;
+	}
+}
+
 //##############################################################//
 //######################## OBSOLETE ###########################//
 //##############################################################//

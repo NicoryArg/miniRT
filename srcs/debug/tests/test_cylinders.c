@@ -6,24 +6,24 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 01:32:50 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 15:35:06 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/22 01:42:04 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minirt.h"
 #include "tests.h"
 
-static int	check_cyl_intersect_result(t_inters *xs, int count, double t0, double t1)
+static int	check_cyl_intersect_result(t_hitlist **xs, int count, double t0, double t1)
 {
-	if (xs->count == count)
+	if (count_hits(xs) == count)
 		printf(GR"✔ ray intersects cylinder\n"RES);
 	else
 		return (printf(AKA"❌ ray does not intersect cylinder\n"RES));
-	if (ft_equal(xs->hits[0]->t, t0))
+	if (ft_equal((*xs)->next->hit->t, t0))
 		printf(GR"✔ xs[0]->t is correct\n"RES);
 	else
 		return (printf(AKA"❌ xs[0]->t is incorrect\n"RES));
-	if (ft_equal(xs->hits[1]->t, t1))
+	if (ft_equal((*xs)->hit->t, t1))
 		printf(GR"✔ xs[1]->t is correct\n\n"RES);
 	else
 		return (printf(AKA"❌ xs[1]->t is incorrect\n"RES));
@@ -38,8 +38,9 @@ int	test_intersect_cylinder(int run)
 	t_ray		*ray;
 	t_tuple		direction;
 	t_tuple		origin;
-	t_inters	*xs;
+	t_hitlist	**xs = new_hitlist();
 	int			i = 1;
+	int			count;
 //TEST 1
 	//print banners
 	print_test_banner("Rays miss the cylinder");
@@ -50,17 +51,18 @@ int	test_intersect_cylinder(int run)
 	direction = ft_tuple(0, 1, 0, VECTOR);
 	ray = ft_ray(origin, direction);
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (xs->count == 0)
+	if (count == 0)
 		printf(GR"✔ ray does not intersect cylinder\n\n"RES);
 	else
 		return (printf(AKA"❌ ray intersects cylinder\n"RES));
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 2
@@ -71,17 +73,18 @@ int	test_intersect_cylinder(int run)
 	direction = ft_tuple(0, 1, 0, VECTOR);
 	ray = ft_ray(origin, direction);
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (xs->count == 0)
+	if (count == 0)
 		printf(GR"✔ ray does not intersect cylinder\n\n"RES);
 	else
 		return (printf(AKA"❌ ray intersects cylinder\n"RES));
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 3
@@ -92,17 +95,18 @@ int	test_intersect_cylinder(int run)
 	direction = normalise(ft_tuple(1, 1, 1, VECTOR));
 	ray = ft_ray(origin, direction);
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (xs->count == 0)
+	if (count == 0)
 		printf(GR"✔ ray does not intersect cylinder\n\n"RES);
 	else
 		return (printf(AKA"❌ ray intersects cylinder\n"RES));
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 4
@@ -116,19 +120,20 @@ int	test_intersect_cylinder(int run)
 	double t0 = 5;
 	double t1 = 5;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 2\n"RES);
-	printf(B_B"xs[0]->t: %.0f\t"RES, xs->hits[0]->t);
+	printf(B_B"xs[0]->t: %.0f\t"RES, (*xs)->next->hit->t);
 	printf(G_B"expected: %.0f\n"RES, t0);
-	printf(B_B"xs[1]->t: %.0f\t"RES, xs->hits[1]->t);
+	printf(B_B"xs[1]->t: %.0f\t"RES, (*xs)->hit->t);
 	printf(G_B"expected: %.0f\n"RES, t1);
 	//check result
 	if (check_cyl_intersect_result(xs, 2, t0, t1))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 5
@@ -141,17 +146,19 @@ int	test_intersect_cylinder(int run)
 	t0 = 4;
 	t1 = 6;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 2\n"RES);
-	printf(B_B"xs[0]->t: %.0f\t"RES, xs->hits[0]->t);
+	printf(B_B"xs[0]->t: %.0f\t"RES, (*xs)->next->hit->t);
 	printf(G_B"expected: %.0f\n"RES, t0);
-	printf(B_B"xs[1]->t: %.0f\t"RES, xs->hits[1]->t);
+	printf(B_B"xs[1]->t: %.0f\t"RES, (*xs)->hit->t);
 	printf(G_B"expected: %.0f\n"RES, t1);
 	//check result
 	if (check_cyl_intersect_result(xs, 2, t0, t1))
 		return (-1);
+	free_hitlist(xs);
 //TEST 6
 	//print banners
 	print_sub_header("ray -> origin (0.5,0,-5) direction (0.1,1,1)", &i);
@@ -162,19 +169,20 @@ int	test_intersect_cylinder(int run)
 	t0 = 6.80798;
 	t1 = 7.08872;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t\t"RES, count);
 	printf(G_B"expected: 2\n"RES);
-	printf(B_B"xs[0]->t: %.5f\t"RES, xs->hits[0]->t);
+	printf(B_B"xs[0]->t: %.5f\t"RES, (*xs)->next->hit->t);
 	printf(G_B"expected: %.5f\n"RES, t0);
-	printf(B_B"xs[1]->t: %.5f\t"RES, xs->hits[1]->t);
+	printf(B_B"xs[1]->t: %.5f\t"RES, (*xs)->hit->t);
 	printf(G_B"expected: %.5f\n"RES, t1);
 	//check result
 	if (check_cyl_intersect_result(xs, 2, t0, t1))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 	return (0);
 }
@@ -286,7 +294,7 @@ int	test_truncate_cylinder(int run)
 	t_ray		*ray;
 	t_tuple		origin;
 	t_tuple		direction;
-	t_inters	*xs;
+	t_hitlist	**xs = new_hitlist();
 	int			i = 1;
 
 //TEST 1
@@ -332,15 +340,16 @@ int	test_truncate_cylinder(int run)
 	ray = ft_ray(origin, direction);
 	int		count = 0;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (check_truncated_result(false, count, xs->count))
+	if (check_truncated_result(false, count, count))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 4
@@ -352,15 +361,16 @@ int	test_truncate_cylinder(int run)
 	ray = ft_ray(origin, direction);
 	count = 0;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (check_truncated_result(false, count, xs->count))
+	if (check_truncated_result(false, count, count))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 5
@@ -370,15 +380,16 @@ int	test_truncate_cylinder(int run)
 	ray = ft_ray(origin, direction);
 	count = 0;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (check_truncated_result(false, count, xs->count))
+	if (check_truncated_result(false, count, count))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 6
@@ -388,15 +399,16 @@ int	test_truncate_cylinder(int run)
 	ray = ft_ray(origin, direction);
 	count = 0;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (check_truncated_result(false, count, xs->count))
+	if (check_truncated_result(false, count, count))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 7
@@ -406,15 +418,16 @@ int	test_truncate_cylinder(int run)
 	ray = ft_ray(origin, direction);
 	count = 0;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 0\n"RES);
 	//check result
-	if (check_truncated_result(false, count, xs->count))
+	if (check_truncated_result(false, count, count))
 		return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 
 //TEST 8
@@ -424,15 +437,16 @@ int	test_truncate_cylinder(int run)
 	ray = ft_ray(origin, direction);
 	count = 2;
 	//run test
-	xs = intersect(cyl, ray);
+	intersect(cyl, ray, xs);
+	count = count_hits(xs);
 	//print output
-	printf(B_B"xs.count: %d\t"RES, xs->count);
+	printf(B_B"xs.count: %d\t"RES, count);
 	printf(G_B"expected: 2\n"RES);
 	//check result
-	if (check_truncated_result(true, count, xs->count))
+	if (check_truncated_result(true, count, count))
 	return (-1);
 	//free memory
-	free_hits(xs);
+	free_hitlist(xs);
 	free_ray(ray);
 	return (0);
 }

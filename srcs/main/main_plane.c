@@ -23,5 +23,6 @@ int	ft_main_plane(int run)
 		return (printf(AKA"❌ local_normal_plane_test failed\n"RES));
 	if (intersect_plane_test(1))
 		return (printf(AKA"❌ intersect_plane_test failed\n"RES));
+	printf(G_B"END OF PLANE TESTS\n"RES);
 	return (0);
 }

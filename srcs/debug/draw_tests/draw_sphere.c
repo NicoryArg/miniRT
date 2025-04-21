@@ -16,14 +16,15 @@
 
 static int	compute_color(void *sph, t_ray *ray, t_light *l)
 {
-	t_inters	*xs;
+	t_hitlist	**xs;
 	t_hit		*hit;
 	t_tuple		pt;
 	t_colour	c;
 	t_shading	shad;
 
-	xs = intersect(sph, ray);
-	hit = find_visible_hit(xs->hits, xs->count);
+	xs = new_hitlist();
+	intersect(sph, ray, xs);
+	hit = find_visible_hit(xs);
 	if (hit && hit->t >= 0)
 	{
 		pt = get_point(ray, hit->t);
@@ -36,7 +37,7 @@ static int	compute_color(void *sph, t_ray *ray, t_light *l)
 	}
 	else
 		c = ft_colour(0, 0, 0);
-	free_hits(xs);
+	free_hitlist(xs);
 	return (convert_colour_to_int(c));
 }
 

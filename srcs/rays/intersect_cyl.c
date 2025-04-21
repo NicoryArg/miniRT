@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:30:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 16:13:08 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:13:36 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,30 @@ static void	ft_swap_t_cyl(t_cyl_vals *data)
 	data->t1 = data->temp;
 }
 
-static void	validate(t_inters *xs, t_cylinder *cyl, t_ray *ray, t_cyl_vals d)
+static void	validate(t_hitlist **xs, t_cylinder *cyl, t_ray *ray, t_cyl_vals d)
 {
 	double	y0;
 	double	y1;
+	t_hit	*hit_0;
+	t_hit	*hit_1;
 
 	if (d.t0 > d.t1)
 		ft_swap_t_cyl(&d);
-	xs->count = 0;
 	y0 = ray->origin.y + d.t0 * ray->direction.y;
 	if (cyl->min < y0 && y0 < cyl->max)
 	{
-		xs->hits[0] = intersection(d.t0, cyl);
-		xs->count++;
+		hit_0 = intersection(d.t0, cyl);
+		add_hit(xs, hit_0);
 	}
 	y1 = ray->origin.y + d.t1 * ray->direction.y;
 	if (cyl->min < y1 && y1 < cyl->max)
 	{
-		xs->hits[1] = intersection(d.t1, cyl);
-		xs->count++;
+		hit_1 = intersection(d.t1, cyl);
+		add_hit(xs, hit_1);
 	}
 }
 
-t_inters	*intersect_cyl(t_cylinder *cyl, t_ray *ray, t_inters *xs)
+void	intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 {
 	double 		disc;
 	double 		a;
@@ -51,17 +52,14 @@ t_inters	*intersect_cyl(t_cylinder *cyl, t_ray *ray, t_inters *xs)
 
 	a = ft_sqr(ray->direction.x) + ft_sqr(ray->direction.z);
 	if (ft_equal(a, 0)) // ray is paralel to y axis
-		return (xs);
+		return ;
 	b = (2 * ray->origin.x * ray->direction.x)
 		+ (2 * ray->origin.z * ray->direction.z);
 	c = ft_sqr(ray->origin.x) + ft_sqr(ray->origin.z) - 1;
 	disc = ft_sqr(b) - 4 * a * c;
 	if (disc < 0) // ray does not intersect cylinder
-		return (xs);
+		return ;
 	data.t0 = (-b - sqrt(disc)) / (2 * a);
 	data.t1 = (-b + sqrt(disc)) / (2 * a);
-	// xs->hits[0] = intersection((-b - sqrt(disc)) / (2*a), cyl);
-	// xs->hits[1] = intersection((-b + sqrt(disc)) / (2*a), cyl);
 	validate(xs, cyl, ray, data);
-	return (xs);
 }

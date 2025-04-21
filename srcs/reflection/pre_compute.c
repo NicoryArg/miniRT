@@ -46,18 +46,19 @@ t_computations	pre_compute(t_hit *hit, t_ray *ray)
 
 static bool	check_shadow_hit(t_world *w, t_ray *r, double ligth_distance)
 {
-	t_inters	*xs;
+	t_hitlist	**xs;
 	t_hit		*hit;
 	bool		shadowed;
 
-	xs = intersect_world(w, r);
-	hit = find_visible_hit(xs->hits, xs->count);
+	xs = new_hitlist();
+	intersect_world(w, r, xs);
+	hit = find_visible_hit(xs);
 	if (hit && hit->t < ligth_distance)
 		shadowed = true;
 	else
 		shadowed = false;
 	free_ray(r);
-	free_hits(xs);
+	free_hitlist(xs);
 	return (shadowed);
 }
 
@@ -118,20 +119,27 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
  */
 t_colour	color_at(t_world *world, t_ray *ray, bool ignore_shadows)
 {
-	t_inters		*xs;
+	t_hitlist		**xs;
 	t_hit			*hit;
 	t_computations	comps;
 	t_colour		color;
 
-	xs = intersect_world(world, ray);
-	hit = find_visible_hit(xs->hits, xs->count);
+	xs = new_hitlist();
+	// printf("intersect_world\n");
+	intersect_world(world, ray, xs);
+	// printf("find hit\n");
+	hit = find_visible_hit(xs);
 	if (!hit)
 		color = ft_colour(0, 0, 0);
 	else
 	{
+		// printf("pre comp\n");
 		comps = pre_compute(hit, ray);
+		// printf("shade hit\n");
 		color = shade_hit(world, comps, ignore_shadows);
 	}
-	free_hits(xs);
+	// printf("free hits\n");
+	free_hitlist(xs);
+	// printf("return color\n");
 	return (color);
 }

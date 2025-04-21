@@ -157,6 +157,12 @@ typedef struct s_intersection
 	t_hit	**hits;
 }	t_inters;
 
+typedef struct s_hitlist
+{
+	t_hit				*hit;
+	struct s_hitlist	*next;
+}	t_hitlist;
+
 //#############################################
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
@@ -305,23 +311,23 @@ t_pattern	test_pattern(void);//test
 //hits.c
 void		ft_swap(t_hit **a, t_hit **b);
 void		sort_intersections(t_hit	**xs, int count);
-t_hit		*find_visible_hit(t_hit **hits, int count);
+t_hit		*find_visible_hit(t_hitlist **list);
 double		find_hit(t_hit	**intersections, int count);
 
 //intersect_cyl.c
-t_inters	*intersect_cyl(t_cylinder *cyl, t_ray *ray, t_inters *xs);
+void		intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs);
 
 //intersect_pl.c
-t_inters	*intersect_pl(t_plane *pl, t_ray *ray, t_inters *xs);
+void		intersect_pl(t_plane *pl, t_ray *ray, t_hitlist **xs);
 
 //intersect.c
 t_inters	*init_intersections(int initial_capacity);
-t_inters	*intersect(void *obj, t_ray *ray);
+void		intersect(void *obj, t_ray *ray, t_hitlist **xs);
 t_hit		*intersection(double t, void *object);
 
 //ray_sphere.c
 double		discriminant_sph(t_ray *ray, t_tuple sph_to_ray);
-t_inters	*intersect_sph(t_sphere *sphere, t_ray *ray, t_inters *xs);
+void		intersect_sph(t_sphere *sphere, t_ray *ray, t_hitlist **xs);
 
 //rays.c
 /**
@@ -374,7 +380,7 @@ bool			is_shadowed(t_world *w, t_tuple point);
 t_world		*ft_world(void);
 t_world		*default_world(void);
 void		copy_hits(t_inters *dst, t_inters *src);
-t_inters	*intersect_world(t_world *w, t_ray *r);
+void		intersect_world(t_world *w, t_ray *r, t_hitlist **xs);
 
 //objects.c
 /**
@@ -543,6 +549,13 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define G_B  "\033[1;32m" // Bold Green
 # define B_B  "\033[1;34m" // Bold Blue
 # define C_B "\033[1;36m" // Bold Cyan
+
+
+t_hitlist	**new_hitlist();
+void		add_hit(t_hitlist **xs, t_hit *hit);
+void		free_hitlist(t_hitlist **hs);
+int			count_hits(t_hitlist **xs);
+void		print_hitlist(t_hitlist **xs);
 
 
 #endif
