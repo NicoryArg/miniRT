@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:37:15 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/22 01:46:20 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/22 02:16:04 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_world	*scene_cyl_truncated()
 	cyl1->base.m.specular = 0.3;
 	cyl1->min = 0;
 	cyl1->max = 8;
-	transform = multiply_matrices(scale(0.9, 0.9, 0.9), translate(-0.5, 0.9, 0.5));
+	transform = multiply_matrices(rotate_x(M_PI/4), rotate_z(M_PI/4));
 	set_transf(cyl1, transform);
 	object_count++;
 
@@ -41,8 +41,8 @@ t_world	*scene_cyl_truncated()
 	cyl2->base.m.specular = 0.3;
 	cyl2->min = -4;
 	cyl2->max = 5;
-	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(4.9, 1, -2.8));
-	set_transf(cyl2, transform);
+	transform = multiply_matrices(rotate_z(-M_PI/2), rotate_x(M_PI/2.28));
+	set_transf(cyl2, multiply_matrices(translate(5, -4, 0), transform));
 	object_count++;
 
 //Lilac cylinder
