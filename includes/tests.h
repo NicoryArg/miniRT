@@ -66,6 +66,7 @@ int			draw_hour_markers(int run);
 //draw cylinders
 void		draw_cyl_infinite(t_engine *engine);
 void		draw_cyl_truncated(t_engine *engine);
+void		draw_cyl_capped(t_engine *engine);
 
 //draw_planes.c
 void		draw_planes(t_engine *engine);
@@ -185,6 +186,7 @@ int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
 int			ft_main_draw_infinite_cylinders(int run);
 int			ft_main_draw_truncated_cylinders(int run);
+int			ft_main_draw_capped_cylinders(int run);
 int			ft_main_draw_patterns(int run);
 
 //main_transform.c
