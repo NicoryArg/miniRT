@@ -54,7 +54,7 @@ MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_ray
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
-PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c type_patterns.c uv_mapping.c)
+PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)

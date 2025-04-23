@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 18:25:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 18:25:15 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 17:15:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 17:15:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_world_shadows(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_scene_patterns(1))
+	if (ft_main_draw_scene_patterns(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_sphere_pattern(0))
 		return (printf(AKA"❌ draw_sphere_pattern failed\n"RES));

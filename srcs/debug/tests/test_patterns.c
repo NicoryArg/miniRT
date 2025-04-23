@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 14:42:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 14:42:23 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 16:40:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 16:44:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	stripe_pattern_test(int run)
 	#define TEST_STRIPE_AT(x, y, z, exp_col, label) { \
 		pt = ft_tuple((double)(x), (double)(y), (double)(z), POINT); \
 		expected = exp_col; \
-		actual = stripe_at(&p, pt); \
+		actual = stripe_at(&p, pt, NULL); \
 		printf("→ %s at point (%.1f, %.1f, %.1f)\n", label, (double)(x), (double)(y), (double)(z)); \
 		printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b); \
 		printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b); \
@@ -177,7 +177,7 @@ int	stripe_transform_test(int run)
 
 	world_point = ft_tuple(1.5, 0, 0, POINT);
 	expected = ft_colour(1, 1, 1);
-	actual = stripe_at_object(&pattern, (t_object *)s, world_point);
+	actual = pattern_colour_at_world(&pattern, (t_object *)s, world_point);
 
 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x, world_point.y, world_point.z);
 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
@@ -198,7 +198,7 @@ int	stripe_transform_test(int run)
 
 	world_point = ft_tuple(1.5, 0, 0, POINT);
 	expected = ft_colour(1, 1, 1);
-	actual = stripe_at_object(&pattern, (t_object *)s, world_point);
+	actual = pattern_colour_at_world(&pattern, (t_object *)s, world_point);
 
 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x, world_point.y, world_point.z);
 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
@@ -219,7 +219,7 @@ int	stripe_transform_test(int run)
 
 	world_point = ft_tuple(2.5, 0, 0, POINT);
 	expected = ft_colour(1, 1, 1);
-	actual = stripe_at_object(&pattern, (t_object *)s, world_point);
+	actual = pattern_colour_at_world(&pattern, (t_object *)s, world_point);
 
 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x, world_point.y, world_point.z);
 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
@@ -256,7 +256,7 @@ int	pattern_generalization_test(int run)
 
 	// world_point = ft_tuple(2, 3, 4, POINT);
 	// expected = ft_colour(1, 1.5, 2);
-	// actual = pattern_at_object(&pattern, (t_object *)s, world_point);
+	// actual = pattern_colour_at_world(&pattern, (t_object *)s, world_point);
 
 	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
 	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
@@ -275,7 +275,7 @@ int	pattern_generalization_test(int run)
 
 	// world_point = ft_tuple(2, 3, 4, POINT);
 	// expected = ft_colour(1, 1.5, 2);
-	// actual = pattern_at_object(&pattern, (t_object *)s, world_point);
+	// actual = pattern_colour_at_world(&pattern, (t_object *)s, world_point);
 
 	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
 	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
@@ -295,7 +295,7 @@ int	pattern_generalization_test(int run)
 
 	// world_point = ft_tuple(2.5, 3, 3.5, POINT);
 	// expected = ft_colour(0.75, 0.5, 0.25);
-	// actual = pattern_at_object(&pattern, (t_object *)s, world_point);
+	// actual = pattern_colour_at_world(&pattern, (t_object *)s, world_point);
 
 	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
 	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
@@ -399,7 +399,7 @@ int	ring_pattern_test(int run)
 	// point at origin
 	print_test_number(&i);
 	expected = ft_colour(1, 1, 1);
-	actual = ring_at(&pattern, ft_tuple(0, 0, 0, POINT));
+	actual = ring_at(&pattern, ft_tuple(0, 0, 0, POINT),NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,0,0) = white\n\n"RES);
 	else
@@ -408,7 +408,7 @@ int	ring_pattern_test(int run)
 	// point on X ring edge
 	print_test_number(&i);
 	expected = ft_colour(0, 0, 0);
-	actual = ring_at(&pattern, ft_tuple(1, 0, 0, POINT));
+	actual = ring_at(&pattern, ft_tuple(1, 0, 0, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (1,0,0) = black\n\n"RES);
 	else
@@ -417,7 +417,7 @@ int	ring_pattern_test(int run)
 	// point just outside first ring
 	print_test_number(&i);
 	expected = ft_colour(0, 0, 0);
-	actual = ring_at(&pattern, ft_tuple(0, 0, 1, POINT));
+	actual = ring_at(&pattern, ft_tuple(0, 0, 1, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,0,1) = black\n\n"RES);
 	else
@@ -426,7 +426,7 @@ int	ring_pattern_test(int run)
 	// diagonally at √2 ≈ 1.41 -> floor(1.41) == 1 -> black
 	print_test_number(&i);
 	expected = ft_colour(0, 0, 0);
-	actual = ring_at(&pattern, ft_tuple(0.708, 0, 0.708, POINT));
+	actual = ring_at(&pattern, ft_tuple(0.708, 0, 0.708, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: diagonal (0.708,0,0.708) = black\n\n"RES);
 	else
@@ -455,7 +455,7 @@ int	checkers_pattern_test(int run)
 	// x changes
 	print_test_number(&i);
 	expected = ft_colour(1, 1, 1);
-	actual = checkers_at(&pattern, ft_tuple(0, 0, 0, POINT));
+	actual = checkers_at(&pattern, ft_tuple(0, 0, 0, POINT),NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,0,0) = white\n\n"RES);
 	else
@@ -463,7 +463,7 @@ int	checkers_pattern_test(int run)
 
 	print_test_number(&i);
 	expected = ft_colour(1, 1, 1);
-	actual = checkers_at(&pattern, ft_tuple(0.99, 0, 0, POINT));
+	actual = checkers_at(&pattern, ft_tuple(0.99, 0, 0, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0.99,0,0) = white\n\n"RES);
 	else
@@ -471,7 +471,7 @@ int	checkers_pattern_test(int run)
 
 	print_test_number(&i);
 	expected = ft_colour(0, 0, 0);
-	actual = checkers_at(&pattern, ft_tuple(1.01, 0, 0, POINT));
+	actual = checkers_at(&pattern, ft_tuple(1.01, 0, 0, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (1.01,0,0) = black\n\n"RES);
 	else
@@ -480,7 +480,7 @@ int	checkers_pattern_test(int run)
 	// y changes
 	print_test_number(&i);
 	expected = ft_colour(1, 1, 1);
-	actual = checkers_at(&pattern, ft_tuple(0, 0.99, 0, POINT));
+	actual = checkers_at(&pattern, ft_tuple(0, 0.99, 0, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,0.99,0) = white\n\n"RES);
 	else
@@ -488,7 +488,7 @@ int	checkers_pattern_test(int run)
 
 	print_test_number(&i);
 	expected = ft_colour(0, 0, 0);
-	actual = checkers_at(&pattern, ft_tuple(0, 1.01, 0, POINT));
+	actual = checkers_at(&pattern, ft_tuple(0, 1.01, 0, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,1.01,0) = black\n\n"RES);
 	else
@@ -497,7 +497,7 @@ int	checkers_pattern_test(int run)
 	// z changes
 	print_test_number(&i);
 	expected = ft_colour(1, 1, 1);
-	actual = checkers_at(&pattern, ft_tuple(0, 0, 0.99, POINT));
+	actual = checkers_at(&pattern, ft_tuple(0, 0, 0.99, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,0,0.99) = white\n\n"RES);
 	else
@@ -505,7 +505,7 @@ int	checkers_pattern_test(int run)
 
 	print_test_number(&i);
 	expected = ft_colour(0, 0, 0);
-	actual = checkers_at(&pattern, ft_tuple(0, 0, 1.01, POINT));
+	actual = checkers_at(&pattern, ft_tuple(0, 0, 1.01, POINT), NULL);
 	if (equal_colour(actual, expected))
 		printf(GR"✔ Passed: (0,0,1.01) = black\n\n"RES);
 	else

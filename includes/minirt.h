@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 17:16:24 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 17:16:24 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 16:38:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 17:09:35 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,24 +316,38 @@ t_pattern	*solid_pattern(t_colour c);
 t_pattern	*make_diagonal_stripe(t_colour a, t_colour b, double angle);
 
 //patterns.c
-t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
-t_colour	pattern_colour_at(t_pattern *patt, t_tuple pattern_point);
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
+t_colour	pattern_colour_at(t_pattern *patt, t_tuple pattern_point, t_object *obj);
+t_colour	pattern_colour_at_world(t_pattern *pattern, t_object *object, t_tuple world_point);
 // t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
 // t_pattern	test_pattern(void);//test
 
+//math_patterns.c
+t_colour	stripe_at(t_pattern *pattern, t_tuple point, t_object *obj);
+t_colour	gradient_at(t_pattern *pattern, t_tuple point);
+t_colour	ring_at(t_pattern *pattern, t_tuple point, t_object *obj);
+t_colour	checkers_at(t_pattern *pattern, t_tuple point, t_object *obj);
+
 //type_patterns.c
 t_pattern	stripe_pattern(t_colour a, t_colour b);
-t_colour	stripe_at(t_pattern *pattern, t_tuple point);
-t_colour	gradient_at(t_pattern *pattern, t_tuple point);
-t_colour	ring_at(t_pattern *pattern, t_tuple point);
-t_colour	checkers_at(t_pattern *pattern, t_tuple point);
+t_pattern	gradient_pattern(t_colour a, t_colour b);
+t_pattern	ring_pattern(t_colour a, t_colour b);
+t_pattern	checkers_pattern(t_colour a, t_colour b);
 
+//type_uv_patterns.c
+t_pattern	uv_stripe_pattern(t_colour a, t_colour b, int width, int height);
+t_pattern	uv_gradient_pattern(t_colour a, t_colour b, int width, int height);
+t_pattern	uv_checkers_pattern(t_colour a, t_colour b, int width, int height);
 //uv_mapping.c
 t_uv		uv_spherical(t_tuple point);
+t_uv		uv_planar(t_tuple point);
+
+//type_uv_patterns.c
 t_colour	uv_checkers_at(t_pattern *pattern, t_uv uv);
 t_colour	uv_stripe_at(t_pattern *pattern, t_uv uv);
 t_colour	uv_gradient_at(t_pattern *pattern, t_uv uv);
+
+//
 //#############################################
 //##################RAYS#######################
 //#############################################

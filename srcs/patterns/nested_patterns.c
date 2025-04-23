@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 17:36:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 17:36:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 17:12:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 17:12:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_pattern	*solid_pattern(t_colour c)
 {
-	t_pattern *p;
+	t_pattern	*p;
 
 	p = malloc(sizeof(t_pattern));
 	if (!p)
@@ -32,25 +32,25 @@ t_pattern	*solid_pattern(t_colour c)
 	return (p);
 }
 
-t_pattern *make_diagonal_stripe(t_colour a, t_colour b, double angle)
+t_pattern	*make_diagonal_stripe(t_colour a, t_colour b, double angle)
 {
-	t_pattern *stripe = malloc(sizeof(t_pattern));
-	stripe->type = PATTERN_UV_STRIPE; // ✅ UV-compatible
+	t_pattern	*stripe;
+
+	stripe = malloc(sizeof(t_pattern));
+	stripe->type = PATTERN_UV_STRIPE;
 	stripe->a = a;
 	stripe->b = b;
-	stripe->width = 16; // depends on how dense you want the stripes
+	stripe->width = 16;
 	stripe->height = 1;
 	stripe->a_pattern = NULL;
 	stripe->b_pattern = NULL;
-	stripe->transform = rotate_z(angle); // rotation in pattern space
+	stripe->transform = rotate_z(angle);
 	return (stripe);
 }
 
-
-
-// t_pattern *make_diagonal_stripe(t_colour a, t_colour b, double angle)
+// t_pattern	*make_diagonal_stripe(t_colour a, t_colour b, double angle)
 // {
-// 	t_pattern *stripe = malloc(sizeof(t_pattern));
+// 	t_pattern	*stripe = malloc(sizeof(t_pattern));
 // 	stripe->type = PATTERN_UV_STRIPE;
 // 	stripe->a = a;
 // 	stripe->b = b;

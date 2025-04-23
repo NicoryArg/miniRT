@@ -82,16 +82,13 @@ void	draw_sphere_pattern(t_engine *engine)
 	ctx.sph->centre = ft_tuple(0, 0, 0, POINT);
 	ctx.sph->base.m = ft_material();
 
-	// 🎨 Pattern: clean concentric rings
+	// 🎨 Pattern setup
 	pattern = malloc(sizeof(t_pattern));
-	pattern->type = PATTERN_RING;
-	pattern->a = ft_colour(1, 0.2, 1); // Magenta
-	pattern->b = ft_colour(1, 1, 0);   // Yellow
-
-	// 💡 Scale X and Z to compress the rings
-	// Lower values = more rings
-	pattern->transform = scale(0.1, 1.0, 0.1);
-	pattern->frequency = 5.0;
+	*pattern = ring_pattern(                     // 🔁 change this to stripe_pattern(), gradient_pattern(), ring_pattern(), checkers_pattern().
+		ft_colour(1, 0.2, 1),                    // color A
+		ft_colour(1, 1, 0));                    // color B
+	pattern->transform = scale(0.1, 1.0, 0.1);   // compress rings in X and Z
+	pattern->frequency = 5.0;                   // tweak for ring density
 	ctx.sph->base.m.pattern = pattern;
 
 	// 💎 Material
@@ -100,11 +97,11 @@ void	draw_sphere_pattern(t_engine *engine)
 	ctx.sph->base.m.specular = 0.9;
 	ctx.sph->base.m.shininess = 200.0;
 
-	// 🌀 Sphere transformation: rotate for nice perspective
+	// 🌀 Sphere transformation
 	rot = multiply_matrices(rotate_y(M_PI / 6), rotate_x(M_PI / 8));
-	scale_mat = scale(1.0, 1.0, 1.0); // optional identity scale
+	scale_mat = scale(1.0, 1.0, 1.0);
 	transform = multiply_matrices(rot, scale_mat);
-	translate_mat = translate(0, 0, 0); // no translation
+	translate_mat = translate(0, 0, 0);
 	final_transform = multiply_matrices(translate_mat, transform);
 
 	set_transf(ctx.sph, final_transform);
