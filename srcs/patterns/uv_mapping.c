@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 15:40:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 15:40:44 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 18:25:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 18:25:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,41 @@ t_uv	uv_planar(t_tuple point)
 	uv.u = point.x - floor(point.x);
 	uv.v = point.z - floor(point.z);
 	return (uv);
+}
+
+/**
+ * @brief Maps a point on a cylinder to UV coordinates.
+ *
+ * U wraps around the Y axis, V runs from min to max along the Y axis.
+ */
+t_uv	uv_cylindrical(t_tuple point)
+{
+	t_uv	uv;
+	double	theta;
+
+	theta = atan2(point.x, point.z);
+	uv.u = 1.0 - (theta + M_PI) / (2.0 * M_PI);
+	uv.v = point.y - floor(point.y);
+	return (uv);
+}
+
+t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj)
+{
+	t_uv	uv;
+
+	if (obj->type == PLANE)
+		uv = uv_planar(point);
+	else if (obj->type == SPHERE)
+		uv = uv_spherical(point);
+	else if (obj->type == CYLINDER)
+		uv = uv_cylindrical(point);
+	else
+		uv = uv_spherical(point);
+	if (patt->type == PATTERN_UV_CHECKERS)
+		return (uv_checkers_at(patt, uv));
+	if (patt->type == PATTERN_UV_STRIPE)
+		return (uv_stripe_at(patt, uv));
+	if (patt->type == PATTERN_UV_GRADIENT)
+		return (uv_gradient_at(patt, uv));
+	return (ft_colour(0, 0, 0));
 }

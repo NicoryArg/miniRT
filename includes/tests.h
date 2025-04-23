@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 17:19:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 17:19:47 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 18:17:10 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 18:17:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		draw_trajectory_scene(t_engine *engine);
 int			draw_trajectory(int run);
 
 //draw_scene_pattern.c
-void		draw_scene_patterns(t_engine *engine);
+void		draw_scene_patterns_full(t_engine *engine);
 
 //draw_silhouette.c
 void		draw_silhouette(t_engine *engine);
@@ -207,12 +207,12 @@ int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
 int			ft_main_draw_infinite_cylinders(int run);
 int			ft_main_draw_truncated_cylinders(int run);
-int			ft_main_draw_scene_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
 int			ft_main_draw_sphere_uv(int run);
 int			ft_main_draw_sphere_nested(int run);
 int			ft_main_draw_scene_nested(int run);
 int			ft_main_draw_capped_cylinders(int run);
+int			ft_main_draw_scene_patterns_full(int run);
 
 //main_transform.c
 int			ft_main_transform(int run);

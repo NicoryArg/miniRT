@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 17:13:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 17:14:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 18:26:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 18:27:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,34 +108,19 @@ static t_tuple	transform_object_to_pattern(t_tuple obj_point, t_matrix *inv)
 t_colour	pattern_colour_at(t_pattern *patt, t_tuple patt_point,
 				t_object *obj)
 {
-	t_uv	uv;
-
 	if (!patt || !obj)
 		return (ft_colour(0, 0, 0));
 	if (patt->type == PATTERN_UV_CHECKERS
 		|| patt->type == PATTERN_UV_STRIPE
 		|| patt->type == PATTERN_UV_GRADIENT)
-	{
-		if (obj->type == PLANE)
-			uv = uv_planar(patt_point);
-		else if (obj->type == SPHERE)
-			uv = uv_spherical(patt_point);
-		else
-			uv = uv_spherical(patt_point);
-		if (patt->type == PATTERN_UV_CHECKERS)
-			return (uv_checkers_at(patt, uv));
-		else if (patt->type == PATTERN_UV_STRIPE)
-			return (uv_stripe_at(patt, uv));
-		else if (patt->type == PATTERN_UV_GRADIENT)
-			return (uv_gradient_at(patt, uv));
-	}
+		return (uv_pattern_at(patt, patt_point, obj));
 	if (patt->type == PATTERN_STRIPE)
 		return (stripe_at(patt, patt_point, obj));
-	else if (patt->type == PATTERN_GRADIENT)
+	if (patt->type == PATTERN_GRADIENT)
 		return (gradient_at(patt, patt_point));
-	else if (patt->type == PATTERN_RING)
+	if (patt->type == PATTERN_RING)
 		return (ring_at(patt, patt_point, obj));
-	else if (patt->type == PATTERN_CHECKERS)
+	if (patt->type == PATTERN_CHECKERS)
 		return (checkers_at(patt, patt_point, obj));
 	return (ft_colour(0, 0, 0));
 }

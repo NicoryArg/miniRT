@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 16:38:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 17:09:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 18:25:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 18:25:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,6 +342,8 @@ t_pattern	uv_checkers_pattern(t_colour a, t_colour b, int width, int height);
 //uv_mapping.c
 t_uv		uv_spherical(t_tuple point);
 t_uv		uv_planar(t_tuple point);
+t_uv		uv_cylindrical(t_tuple point);
+t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj);
 
 //type_uv_patterns.c
 t_colour	uv_checkers_at(t_pattern *pattern, t_uv uv);
