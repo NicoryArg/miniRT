@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:37:15 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/22 02:16:04 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:52:50 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_world	*scene_cyl_truncated()
 	cyl1->base.m.specular = 0.3;
 	cyl1->min = 0;
 	cyl1->max = 8;
+	cyl1->closed = false;
 	transform = multiply_matrices(rotate_x(M_PI/4), rotate_z(M_PI/4));
 	set_transf(cyl1, transform);
 	object_count++;
@@ -41,6 +42,7 @@ t_world	*scene_cyl_truncated()
 	cyl2->base.m.specular = 0.3;
 	cyl2->min = -4;
 	cyl2->max = 5;
+	cyl2->closed = false;
 	transform = multiply_matrices(rotate_z(-M_PI/2), rotate_x(M_PI/2.28));
 	set_transf(cyl2, multiply_matrices(translate(5, -4, 0), transform));
 	object_count++;
@@ -52,7 +54,8 @@ t_world	*scene_cyl_truncated()
 	cyl3->base.m.specular = 0.3;
 	cyl3->min = -22;
 	cyl3->max = -5;
-	transform = multiply_matrices(scale(0.33, 0.33, 0.33), translate(-13.2, 0.8, -2.7));
+	cyl3->closed = false;
+	transform = multiply_matrices(scale(0.6, 0.6, 0.6), translate(-13.2, 0.8, -2.7));
 	set_transf(cyl3, transform);
 	object_count++;
 
@@ -102,8 +105,8 @@ void	draw_cyl_truncated(t_engine *engine)
 	w = scene_cyl_truncated();
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
-		ft_tuple(6, 2, -15, POINT),//from camera
-		ft_tuple(-2, 0, 20, POINT),//look at target
+		ft_tuple(8, 5, -8, POINT),//from camera
+		ft_tuple(0, -3, 1.8, POINT),//look at target
 		ft_tuple(0, 1, 0, VECTOR));//up vector
 	printf("render\n");
 	render(cam, w, &engine->image);

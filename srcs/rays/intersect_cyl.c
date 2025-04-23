@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:30:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/23 14:00:31 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:46:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	intersect_caps(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 	t = (cyl->min - ray->origin.y) / ray->direction.y;
 	if (check_cap(ray, t))
 		add_hit(xs, intersection(t, cyl));
-	t = (cyl->min - ray->origin.y) / ray->direction.y;
+	t = (cyl->max - ray->origin.y) / ray->direction.y;
 	if (check_cap(ray, t))
 		add_hit(xs, intersection(t, cyl));
 }
