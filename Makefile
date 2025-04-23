@@ -57,7 +57,7 @@ MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free
 									matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
-						intersect_pl.c intersect_cyl.c rays.c transform.c)
+						intersect_pl.c intersect_cyl.c rays.c transform.c intersect_cone.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)
 SCENE_FILES			= $(addprefix scene/, world.c objects.c)
 TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)

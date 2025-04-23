@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:16 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 19:10:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 19:10:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_plane	*ft_plane(void)
 	return (plane);
 }
 
-t_cylinder	*ft_cylinder()
+t_cylinder	*ft_cylinder(void)
 {
 	t_cylinder	*cyl;
 
@@ -64,4 +64,20 @@ t_cylinder	*ft_cylinder()
 	cyl->max = INFINITY;
 	cyl->closed = false;
 	return (cyl);
+}
+
+t_cone	*ft_cone(void)
+{
+	t_cone	*cone;
+
+	cone = malloc(sizeof(t_cone));
+	if (!cone)
+		malloc_err("make_cone");
+	cone->base.type = CONE;
+	cone->base.transf = identity_matrix(4);
+	cone->base.m = ft_material();
+	cone->min = -INFINITY;
+	cone->max = INFINITY;
+	cone->closed = false;
+	return (cone);
 }

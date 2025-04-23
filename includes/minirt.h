@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:25:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:25:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 19:09:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 19:09:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef enum e_obj_type
 	SPHERE,
 	CYLINDER,
 	PLANE,
+	CONE,
 }	t_obj;
 
 typedef struct s_material
@@ -142,6 +143,15 @@ typedef struct s_cylinder
 	double		max;
 	bool		closed;
 }	t_cylinder;
+
+typedef struct s_cone
+{
+	t_object	base;
+	double		min;
+	double		max;
+	bool		closed;
+}	t_cone;
+
 
 typedef struct s_plane
 {
@@ -436,6 +446,7 @@ void		intersect_world(t_world *w, t_ray *r, t_hitlist **xs);
 t_sphere	*ft_sphere(double radius);
 t_plane		*ft_plane(void);
 t_cylinder	*ft_cylinder(void);
+t_cone		*ft_cone(void);
 
 //#############################################
 //############ TRANSFORMATIONS ################
