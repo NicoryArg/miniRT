@@ -495,6 +495,7 @@ int			convert_colour_to_int(t_colour col);
 //free_utils.c
 void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
+void		free_hitlists(t_hitlist *xs);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);
 void		free_material(t_material *m);
