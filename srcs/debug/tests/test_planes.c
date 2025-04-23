@@ -70,8 +70,9 @@ int	intersect_plane_test(int run)
 
 	t_plane		*plane;
 	t_ray		*ray;
-	t_inters	*xs;
+	t_hitlist	**xs = new_hitlist();
 	int			i = 1;
+	int			count;
 
 //TEST 1
 	//print banners
@@ -81,17 +82,18 @@ int	intersect_plane_test(int run)
 	plane = ft_plane();
 	ray = ft_ray(ft_tuple(0, 10, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 	//run test
-	xs = intersect(plane, ray);
+	intersect(plane, ray, xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	count = count_hits(xs);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 0\n"RES);
-	if (xs->count == 0)
+	if (count == 0)
 		printf(GR"✔ No intersections!\n\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 0\n"RES));
 	//free resources
 	free_ray(ray);
-	free_hits(xs);
+	free_hitlist(xs);
 
 //TEST 2
 	//print banners
@@ -99,17 +101,18 @@ int	intersect_plane_test(int run)
 	//redefine ray
 	ray = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 	//run test
-	xs = intersect(plane, ray);
+	intersect(plane, ray, xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	count = count_hits(xs);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 0\n"RES);
-	if (xs->count == 0)
+	if (count == 0)
 		printf(GR"✔ No intersections!\n\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 0\n"RES));
 	//free resources
 	free_ray(ray);
-	free_hits(xs);
+	free_hitlist(xs);
 
 //TEST 3
 	//print banners
@@ -117,19 +120,20 @@ int	intersect_plane_test(int run)
 	//redefine ray
 	ray = ft_ray(ft_tuple(0, 1, 0, POINT), ft_tuple(0, -1, 0, VECTOR));
 	//run test
-	xs = intersect(plane, ray);
+	intersect(plane, ray, xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	count = count_hits(xs);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 1\n"RES);
-	printf(B_B"xs[0]->t: %.1f\n"RES, xs->hits[0]->t);
+	printf(B_B"xs[0]->t: %.1f\n"RES, (*xs)->hit->t);
 	printf(G_B"expected: 1.0\n"RES);
-	if (xs->count == 1 && ft_equal(xs->hits[0]->t, 1))
+	if (count == 1 && ft_equal((*xs)->hit->t, 1))
 		printf(GR"✔ Intersection at t=1\n\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 1 or t != 1\n"RES));
 	//free resources
 	free_ray(ray);
-	free_hits(xs);
+	free_hitlist(xs);
 
 //TEST 4
 	//print banners
@@ -137,18 +141,19 @@ int	intersect_plane_test(int run)
 	//redefine ray
 	ray = ft_ray(ft_tuple(0, -1, 0, POINT), ft_tuple(0, 1, 0, VECTOR));
 	//run test
-	xs = intersect(plane, ray);
+	intersect(plane, ray, xs);
 	//print output
-	printf(B_B"xs.count: %d\n"RES, xs->count);
+	count = count_hits(xs);
+	printf(B_B"xs.count: %d\n"RES, count);
 	printf(G_B"expected: 1\n"RES);
-	printf(B_B"xs[0]->t: %.1f\n"RES, xs->hits[0]->t);
+	printf(B_B"xs[0]->t: %.1f\n"RES, (*xs)->hit->t);
 	printf(G_B"expected: 1.0\n"RES);
-	if (xs->count == 1 && ft_equal(xs->hits[0]->t, 1))
+	if (count == 1 && ft_equal((*xs)->hit->t, 1))
 		printf(GR"✔ Intersection at t=1\n\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 1 or t != 1\n"RES));
 	//free resources
 	free_ray(ray);
-	free_hits(xs);
+	free_hitlist(xs);
 	return (0);
 }

@@ -47,6 +47,8 @@ void		print_test_number(int *i);
 void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
 void		print_progress_bar(int y, int total);
+void		print_hitlist(t_hitlist **xs);
+
 // void		print_rs(t_ray_sphere *rs);//	obsolete
 
 

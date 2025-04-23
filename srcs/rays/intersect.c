@@ -31,26 +31,21 @@ t_inters	*init_intersections(int initial_capacity)
 	return (xs);
 }
 
-t_inters	*intersect(void *obj, t_ray *ray)
+void	intersect(void *obj, t_ray *ray, t_hitlist **xs)
 {
-	t_inters	*xs;
 	t_ray		*r2;
 	t_matrix	*inv;
 
-	xs = init_intersections(256);
-	if (!xs)
-		return (NULL);
 	inv = invert_matrix(((t_object *)obj)->transf);
 	r2 = transform(ray, inv);
 	free_matrix(inv);
 	if (((t_object *)obj)->type == SPHERE)
-		xs = intersect_sph((t_sphere *)obj, r2, xs);
+		intersect_sph((t_sphere *)obj, r2, xs);
 	else if (((t_object *)obj)->type == CYLINDER)
-	 	xs = intersect_cyl((t_cylinder *)obj, r2, xs);
+	 	intersect_cyl((t_cylinder *)obj, r2, xs);
 	else if (((t_object *)obj)->type == PLANE)
-		xs = intersect_pl((t_plane *)obj, r2, xs);
+		intersect_pl((t_plane *)obj, r2, xs);
 	free_ray(r2);
-	return (xs);
 }
 
 t_hit	*intersection(double t, void *shape)

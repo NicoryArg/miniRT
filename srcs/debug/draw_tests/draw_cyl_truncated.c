@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:37:15 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 16:11:02 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/22 02:16:04 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_world	*scene_cyl_truncated()
 	cyl1->base.m.diffuse = 0.7;
 	cyl1->base.m.specular = 0.3;
 	cyl1->min = 0;
-	cyl1->max = 28;
-	transform = multiply_matrices(scale(0.9, 0.9, 0.9), translate(-0.5, 0.9, 0.5));
+	cyl1->max = 8;
+	transform = multiply_matrices(rotate_x(M_PI/4), rotate_z(M_PI/4));
 	set_transf(cyl1, transform);
 	object_count++;
 
@@ -39,10 +39,10 @@ t_world	*scene_cyl_truncated()
 	cyl2->base.m.c = ft_colour(0.5, 1, 0.1);
 	cyl2->base.m.diffuse = 0.7;
 	cyl2->base.m.specular = 0.3;
-	cyl2->min = -15;
+	cyl2->min = -4;
 	cyl2->max = 5;
-	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(4.9, 1, -2.8));
-	set_transf(cyl2, transform);
+	transform = multiply_matrices(rotate_z(-M_PI/2), rotate_x(M_PI/2.28));
+	set_transf(cyl2, multiply_matrices(translate(5, -4, 0), transform));
 	object_count++;
 
 //Lilac cylinder
@@ -50,7 +50,7 @@ t_world	*scene_cyl_truncated()
 	cyl3->base.m.c = ft_colour(1, 0.8, 1);
 	cyl3->base.m.diffuse = 0.7;
 	cyl3->base.m.specular = 0.3;
-	cyl3->min = -50;
+	cyl3->min = -22;
 	cyl3->max = -5;
 	transform = multiply_matrices(scale(0.33, 0.33, 0.33), translate(-13.2, 0.8, -2.7));
 	set_transf(cyl3, transform);
@@ -105,6 +105,7 @@ void	draw_cyl_truncated(t_engine *engine)
 		ft_tuple(6, 2, -15, POINT),//from camera
 		ft_tuple(-2, 0, 20, POINT),//look at target
 		ft_tuple(0, 1, 0, VECTOR));//up vector
+	printf("render\n");
 	render(cam, w, &engine->image);
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->image.img_ptr, 0, 0);

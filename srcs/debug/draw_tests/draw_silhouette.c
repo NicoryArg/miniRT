@@ -39,22 +39,18 @@ static t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
 
 static int	compute_pixel_color(t_sphere *sphere, t_ray *ray)
 {
-	t_inters	*xs;
+	t_hitlist	**xs;
 	t_hit		*hit;
 	int			color;
-	int			i;
 
-	xs = intersect(sphere, ray);
-	hit = find_visible_hit(xs->hits, xs->count);
+	xs = new_hitlist();
+	intersect(sphere, ray, xs);
+	hit = find_visible_hit(xs);
 	if (hit && hit->t >= 0)
 		color = RED;
 	else
 		color = BLACK;
-	i = 0;
-	while (i < xs->count)
-		free(xs->hits[i++]);
-	free(xs->hits);
-	free(xs);
+	free_hitlist(xs);
 	return (color);
 }
 

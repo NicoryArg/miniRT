@@ -98,3 +98,21 @@ void	free_material(t_material *m)
 		free(m->pattern);
 	}
 }
+
+void	free_hitlist(t_hitlist **hs)
+{
+	t_hitlist	*current;
+	t_hitlist	*next;
+
+	if (!hs || !*hs)
+		return;
+	current = *hs;
+	while (current)
+	{
+		next = current->next;
+		free(current->hit); 	// Free the t_hit inside
+		free(current);			// Free the t_hitlist node itself
+		current = next;
+	}
+	*hs = NULL; // Nullify the original pointer
+}
