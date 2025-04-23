@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cyl_truncated.c                               :+:      :+:    :+:   */
+/*   draw_cyl_capped.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:37:15 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/23 14:52:50 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:50:31 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "tests.h"
 
-t_world	*scene_cyl_truncated()
+static t_world	*scene_cyl_capped()
 {
 	t_world		*w;
 	t_cylinder	*cyl1;
@@ -30,7 +30,7 @@ t_world	*scene_cyl_truncated()
 	cyl1->base.m.specular = 0.3;
 	cyl1->min = 0;
 	cyl1->max = 8;
-	cyl1->closed = false;
+	cyl1->closed = true;
 	transform = multiply_matrices(rotate_x(M_PI/4), rotate_z(M_PI/4));
 	set_transf(cyl1, transform);
 	object_count++;
@@ -42,7 +42,7 @@ t_world	*scene_cyl_truncated()
 	cyl2->base.m.specular = 0.3;
 	cyl2->min = -4;
 	cyl2->max = 5;
-	cyl2->closed = false;
+	cyl2->closed = true;
 	transform = multiply_matrices(rotate_z(-M_PI/2), rotate_x(M_PI/2.28));
 	set_transf(cyl2, multiply_matrices(translate(5, -4, 0), transform));
 	object_count++;
@@ -54,7 +54,7 @@ t_world	*scene_cyl_truncated()
 	cyl3->base.m.specular = 0.3;
 	cyl3->min = -22;
 	cyl3->max = -5;
-	cyl3->closed = false;
+	cyl3->closed = true;
 	transform = multiply_matrices(scale(0.6, 0.6, 0.6), translate(-13.2, 0.8, -2.7));
 	set_transf(cyl3, transform);
 	object_count++;
@@ -97,12 +97,12 @@ t_world	*scene_cyl_truncated()
 	return (w);
 }
 
-void	draw_cyl_truncated(t_engine *engine)
+void	draw_cyl_capped(t_engine *engine)
 {
 	t_world		*w;
 	t_camera	cam;
 
-	w = scene_cyl_truncated();
+	w = scene_cyl_capped();
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
 		ft_tuple(8, 5, -8, POINT),//from camera

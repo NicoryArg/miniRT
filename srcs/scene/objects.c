@@ -62,5 +62,6 @@ t_cylinder	*ft_cylinder()
 	cyl->centre = ft_tuple(0, 0, 0, POINT);
 	cyl->min = -INFINITY;
 	cyl->max = INFINITY;
+	cyl->closed = false;
 	return (cyl);
 }

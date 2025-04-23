@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 18:24:48 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 18:24:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 17:19:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 17:19:47 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			draw_hour_markers(int run);
 //draw cylinders
 void		draw_cyl_infinite(t_engine *engine);
 void		draw_cyl_truncated(t_engine *engine);
+void		draw_cyl_capped(t_engine *engine);
 
 //draw_planes.c
 void		draw_planes(t_engine *engine);
@@ -211,7 +212,7 @@ int			ft_main_draw_sphere_pattern(int run);
 int			ft_main_draw_sphere_uv(int run);
 int			ft_main_draw_sphere_nested(int run);
 int			ft_main_draw_scene_nested(int run);
-
+int			ft_main_draw_capped_cylinders(int run);
 
 //main_transform.c
 int			ft_main_transform(int run);

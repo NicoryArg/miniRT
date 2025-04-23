@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 18:24:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 18:24:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 17:17:24 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 17:17:54 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ int	ft_main_draw_truncated_cylinders(int run)
 }
 
 int	ft_main_draw_scene_patterns(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_scene_patterns));
+}
+
+int	ft_main_draw_capped_cylinders(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_cyl_capped));
+}
+
+int	ft_main_draw_patterns(int run)
 {
 	if (run == 0)
 		return (0);

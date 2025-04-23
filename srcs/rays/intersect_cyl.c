@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:30:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/21 23:13:36 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:46:25 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,34 @@ static void	validate(t_hitlist **xs, t_cylinder *cyl, t_ray *ray, t_cyl_vals d)
 	}
 }
 
+static int	check_cap(t_ray *r, double t)
+{
+	double	x;
+	double	z;
+	double	res;
+
+	x = r->origin.x + t * r->direction.x;
+	z = r->origin.z + t * r->direction.z;
+	res = ft_sqr(x) + ft_sqr(z);
+	if (res <= 1)
+		return (1);
+	return (0);
+}
+
+static void	intersect_caps(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
+{
+	double	t;
+
+	if (!cyl->closed || ft_equal(ray->direction.y, 0))
+		return ;
+	t = (cyl->min - ray->origin.y) / ray->direction.y;
+	if (check_cap(ray, t))
+		add_hit(xs, intersection(t, cyl));
+	t = (cyl->max - ray->origin.y) / ray->direction.y;
+	if (check_cap(ray, t))
+		add_hit(xs, intersection(t, cyl));
+}
+
 void	intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 {
 	double 		disc;
@@ -52,7 +80,10 @@ void	intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 
 	a = ft_sqr(ray->direction.x) + ft_sqr(ray->direction.z);
 	if (ft_equal(a, 0)) // ray is paralel to y axis
+	{
+		intersect_caps(cyl, ray, xs);
 		return ;
+	}
 	b = (2 * ray->origin.x * ray->direction.x)
 		+ (2 * ray->origin.z * ray->direction.z);
 	c = ft_sqr(ray->origin.x) + ft_sqr(ray->origin.z) - 1;
@@ -62,4 +93,5 @@ void	intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 	data.t0 = (-b - sqrt(disc)) / (2 * a);
 	data.t1 = (-b + sqrt(disc)) / (2 * a);
 	validate(xs, cyl, ray, data);
+	intersect_caps(cyl, ray, xs);
 }
