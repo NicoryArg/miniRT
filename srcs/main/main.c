@@ -30,7 +30,7 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_world_shadows(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_patterns(0))
+	if (ft_main_draw_scene_patterns(1))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_sphere_pattern(0))
 		return (printf(AKA"❌ draw_sphere_pattern failed\n"RES));
@@ -44,7 +44,7 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_infinite_cylinders(0))
 		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
-	if (ft_main_draw_truncated_cylinders(1))
+	if (ft_main_draw_truncated_cylinders(0))
 		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);

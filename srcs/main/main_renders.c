@@ -76,11 +76,11 @@ int	ft_main_draw_truncated_cylinders(int run)
 	return (run_render_with(draw_cyl_truncated));
 }
 
-int	ft_main_draw_patterns(int run)
+int	ft_main_draw_scene_patterns(int run)
 {
 	if (run == 0)
 		return (0);
-	return (run_render_with(draw_patterns));
+	return (run_render_with(draw_scene_patterns));
 }
 int	ft_main_draw_sphere_pattern(int run)
 {

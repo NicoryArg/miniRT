@@ -146,7 +146,7 @@ t_world	*scene_pattern(void)
 }
 
 
-void	draw_patterns(t_engine *engine)
+void	draw_scene_patterns(t_engine *engine)
 {
 	t_world		*w;
 	t_camera	cam;

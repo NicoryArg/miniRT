@@ -75,7 +75,7 @@ void		draw_trajectory_scene(t_engine *engine);
 int			draw_trajectory(int run);
 
 //draw_scene_pattern.c
-void		draw_patterns(t_engine *engine);
+void		draw_scene_patterns(t_engine *engine);
 
 //draw_silhouette.c
 void		draw_silhouette(t_engine *engine);
@@ -206,7 +206,7 @@ int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
 int			ft_main_draw_infinite_cylinders(int run);
 int			ft_main_draw_truncated_cylinders(int run);
-int			ft_main_draw_patterns(int run);
+int			ft_main_draw_scene_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
 int			ft_main_draw_sphere_uv(int run);
 int			ft_main_draw_sphere_nested(int run);
