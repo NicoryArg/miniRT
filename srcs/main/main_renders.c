@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:17:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:18:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 16:08:15 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 16:08:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,11 @@ int	ft_main_draw_scene_nested(int run)
 	if (run == 0)
 		return (0);
 	return (run_render_with(draw_scene_nested));
+}
+
+int	ft_main_draw_cone(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_cone));
 }
