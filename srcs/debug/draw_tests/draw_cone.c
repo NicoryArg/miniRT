@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:29:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 16:35:27 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 16:45:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 16:45:15 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,11 @@ void	draw_cone(t_engine *engine)
 {
 	t_world		*w;
 	t_camera	cam;
+	t_tuple		n;
 
 	w = scene_cone_capped();
+	n = normal_at((t_object *)w->objects[3], ft_tuple(1, 3, 0, POINT));
+	printf("Side normal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
 		ft_tuple(0, 5, -9, POINT),//from camera

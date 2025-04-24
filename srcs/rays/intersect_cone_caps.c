@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:05:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:06:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 16:43:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 16:44:04 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,17 @@ void	intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray)
  * @param lp The local-space point on the cone’s side.
  * @return A normalized normal vector for the side surface.
  */
-static t_tuple	cone_side_normal(t_tuple lp)
-{
-	t_tuple	normal;
-	double	y;
+// static t_tuple	cone_side_normal(t_tuple lp)
+// {
+// 	t_tuple	normal;
+// 	double	y;
 
-	y = sqrt(lp.x * lp.x + lp.z * lp.z);
-	if (lp.y > 0)
-		y = -y;
-	normal = ft_tuple(lp.x, y, lp.z, VECTOR);
-	return (normalize(normal));
-}
+// 	y = sqrt(lp.x * lp.x + lp.z * lp.z);
+// 	if (lp.y > 0)
+// 		y = -y;
+// 	normal = ft_tuple(lp.x, y, lp.z, VECTOR);
+// 	return (normalize(normal));
+// }
 
 /**
  * @brief Computes the normal vector at a point on a cone.
@@ -107,25 +107,34 @@ static t_tuple	cone_side_normal(t_tuple lp)
  * @param world_point The point in world space.
  * @return The normal vector at the given point on the cone.
  */
-t_tuple	normal_at_cone(t_object *obj, t_tuple world_point)
+t_tuple normal_at_cone(t_object *obj, t_tuple world_point)
 {
 	t_cone		*cone;
-	t_tuple		lp;
+	t_tuple		local_p;
 	t_matrix	*inv;
 	double		dist;
+	double		y;
 
 	cone = (t_cone *)obj;
 	inv = invert_matrix(obj->transf);
-	lp = transform_world_to_object(world_point, inv);
+	local_p = transform_world_to_object(world_point, inv);
 	free_matrix(inv);
-	dist = lp.x * lp.x + lp.z * lp.z;
-	if (cone->closed && fabs(lp.y - cone->max)
-		< EPSILON && dist <= fabs(cone->max) * fabs(cone->max))
-		return (ft_tuple(0, 1, 0, VECTOR));
-	if (cone->closed && fabs(lp.y - cone->min)
-		< EPSILON && dist <= fabs(cone->min) * fabs(cone->min))
-		return (ft_tuple(0, -1, 0, VECTOR));
-	if (fabs(lp.x) < EPSILON && fabs(lp.z) < EPSILON)
-		return (ft_tuple(0, 0, 0, VECTOR));
-	return (cone_side_normal(lp));
+
+	dist = local_p.x * local_p.x + local_p.z * local_p.z;
+
+	// Check if on the caps
+	if (cone->closed)
+	{
+		if (fabs(local_p.y - cone->max) < EPSILON && dist <= fabs(cone->max) * fabs(cone->max))
+			return (ft_tuple(0, 1, 0, VECTOR));
+		if (fabs(local_p.y - cone->min) < EPSILON && dist <= fabs(cone->min) * fabs(cone->min))
+			return (ft_tuple(0, -1, 0, VECTOR));
+	}
+
+	// Side normal
+	y = sqrt(local_p.x * local_p.x + local_p.z * local_p.z);
+	if (local_p.y > 0)
+		y = -y;
+	return (ft_tuple(local_p.x, y, local_p.z, VECTOR));
 }
+
