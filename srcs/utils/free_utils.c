@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 22:36:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 22:38:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 13:17:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 13:22:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,11 @@ void	free_world(t_world *w)
 		if (obj->type == SPHERE)
 			free_sphere((t_sphere *)obj);
 		else if (obj->type == PLANE)
-			free(((t_plane *)obj));
+			free_plane((t_plane *)obj);
 		else if (obj->type == CYLINDER)
-			free(((t_cylinder *)obj));
+			free_cylinder((t_cylinder *)obj);
+		else if (obj->type == CONE)
+			free_cone((t_cone *)obj);
 
 		i++;
 	}
@@ -100,7 +102,33 @@ void	free_world(t_world *w)
 	free(w->light);
 	free(w);
 }
+// void	free_world(t_world *w)
+// {
+// 	int	i;
 
+// 	if (!w)
+// 		return ;
+// 	i = 0;
+// 	while (i < w->object_count)
+// 	{
+// 		free_object(w->objects[i]);
+// 		i++;
+// 	}
+// 	free(w->objects);
+// 	free(w->light);
+// 	free(w);
+// }
+//
+
+// void	free_object(t_object *obj)
+// {
+// 	if (!obj)
+// 		return;
+// 	if (obj->transf)
+// 		free_matrix(obj->transf);
+// 	free_material(&obj->m);
+// 	free(obj);
+// }
 
 void	free_material(t_material *m)
 {
@@ -128,4 +156,34 @@ void	free_hitlist(t_hitlist **hs)
 		current = next;
 	}
 	*hs = NULL; // Nullify the original pointer
+}
+
+void	free_plane(t_plane *plane)
+{
+	if (!plane)
+		return ;
+	if (plane->base.transf)
+		free_matrix(plane->base.transf);
+	free_material(&plane->base.m);
+	free(plane);
+}
+
+void	free_cylinder(t_cylinder *cyl)
+{
+	if (!cyl)
+		return ;
+	if (cyl->base.transf)
+		free_matrix(cyl->base.transf);
+	free_material(&cyl->base.m);
+	free(cyl);
+}
+
+void	free_cone(t_cone *cone)
+{
+	if (!cone)
+		return ;
+	if (cone->base.transf)
+		free_matrix(cone->base.transf);
+	free_material(&cone->base.m);
+	free(cone);
 }

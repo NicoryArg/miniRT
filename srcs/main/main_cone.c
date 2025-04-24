@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:15:06 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:15:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 13:56:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 13:56:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_main_cone(int run)
 {
 	if (run == 0)
 		return (0);
-	if (cone_intersection_test(0))
+	if (cone_intersection_test(1))
 		return (printf(AKA"❌ cone_intersection_test failed\n"RES));
 	if (cone_cap_intersection_test(1))
 		return (printf(AKA"❌ cone_cap_intersection_test failed\n"RES));

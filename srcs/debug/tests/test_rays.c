@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:45:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:45:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 14:17:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 14:17:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -454,7 +454,7 @@ int	ray_transform_test(int run)
 	t_tuple	expected_origin = ft_tuple(4, 6, 8, POINT);
 	t_tuple	expected_direction = ft_tuple(0, 1, 0, VECTOR);
 	//call function
-	transformed_ray = transform(r, transf);
+	transformed_ray = transform_ray_to_object(r, transf);
 	//print output
 	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (4, 6, 8, 1)\n"RES"", transformed_ray->origin.x, transformed_ray->origin.y, transformed_ray->origin.z, transformed_ray->origin.w);
 	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (0, 1, 0, 0)\n"RES"", transformed_ray->direction.x, transformed_ray->direction.y, transformed_ray->direction.z, transformed_ray->direction.w);
@@ -480,7 +480,7 @@ int	ray_transform_test(int run)
 	expected_origin = ft_tuple(2, 6, 12, POINT);
 	expected_direction = ft_tuple(0, 3, 0, VECTOR);
 	//call function
-	transformed_ray = transform(r, transf);
+	transformed_ray = transform_ray_to_object(r, transf);
 	//print output
 	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d)\t "G_B"expected: (2, 6, 12, 1)\n"RES"", transformed_ray->origin.x, transformed_ray->origin.y, transformed_ray->origin.z, transformed_ray->origin.w);
 	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (0, 3, 0, 0)\n"RES"", transformed_ray->direction.x, transformed_ray->direction.y, transformed_ray->direction.z, transformed_ray->direction.w);

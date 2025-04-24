@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:07:33 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:07:33 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 15:15:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 15:15:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct s_object
 {
 	t_obj		type;
 	t_matrix	*transf;
+	t_matrix	*inverse;
+	t_matrix	*transpose_inverse;
 	t_material	m;
 }	t_object;
 
@@ -147,6 +149,7 @@ typedef struct s_cylinder
 typedef struct s_cone
 {
 	t_object	base;
+	t_tuple		centre;
 	double		min;
 	double		max;
 	bool		closed;
@@ -419,7 +422,7 @@ t_tuple		get_point(t_ray *ray, double t);
 
 //transform.c
 void		set_transf(void *obj, t_matrix *trans);
-t_ray		*transform(t_ray *r, t_matrix *mtx);
+t_ray		*transform_ray_to_object(t_ray *r, t_matrix *mtx);
 
 //#############################################
 //############### REFLECTION ##################
@@ -549,6 +552,9 @@ void		free_hitlists(t_hitlist *xs);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);
 void		free_material(t_material *m);
+void		free_plane(t_plane *plane);
+void		free_cylinder(t_cylinder *cyl);
+void		free_cone(t_cone *cone);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:05:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:06:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 14:54:41 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 14:54:41 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,22 @@ bool	check_cone_cap(t_ray *ray, double t, double y)
 	double	z;
 	double	radius;
 	double	dist2;
-	double	limit;
 
+	// Calculate intersection point on the ray in object space
 	x = ray->origin.x + t * ray->direction.x;
 	z = ray->origin.z + t * ray->direction.z;
+
+	// Distance squared from the Y axis
 	dist2 = x * x + z * z;
+
+	// In a canonical cone aligned to Y, the radius at a height y is |y|
+	// Only valid if ray is in object space (which it should be)
 	radius = fabs(y);
-	limit = radius * radius + CAP_EPSILON;
-	return (dist2 <= limit);
+
+	// Check if the point lies within the cap circle
+	return (dist2 <= radius * radius + CAP_EPSILON);
 }
+
 
 /**
  * @brief Computes ray intersections with a closed cone’s end caps.
@@ -65,7 +72,10 @@ void	intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray)
 		return ;
 	t = (cone->min - ray->origin.y) / ray->direction.y;
 	if (t >= 0 && check_cone_cap(ray, t, cone->min))
+	{
+		printf("[cap] intersect min cap at t = %f\n", t);
 		add_hit(xs, intersection(t, cone));
+	}
 	t = (cone->max - ray->origin.y) / ray->direction.y;
 	if (t >= 0 && check_cone_cap(ray, t, cone->max))
 		add_hit(xs, intersection(t, cone));

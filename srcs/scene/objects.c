@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 21:47:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 21:47:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 15:15:13 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 15:15:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_cone	*ft_cone(void)
 	cone->base.type = CONE;
 	cone->base.transf = create_identity_matrix(4);
 	cone->base.m = ft_material();
+	cone->centre = ft_tuple(0, 0, 0, POINT);
 	cone->min = -INFINITY;
 	cone->max = INFINITY;
 	cone->closed = false;

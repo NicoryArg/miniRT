@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:08:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:14:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 14:51:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 14:52:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,35 @@ void	validate_cone_hits(t_hitlist **xs, t_cone *c, t_ray *r, t_cone_vals d)
 
 	h0 = NULL;
 	h1 = NULL;
+
 	if (d.t0 > d.t1)
 		swap_vals(&d.t0, &d.t1);
+
+	// Compute intersection y-values in object space
 	y0 = r->origin.y + d.t0 * r->direction.y;
 	y1 = r->origin.y + d.t1 * r->direction.y;
-	if (c->min < y0 && y0 < c->max)
+
+	// Debug: Print t-values and resulting Y positions
+	printf("[cone] hit t0: %f t1: %f\n", d.t0, d.t1);
+	printf("[cone] y0: %f y1: %f (min: %f, max: %f)\n", y0, y1, c->min, c->max);
+
+	if (y0 >= c->min && y0 <= c->max)
+	{
+		printf("[cone] VALID t0 = %f (y0 = %f)\n", d.t0, y0);
 		h0 = intersection(d.t0, c);
-	if (c->min < y1 && y1 < c->max)
+	}
+	if (y1 >= c->min && y1 <= c->max)
+	{
+		printf("[cone] VALID t1 = %f (y1 = %f)\n", d.t1, y1);
 		h1 = intersection(d.t1, c);
+	}
+
 	if (h1)
 		add_hit(xs, h1);
 	if (h0)
 		add_hit(xs, h0);
 }
+
 
 /**
  * @brief Handles quadratic intersection logic for a cone.
@@ -82,11 +98,11 @@ void	validate_cone_hits(t_hitlist **xs, t_cone *c, t_ray *r, t_cone_vals d)
  */
 static void	cone_quadratic_intersections(t_cone *cone, t_ray *r, t_hitlist **xs)
 {
-	t_cone_vals	d;
+	t_cone_vals	data;
 	double		a;
 	double		b;
 	double		c;
-	double		disc;
+	double		discriminant;
 
 	a = pow(r->direction.x, 2) - pow(r->direction.y, 2)
 		+ pow(r->direction.z, 2);
@@ -96,16 +112,16 @@ static void	cone_quadratic_intersections(t_cone *cone, t_ray *r, t_hitlist **xs)
 	c = pow(r->origin.x, 2) - pow(r->origin.y, 2) + pow(r->origin.z, 2);
 	if (fabs(a) < EPSILON && fabs(b) >= EPSILON)
 	{
-		d.t0 = -c / (2 * b);
-		add_hit(xs, intersection(d.t0, cone));
+		data.t0 = -c / (2 * b);
+		add_hit(xs, intersection(data.t0, cone));
 		return ;
 	}
-	disc = b * b - 4 * a * c;
-	if (disc < 0)
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
 		return ;
-	d.t0 = (-b - sqrt(disc)) / (2 * a);
-	d.t1 = (-b + sqrt(disc)) / (2 * a);
-	validate_cone_hits(xs, cone, r, d);
+	data.t0 = (-b - sqrt(discriminant)) / (2 * a);
+	data.t1 = (-b + sqrt(discriminant)) / (2 * a);
+	validate_cone_hits(xs, cone, r, data);
 }
 
 /**
@@ -124,7 +140,7 @@ void	intersect_cone(t_object *shape, t_ray *ray, t_hitlist **xs)
 	t_ray	*local_ray;
 
 	cone = (t_cone *)shape;
-	local_ray = transform(ray, cone->base.transf);
+	local_ray = transform_ray_to_object(ray, cone->base.inverse);
 	if (!(fabs(local_ray->direction.x) < EPSILON
 			&& fabs(local_ray->direction.y) < EPSILON
 			&& fabs(local_ray->direction.z) < EPSILON))

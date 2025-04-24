@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 21:32:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 21:32:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 15:18:28 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 15:18:28 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
 	if (ft_main_draw_capped_cylinders(0))
 		return (printf(AKA"❌ draw_capped_cylinders failed\n"RES));
+	if (ft_main_draw_cone(1))
+		return (printf(AKA"❌ draw_cone failed\n"RES));
 	if (ft_main_draw_scene_patterns_full(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
@@ -93,7 +95,7 @@ int	main()
 		return (-1);
 	if (ft_main_cylinder(0))
 		return (-1);
-	if (ft_main_cone(1))
+	if (ft_main_cone(0))
 		return (-1);
 	///////////////////////////////////////////////
 	if (ft_main_render(1)) //1 to run, 0 to skip

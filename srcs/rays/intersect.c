@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hits.c                                             :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:55:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:55:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 14:17:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 14:17:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	intersect(void *obj, t_ray *ray, t_hitlist **xs)
 	t_matrix	*inv;
 
 	inv = invert_matrix(((t_object *)obj)->transf);
-	r2 = transform(ray, inv);
+	r2 = transform_ray_to_object(ray, inv);
 	free_matrix(inv);
 	if (((t_object *)obj)->type == SPHERE)
 		intersect_sph((t_sphere *)obj, r2, xs);
@@ -45,6 +45,8 @@ void	intersect(void *obj, t_ray *ray, t_hitlist **xs)
 	 	intersect_cyl((t_cylinder *)obj, r2, xs);
 	else if (((t_object *)obj)->type == PLANE)
 		intersect_pl((t_plane *)obj, r2, xs);
+	else if (((t_object *)obj)->type == CONE)
+		intersect_cone((t_object *)obj, r2, xs);
 	free_ray(r2);
 }
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 01:45:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 01:46:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 13:23:36 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 13:23:36 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,6 @@ int	list_size(t_hitlist *xs)
 int	equal_double(double a, double b)
 {
 	return (fabs(a - b) < 1e-4);
-}
-void	free_cone(t_cone *cone)
-{
-	if (!cone)
-		return;
-	if (cone->base.transf)
-		free_matrix(cone->base.transf);
-	// If material contains pointers like patterns, free them too.
-	free(cone);
 }
 
 int	cone_cap_intersection_test(int run)

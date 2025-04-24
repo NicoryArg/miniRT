@@ -45,7 +45,7 @@ DRAW_FILES			= $(addprefix debug/draw_tests/, draw_circle.c draw_clock.c draw_pr
 									draw_scene_pattern.c draw_silhouette.c draw_sphere_pattern.c \
 									draw_sphere.c draw_sphere_uv.c draw_world_shadow.c draw_world.c \
 									draw_sphere_nested.c draw_scene_nested.c draw_utils.c draw_planes.c \
-									draw_cyl_infinite.c draw_cyl_truncated.c draw_cyl_capped.c )
+									draw_cyl_infinite.c draw_cyl_truncated.c draw_cyl_capped.c draw_cone.c )
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_patterns.c test_transform.c \
 									test_tuples.c test_phong.c test_world.c view_transform_test.c \
 									test_ray_for_pixel.c test_shadows.c test_planes.c test_cylinders.c test_cone.c)
