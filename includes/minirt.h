@@ -18,9 +18,13 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdbool.h>
+// # include <sys/types.h>
+// # include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
+# include "parse.h"
 
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
