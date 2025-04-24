@@ -33,7 +33,7 @@ t_colour	ft_shading(t_shading L, bool in_shadow)
 			pattern_colour_at_world(L.m.pattern, L.obj, L.point), L.l->lum);
 	else
 		ph.effective_colour = mult_colours(L.m.c, L.l->lum);
-	ph.lightv = normalise(diff_tuple(L.l->pos, L.point));
+	ph.lightv = normalize(diff_tuple(L.l->pos, L.point));
 	ph.ambient = mult_colour(ph.effective_colour, L.m.ambient);
 	if (in_shadow)
 		return (ph.ambient);

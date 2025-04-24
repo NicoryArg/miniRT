@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 19:10:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 19:10:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 21:47:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 21:47:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_cone	*ft_cone(void)
 	if (!cone)
 		malloc_err("make_cone");
 	cone->base.type = CONE;
-	cone->base.transf = identity_matrix(4);
+	cone->base.transf = create_identity_matrix(4);
 	cone->base.m = ft_material();
 	cone->min = -INFINITY;
 	cone->max = INFINITY;

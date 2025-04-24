@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 23:04:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 23:06:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 02:17:42 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 02:17:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ t_ray	*ray_for_pixel(t_camera cam, int px, int py)
 
 	pixel = rfp_pixel(cam, w_pt(cam, px, 'x'), w_pt(cam, py, 'y'));
 	origin = rfp_origin(cam.transf);
-	direction = normalise(diff_tuple(pixel, origin));
+	direction = normalize(diff_tuple(pixel, origin));
 	return (ft_ray(origin, direction));
 }

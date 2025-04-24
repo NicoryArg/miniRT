@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:25:17 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:25:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 01:02:10 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 01:02:10 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj)
 	else if (obj->type == SPHERE)
 		uv = uv_spherical(point);
 	else if (obj->type == CYLINDER)
+		uv = uv_cylindrical(point);
+	else if (obj->type == CONE)
 		uv = uv_cylindrical(point);
 	else
 		uv = uv_spherical(point);

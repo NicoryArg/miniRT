@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:26:12 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:27:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 00:50:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 00:50:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_colour	pattern_at_object(t_pattern *patt, t_object *obj, t_tuple w_point)
 /**
  * @brief Transforms a world point to object space using the inverse transform.
  */
-static t_tuple	transform_world_to_object(t_tuple w_point, t_matrix *inverse)
+t_tuple	transform_world_to_object(t_tuple w_point, t_matrix *inverse)
 {
 	t_matrix	*wm;
 	t_matrix	*rm;

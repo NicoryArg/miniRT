@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:17:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:17:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 01:42:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 01:42:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ t_ray		*create_ray_to_point(t_tuple origin, t_tuple target);
 //################## TESTS ####################
 //#############################################
 
+//test_cone.c
+int			cone_intersection_test(int run);
+int			cone_cap_intersection_test(int run);
+int			cone_normal_vector_test(int run);
+
 //test_normal_at.c
 int			normal_at_test(int run);
 
@@ -187,6 +192,8 @@ int			camera_test(int run);
 //#############################################
 //################## MAIN #####################
 //#############################################
+//main_cone.c
+int			ft_main_cone(int run);
 //main_cyl.c
 int			ft_main_cylinder(int run);
 //main_patterns.c

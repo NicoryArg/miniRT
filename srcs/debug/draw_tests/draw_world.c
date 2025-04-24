@@ -29,7 +29,7 @@ static t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
 	t_tuple	direction;
 
 	diff = diff_tuple(target, origin);
-	direction = normalise(diff);
+	direction = normalize(diff);
 	return (ft_ray(origin, direction));
 }
 

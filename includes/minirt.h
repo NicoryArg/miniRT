@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 19:09:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 19:09:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 02:07:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 02:07:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,19 @@ typedef struct s_cone
 	double		max;
 	bool		closed;
 }	t_cone;
+
+/**
+ * @brief Stores the two t-values resulting from a ray-cone intersection.
+ *
+ * When a ray intersects the side of a cone, it produces up to two
+ * solutions (t0 and t1) from the quadratic formula. This struct holds
+ * those values for later validation against the cone’s height limits.
+ */
+typedef struct	s_cone_vals
+{
+	double	t0;
+	double	t1;
+}	t_cone_vals;
 
 
 typedef struct s_plane
@@ -327,6 +340,7 @@ t_pattern	*solid_pattern(t_colour c);
 t_pattern	*make_diagonal_stripe(t_colour a, t_colour b, double angle);
 
 //patterns.c
+t_tuple		transform_world_to_object(t_tuple w_point, t_matrix *inverse);
 t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
 t_colour	pattern_colour_at(t_pattern *patt, t_tuple pattern_point, t_object *obj);
 t_colour	pattern_colour_at_world(t_pattern *pattern, t_object *object, t_tuple world_point);
@@ -369,6 +383,14 @@ void		ft_swap(t_hit **a, t_hit **b);
 void		sort_intersections(t_hit	**xs, int count);
 t_hit		*find_visible_hit(t_hitlist **list);
 double		find_hit(t_hit	**intersections, int count);
+
+//intersect_cone_caps.c
+void		intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray);
+bool		check_cone_cap(t_ray *ray, double t, double y);
+t_tuple		normal_at_cone(t_object *obj, t_tuple world_point);
+
+//intersect_cone.c
+void		intersect_cone(t_object *shape, t_ray *ray, t_hitlist **xs);
 
 //intersect_cyl.c
 void		intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs);
@@ -499,7 +521,7 @@ t_tuple		cross(t_tuple a, t_tuple b);
  */
 t_tuple		ft_tuple(double x, double y, double z, t_tpl type);
 t_tuple		new_tuple(void);
-t_tuple		normalise(t_tuple v);
+t_tuple		normalize(t_tuple v);
 
 //tuple_utils.c
 bool		is_point(t_tuple tuple);
