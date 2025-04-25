@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:00:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:00:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/25 21:21:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/25 21:21:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_tuple t_tuple;
 # include "minirt.h"
-
+# include "pthread.h"
 
 typedef struct s_image
 {
@@ -46,6 +46,35 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 }				t_data;
+
+
+typedef struct	s_progress
+{
+	int					lines_rendered;
+	int					current_y;
+	int					total_lines;
+	pthread_mutex_t		mutex;
+}	t_progress;
+
+typedef struct	s_render_thread
+{
+	t_camera		cam;
+	t_world			*world;
+	t_image			*image;
+	int				start_y;
+	int				end_y;
+	t_progress		*progress;
+}	t_render_thread;
+
+typedef struct s_render_launch
+{
+	t_camera		cam;
+	t_world			*world;
+	t_image			*img;
+	t_progress		*progress;
+	int				thread_count;
+}	t_render_launch;
+
 
 //#############################################
 //################# DRAW ######################
@@ -122,7 +151,6 @@ void	display_help_message(t_engine *engine);
 void	malloc_err(char *func_name);
 
 t_image		*render(t_camera cam, t_world *world, t_image *img);
-void	init_engine_world(t_engine *engine);
 
 #define WALL_Z 5
 #define WALL_SIZE 7
