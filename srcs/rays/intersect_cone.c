@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:08:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:14:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/25 14:58:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/25 14:59:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,13 @@ void	intersect_cone(t_object *shape, t_ray *ray, t_hitlist **xs)
 {
 	t_cone	*cone;
 	t_ray	*local_ray;
+	t_matrix	*inverse;
+
+
 
 	cone = (t_cone *)shape;
-	local_ray = transform(ray, cone->base.transf);
+	inverse = invert_matrix(cone->base.transf);
+	local_ray = transform(ray, inverse);
 	if (!(fabs(local_ray->direction.x) < EPSILON
 			&& fabs(local_ray->direction.y) < EPSILON
 			&& fabs(local_ray->direction.z) < EPSILON))
