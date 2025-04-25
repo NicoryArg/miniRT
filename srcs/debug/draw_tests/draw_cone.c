@@ -6,7 +6,7 @@
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:00:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/25 15:27:13 by nryser           ###   ########.ch       */
+/*   Updated: 2025/04/25 20:22:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static t_world	*scene_cone_capped()
 	cone1->base.m.c = ft_colour(1, 1, 0.5);
 	cone1->base.m.diffuse = 0.7;
 	cone1->base.m.specular = 0.3;
-	cone1->min = 0;
-	cone1->max = 1;
+	cone1->min = -1.5;
+	cone1->max = 1.5;
 	cone1->closed = true;
 	transform = translate(-2, 3, 0);
 
@@ -43,10 +43,10 @@ static t_world	*scene_cone_capped()
 	cone2->base.m.c = ft_colour(0, 1, 1);
 	cone2->base.m.diffuse = 0.7;
 	cone2->base.m.specular = 0.3;
-	cone2->min = -4;
-	cone2->max = 4;
+	cone2->min = -3;
+	cone2->max = 3;
 	cone2->closed = true;
-	transform = multiply_matrices(translate(2.5, 2, -3), rotate_z(M_PI / 2));
+	transform = multiply_matrices(translate(2, 2, -2), create_identity_matrix(4));
 	set_transf(cone2, transform);
 	object_count++;
 
