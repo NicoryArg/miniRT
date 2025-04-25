@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:42:06 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/24 19:11:09 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/25 23:17:38 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ static int	grab_input(char *file, char **buf)
 		if (total_read >= size)
 		{
 			free(*buf);
-			return(printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)"));
+			return(printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
 		}
 	}
 	if (bytes_read < 0)
-		return (-1);
+	{
+		free(*buf);
+		return (printf(AKA"Error\n❌ Read error\n"RES));
+	}
 	close(fd);
 	return (0);
 }
@@ -44,5 +47,4 @@ int	check_input(char *file)
 	if (grab_input(file, &input))
 		return (-1);
 	printf("%s", input);
-	return (0);
 }
