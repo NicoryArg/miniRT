@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 11/03/2025 17:11:20 by nryser            #+#    #+#             */
-/*   Updated: 11/03/2025 17:11:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 06:47:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 07:19:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ enum e_keys
 	KEY_G = 103,
 	KEY_H = 104,
 	KEY_L = 108,
+	KEY_PLUS = 61,
+	KEY_MINUS = 45,
+	KEY_KP_PLUS = 65451,
+	KEY_KP_MINUS = 65453,
 	MOUSE_LEFT_CLK = 1,
 	MOUSE_SCRL_CLK = 2,
 	MOUSE_RIGHT_CLK = 3,
@@ -74,6 +78,10 @@ enum e_keys
 	KEY_G = 5,
 	KEY_H = 4,
 	KEY_L = 37,
+	KEY_PLUS = 24,          // This may need adjusting depending on macOS version
+	KEY_MINUS = 27,
+	KEY_KP_PLUS = 69,       // Keypad + (macOS)
+	KEY_KP_MINUS = 78,      // Keypad - (macOS)
 	MOUSE_LEFT_CLK = 1,
 	MOUSE_RIGHT_CLK = 2,
 	MOUSE_SCRL_CLK = 3,

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 20:08:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 18:06:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 08:59:07 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 08:59:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	put_pixel(t_image *img, int x, int y, int color)
 		*(unsigned int *)pixel = color;
 	}
 }
+
 //function for debug * comment it out after//
 void	draw_marker(t_image *img, int x, int y, int color, int marker_size)
 {

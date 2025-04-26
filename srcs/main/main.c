@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:28:06 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 16:28:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 06:55:22 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 06:55:22 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ int	run_render_with(void (*render_func)(t_engine *))
 		engine.image.img_ptr, 0, 0);
 	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
 	printf("\tPlease refrain from resizing the window\n"RES);
-	mlx_key_hook(engine.window, on_key_hook_event, &engine);
-	mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	// mlx_key_hook(engine.window, on_key_hook_event, &engine);
+	// mlx_hook(engine.window, 17, 0, on_destroy_event, &engine);
+	setup_hooks(&engine);
 	mlx_loop(engine.mlx);
 	cleanup(&engine);
 	return (0);

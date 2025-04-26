@@ -52,7 +52,7 @@ TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_patte
 MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_rays.c main_renders.c \
 									main_phong.c main_transform.c main_tuples.c main_world.c \
 									main_view.c main_plane.c main_cyl.c main_cone.c)
-ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
+ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c handle_hooks.c handle_mouse.c handle_bar.c key_hook.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
