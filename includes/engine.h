@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 21:21:59 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/25 21:21:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 06:06:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 06:09:40 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,16 +141,33 @@ void	draw_world_with_shadows(t_engine *engine);
 //draw_world.c
 void	draw_world(t_engine *engine);
 
+//#############################################
+//################## VIEW #####################
+//#############################################
+//render_threads.c
+int			grab_next_block(t_render_thread *ctx, int *y_start,
+				int *y_end, int block_size);
+void		render_line(t_render_thread *ctx, int y);
+void		*render_section(void *arg);
+t_image		*render(t_camera cam, t_world *world, t_image *img);
+
+//thread_utils.c
+int			get_cpu_count(void);
+int			auto_block_size(int image_height);
+void		create_threads(pthread_t *threads, t_render_thread *args,
+				t_render_launch *ctx);
+void		join_threads(pthread_t *threads, int thread_count);
 
 //#############################################
 //################## UTILS ####################
 //#############################################
 //messages.c
-void	put_help_text(t_engine *engine, int *y, char *text);
-void	display_help_message(t_engine *engine);
-void	malloc_err(char *func_name);
+void		put_help_text(t_engine *engine, int *y, char *text);
+void		display_help_message(t_engine *engine);
+void		malloc_err(char *func_name);
 
-t_image		*render(t_camera cam, t_world *world, t_image *img);
+
+
 
 #define WALL_Z 5
 #define WALL_SIZE 7

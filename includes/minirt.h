@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 21:29:18 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/25 21:29:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 06:09:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 06:09:54 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -552,9 +552,8 @@ void		free_material(t_material *m);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);
-double		ft_max(double a, double b);
-double		ft_min(double a, double b);
-t_tuple		uv_to_tuple(t_uv uv);
+void		print_progress_bar(int y, int total);
+
 
 //#############################################
 //################# VIEW ######################

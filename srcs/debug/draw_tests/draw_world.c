@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 20:40:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/25 20:40:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 05:42:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 05:42:15 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,35 +86,6 @@ static t_world	*simple_world(void)
 	l = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
 	w->light = l;
 	return (w);
-}
-static void	print_progress_bar(int y, int total)
-{
-	int		percent;
-	int		filled;
-	int		i;
-
-	if (y > total)
-		y = total; // Prevent going over
-
-	percent = (y * 100) / total;
-	filled = (percent * 50) / 100;
-
-	printf("\r[");
-	i = 0;
-	while (i < filled)
-	{
-		printf("\033[32m=\033[0m");
-		i++;
-	}
-	while (i < 50)
-	{
-		printf(" ");
-		i++;
-	}
-	printf("] %3d%% (%d/%d)", percent, y, total);
-	fflush(stdout);
-	if (y == total)
-		printf("\n");
 }
 
 

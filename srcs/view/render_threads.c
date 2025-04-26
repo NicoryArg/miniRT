@@ -5,46 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 23:05:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/25 23:06:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 06:10:40 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 06:10:40 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
-#include "tests.h"
-
-/**
- * @brief Retrieves the number of available CPU cores.
- *
- * This function queries the operating system to determine how many
- * logical processors are available for multithreading.
- *
- * @return The number of CPU cores detected.
- */
-int	get_cpu_count(void)
-{
-	return (int)sysconf(_SC_NPROCESSORS_ONLN);
-}
-
-/**
- * @brief Determines an optimal block size based on the image height.
- *
- * This function returns a suitable block size for dynamic workload
- * distribution, balancing between fine-grained and coarse-grained
- * thread scheduling.
- *
- * @param image_height The vertical resolution of the rendered image.
- * @return The chosen block size (in number of rows).
- */
-int	auto_block_size(int image_height)
-{
-	if (image_height <= 500)
-		return (1);
-	if (image_height <= 1000)
-		return (2);
-	return (4);
-}
 
 /**
  * @brief Attempts to acquire the next available block of rows to render.
@@ -58,7 +25,8 @@ int	auto_block_size(int image_height)
  * @param block_size The number of rows to acquire at once.
  * @return 1 if a block was successfully acquired, 0 if rendering is complete.
  */
-int	grab_next_block(t_render_thread *ctx, int *y_start, int *y_end, int block_size)
+int	grab_next_block(t_render_thread *ctx, int *y_start,
+					int *y_end, int block_size)
 {
 	pthread_mutex_lock(&ctx->progress->mutex);
 	if (ctx->progress->current_y >= ctx->cam.vsize)
@@ -100,7 +68,8 @@ void	render_line(t_render_thread *ctx, int y)
 	}
 	pthread_mutex_lock(&ctx->progress->mutex);
 	ctx->progress->lines_rendered++;
-	print_progress_bar(ctx->progress->lines_rendered, ctx->progress->total_lines);
+	print_progress_bar(ctx->progress->lines_rendered,
+		ctx->progress->total_lines);
 	pthread_mutex_unlock(&ctx->progress->mutex);
 }
 
@@ -133,53 +102,6 @@ void	*render_section(void *arg)
 		}
 	}
 	return (NULL);
-}
-
-/**
- * @brief Initializes and starts all rendering threads.
- *
- * This function sets up the thread contexts and creates each thread,
- * assigning them the rendering workload through the render_section function.
- *
- * @param threads An array to store thread identifiers.
- * @param args An array of thread argument structures.
- * @param ctx A pointer to the render launch context containing shared data.
- */
-static void	create_threads(pthread_t *threads, t_render_thread *args, t_render_launch *ctx)
-{
-	int	i;
-
-	i = 0;
-	while (i < ctx->thread_count)
-	{
-		args[i].cam = ctx->cam;
-		args[i].world = ctx->world;
-		args[i].image = ctx->img;
-		args[i].progress = ctx->progress;
-		pthread_create(&threads[i], NULL, render_section, &args[i]);
-		i++;
-	}
-}
-
-/**
- * @brief Waits for all rendering threads to complete.
- *
- * This function calls pthread_join() on each rendering thread to ensure
- * that the main thread does not proceed until all work is finished.
- *
- * @param threads An array containing the thread identifiers.
- * @param thread_count The total number of threads launched.
- */
-static void	join_threads(pthread_t *threads, int thread_count)
-{
-	int	i;
-
-	i = 0;
-	while (i < thread_count)
-	{
-		pthread_join(threads[i], NULL);
-		i++;
-	}
 }
 
 /**

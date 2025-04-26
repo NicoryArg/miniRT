@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 15:53:12 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/19 02:46:44 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/26 05:39:41 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 05:39:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,24 +220,6 @@ void	print_intersections(t_hit **xs, int count, int sorted)
 	}
 	printf(BOLD"_________________________________\n\n"RES);
 }
-
-void	print_progress_bar(int y, int total)
-{
-	int		percent = (y * 100) / total;
-	int		filled = (percent * 50) / 100;
-
-	printf("\r["); // Start of bar
-	for (int i = 0; i < filled; i++)
-		printf("\033[32m=\033[0m"); // Green fill
-	for (int i = filled; i < 50; i++)
-		printf(" "); // Empty part
-	printf("] %3d%% (%d/%d)", percent, y, total);
-	fflush(stdout);
-	if (y == total)
-		printf("\n");
-}
-
-
 
 void	print_hitlist(t_hitlist **xs)
 {

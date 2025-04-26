@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:08:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 16:09:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 05:40:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 05:40:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		print_test_banner(const char *word);
 void		print_test_number(int *i);
 void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
-void		print_progress_bar(int y, int total);
 void		print_hitlist(t_hitlist **xs);
 
 // void		print_rs(t_ray_sphere *rs);//	obsolete
