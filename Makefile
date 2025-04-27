@@ -45,14 +45,14 @@ DRAW_FILES			= $(addprefix debug/draw_tests/, draw_circle.c draw_clock.c draw_pr
 									draw_scene_pattern.c draw_silhouette.c draw_sphere_pattern.c \
 									draw_sphere.c draw_sphere_uv.c draw_world_shadow.c draw_world.c \
 									draw_sphere_nested.c draw_scene_nested.c draw_utils.c draw_planes.c \
-									draw_cyl_infinite.c draw_cyl_truncated.c draw_cyl_capped.c draw_cone.c )
+									draw_cyl_infinite.c draw_cyl_truncated.c draw_cyl_capped.c draw_cone.c draw_cone_scene.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_patterns.c test_transform.c \
 									test_tuples.c test_phong.c test_world.c view_transform_test.c \
 									test_ray_for_pixel.c test_shadows.c test_planes.c test_cylinders.c test_cone.c)
 MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_rays.c main_renders.c \
 									main_phong.c main_transform.c main_tuples.c main_world.c \
 									main_view.c main_plane.c main_cyl.c main_cone.c)
-ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c handle_hooks.c handle_mouse.c handle_bar.c key_hook.c make_engine.c)
+ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c handle_hooks.c handle_mouse.c handle_bar.c key_hook.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)

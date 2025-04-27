@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:08:15 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 16:08:46 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/27 05:39:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/27 05:39:52 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,11 @@ int	ft_main_draw_cone(int run)
 	if (run == 0)
 		return (0);
 	return (run_render_with(draw_cone));
+}
+
+int	ft_main_draw_icecream(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_icecream));
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:43:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 16:44:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/27 04:05:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/27 04:05:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,34 +107,58 @@ void	intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray)
  * @param world_point The point in world space.
  * @return The normal vector at the given point on the cone.
  */
-t_tuple normal_at_cone(t_object *obj, t_tuple world_point)
+t_tuple	normal_at_cone(t_object *obj, t_tuple world_point)
 {
 	t_cone		*cone;
 	t_tuple		local_p;
+	t_tuple		local_normal;
+	t_tuple		world_normal;
 	t_matrix	*inv;
+	t_matrix	*inv_transp;
 	double		dist;
 	double		y;
 
 	cone = (t_cone *)obj;
+
+	// Move world_point into object space
 	inv = invert_matrix(obj->transf);
 	local_p = transform_world_to_object(world_point, inv);
 	free_matrix(inv);
 
+	// Calculate normal in object space
 	dist = local_p.x * local_p.x + local_p.z * local_p.z;
 
-	// Check if on the caps
 	if (cone->closed)
 	{
 		if (fabs(local_p.y - cone->max) < EPSILON && dist <= fabs(cone->max) * fabs(cone->max))
-			return (ft_tuple(0, 1, 0, VECTOR));
-		if (fabs(local_p.y - cone->min) < EPSILON && dist <= fabs(cone->min) * fabs(cone->min))
-			return (ft_tuple(0, -1, 0, VECTOR));
+			local_normal = ft_tuple(0, 1, 0, VECTOR);
+		else if (fabs(local_p.y - cone->min) < EPSILON && dist <= fabs(cone->min) * fabs(cone->min))
+			local_normal = ft_tuple(0, -1, 0, VECTOR);
+		else
+		{
+			y = sqrt(local_p.x * local_p.x + local_p.z * local_p.z);
+			if (local_p.y > 0)
+				y = -y;
+			local_normal = ft_tuple(local_p.x, y, local_p.z, VECTOR);
+		}
+	}
+	else
+	{
+		y = sqrt(local_p.x * local_p.x + local_p.z * local_p.z);
+		if (local_p.y > 0)
+			y = -y;
+		local_normal = ft_tuple(local_p.x, y, local_p.z, VECTOR);
 	}
 
-	// Side normal
-	y = sqrt(local_p.x * local_p.x + local_p.z * local_p.z);
-	if (local_p.y > 0)
-		y = -y;
-	return (ft_tuple(local_p.x, y, local_p.z, VECTOR));
+	// Transform normal back into world space
+	inv = invert_matrix(obj->transf);
+	inv_transp = transpose_matrix(inv);
+	world_normal = transform_world_to_object(local_normal, inv_transp);
+
+	free_matrix(inv);
+	free_matrix(inv_transp);
+
+	world_normal.w = 0; // Make sure it's a vector, not a point
+	return (normalize(world_normal));
 }
 

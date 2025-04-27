@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 05:40:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/26 05:40:32 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/27 05:40:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/27 05:40:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int			draw_hour_markers(int run);
 
 //draw_cone.c
 void		draw_cone(t_engine *engine);
+
+//draw_cone_scene.c
+void		draw_icecream(t_engine *engine);
 
 //draw cylinders
 void		draw_cyl_infinite(t_engine *engine);
@@ -223,6 +226,7 @@ int			ft_main_draw_scene_nested(int run);
 int			ft_main_draw_capped_cylinders(int run);
 int			ft_main_draw_scene_patterns_full(int run);
 int			ft_main_draw_cone(int run);
+int			ft_main_draw_icecream(int run);
 
 //main_transform.c
 int			ft_main_transform(int run);

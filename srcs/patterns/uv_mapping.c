@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 01:02:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 01:02:10 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/27 06:03:35 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/27 06:03:44 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,19 @@ t_uv	uv_cylindrical(t_tuple point)
 	return (uv);
 }
 
+t_uv	uv_conical(t_tuple point)
+{
+	t_uv	uv;
+	double	theta;
+	double	radius;
+
+	theta = atan2(point.x, point.z);
+	radius = sqrt(point.x * point.x + point.z * point.z);
+	uv.u = 1.0 - (theta + M_PI) / (2.0 * M_PI);
+	uv.v = 1.0 - (point.y / radius);
+	return (uv);
+}
+
 t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj)
 {
 	t_uv	uv;
@@ -79,7 +92,7 @@ t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj)
 	else if (obj->type == CYLINDER)
 		uv = uv_cylindrical(point);
 	else if (obj->type == CONE)
-		uv = uv_cylindrical(point);
+		uv = uv_conical(point);
 	else
 		uv = uv_spherical(point);
 	if (patt->type == PATTERN_UV_CHECKERS)
