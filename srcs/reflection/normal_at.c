@@ -60,6 +60,19 @@ t_tuple	normal_at(void *shape, t_tuple world_p)
 	return (world_normal);
 }
 
+static t_tuple	local_normal_at_cyl(t_cylinder *cyl, t_tuple p)
+{
+	double	dist;
+
+	dist = ft_sqr(p.x) + ft_sqr(p.z);
+	if ((dist < 1) && (p.y >= cyl->max - EPSILON))
+		return (ft_tuple(0, 1, 0, VECTOR));
+	else if ((dist < 1) && (p.y <= cyl->min + EPSILON))
+		return (ft_tuple(0, -1, 0, VECTOR));
+	else
+		return (ft_tuple(p.x, 0, p.z, VECTOR));
+}
+
 t_tuple	local_normal_at(void *shape, t_tuple local_p)
 {
 	t_tuple		normal;
@@ -71,6 +84,6 @@ t_tuple	local_normal_at(void *shape, t_tuple local_p)
 	else if (obj->type == PLANE)
 		normal = ft_tuple(0, 1, 0, VECTOR);
 	else if (obj->type == CYLINDER)
-		normal = ft_tuple(local_p.x, 0, local_p.z, VECTOR);
+		normal = local_normal_at_cyl((t_cylinder *)shape, local_p);
 	return (normal);
 }

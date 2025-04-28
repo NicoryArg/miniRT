@@ -33,6 +33,6 @@ int	ft_main_patterns(int run)
 	if (checkers_pattern_test(1))//	0 to skip, 1 to run
 		return(printf(R_B"checkers_pattern_test failed\n"RES));
 
-	printf(G_B"END OF RAYS TESTS\n"RES);
+	printf(G_B"END OF PATTERN TESTS\n"RES);
 	return (0);
 }

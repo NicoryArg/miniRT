@@ -47,6 +47,8 @@ void		print_test_number(int *i);
 void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
 void		print_progress_bar(int y, int total);
+void		print_hitlist(t_hitlist **xs);
+
 // void		print_rs(t_ray_sphere *rs);//	obsolete
 
 
@@ -64,6 +66,7 @@ int			draw_hour_markers(int run);
 //draw cylinders
 void		draw_cyl_infinite(t_engine *engine);
 void		draw_cyl_truncated(t_engine *engine);
+void		draw_cyl_capped(t_engine *engine);
 
 //draw_planes.c
 void		draw_planes(t_engine *engine);
@@ -195,6 +198,7 @@ int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
 int			ft_main_draw_infinite_cylinders(int run);
 int			ft_main_draw_truncated_cylinders(int run);
+int			ft_main_draw_capped_cylinders(int run);
 int			ft_main_draw_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
 

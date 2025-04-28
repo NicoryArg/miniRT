@@ -26,24 +26,38 @@ double	discriminant_sph(t_ray *ray, t_tuple sph_to_ray)
 	discriminant = ft_sqr(b) - (4 * a * c);
 	return (discriminant);
 }
+/**
+ * @brief prepend a new node that stores hit to hitlist
+ */
+void	add_hit(t_hitlist **xs, t_hit *hit)
+{
+	t_hitlist *new;
 
-t_inters	*intersect_sph(t_sphere *sph, t_ray *ray, t_inters *xs)
+	new = malloc(sizeof(t_hitlist));
+	if (!new)
+		malloc_err("add_hit");
+	new->hit = hit;
+	new->next = *xs;
+	*xs = new;
+}
+
+void	intersect_sph(t_sphere *sph, t_ray *ray, t_hitlist **xs)
 {
 	double	d;
 	double	a;
 	double	b;
 	t_tuple	origin_centre;
-	int 	i;
+	t_hit 	*t0;
+	t_hit	*t1;
 
-	i = xs->count;
 	origin_centre = diff_tuple(ray->origin, sph->centre);
 	d = discriminant_sph(ray, origin_centre);
 	if (d < 0)
-		return (xs);
+		return ;
 	a = dot(ray->direction, ray->direction);
 	b = 2 * dot(ray->direction, origin_centre);
-	xs->hits[i] = intersection(((-b - sqrt(d)) / (2 * a)), sph);
-	xs->hits[i + 1] = intersection(((-b + sqrt(d)) / (2 * a)), sph);
-	xs->count += 2;
-	return (xs);
+	t0 = intersection(((-b - sqrt(d)) / (2 * a)), sph);
+	t1 = intersection(((-b + sqrt(d)) / (2 * a)), sph);
+	add_hit(xs, t0);
+	add_hit(xs, t1);
 }

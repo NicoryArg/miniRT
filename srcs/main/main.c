@@ -40,6 +40,8 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
 	if (ft_main_draw_truncated_cylinders(1))
 		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
+	if (ft_main_draw_capped_cylinders(0))
+		return (printf(AKA"❌ draw_capped_cylinders failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
 }

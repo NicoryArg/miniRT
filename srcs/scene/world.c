@@ -31,18 +31,18 @@ t_world	*default_world(void)
 	t_world		*w;
 	t_sphere	*s1;
 	t_sphere	*s2;
-	t_matrix	*transform;
+	// t_matrix	*transform;
 	w = ft_world();
 	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
 	s1 = ft_sphere(1);
-	s1->base.m.c = ft_colour(1, 0, 0);
+	s1->base.m.c = ft_colour(0.8, 1, 0.6);
 	s1->base.m.diffuse = 0.7;
 	s1->base.m.specular = 0.2;
 	s2 = ft_sphere(1);
-	s2->base.m.c = ft_colour(0, 1, 0);
-	//set_transf(s2, scale(0.5, 0.5, 0.5));
-	transform= multiply_matrices(scale(1, 0.5, 0.5), translate(0, -2, 0));
-	set_transf(s2, transform);
+	// s2->base.m.c = ft_colour(0, 1, 0);
+	set_transf(s2, scale(0.5, 0.5, 0.5));
+	// transform= multiply_matrices(scale(1, 0.5, 0.5), translate(0, -2, 0));
+	// set_transf(s2, transform);
 	w->objects = malloc(sizeof(t_sphere *) * 2);
 	if (!w->objects)
 		return (NULL);
@@ -67,27 +67,29 @@ void	copy_hits(t_inters *dst, t_inters *src)
 	}
 }
 
-t_inters	*intersect_world(t_world *w, t_ray *r)
+t_hitlist	**new_hitlist()
 {
-	t_inters	*xs;
-	t_inters	*temp;
+	t_hitlist	**new;
+
+	new = malloc(sizeof(t_hitlist *));
+	if (!new)
+		malloc_err("new_hitlist");
+	// new = NULL;
+	*new = NULL;
+	return (new);
+}
+
+void	intersect_world(t_world *w, t_ray *r, t_hitlist **xs)
+{
 	int			i;
 
-	xs = init_intersections(256);
 	if (!xs)
-		return (NULL);
+		return ;
 	i = 0;
 	while (i < w->object_count)
 	{
-		temp = intersect(w->objects[i], r);
-		if (temp)
-		{
-			copy_hits(xs, temp);
-			free(temp->hits);
-			free(temp);
-		}
+		intersect(w->objects[i], r, xs);
 		i++;
 	}
-	sort_intersections(xs->hits, xs->count);
-	return (xs);
+	// sort_intersections(xs->hits, xs->count);
 }

@@ -123,6 +123,23 @@ int	sph_unique_id(int run, int num)
 //########################## P59 - P62 #############################//
 //#################################################################//
 
+int	count_hits(t_hitlist **xs)
+{
+	t_hitlist	*current;
+	int			i = 0;
+
+	if (!xs || !*xs)
+		return (0);
+	current = *xs;
+	while (current)
+	{
+		i++;
+		current = current->next;
+	}
+	return (i);
+}
+
+
 int	sph_ray_intersect(int run)
 {
 	if (run == 0)
@@ -131,31 +148,35 @@ int	sph_ray_intersect(int run)
 	t_ray	*r = ft_ray(ft_tuple(-5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	t_sphere	*s = ft_sphere(1);
 	double		d;
-	t_inters	*xs = NULL;
+	t_hitlist	**xs = new_hitlist();
+	double		t0;
+	double		t1;
+	int			count = 0;
 
 	print_test_banner("Sphere Intersections");
-	print_test_number(&i);
 //TEST 1
 	//print banners
-	print_test_banner("two intersections");
-	print_test_number(&i);
+	print_sub_header("two intersections", &i);
 	//run test
 	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
-	xs = intersect(s, r);
+	intersect(s, r, xs);
+	t0 = (*xs)->hit->t;
+	t1 = (*xs)->next->hit->t;
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
-	printf(B_B"t1:\t      %.1f\t"G_B"expected: 4.0\n"RES, xs->hits[0]->t);
-	printf(B_B"t2:\t      %.1f\t"G_B"expected: 6.0\n"RES, xs->hits[1]->t);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: 4.0\n"RES, t1);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected: 6.0\n"RES, t0);
 	//check output
-	if (xs->count == 2)
+	count = count_hits(xs);
+	if (count == 2)
 		printf(GR"✔ xs.count == 2\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 2\n"RES));
-	if (ft_equal(xs->hits[0]->t, 4.0) && ft_equal(xs->hits[1]->t, 6.0))
+	if (ft_equal(t1, 4.0) && ft_equal(t0, 6.0))
 		printf(GR"✔ t1 and t2 are correct\n"RES);
 	else
 		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
-	free(xs);
+	free_hitlist(xs);
 	free(r);
 //TEST 2
 	//print banners
@@ -165,21 +186,24 @@ int	sph_ray_intersect(int run)
 	r = ft_ray(ft_tuple(-5, 1, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	//run test
 	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
-	xs = intersect(s, r);
+	intersect(s, r, xs);
+	t0 = (*xs)->hit->t;
+	t1 = (*xs)->next->hit->t;
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
-	printf(B_B"t1:\t      %.1f\t"G_B"expected: 5.0\n"RES, xs->hits[0]->t);
-	printf(B_B"t2:\t      %.1f\t"G_B"expected: 5.0\n"RES, xs->hits[1]->t);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: 5.0\n"RES, t1);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected: 5.0\n"RES, t0);
 	//check output
-	if (xs->count == 2)
+	count = count_hits(xs);
+	if (count == 2)
 		printf(GR"✔ xs.count == 2\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 2\n"RES));
-	if (ft_equal(xs->hits[0]->t, 5.0) && ft_equal(xs->hits[1]->t, 5.0))
+	if (ft_equal(t1, 5.0) && ft_equal(t0, 5.0))
 		printf(GR"✔ t1 and t2 are correct\n"RES);
 	else
 		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
-	free(xs);
+	free_hitlist(xs);
 	free(r);
 //TEST 3
 	//print banners
@@ -190,17 +214,18 @@ int	sph_ray_intersect(int run)
 	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
 	printf(G_B"Discriminant: "RES"%.2f\n", d);
 	//call function
-	xs = intersect(s, r);
+	intersect(s, r, xs);
 	//print output
-	if (xs->count == 0)
+	count = count_hits(xs);
+	if (count == 0)
 	{
 		printf(GR"✔ NO INTERSECTIONS DETECTED!\n"RES"");
-		printf(GR"xs.count: %d\n"RES, xs->count);
+		printf(GR"xs.count: %d\n"RES, count);
 	}
 	else
-		return(printf(AKA"❌xs.count != 0\txs.count: %d\n"RES, xs->count));
+		return(printf(AKA"❌xs.count != 0\txs.count: %d\n"RES, count));
 	//free resources
-	free(xs);
+	free_hitlist(xs);
 	free(r);
 //TEST 4
 	//print banners
@@ -210,21 +235,24 @@ int	sph_ray_intersect(int run)
 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	//run test
 	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
-	xs = intersect(s, r);
+	intersect(s, r, xs);
+	t0 = (*xs)->hit->t;
+	t1 = (*xs)->next->hit->t;
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
-	printf(B_B"t1:\t      %.1f\t"G_B"expected: -1.0\n"RES, xs->hits[0]->t);
-	printf(B_B"t2:\t      %.1f\t"G_B"expected:  1.0\n"RES, xs->hits[1]->t);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: -1.0\n"RES, t1);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected:  1.0\n"RES, t0);
 	//check output
-	if (xs->count == 2)
+	count = count_hits(xs);
+	if (count == 2)
 		printf(GR"✔ xs.count == 2\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 2\n"RES));
-	if (ft_equal(xs->hits[0]->t, -1.0) && ft_equal(xs->hits[1]->t, 1.0))
+	if (ft_equal(t1, -1.0) && ft_equal(t0, 1.0))
 		printf(GR"✔ t1 and t2 are correct\n"RES);
 	else
 		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
-	free(xs);
+	free_hitlist(xs);
 	free(r);
 //TEST 5
 	//print banners
@@ -234,21 +262,24 @@ int	sph_ray_intersect(int run)
 	r = ft_ray(ft_tuple(5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	//run test
 	d = discriminant_sph(r, diff_tuple(r->origin, s->centre));
-	xs = intersect(s, r);
+	intersect(s, r, xs);
+	t0 = (*xs)->hit->t;
+	t1 = (*xs)->next->hit->t;
 	//print output
 	printf(YEL"Discriminant: %.1f\n"RES, d);
-	printf(B_B"t1:\t      %.1f\t"G_B"expected: -6.0\n"RES, xs->hits[0]->t);
-	printf(B_B"t2:\t      %.1f\t"G_B"expected: -4.0\n"RES, xs->hits[1]->t);
+	printf(B_B"t1:\t      %.1f\t"G_B"expected: -6.0\n"RES, t1);
+	printf(B_B"t2:\t      %.1f\t"G_B"expected: -4.0\n"RES, t0);
 	//check output
-	if (xs->count == 2)
+	count = count_hits(xs);
+	if (count == 2)
 		printf(GR"✔ xs.count == 2\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 2\n"RES));
-	if (ft_equal(xs->hits[0]->t, -6.0) && ft_equal(xs->hits[1]->t, -4.0))
+	if (ft_equal(t1, -6.0) && ft_equal(t0, -4.0))
 		printf(GR"✔ t1 and t2 are correct\n"RES);
 	else
 		return(printf(AKA"❌ t1 and t2 are incorrect\n"RES));
-	free(xs);
+	free_hitlist(xs);
 	free(r);
 	return (0);
 }
@@ -264,6 +295,7 @@ int	intersection_test(int run)
 	if (run == 0)
 		return (0);
 	int			i = 1;
+	int			count = 0;
 	t_sphere	*s = ft_sphere(1);
 	t_ray		*r = ft_ray(ft_tuple(-5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
 	t_hit		*i1 = NULL;
@@ -299,48 +331,46 @@ int	intersection_test(int run)
 	print_test_number(&i);
 	//redefine variables
 	t_sphere	*s2 = ft_sphere(1);
-	t_inters	*xs = intersect(s2, r);
-	printf(BOLD"%15s "GR"%7d\n"RES, "xs.count:", xs->count);
-	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", xs->hits[0]->obj);
-	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", xs->hits[1]->obj);
-	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s2);
+	t_hitlist	**xs = new_hitlist();
 	//check output
-	if (xs->count == 2)
+	intersect(s2, r, xs);
+	count = count_hits(xs);
+	printf(BOLD"%15s "GR"%7d\n"RES, "xs.count:", count);
+	printf(BOLD"%15s "GR"%20p\n"RES, "xs[0].object:", (*xs)->next->hit->obj);
+	printf(BOLD"%15s "GR"%20p\n"RES, "xs[1].object:", (*xs)->hit->obj);
+	printf(BOLD"%15s "LILA"%20p\n"RES, "Sphere:", s2);
+	if (count == 2)
 		printf(GR"✔ xs.count == 2\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 2\n"RES));
-	if (xs->hits[0]->obj == s2)
+	if ((*xs)->next->hit->obj == s2)
 		printf(GR"✔ xs[0].object == Sphere\n"RES);
 	else
 		return(printf(AKA"❌ xs[0].object != Sphere\n"RES));
-	if (xs->hits[1]->obj == s2)
+	if ((*xs)->hit->obj == s2)
 		printf(GR"✔ xs[1].object == Sphere\n"RES);
 	else
 		return(printf(AKA"❌ xs[1].object != Sphere\n"RES));
 	//free variables
-	free(xs->hits);
-	free(xs);
+	free_hitlist(xs);
 	//TEST 3
 	print_test_banner("hit when all inters have positive `t`");
 	print_test_number(&i);
 	printf(BOLD"_________________________________\n\n"RES);
 	i1 = intersection(1, s);
 	i2 = intersection(2, s);
-	t_hit **intersections = malloc(sizeof(t_hit *) * 3);
-	intersections[0] = i1;
-	intersections[1] = i2;
-	intersections[2] = NULL;
-	hit = find_visible_hit(intersections, 2);
-	print_intersections(intersections, 2, 1);
+
+	add_hit(xs, i2);
+	add_hit(xs, i1);
+	hit = find_visible_hit(xs);
+	printf("hit_list:\n\t%f\n\t%f\n", (*xs)->hit->t, (*xs)->next->hit->t);
 	if (hit)
 		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
 	else
 		printf(AKA"❌ no visible hit found\n"RES);
 	printf(R_B"Attention: Manual check required!\n"RES"");
 	printf(B_B"hit should be 1.0\n"RES);
-	free(i1);
-	free(i2);
-	free(intersections);
+	free_hitlist(xs);
 
 	//TEST 4
 	print_test_banner("hit when some inters have nagative `t`");
@@ -348,21 +378,17 @@ int	intersection_test(int run)
 	printf(BOLD"_________________________________\n\n"RES);
 	i1 = intersection(-1, s);
 	i2 = intersection(1, s);
-	intersections = malloc(sizeof(t_hit *) * 3);
-	intersections[0] = i1;
-	intersections[1] = i2;
-	intersections[2] = NULL;
-	hit = find_visible_hit(intersections, 2);
-	print_intersections(intersections, 2, 1);
+	add_hit(xs, i1);
+	add_hit(xs, i2);
+	hit = find_visible_hit(xs);
+	printf("hit_list:\n\t%f\n\t%f\n", (*xs)->hit->t, (*xs)->next->hit->t);
 	if (hit)
 		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
 	else
 		printf(AKA"❌ no visible hit found\n"RES);
 	printf(R_B"Attention: Manual check required!\n"RES"");
 	printf(B_B"hit should be 1.0\n"RES);
-	free(i1);
-	free(i2);
-	free(intersections);
+	free_hitlist(xs);
 
 	//TEST 5
 	print_test_banner("hit when all inters have nagative `t`");
@@ -370,21 +396,17 @@ int	intersection_test(int run)
 	printf(BOLD"_________________________________\n\n"RES);
 	i1 = intersection(-2, s);
 	i2 = intersection(-1, s);
-	intersections = malloc(sizeof(t_hit *) * 3);
-	intersections[0] = i1;
-	intersections[1] = i2;
-	intersections[2] = NULL;
-	hit = find_visible_hit(intersections, 2);
-	print_intersections(intersections, 2, 1);
+	add_hit(xs, i1);
+	add_hit(xs, i2);
+	hit = find_visible_hit(xs);
+	printf("hit_list:\n\t%f\n\t%f\n", (*xs)->hit->t, (*xs)->next->hit->t);
 	if (hit)
 		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
 	else
 		printf(GR"✔ no hit found (correct)\n"RES);
 	printf(R_B"Attention: Manual check required!\n"RES"");
 	printf(B_B"hit should be -999 (indicates no hit)\n"RES);
-	free(i1);
-	free(i2);
-	free(intersections);
+	free_hitlist(xs);
 
 	//TEST 6
 	print_test_banner("hit when unsorted array of inters");
@@ -394,26 +416,19 @@ int	intersection_test(int run)
 	i2 = intersection(7, s);
 	i3 = intersection(-3, s);
 	i4 = intersection(2, s);
-	intersections = malloc(sizeof(t_hit *) * 5);
-	intersections[0] = i1;
-	intersections[1] = i2;
-	intersections[2] = i3;
-	intersections[3] = i4;
-	intersections[4] = NULL;
-	print_intersections(intersections, 4, 0);
-	hit = find_visible_hit(intersections, 4);
-	print_intersections(intersections, 4, 1);
+	add_hit(xs, i1);
+	add_hit(xs, i2);
+	add_hit(xs, i3);
+	add_hit(xs, i4);
+	print_hitlist(xs);
+	hit = find_visible_hit(xs);
 	if (hit)
 		printf(G_B"%6s "GR"%7.1f\n"RES, "hit:", hit->t);
 	else
 		printf(AKA"❌ no visible hit found\n"RES);
 	printf(R_B"Attention: Manual check required!\n"RES"");
 	printf(B_B"hit should be 2.0\n"RES);
-	free(i1);
-	free(i2);
-	free(i3);
-	free(i4);
-	free(intersections);
+	free_hitlist(xs);
 
 	return (0);
 }
@@ -490,10 +505,11 @@ int	ray_transform_test2(int run)
 		return (0);
 //initiate variables
 	int			i = 1;
+	int			count = 0;
 	t_sphere	*s;
 	t_matrix	*t;
 	t_ray		*r;
-	t_inters	*xs;
+	t_hitlist	**xs = new_hitlist();
 	t_matrix	*identity = create_identity_matrix(4);
 
 //TEST 1
@@ -511,6 +527,8 @@ int	ray_transform_test2(int run)
 		printf(GR"✔ transf is correct\n"RES);
 	else
 		return(printf(AKA"❌ transf is incorrect\n"RES));
+	//free resources
+	free_hitlist(xs);
 //TEST 2
 	print_test_banner("Changing a sphere's transf (translation)");
 	print_test_number(&i);
@@ -535,6 +553,8 @@ int	ray_transform_test2(int run)
 		printf(GR"✔ transf is correct\n"RES);
 	else
 		return(printf(AKA"❌ transf is incorrect\n"RES));
+	//free resources
+	free_hitlist(xs);
 //TEST 3
 	print_test_banner("Intersecting a scaled sphere with a ray");
 	print_test_number(&i);
@@ -545,24 +565,27 @@ int	ray_transform_test2(int run)
 	t = scale(2, 2 ,2);
 	//run tests
 	set_transf(s, t);
-	xs = intersect(s, r);
+	intersect(s, r, xs);
 	//print output
-	printf(LILA"xs.count: "RES"%8d \t"G_B"expected: 2\n", xs->count);
-	printf(LILA"t1: "RES"%16.1f \t"G_B"expected: 3.0\n", xs->hits[0]->t);
-	printf(LILA"t2: "RES"%16.1f \t"G_B"expected: 7.0\n", xs->hits[1]->t);
+	printf(LILA"xs.count: "RES"%8d \t"G_B"expected: 2\n", count_hits(xs));
+	printf(LILA"t1: "RES"%16.1f \t"G_B"expected: 3.0\n", (*xs)->next->hit->t);
+	printf(LILA"t2: "RES"%16.1f \t"G_B"expected: 7.0\n", (*xs)->hit->t);
 	//check output
-	if (xs->count == 2)
+	count = count_hits(xs);
+	if (count == 2)
 	printf(GR"✔ xs.count == 2\n"RES);
 	else
 		return(printf(AKA"❌ xs.count != 2\n"RES));
-	if (ft_equal(xs->hits[0]->t, 3.0))
+	if (ft_equal((*xs)->next->hit->t, 3.0))
 		printf(GR"✔ t1 is correct\n"RES);
 	else
 		return(printf(AKA"❌ t1 is incorrect\n"RES));
-	if (ft_equal(xs->hits[1]->t, 7.0))
+	if (ft_equal((*xs)->hit->t, 7.0))
 		printf(GR"✔ t2 is correct\n"RES);
 	else
 		return(printf(AKA"❌ t2 is incorrect\n"RES));
+	//free resources
+	free_hitlist(xs);
 
 //TEST 4
 	print_test_banner("Intersecting a translated sphere with a ray");
@@ -574,17 +597,18 @@ int	ray_transform_test2(int run)
 	t = translate(5, 0 ,0);
 	//run tests
 	set_transf(s, t);
-	xs = intersect(s, r);
+	intersect(s, r, xs);
 	//print output
-	printf(LILA"xs.count: "RES"%8d \t"G_B"expected: 0\n", xs->count);
+	printf(LILA"xs.count: "RES"%8d \t"G_B"expected: 0\n", count_hits(xs));
 	//check output
-	if (xs->count == 0)
+	if (count_hits(xs) == 0)
 	{
 		printf(GR"✔ NO INTERSECTIONS DETECTED!\n"RES"");
 		printf(GR"✔ xs.count == 0\n"RES);
 	}
 	else
 		return(printf(AKA"❌ xs.count != 0\n"RES));
-
+	//free resources
+	free_hitlist(xs);
 	return (0);
 }

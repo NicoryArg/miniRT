@@ -32,16 +32,22 @@ void	sort_intersections(t_hit	**xs, int count)
 	}
 }
 
-t_hit	*find_visible_hit(t_hit **hits, int count)
+t_hit	*find_visible_hit(t_hitlist **list)
 {
-	int	i = 0;
+	t_hit		*min;
+	t_hitlist	*current;
 
-	sort_intersections(hits, count);
-	while (i < count && hits[i]->t < 0)
-		i++;
-	if (i < count)
-		return (hits[i]);
-	return (NULL);
+	if (!list || !*list)
+		return (NULL);
+	current = *list;
+	min = NULL;
+	while (current)
+	{
+		if (current->hit && current->hit->t > 0 && (!min || current->hit->t < min->t))
+			min = current->hit;
+		current = current->next;
+	}
+	return (min);
 }
 
 

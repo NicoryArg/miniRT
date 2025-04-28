@@ -70,14 +70,14 @@ int	default_world_test(int run)
 		ft_equal(w->light->lum.b, expected_light->lum.b))
 		printf(G_B"✔ Light is correctly initialized\n"RES);
 	else
-		printf(AKA"❌ Light does not match expected values\n"RES);
+		return(printf(AKA"❌ Light does not match expected values\n"RES));
 	free(expected_light);
 	// Check object count
 	printf("World object count: %d\n", w->object_count);
 	if (w->object_count == 2)
 		printf(G_B"✔ World has 2 objects\n"RES);
 	else
-		printf(AKA"❌ World object count is incorrect\n"RES);
+		return(printf(AKA"❌ World object count is incorrect\n"RES));
 	// Check first sphere's material
 	s1 = w->objects[0];
 	printf("First sphere material color: (%.1f, %.1f, %.1f)\n", s1->base.m.c.r, s1->base.m.c.g, s1->base.m.c.b);
@@ -86,7 +86,7 @@ int	default_world_test(int run)
 		ft_equal(s1->base.m.diffuse, 0.7) && ft_equal(s1->base.m.specular, 0.2))
 		printf(G_B"✔ First sphere material matches expected values\n"RES);
 	else
-		printf(AKA"❌ First sphere material does not match expected values\n"RES);
+		return(printf(AKA"❌ First sphere material does not match expected values\n"RES));
 	// Check second sphere’s scale (0.5, 0.5, 0.5)
 	s2 = w->objects[1];
 	expected_scale = scale(0.5, 0.5, 0.5);
@@ -97,7 +97,7 @@ int	default_world_test(int run)
 	if (equal_matrix(s2->base.transf, expected_scale))
 		printf(G_B"✔ Second sphere transform is scaled correctly\n"RES);
 	else
-		printf(AKA"❌ Second sphere transform is incorrect\n"RES);
+		return(printf(AKA"❌ Second sphere transform is incorrect\n"RES));
 	free_matrix(expected_scale);
 	free_world(w);
 	return (0);
@@ -110,28 +110,33 @@ int	intersect_world_test(int run)
 	int			i = 3;
 	t_world		*w = default_world();
 	t_ray		*r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
-	t_inters	*xs = intersect_world(w, r);
-	double		expected[] = {4.0, 4.5, 5.5, 6.0};
+	t_hitlist	**xs = new_hitlist();
+	double		expected[] = {5.5, 4.5, 6.0, 4.0};
+	int			count;
 
 	print_test_banner("Intersecting a world with a ray");
 	print_test_number(&i);
+	intersect_world(w, r, xs);
+	print_hitlist(xs);
 	// Check count
-	printf("Intersections count: %d\n", xs->count);
-	if (xs->count == 4)
+	count = count_hits(xs);
+	printf("Intersections count: %d\n", count);
+	if (count == 4)
 		printf(G_B"✔ xs.count == 4\n"RES);
 	else
 		printf(AKA"❌ xs.count != 4\n"RES);
 
-	for (int j = 0; j < xs->count; j++)
+	for (int j = 0; j < count; j++)
 	{
-		printf("xs[%d].t = %.1f (expected %.1f)\n", j, xs->hits[j]->t, expected[j]);
-		if (ft_equal(xs->hits[j]->t, expected[j]))
+		printf("xs[%d].t = %.1f (expected %.1f)\n", j, (*xs)->hit->t, expected[j]);
+		if (ft_equal((*xs)->hit->t, expected[j]))
 			printf(GR"✔ t%d is correct\n"RES, j);
 		else
 			printf(AKA"❌ t%d is incorrect\n"RES, j);
+		(*xs) = (*xs)->next;
 	}
+	free_hitlist(xs);
 	free_ray(r);
-	free_hits(xs);
 	free_world(w);
 	return (0);
 }
