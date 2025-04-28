@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hits.c                                             :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:55:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:55:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 16:07:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 16:07:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	intersect(void *obj, t_ray *ray, t_hitlist **xs)
 	 	intersect_cyl((t_cylinder *)obj, r2, xs);
 	else if (((t_object *)obj)->type == PLANE)
 		intersect_pl((t_plane *)obj, r2, xs);
+	else if (((t_object *)obj)->type == CONE)
+		intersect_cone((t_object *)obj, r2, xs);
 	free_ray(r2);
 }
 

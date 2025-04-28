@@ -24,7 +24,7 @@ static int	setup_simulation(t_projectile **p, t_environment **e)
 		return (0);
 	(*p)->position = ft_tuple(1, 1, 0, POINT);
 	velocity = ft_tuple(1, 2, 0, VECTOR);
-	(*p)->velocity = mult_tuple(normalise(velocity), 4.7);
+	(*p)->velocity = mult_tuple(normalize(velocity), 4.7);
 	(*e)->gravity = ft_tuple(0, -0.5, 0, VECTOR);
 	(*e)->wind = ft_tuple(-0.01, 0, 0, VECTOR);
 	return (1);
@@ -43,7 +43,7 @@ static t_projectile	*update_projectile(t_projectile *p, t_environment *e)
 		new_vel.y *= -0.8;
 	}
 	if (magnitude(new_vel) > WIN_SIZE)
-		new_vel = mult_tuple(normalise(new_vel), 20);
+		new_vel = mult_tuple(normalize(new_vel), 20);
 	p->position = new_pos;
 	p->velocity = new_vel;
 	return (p);

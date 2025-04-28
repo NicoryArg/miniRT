@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuples.c                                           :+:      :+:    :+:   */
+/*   main_cone.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:52 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 02:15:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 02:15:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-#include "engine.h"
+#include "tests.h"
 
-t_tuple ft_tuple(double x, double y, double z, t_tpl type)
+int	ft_main_cone(int run)
 {
-	t_tuple	tuple;
-
-	tuple.x = x;
-	tuple.y = y;
-	tuple.z = z;
-	tuple.w = type;
-	return (tuple);
-}
-
-t_tuple	normalize(t_tuple v)
-{
-	double	len;
-	t_tuple	normal;
-
-	len = magnitude(v);
-	normal.w = VECTOR;
-	normal.x = v.x/len;
-	normal.y = v.y/len;
-	normal.z = v.z/len;
-	return (normal);
+	if (run == 0)
+		return (0);
+	if (cone_intersection_test(0))
+		return (printf(AKA"❌ cone_intersection_test failed\n"RES));
+	if (cone_cap_intersection_test(1))
+		return (printf(AKA"❌ cone_cap_intersection_test failed\n"RES));
+	if (cone_normal_vector_test(1))
+		return (printf(AKA"❌ cone_normal_test failed\n"RES));
+	printf(G_B"END OF CONE TESTS\n"RES);
+	return (0);
 }

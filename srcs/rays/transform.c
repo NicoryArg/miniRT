@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays.c                                             :+:      :+:    :+:   */
+/*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:55:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:55:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 18:39:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 18:39:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
 
-void    set_transf(void *obj, t_matrix *trans)
+void	set_transf(void *obj, t_matrix *trans)
 {
 	t_object	*o;
 

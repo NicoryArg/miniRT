@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_scene_pattern.c                               :+:      :+:    :+:   */
+/*   draw_cone.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:17:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:17:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/27 05:40:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/27 05:40:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "tests.h"
 
-t_world	*scene_pattern(void)
+t_world	*scene_cone_capped(void)
 {
 	t_world		*w;
 	t_sphere	*s1;
@@ -38,6 +38,9 @@ t_world	*scene_pattern(void)
 	t_matrix	*transform;
 	t_matrix	*left_rot;
 	t_matrix	*right_rot;
+	t_cone		*cone1;
+	t_cone		*cone2;
+	t_cone		*cone3;
 	int			object_count;
 
 	object_count = 0;
@@ -66,7 +69,7 @@ t_world	*scene_pattern(void)
 	s2->base.m.pattern = pat2;
 	s2->base.m.specular = 0.3;
 	s2->base.m.diffuse = 0.7;
-	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(3, 1, -2.8));
+	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(3, 1, -3.8));
 	set_transf(s2, transform);
 	object_count++;
 
@@ -170,12 +173,49 @@ t_world	*scene_pattern(void)
 	cyl3->min = -1;
 	cyl3->max = 2;
 	cyl3->closed = true;
-	transform = multiply_matrices(scale(0.3, 0.3, 0.3), multiply_matrices( translate(1.5, 1.3, -12.8),
+	transform = multiply_matrices(scale(0.3, 0.3, 0.3), multiply_matrices( translate(1.5, 1.3, -13.8),
 	multiply_matrices(rotate_x(M_PI / 2), rotate_z(M_PI / 4))));
 	set_transf(cyl3, transform);
 	object_count++;
 
+	//red cone1
+	cone1 = ft_cone();
+	cone1->base.m.c = ft_colour(1, 0.3, 0.5);
+	cone1->base.m.diffuse = 0.7;
+	cone1->base.m.specular = 0.3;
+	cone1->min = -3;
+	cone1->max = 0;
+	cone1->closed = true;
+	transform = multiply_matrices(scale(1, 1, 1), translate(3, 1, -0.5));
 
+	set_transf((t_object *)cone1, transform);
+	printf("[cone-transformed] min: %.2f max: %.2f\n", cone1->min, cone1->max);
+	object_count++;
+
+	//blue cone2
+	cone2 = ft_cone();
+	cone2->base.m.c = ft_colour(0.2, 0.7, 1);
+	cone2->base.m.diffuse = 0.7;
+	cone2->base.m.specular = 0.3;
+	cone2->min = -2;
+	cone2->max = 0;
+	cone2->closed = true;
+	transform =  multiply_matrices(multiply_matrices(translate(-3, 1, -2),rotate_z(M_PI/4)), scale(1, 1, 1));
+	set_transf(cone2, transform);
+	object_count++;
+
+	//green cone3
+	cone3 = ft_cone();
+	cone3->base.m.c = ft_colour(0.1, 1, 0.6);
+	cone3->base.m.diffuse = 0.7;
+	cone3->base.m.specular = 0.3;
+	cone3->min = -2;
+	cone3->max = 2;
+	cone3->closed = true;
+	transform = multiply_matrices(translate(2, 0.8, -1), multiply_matrices(scale(0.7, 0.7, 0.7),
+	multiply_matrices(rotate_x(M_PI / 2), rotate_z(M_PI / 4))));
+	set_transf(cone3, transform);
+	object_count++;
 
 	// World and light
 	w = ft_world();
@@ -193,29 +233,51 @@ t_world	*scene_pattern(void)
 	w->objects[6] = &cyl1->base;
 	w->objects[7] = &cyl2->base;
 	w->objects[8] = &cyl3->base;
+	w->objects[9] = &cone1->base;
+	w->objects[10] = &cone2->base;
+	w->objects[11] = &cone3->base;
+
 	w->object_count = object_count;
 
 	return (w);
 }
 
-
-void	draw_scene_patterns_full(t_engine *engine)
+void	draw_cone(t_engine *engine)
 {
 	t_world		*w;
 	t_camera	cam;
+	t_tuple		n;
 
-	w = scene_pattern();
-	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);
+	w = scene_cone_capped();
+	n = normal_at((t_object *)w->objects[3], ft_tuple(1, 3, 0, POINT));
+	printf("Side normal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
+	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
 	cam.transf = view_transform(
-		ft_tuple(0, 2, -9, POINT),   // camera position
-		ft_tuple(0, 0, 10, POINT),   // look-at target
-		ft_tuple(0, 1, 0, VECTOR));  // up vector
-
+		ft_tuple(0, 5, -15, POINT),     // camera up and back
+		ft_tuple(0, 0, 0, POINT),      // looking at the center
+		ft_tuple(0, 1, 0, VECTOR));//up vector
+	printf("render\n");
 	render(cam, w, &engine->image);
-
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->image.img_ptr, 0, 0);
-
 	free_world(w);
 	free_matrix(cam.transf);
 }
+/*(Eye-level View)
+cam.transf = view_transform(
+	ft_tuple(0, 0, -5, POINT),     // from: camera position
+	ft_tuple(0, 0, 0, POINT),      // to: where camera is looking
+	ft_tuple(0, 1, 0, VECTOR));    // up: camera's "up" direction
+
+	(Top-down View)
+	cam.transf = view_transform(
+	ft_tuple(0, 10, 0, POINT),     // from: camera placed 10 units "above"
+	ft_tuple(0, 0, 0, POINT),      // to: looking at the origin
+	ft_tuple(0, 0, -1, VECTOR));   // up: z-axis now defines camera's "up"
+
+	(from above and behind)
+	cam.transf = view_transform(
+	ft_tuple(5, 5, -5, POINT),     // camera up and back
+	ft_tuple(0, 0, 0, POINT),      // looking at the center
+	ft_tuple(0, 1, 0, VECTOR));    // standard up
+	*/

@@ -92,7 +92,7 @@ int	test_intersect_cylinder(int run)
 	print_sub_header("ray -> origin (0,0,-5) direction (1,1,1)", &i);
 	//redefine variables
 	origin = ft_tuple(0, 0, -5, VECTOR);
-	direction = normalise(ft_tuple(1, 1, 1, VECTOR));
+	direction = normalize(ft_tuple(1, 1, 1, VECTOR));
 	ray = ft_ray(origin, direction);
 	//run test
 	intersect(cyl, ray, xs);
@@ -115,7 +115,7 @@ int	test_intersect_cylinder(int run)
 	print_sub_header("ray -> origin (1,0,-5) direction (0,0,1)", &i);
 	//redefine variables
 	origin = ft_tuple(1, 0, -5, VECTOR);
-	direction = normalise(ft_tuple(0, 0, 1, VECTOR));
+	direction = normalize(ft_tuple(0, 0, 1, VECTOR));
 	ray = ft_ray(origin, direction);
 	double t0 = 5;
 	double t1 = 5;
@@ -141,7 +141,7 @@ int	test_intersect_cylinder(int run)
 	print_sub_header("ray -> origin (0,0,-5) direction (0,0,1)", &i);
 	//redefine variables
 	origin = ft_tuple(0, 0, -5, VECTOR);
-	direction = normalise(ft_tuple(0, 0, 1, VECTOR));
+	direction = normalize(ft_tuple(0, 0, 1, VECTOR));
 	ray = ft_ray(origin, direction);
 	t0 = 4;
 	t1 = 6;
@@ -164,7 +164,7 @@ int	test_intersect_cylinder(int run)
 	print_sub_header("ray -> origin (0.5,0,-5) direction (0.1,1,1)", &i);
 	//redefine variables
 	origin = ft_tuple(0.5, 0, -5, VECTOR);
-	direction = normalise(ft_tuple(0.1, 1, 1, VECTOR));
+	direction = normalize(ft_tuple(0.1, 1, 1, VECTOR));
 	ray = ft_ray(origin, direction);
 	t0 = 6.80798;
 	t1 = 7.08872;
@@ -336,7 +336,7 @@ int	test_truncate_cylinder(int run)
 	print_sub_header("ray -> origin (0, 1.5, 0) direction (0.1, 1, 0)", &i);
 	//redefine variables
 	origin = ft_tuple(0, 1.5, 0, VECTOR);
-	direction = normalise(ft_tuple(0.1, 1, 0, VECTOR));
+	direction = normalize(ft_tuple(0.1, 1, 0, VECTOR));
 	ray = ft_ray(origin, direction);
 	int		count = 0;
 	//run test
@@ -357,7 +357,7 @@ int	test_truncate_cylinder(int run)
 	print_sub_header("ray -> origin (0, 3, -5) direction (0, 0, 1)", &i);
 	//redefine variables
 	origin = ft_tuple(0, 3, -5, VECTOR);
-	direction = normalise(ft_tuple(0, 0, 1, VECTOR));
+	direction = normalize(ft_tuple(0, 0, 1, VECTOR));
 	ray = ft_ray(origin, direction);
 	count = 0;
 	//run test

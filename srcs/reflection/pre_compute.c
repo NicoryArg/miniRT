@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:25:00 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 23:22:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 02:16:07 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 02:16:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,10 @@ bool	is_shadowed(t_world *w, t_tuple point)
 
 	lightv = diff_tuple(w->light->pos, point);
 	light_distance = magnitude(lightv);
-	direction = normalise(lightv);
+	direction = normalize(lightv);
 	r = ft_ray(point, direction);
 	return (check_shadow_hit(w, r, light_distance));
 }
-
 
 /**
  * @brief Computes the color at the point of intersection.

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:00:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:00:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 08:42:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 08:42:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_tuple t_tuple;
 # include "minirt.h"
-
+# include "pthread.h"
 
 typedef struct s_image
 {
@@ -36,6 +36,12 @@ typedef struct s_engine
 	void		*mlx;
 	void		*window;
 	t_image		image;
+	int			offset_x;
+	int			offset_y;
+	float		zoom;
+	int			mouse_pressed;
+	int			last_mouse_x;
+	int			last_mouse_y;
 }	t_engine;
 
 typedef struct	s_data
@@ -46,6 +52,56 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 }				t_data;
+
+
+typedef struct	s_progress
+{
+	int					lines_rendered;
+	int					current_y;
+	int					total_lines;
+	pthread_mutex_t		mutex;
+}	t_progress;
+
+typedef struct	s_render_thread
+{
+	t_camera		cam;
+	t_world			*world;
+	t_image			*image;
+	int				start_y;
+	int				end_y;
+	t_progress		*progress;
+}	t_render_thread;
+
+typedef struct s_render_launch
+{
+	t_camera		cam;
+	t_world			*world;
+	t_image			*img;
+	t_progress		*progress;
+	int				thread_count;
+}	t_render_launch;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
+typedef struct s_scale_info
+{
+	char	*dst_addr;
+	int		dst_line_len;
+	int		dst_bits;
+	float	zoom;
+}	t_scale_info;
+
+typedef struct s_zoom_data
+{
+	float	zoom_factor;
+	float	limit;
+	int		is_zoom_in;
+}	t_zoom_data;
+
 
 //#############################################
 //################# DRAW ######################
@@ -76,8 +132,26 @@ void	display_help_message(t_engine *engine);
 void	put_pixel(t_image *img, int x, int y, int color);
 void	draw_marker(t_image *img, int x, int y, int color, int marker_size);
 
+//handle_hooks.c
+void	copy_pixel(t_engine *engine, t_point p, t_scale_info info);
+void	scale_image(t_engine *engine, void *zoomed_img, float zoom);
+void	redraw_image(t_engine *engine);
+void	setup_hooks(t_engine *engine);
+
+//handle_mouse.c
+int		mouse_release(int button, int x, int y, t_engine *engine);
+void	apply_zoom(t_engine *engine, int x, int y, t_zoom_data zoom);
+int		mouse_press(int button, int x, int y, t_engine *engine);
+int		mouse_move(int x, int y, t_engine *engine);
+int		mouse_hook(int button, int x, int y, t_engine *engine);
+
+//handle_bar.c
+void	draw_zoom_bar(t_engine *engine);
+
+//key_hook.c
+int		key_hook(int keycode, t_engine *engine);
+
 //make_engine.c
-int		on_key_hook_event(int key, t_engine *engine);
 void	init_engine(t_engine *engine);
 
 //main.c
@@ -112,17 +186,37 @@ void	draw_world_with_shadows(t_engine *engine);
 //draw_world.c
 void	draw_world(t_engine *engine);
 
+//#############################################
+//################## VIEW #####################
+//#############################################
+//render_threads.c
+int			grab_next_block(t_render_thread *ctx, int *y_start,
+				int *y_end, int block_size);
+void		render_line(t_render_thread *ctx, int y);
+void		*render_section(void *arg);
+t_image		*render(t_camera cam, t_world *world, t_image *img);
+
+//thread_utils.c
+int			get_cpu_count(void);
+int			auto_block_size(int image_height);
+void		create_threads(pthread_t *threads, t_render_thread *args,
+				t_render_launch *ctx);
+void		join_threads(pthread_t *threads, int thread_count);
 
 //#############################################
 //################## UTILS ####################
 //#############################################
 //messages.c
-void	put_help_text(t_engine *engine, int *y, char *text);
-void	display_help_message(t_engine *engine);
-void	malloc_err(char *func_name);
+void		put_help_text(t_engine *engine, int *y, char *text);
+void		display_help_message(t_engine *engine);
+void		malloc_err(char *func_name);
 
-t_image		*render(t_camera cam, t_world *world, t_image *img);
-void	init_engine_world(t_engine *engine);
+int key_hook(int keycode, t_engine *engine);
+int mouse_hook(int button, int x, int y, t_engine *engine);
+void redraw_image(t_engine *engine);
+void setup_hooks(t_engine *engine);
+
+
 
 #define WALL_Z 5
 #define WALL_SIZE 7

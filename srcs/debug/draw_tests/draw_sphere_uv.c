@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:07:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:08:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 18:20:13 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 18:20:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	compute_color(void *sph, t_ray *ray, t_light *l)
 {
-	t_hitlist	*xs;
+	t_hitlist 	*xs = NULL;
 	t_hit		*hit;
 	t_tuple		pt;
 	t_colour	c;
@@ -37,7 +37,7 @@ static int	compute_color(void *sph, t_ray *ray, t_light *l)
 	}
 	else
 		c = ft_colour(0, 0, 0);
-	free_hitlist(&xs);
+	free_hitlists(xs);
 	return (convert_colour_to_int(c));
 }
 
@@ -82,33 +82,36 @@ void	draw_sphere_uv(t_engine *engine)
 	ctx.sph->centre = ft_tuple(0, 0, 0, POINT);
 	ctx.sph->base.m = ft_material();
 
-	// 🎨 Pattern: clean concentric rings
+	// 🎨 UV Pattern: checkerboard wrapping the sphere
 	pattern = malloc(sizeof(t_pattern));
-	pattern->type = PATTERN_UV_CHECKERS;
-	pattern->a = ft_colour(1, 0.2, 1); // Magenta
-	pattern->b = ft_colour(1, 1, 0);   // Yellow
-	pattern->width = 12;
-	pattern->height = 12;
-	// 💡 Scale X and Z to compress the rings
-	pattern->transform = create_identity_matrix(4);
+	*pattern = uv_gradient_pattern(                        // 🔁 change this to uv_stripe_pattern(), uv_gradient_pattern(), uv_checkers_pattern().
+		ft_colour(1, 0.2, 1),                              // Magenta
+		ft_colour(1, 1, 0),                                // Yellow
+		12, 12);                                           // width x height tiles
+	pattern->transform = create_identity_matrix(4);        // no transformation for UV mapping
 	ctx.sph->base.m.pattern = pattern;
+
 	// 💎 Material
 	ctx.sph->base.m.ambient = 0.1;
 	ctx.sph->base.m.diffuse = 0.9;
 	ctx.sph->base.m.specular = 0.9;
 	ctx.sph->base.m.shininess = 200.0;
+
 	// 🌀 Sphere transformation: rotate for nice perspective
 	rot = multiply_matrices(rotate_y(M_PI / 6), rotate_x(M_PI / 8));
-	scale_mat = scale(1.0, 1.0, 1.0); // optional identity scale
+	scale_mat = scale(1.0, 1.0, 1.0);
 	transform = multiply_matrices(rot, scale_mat);
-	translate_mat = translate(0, 0, 0); // no translation
+	translate_mat = translate(0, 0, 0);
 	final_transform = multiply_matrices(translate_mat, transform);
 	set_transf(ctx.sph, final_transform);
+
 	// 📷 Camera setup
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
+
 	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
 	render_sphere_loop(&ctx, &engine->image, light);
-	free_sphere(ctx.sph);
+
+	free_sphere(ctx.sph); // also frees pattern and matrix inside
 	free(light);
 }

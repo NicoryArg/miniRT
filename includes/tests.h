@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 18:24:48 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 18:24:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/27 05:40:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/27 05:40:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		print_test_banner(const char *word);
 void		print_test_number(int *i);
 void		print_sub_header(const char *word, int *i);
 void		print_intersections(t_hit **xs, int count, int sorted);
-void		print_progress_bar(int y, int total);
 void		print_hitlist(t_hitlist **xs);
 
 // void		print_rs(t_ray_sphere *rs);//	obsolete
@@ -63,6 +62,12 @@ int			draw_circle(int run);
 void		draw_clock_scene(t_engine *engine);
 int			draw_hour_markers(int run);
 
+//draw_cone.c
+void		draw_cone(t_engine *engine);
+
+//draw_cone_scene.c
+void		draw_icecream(t_engine *engine);
+
 //draw cylinders
 void		draw_cyl_infinite(t_engine *engine);
 void		draw_cyl_truncated(t_engine *engine);
@@ -76,7 +81,7 @@ void		draw_trajectory_scene(t_engine *engine);
 int			draw_trajectory(int run);
 
 //draw_scene_pattern.c
-void		draw_patterns(t_engine *engine);
+void		draw_scene_patterns_full(t_engine *engine);
 
 //draw_silhouette.c
 void		draw_silhouette(t_engine *engine);
@@ -109,6 +114,11 @@ t_ray		*create_ray_to_point(t_tuple origin, t_tuple target);
 //#############################################
 //################## TESTS ####################
 //#############################################
+
+//test_cone.c
+int			cone_intersection_test(int run);
+int			cone_cap_intersection_test(int run);
+int			cone_normal_vector_test(int run);
 
 //test_normal_at.c
 int			normal_at_test(int run);
@@ -187,6 +197,8 @@ int			camera_test(int run);
 //#############################################
 //################## MAIN #####################
 //#############################################
+//main_cone.c
+int			ft_main_cone(int run);
 //main_cyl.c
 int			ft_main_cylinder(int run);
 //main_patterns.c
@@ -207,13 +219,14 @@ int			ft_main_draw_world_shadows(int run);
 int			ft_main_draw_world_planes(int run);
 int			ft_main_draw_infinite_cylinders(int run);
 int			ft_main_draw_truncated_cylinders(int run);
-int			ft_main_draw_capped_cylinders(int run);
-int			ft_main_draw_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
 int			ft_main_draw_sphere_uv(int run);
 int			ft_main_draw_sphere_nested(int run);
 int			ft_main_draw_scene_nested(int run);
-
+int			ft_main_draw_capped_cylinders(int run);
+int			ft_main_draw_scene_patterns_full(int run);
+int			ft_main_draw_cone(int run);
+int			ft_main_draw_icecream(int run);
 
 //main_transform.c
 int			ft_main_transform(int run);

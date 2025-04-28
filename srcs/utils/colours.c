@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:02:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:02:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 05:47:41 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 05:47:56 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	convert_colour_to_int(t_colour col)
 	int	g;
 	int	b;
 
-	r = ft_min(ft_max(col.r * 255, 0), 255);
-	g = ft_min(ft_max(col.g * 255, 0), 255);
-	b = ft_min(ft_max(col.b * 255, 0), 255);
+	r = fmin(fmax(col.r * 255, 0), 255);
+	g = fmin(fmax(col.g * 255, 0), 255);
+	b = fmin(fmax(col.b * 255, 0), 255);
 	return (r << 16 | g << 8 | b);
 }

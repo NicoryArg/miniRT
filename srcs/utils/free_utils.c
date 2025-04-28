@@ -49,6 +49,19 @@ void	free_sphere(t_sphere *sphere)
 	free(sphere);
 }
 
+void	free_hitlists(t_hitlist *xs)
+{
+	t_hitlist	*tmp;
+
+	while (xs)
+	{
+		tmp = xs->next;
+		free(xs->hit);
+		free(xs);
+		xs = tmp;
+	}
+}
+
 void	free_hits(t_inters *xs)
 {
 	int	i;

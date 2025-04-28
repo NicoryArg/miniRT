@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:09 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/24 00:58:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/24 00:58:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_tuple	ft_world_normal(t_matrix *inverse, t_tuple local_normal)
 	free_matrix(transposed_inverse);
 	free_matrix(local_n_mtx);
 	free_matrix(world_normal_mtx);
-	return (normalise(world_normal));
+	return (normalize(world_normal));
 }
 
 t_tuple	ft_local_point(t_matrix *inverse, t_tuple world_point)
@@ -85,5 +85,7 @@ t_tuple	local_normal_at(void *shape, t_tuple local_p)
 		normal = ft_tuple(0, 1, 0, VECTOR);
 	else if (obj->type == CYLINDER)
 		normal = local_normal_at_cyl((t_cylinder *)shape, local_p);
+	else if (obj->type == CONE)
+		normal = normal_at_cone((t_object *)shape, local_p);
 	return (normal);
 }
