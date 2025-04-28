@@ -54,6 +54,7 @@ MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_ray
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
+PARSE_FILES			= $(addprefix parse/, check_file.c check_input.c validate_and_load.c )
 PATTERNS_FILES		= $(addprefix patterns/, patterns.c type_patterns.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c)
@@ -69,7 +70,7 @@ VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c)
 SRC_FILES		= 	$(MATRIX_FILES) $(PATTERNS_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(DRAW_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
-					$(REFLECTION_FILES) $(VIEW_FILES)
+					$(REFLECTION_FILES) $(VIEW_FILES) $(PARSE_FILES)
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
 
@@ -120,6 +121,7 @@ $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)/main
 	@$(MKDIR) $(OBJS_DIR)/make_engine
 	@$(MKDIR) $(OBJS_DIR)/matrices
+	@$(MKDIR) $(OBJS_DIR)/parse
 	@$(MKDIR) $(OBJS_DIR)/patterns
 	@$(MKDIR) $(OBJS_DIR)/rays
 	@$(MKDIR) $(OBJS_DIR)/reflection
