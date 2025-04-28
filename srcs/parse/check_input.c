@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:42:06 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/28 17:36:09 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/28 17:54:20 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_input(char *file)
 
 	if (grab_input(file, &input))
 		return (-1);
-	if ()
+	// if ()
 	printf("%s", input);
 	return (0);
 }
