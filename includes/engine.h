@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 08:42:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/26 08:42:30 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 18:54:16 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 18:55:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,14 @@ void	draw_world_with_shadows(t_engine *engine);
 void	draw_world(t_engine *engine);
 
 //#############################################
-//################## VIEW #####################
+//################ RENDER #####################
 //#############################################
+//bonus_render.c
+t_image	*render(t_camera cam, t_world *world, t_image *img);
+
+//normal_render.c
+t_image	*render(t_camera cam, t_world *world, t_image *img);
+
 //render_threads.c
 int			grab_next_block(t_render_thread *ctx, int *y_start,
 				int *y_end, int block_size);

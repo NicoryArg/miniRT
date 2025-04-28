@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:45:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:22:52 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 18:51:13 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 18:51:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_capped_cylinders failed\n"RES));
 	if (ft_main_draw_cone(0))
 		return (printf(AKA"❌ draw_cone failed\n"RES));
-	if (ft_main_draw_icecream(0))
+	if (ft_main_draw_icecream(1))
 		return (printf(AKA"❌ draw_icecream failed\n"RES));
-	if (ft_main_draw_scene_patterns_full(1))
+	if (ft_main_draw_scene_patterns_full(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);

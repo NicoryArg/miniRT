@@ -9,8 +9,11 @@ MAGENTA  		= "\033[35m"    # Magenta
 CYAN     		= "\033[36m"    # Cyan
 WHITE    		= "\033[37m"    # White
 
-# Compiler
+# Program names
 NAME			= miniRT
+BONUS_NAME		= miniRT_bonus
+
+# Compiler
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror #-g3 -fsanitize=address
 # - g3: Include debugging information
@@ -65,27 +68,39 @@ TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c 
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
 UTILS_FILES			= $(addprefix utils/, colours.c free_utils.c messages.c ft_utils.c)
-VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c render_threads.c threads_utils.c view_transform.c)
+VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c )
 
+# Normal (mandatory) rendering
+NORMAL_RENDER_FILES = render/normal_render.c
+
+# Bonus (threaded) rendering
+RENDER_THREADS_FILES = render/render_threads.c
+THREADS_UTILS_FILES  = render/threads_utils.c
+BONUS_RENDER_FILES   = render/bonus_render.c
 
 SRC_FILES		= 	$(MATRIX_FILES) $(PATTERNS_FILES) $(TUPLE_FILES) $(DEBUG_FILES) $(DRAW_FILES) $(TEST_FILES) \
 					$(MAIN_FILES) $(ENGINE_FILES) $(TRANSFORM_FILES) \
 					$(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
-					$(REFLECTION_FILES) $(VIEW_FILES) $(PARSE_FILES)
+					$(REFLECTION_FILES) $(VIEW_FILES) $(PARSE_FILES) $(NORMAL_RENDER_FILES)
 
+BONUS_SRC_FILES		= $(MATRIX_FILES) $(PATTERNS_FILES) $(TUPLE_FILES) $(DEBUG_FILES) \
+					$(DRAW_FILES) $(TEST_FILES) $(MAIN_FILES) $(ENGINE_FILES) \
+					$(TRANSFORM_FILES) $(RAYS_FILES) $(SCENE_FILES) $(UTILS_FILES) \
+					$(REFLECTION_FILES) $(VIEW_FILES) $(PARSE_FILES) \
+					$(RENDER_THREADS_FILES) $(THREADS_UTILS_FILES) \
+					$(BONUS_RENDER_FILES)
+
+# Full paths
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
-
+BONUS_SRCS		= $(addprefix $(SRCS_DIR), $(BONUS_SRC_FILES))
 
 
 # Objects
 OBJS_DIR		= objs/
 OBJ_FILES		= $(SRC_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
+BONUS_OBJS		= $(addprefix $(OBJS_DIR), $(BONUS_SRC_FILES:.c=.o))
 
-# Objects
-OBJS_DIR		= objs/
-OBJ_FILES		= $(SRC_FILES:.c=.o)
-OBJS			= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
 
 # Platform-dependent compilation
 ifeq ($(OS), Linux)
@@ -126,6 +141,7 @@ $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)/patterns
 	@$(MKDIR) $(OBJS_DIR)/rays
 	@$(MKDIR) $(OBJS_DIR)/reflection
+	@$(MKDIR) $(OBJS_DIR)/render
 	@$(MKDIR) $(OBJS_DIR)/scene
 	@$(MKDIR) $(OBJS_DIR)/transformations
 	@$(MKDIR) $(OBJS_DIR)/tuple
@@ -143,6 +159,18 @@ $(NAME) : $(OBJS) Makefile
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(INCLUDES)
 	@$(CC) $(CFLAGS) $(INCLUDES_FLAG) -c $< -o $@
 
+# Bonus target
+bonus : $(LIBFT) $(MLX) $(OBJS_DIR) $(BONUS_NAME)
+
+$(BONUS_NAME) : $(BONUS_OBJS) Makefile
+	@echo $(CYAN) " - Compiling $(BONUS_NAME)..." $(RESET)
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LINKER) -lm -o $(BONUS_NAME)
+	@echo $(GREEN) " - "$(BONUS_NAME)" Ready!" $(RESET)
+
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(INCLUDES)
+	@$(CC) $(CFLAGS) $(INCLUDES_FLAG) -c $< -o $@
+
+
 #Clean Targets
 #Removes Objects Files
 clean :
@@ -152,7 +180,7 @@ clean :
 
 #Removes Objects files, the executable, and cleans the libraries
 fclean : clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS_NAME)
 	@$(MAKE) $(MLX_DIR) clean > /dev/null 2>&1;
 	@$(MAKE) $(LIBFT_DIR) fclean
 	@echo $(GREEN) " - Fully Cleaned!" $(RESET)
@@ -160,4 +188,4 @@ fclean : clean
 re: fclean all
 
 #Declares targets that are not actual files, ensuring they run regardless of file status.
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
