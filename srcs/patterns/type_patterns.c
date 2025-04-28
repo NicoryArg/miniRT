@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 14:23:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 14:25:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 17:01:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 17:11:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_pattern	stripe_pattern(t_colour a, t_colour b)
 	p.type = PATTERN_STRIPE;
 	p.a = a;
 	p.b = b;
+	p.a_pattern = NULL;
+	p.b_pattern = NULL;
 	p.transform = create_identity_matrix(4);
 	p.frequency = 10.0;
 	return (p);
@@ -42,20 +44,34 @@ t_pattern	stripe_pattern(t_colour a, t_colour b)
  * @param point A point in pattern space.
  * @return Color A or B depending on the x-position.
  *
- * The pattern alternates between color A and B every 1/frequency units along the x-axis.
+ * The pattern alternates between color A
+ *  and B every 1/frequency units along the x-axis.
  */
 t_colour	stripe_at(t_pattern *pattern, t_tuple point)
 {
 	double	freq;
+	int		stripe_index;
+
 	if (pattern->frequency > 0)
 		freq = pattern->frequency;
 	else
 		freq = 1.0;
-	if ((int)ft_floor(point.x * freq) % 2 == 0)
+	stripe_index = (int)floor(point.x * freq);
+	if (stripe_index % 2 == 0)
+	{
+		if (pattern->a_pattern)
+			return (pattern_colour_at(pattern->a_pattern, point));
 		return (pattern->a);
+	}
 	else
+	{
+		if (pattern->b_pattern)
+			return (pattern_colour_at(pattern->b_pattern, point));
 		return (pattern->b);
+	}
 }
+
+
 
 /**
  * @brief Returns a gradient color between two base colors.
@@ -73,7 +89,7 @@ t_colour	gradient_at(t_pattern *pattern, t_tuple point)
 	double		fraction;
 
 	distance = diff_colours(pattern->b, pattern->a);
-	fraction = point.x - ft_floor(point.x);
+	fraction = point.x - floor(point.x);
 	return (add_colours(pattern->a, mult_colour(distance, fraction)));
 }
 
@@ -84,20 +100,24 @@ t_colour	gradient_at(t_pattern *pattern, t_tuple point)
  * @param point A point in pattern space (typically object-local space).
  * @return Color A or B depending on the ring index.
  *
- * This pattern creates concentric rings (circles) using the distance from the origin
- * in the XZ plane. The frequency determines how many rings appear per unit of distance.
+ * This pattern creates concentric rings (circles) using
+ * the distance from the origin
+ * in the XZ plane. The frequency determines how many rings
+ * appear per unit of distance.
  *
- * ring_offset is a small value added to avoid the center always rendering as a solid color.
- * frequency controls the number of rings per unit — higher = more tightly packed rings.
+ * ring_offset is a small value added to avoid the center always
+ * rendering as a solid color.
+ * frequency controls the number of rings per unit — higher = more
+ * tightly packed rings.
  */
 t_colour	ring_at(t_pattern *pattern, t_tuple point)
 {
-	double	dist;
-	int		ring_index;
-	double	ring_offset;
-	double	freq; // number of rings per unit distance
+	double		dist;
+	int			ring_index;
+	double		ring_offset;
+	double		freq;
 
-	ring_offset = 0.01; // shifts the center to avoid flat color
+	ring_offset = 0.01;
 	if (pattern->frequency > 0)
 		freq = pattern->frequency;
 	else
@@ -106,9 +126,17 @@ t_colour	ring_at(t_pattern *pattern, t_tuple point)
 	dist += ring_offset;
 	ring_index = (int)floor(dist * freq);
 	if (ring_index % 2 == 0)
+	{
+		if (pattern->a_pattern)
+			return (pattern_colour_at(pattern->a_pattern, point));
 		return (pattern->a);
+	}
 	else
+	{
+		if (pattern->b_pattern)
+			return (pattern_colour_at(pattern->b_pattern, point));
 		return (pattern->b);
+	}
 }
 
 /**
@@ -123,17 +151,26 @@ t_colour	ring_at(t_pattern *pattern, t_tuple point)
  */
 t_colour	checkers_at(t_pattern *pattern, t_tuple point)
 {
-	int		sum;
-	double	freq;
+	int			sum;
+	double		freq;
 
-	if(pattern->frequency > 0)
+	if (pattern->frequency > 0)
 		freq = pattern->frequency;
 	else
 		freq = 1.0;
-	sum = (int)(ft_floor(point.x * freq) + ft_floor(point.y * freq) + ft_floor(point.z * freq));
+	sum = (int)(floor(point.x * freq)
+			+ floor(point.y * freq)
+			+ floor(point.z * freq));
 	if (sum % 2 == 0)
+	{
+		if (pattern->a_pattern)
+			return (pattern_colour_at(pattern->a_pattern, point));
 		return (pattern->a);
+	}
 	else
+	{
+		if (pattern->b_pattern)
+			return (pattern_colour_at(pattern->b_pattern, point));
 		return (pattern->b);
+	}
 }
-

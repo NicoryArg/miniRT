@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:18:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:37:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 18:24:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 18:24:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,15 @@ void		draw_silhouette(t_engine *engine);
 
 //draw_sphere_pattern.c
 void		draw_sphere_pattern(t_engine *engine);
+
+//draw_spehere_uv.c
+void		draw_sphere_uv(t_engine *engine);
+
+//draw_sphere_nested.c
+void		draw_sphere_nested(t_engine *engine);
+
+//draw_scene_nested.c
+void		draw_scene_nested(t_engine *engine);
 
 //draw_sphere.c
 void		draw_sphere(t_engine *engine);
@@ -201,6 +210,9 @@ int			ft_main_draw_truncated_cylinders(int run);
 int			ft_main_draw_capped_cylinders(int run);
 int			ft_main_draw_patterns(int run);
 int			ft_main_draw_sphere_pattern(int run);
+int			ft_main_draw_sphere_uv(int run);
+int			ft_main_draw_sphere_nested(int run);
+int			ft_main_draw_scene_nested(int run);
 
 
 //main_transform.c

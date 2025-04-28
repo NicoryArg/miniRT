@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:18:13 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:18:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/20 14:42:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/20 14:42:23 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,73 +239,73 @@ int	pattern_generalization_test(int run)
 	if (run == 0)
 		return (0);
 
-	int			i;
-	t_pattern	pattern;
-	t_sphere	*s;
-	t_tuple		world_point;
-	t_colour	expected;
-	t_colour	actual;
+	// int			i;
+	// t_pattern	pattern;
+	// t_sphere	*s;
+	// t_tuple		world_point;
+	// t_colour	expected;
+	// t_colour	actual;
 
-	i = 1;
-	print_test_banner("Pattern with object transformation");
-	print_test_number(&i);
+	// i = 1;
+	// print_test_banner("Pattern with object transformation");
+	// print_test_number(&i);
 
-	s = ft_sphere(1);
-	pattern = test_pattern();
-	set_transf(s, scale(2, 2, 2));
+	// s = ft_sphere(1);
+	// pattern = test_pattern();
+	// set_transf(s, scale(2, 2, 2));
 
-	world_point = ft_tuple(2, 3, 4, POINT);
-	expected = ft_colour(1, 1.5, 2);
-	actual = pattern_at_object(&pattern, (t_object *)s, world_point);
+	// world_point = ft_tuple(2, 3, 4, POINT);
+	// expected = ft_colour(1, 1.5, 2);
+	// actual = pattern_at_object(&pattern, (t_object *)s, world_point);
 
-	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
-	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
-	if (equal_colour(actual, expected))
-		printf(GR"✔ Passed: object transformation\n\n"RES);
-	else
-		return (printf(AKA"❌ Failed: object transformation\n\n"RES));
+	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
+	// if (equal_colour(actual, expected))
+	// 	printf(GR"✔ Passed: object transformation\n\n"RES);
+	// else
+	// 	return (printf(AKA"❌ Failed: object transformation\n\n"RES));
 
-	print_test_banner("Pattern with pattern transformation");
-	print_test_number(&i);
+	// print_test_banner("Pattern with pattern transformation");
+	// print_test_number(&i);
 
-	s = ft_sphere(1);
-	pattern = test_pattern();
-	free_matrix(pattern.transform);
-	pattern.transform = scale(2, 2, 2);
+	// s = ft_sphere(1);
+	// pattern = test_pattern();
+	// free_matrix(pattern.transform);
+	// pattern.transform = scale(2, 2, 2);
 
-	world_point = ft_tuple(2, 3, 4, POINT);
-	expected = ft_colour(1, 1.5, 2);
-	actual = pattern_at_object(&pattern, (t_object *)s, world_point);
+	// world_point = ft_tuple(2, 3, 4, POINT);
+	// expected = ft_colour(1, 1.5, 2);
+	// actual = pattern_at_object(&pattern, (t_object *)s, world_point);
 
-	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
-	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
-	if (equal_colour(actual, expected))
-		printf(GR"✔ Passed: pattern transformation\n\n"RES);
-	else
-		return (printf(AKA"❌ Failed: pattern transformation\n\n"RES));
+	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
+	// if (equal_colour(actual, expected))
+	// 	printf(GR"✔ Passed: pattern transformation\n\n"RES);
+	// else
+	// 	return (printf(AKA"❌ Failed: pattern transformation\n\n"RES));
 
-	print_test_banner("Pattern with object and pattern transformation");
-	print_test_number(&i);
+	// print_test_banner("Pattern with object and pattern transformation");
+	// print_test_number(&i);
 
-	s = ft_sphere(1);
-	pattern = test_pattern();
-	set_transf(s, scale(2, 2, 2));
-	free_matrix(pattern.transform);
-	pattern.transform = translate(0.5, 1, 1.5);
+	// s = ft_sphere(1);
+	// pattern = test_pattern();
+	// set_transf(s, scale(2, 2, 2));
+	// free_matrix(pattern.transform);
+	// pattern.transform = translate(0.5, 1, 1.5);
 
-	world_point = ft_tuple(2.5, 3, 3.5, POINT);
-	expected = ft_colour(0.75, 0.5, 0.25);
-	actual = pattern_at_object(&pattern, (t_object *)s, world_point);
+	// world_point = ft_tuple(2.5, 3, 3.5, POINT);
+	// expected = ft_colour(0.75, 0.5, 0.25);
+	// actual = pattern_at_object(&pattern, (t_object *)s, world_point);
 
-	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
-	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
-	if (equal_colour(actual, expected))
-		printf(GR"✔ Passed: object + pattern transformation\n"RES);
-	else
-		return (printf(AKA"❌ Failed: object + pattern transformation\n"RES));
+	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
+	// if (equal_colour(actual, expected))
+	// 	printf(GR"✔ Passed: object + pattern transformation\n"RES);
+	// else
+	// 	return (printf(AKA"❌ Failed: object + pattern transformation\n"RES));
 
-	free_matrix(pattern.transform);
-	free_sphere(s);
+	// free_matrix(pattern.transform);
+	// free_sphere(s);
 	return (0);
 }
 

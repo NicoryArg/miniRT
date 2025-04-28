@@ -42,8 +42,9 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 SRCS_DIR			= srcs/
 DEBUG_FILES			= $(addprefix debug/, print.c)
 DRAW_FILES			= $(addprefix debug/draw_tests/, draw_circle.c draw_clock.c draw_projectile.c \
-									draw_scene_pattern.c draw_silhouette.c draw_sphere.c draw_sphere_pattern.c\
-									draw_world_shadow.c draw_world.c draw_utils.c draw_planes.c\
+									draw_scene_pattern.c draw_silhouette.c draw_sphere_pattern.c \
+									draw_sphere.c draw_sphere_uv.c draw_world_shadow.c draw_world.c \
+									draw_sphere_nested.c draw_scene_nested.c draw_utils.c draw_planes.c \
 									draw_cyl_infinite.c draw_cyl_truncated.c draw_cyl_capped.c)
 TEST_FILES			= $(addprefix debug/tests/, test_rays.c test_normal_at.c test_patterns.c test_transform.c \
 									test_tuples.c test_phong.c test_world.c view_transform_test.c \
@@ -55,7 +56,7 @@ ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engin
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
 PARSE_FILES			= $(addprefix parse/, check_file.c check_input.c validate_and_load.c )
-PATTERNS_FILES		= $(addprefix patterns/, patterns.c type_patterns.c)
+PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c type_patterns.c uv_mapping.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)
