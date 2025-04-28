@@ -60,7 +60,7 @@ RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c intersect_cone_caps.c intersect_cone.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)
 SCENE_FILES			= $(addprefix scene/, world.c objects.c)
-TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c)
+TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c rodrigues.c)
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
 UTILS_FILES			= $(addprefix utils/, colours.c free_utils.c messages.c ft_utils.c)

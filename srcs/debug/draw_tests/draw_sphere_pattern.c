@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 14:25:53 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/20 14:28:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 17:53:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 17:53:09 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	compute_color(void *sph, t_ray *ray, t_light *l)
 	}
 	else
 		c = ft_colour(0, 0, 0);
-	free_hitlists(xs);
+	free_hitlist(&xs);
 	return (convert_colour_to_int(c));
 }
 
