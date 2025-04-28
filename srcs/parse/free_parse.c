@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   free_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 17:17:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/28 19:00:14 by ameechan         ###   ########.fr       */
+/*   Created: 2025/04/28 18:54:19 by ameechan          #+#    #+#             */
+/*   Updated: 2025/04/28 18:56:52 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "../../includes/minirt.h"
 
-# define MAX_FILE 10240
-# define MAX_LINE_LEN 51
+void	free_array(char **array)
+{
+	int	i;
 
-//check_file.c
-int		check_file(int ac, char **av);
-
-//check_input.c
-int		check_input(char *file);
-
-//free_parse.c
-void	free_array(char **array);
-
-//validate_and_load.c
-int		validate_and_load(int ac, char **av);
-
-#endif
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	array = NULL;
+}

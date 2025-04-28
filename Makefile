@@ -54,7 +54,7 @@ MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_ray
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c draw_pixel.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
-PARSE_FILES		= $(addprefix parse/, check_file.c check_input.c validate_and_load.c )
+PARSE_FILES		= $(addprefix parse/, free_parse.c check_file.c check_input.c validate_and_load.c )
 PATTERNS_FILES		= $(addprefix patterns/, patterns.c )
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c)
