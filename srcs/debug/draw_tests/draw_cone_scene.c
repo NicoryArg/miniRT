@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cone_scene.c                                  :+:      :+:    :+:   */
+/*   draw_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 06:00:20 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/27 06:00:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:18:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:18:52 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ t_world	*scene_icecream(void)
 
 	// Create world
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
 	w->objects = malloc(sizeof(t_object *) * object_count);
 	if (!w->objects)
 		return (NULL);

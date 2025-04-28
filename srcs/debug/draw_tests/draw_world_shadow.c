@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:05:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:05:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:27:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:43:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static t_world	*shadow_scene(void)
 	t_matrix	*transform;
 
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	t_light *l1 = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)); // White light on left
+	t_light *l2 = ft_light(ft_tuple(10, 0, -10, POINT), ft_colour(1, 1, 1));  // White light on right
+
+	add_light_to_world(w, l1);
+	add_light_to_world(w, l2);
 	s1 = ft_sphere(1);
 	s1->base.m.c = ft_colour(0.1, 1, 0.5);
 	s1->base.m.diffuse = 0.7;

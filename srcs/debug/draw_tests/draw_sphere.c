@@ -133,7 +133,8 @@ void	draw_sphere(t_engine *engine)
 // 	t_matrix	*transform;
 
 // 	w = ft_world();
-// 	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+// 	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+
 // 	s1 = ft_sphere(1);
 // 	s1->base.m.c = ft_colour(0.1, 1, 0.5);
 // 	s1->base.m.diffuse = 0.7;
