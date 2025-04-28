@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 06:00:47 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/27 06:03:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 04:32:00 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 04:32:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,8 @@ typedef struct s_world
 {
 	void		**objects;
 	int			object_count;
-	t_light		*light;
+	t_light		**lights;
+	int			light_count;
 }	t_world;
 
 typedef struct s_camera
@@ -273,6 +274,7 @@ typedef struct s_camera
 	double		half_width;
 	double		half_height;
 	t_matrix	*transf;
+	t_matrix	*inverse_transf;
 }	t_camera;
 
 //#############################################
@@ -452,7 +454,8 @@ t_tuple		local_normal_at(void *shape, t_tuple world_p);
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
 t_colour		shade_hit(t_world *w, t_computations comps, bool ignore_shadows);
 t_colour		color_at(t_world *world, t_ray *ray, bool ignore_shadows);
-bool			is_shadowed(t_world *w, t_tuple point);
+bool			is_shadowed(t_world *w, t_tuple point, t_light *light);
+void			add_light_to_world(t_world *world, t_light *light);
 
 
 //#############################################
@@ -544,6 +547,7 @@ t_colour	diff_colours(t_colour a, t_colour b);
 t_colour	mult_colour(t_colour c, double num);
 t_colour	mult_colours(t_colour c1, t_colour c2);
 int			convert_colour_to_int(t_colour col);
+t_colour	clamp_colour(t_colour c);
 
 
 //free_utils.c
@@ -583,6 +587,7 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
  * @return a pointer to the ray object
  */
 t_ray		*ray_for_pixel(t_camera cam, int px, int py);
+t_ray		ray_for_subpixel(t_camera cam, int px, int py, double offset_x, double offset_y);
 
 //view_transform.c
 t_matrix	*orientation_matrix(t_tuple forward, t_tuple up);
@@ -594,7 +599,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 500
+# define WIN_SIZE 300
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

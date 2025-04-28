@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:24:26 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:47:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_world	*ft_world(void)
 		return (NULL);
 	w->objects = NULL;
 	w->object_count = 0;
-	w->light = NULL;
+	w->lights = NULL;
 	return (w);
 }
 
@@ -33,7 +33,8 @@ t_world	*default_world(void)
 	t_sphere	*s2;
 	// t_matrix	*transform;
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+
 	s1 = ft_sphere(1);
 	s1->base.m.c = ft_colour(0.8, 1, 0.6);
 	s1->base.m.diffuse = 0.7;

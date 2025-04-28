@@ -5,13 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:16:07 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:16:07 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:55:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 04:01:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
+
+void	add_light_to_world(t_world *world, t_light *light)
+{
+	t_light	**new_lights;
+	int		i;
+
+	new_lights = malloc(sizeof(t_light *) * (world->light_count + 1));
+	if (!new_lights)
+		malloc_err("add_light_to_world");
+	i = 0;
+	while (i < world->light_count)
+	{
+		new_lights[i] = world->lights[i];
+		i++;
+	}
+	new_lights[i] = light;
+	if (world->lights)
+		free(world->lights);
+	world->lights = new_lights;
+	world->light_count++;
+}
 
 /**
  * @brief Prepares the data needed to shade an intersection.
@@ -62,19 +83,21 @@ static bool	check_shadow_hit(t_world *w, t_ray *r, double ligth_distance)
 	return (shadowed);
 }
 
-bool	is_shadowed(t_world *w, t_tuple point)
+bool	is_shadowed(t_world *w, t_tuple point, t_light *light)
 {
 	t_tuple		lightv;
 	t_tuple		direction;
 	t_ray		*r;
 	double		light_distance;
 
-	lightv = diff_tuple(w->light->pos, point);
+	lightv = diff_tuple(light->pos, point);
 	light_distance = magnitude(lightv);
 	direction = normalize(lightv);
-	r = ft_ray(point, direction);
+	r = ft_ray(add_tuple(point, mult_tuple(direction, EPSILON)), direction);
 	return (check_shadow_hit(w, r, light_distance));
 }
+
+
 
 /**
  * @brief Computes the color at the point of intersection.
@@ -89,21 +112,33 @@ bool	is_shadowed(t_world *w, t_tuple point)
  */
 t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 {
+	t_colour	final_color;
 	t_shading	light_args;
 	bool		in_shadow;
+	int			i;
 
-	light_args.m = ((t_object *)comps.obj)->m;
-	light_args.l = w->light;
-	light_args.point = comps.over_point;
-	light_args.eyev = comps.eyev;
-	light_args.normalv = comps.normalv;
-	light_args.obj = comps.obj;
-	if (ignore_shadows)
-		in_shadow = false;
-	else
-		in_shadow = is_shadowed(w, light_args.point);
-	return (ft_shading(light_args, in_shadow));
+	final_color = ft_colour(0, 0, 0);
+	i = 0;
+	while (i < w->light_count)
+	{
+		light_args.m = ((t_object *)comps.obj)->m;
+		light_args.l = w->lights[i];
+		light_args.point = comps.over_point;
+		light_args.eyev = comps.eyev;
+		light_args.normalv = comps.normalv;
+		light_args.obj = comps.obj;
+		if (ignore_shadows)
+			in_shadow = false;
+		else
+			in_shadow = is_shadowed(w, light_args.point, w->lights[i]);
+		final_color = add_colours(final_color, ft_shading(light_args, in_shadow));
+		i++;
+	}
+	final_color = mult_colour(final_color, 1.0 / w->light_count);
+	final_color = clamp_colour(final_color);
+	return (final_color);
 }
+
 
 /**
  * @brief Determines the color seen by a given ray in the world.

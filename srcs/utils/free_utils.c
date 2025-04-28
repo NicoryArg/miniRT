@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 22:36:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 22:38:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:24:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:24:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	free_world(t_world *w)
 		i++;
 	}
 	free(w->objects);
-	free(w->light);
+	free(w->lights);
 	free(w);
 }
 

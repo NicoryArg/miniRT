@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_planes.c                                     :+:      :+:    :+:   */
+/*   draw_planes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:21:58 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:21:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:17:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:17:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_world	*scene_planes()
 
 //World
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
 	w->objects = malloc(sizeof(t_object *) * object_count);
 	if (!w->objects)
 		return (NULL);

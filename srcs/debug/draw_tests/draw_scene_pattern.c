@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:17:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:17:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 04:36:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 04:36:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,15 @@ t_world	*scene_pattern(void)
 
 	// World and light
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	t_light *l1 = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1.5, 1.5, 1.5)); // White light on left
+	t_light *l2 = ft_light(ft_tuple(10, 10, -10, POINT), ft_colour(1.5, 1.5, 1.5));  // White light on right
+	t_light *l3 = ft_light(ft_tuple(-10, 0, -10, POINT), ft_colour(1.5, 1.5, 1.5));  // White light on left
+	t_light *l4 = ft_light(ft_tuple(10, 0, -10, POINT), ft_colour(1.5, 1.5, 1.5));  // White light on right
+
+	add_light_to_world(w, l1);
+	add_light_to_world(w, l2);
+	add_light_to_world(w, l3);
+	add_light_to_world(w, l4);
 	w->objects = malloc(sizeof(t_object *) * object_count);
 	if (!w->objects)
 		return (NULL);
@@ -210,7 +218,6 @@ void	draw_scene_patterns_full(t_engine *engine)
 		ft_tuple(0, 2, -9, POINT),   // camera position
 		ft_tuple(0, 0, 10, POINT),   // look-at target
 		ft_tuple(0, 1, 0, VECTOR));  // up vector
-
 	render(cam, w, &engine->image);
 
 	mlx_put_image_to_window(engine->mlx, engine->window,
