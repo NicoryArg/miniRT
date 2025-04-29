@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:19:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:19:47 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:10:01 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:10:01 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	compute_color(void *sph, t_ray *ray, t_light *l)
 	free_hitlists(xs);
 	return (convert_colour_to_int(c));
 }
+
 static void	render_sphere_loop(t_render_ctx *ctx, t_image *img, t_light *light)
 {
 	int		x;

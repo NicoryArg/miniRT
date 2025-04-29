@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 19:41:29 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 19:41:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:33:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:33:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_tuple	parse_tuple(char *str, int type)
 
 	split = ft_split(str, ',');
 	if (!split)
-		error_message("Failed to split tuple string", 1);
+		write(1, "Failed to split tuple string", 28);
 	x = ft_atof(split[0]);
 	y = ft_atof(split[1]);
 	z = ft_atof(split[2]);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 19:35:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 19:36:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:34:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:34:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct	s_environment
 //############## MAKE_ENGINE ##################
 //#############################################
 //clean_engine.c
-void	error_message(char *text, int mode);
+void	error_message(t_engine *engine, char *text, int mode);
 int		on_destroy_event(t_engine *engine);
 void	cleanup(t_engine *engine);
 void	display_help_message(t_engine *engine);
@@ -246,6 +246,6 @@ t_matrix	*rotation_matrix(t_tuple from, t_tuple to);
 
 #define WALL_Z 5
 #define WALL_SIZE 7
-#define CANVAS_SIZE 300
+#define CANVAS_SIZE WIN_SIZE
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 19:17:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 19:17:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:31:15 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:31:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_colour	parse_color(char *str)
 
 	split = ft_split(str, ',');
 	if (!split)
-		error_message("Failed to split color string", 1);
+		write(1,"Failed to split color string", 28);
 	r = ft_atof(split[0]) / 255.0;
 	g = ft_atof(split[1]) / 255.0;
 	b = ft_atof(split[2]) / 255.0;

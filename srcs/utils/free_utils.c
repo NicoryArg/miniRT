@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:24:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 03:24:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:12:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:16:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,16 @@ void	free_hitlist(t_hitlist **hs)
 	t_hitlist	*current;
 	t_hitlist	*next;
 
-	if (!hs || !*hs)
+	if (!hs)
 		return;
 	current = *hs;
 	while (current)
 	{
 		next = current->next;
-		free(current->hit); 	// Free the t_hit inside
-		free(current);			// Free the t_hitlist node itself
+		free(current->hit);
+		free(current);
 		current = next;
 	}
-	*hs = NULL; // Nullify the original pointer
+	free(hs); // free the malloc from new_hitlist()
 }
+

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:51:13 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:51:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:02:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:03:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_2d failed\n"RES));
 	if (ft_main_draw_silhouette(0))
 		return (printf(AKA"❌ draw_silhouette failed\n"RES));
-	if (ft_main_draw_sphere(0))
+	if (ft_main_draw_sphere(1))
 		return (printf(AKA"❌ draw_sphere failed\n"RES));
 	if (ft_main_draw_world(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
@@ -48,10 +48,12 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_capped_cylinders failed\n"RES));
 	if (ft_main_draw_cone(0))
 		return (printf(AKA"❌ draw_cone failed\n"RES));
-	if (ft_main_draw_icecream(1))
+	if (ft_main_draw_icecream(0))
 		return (printf(AKA"❌ draw_icecream failed\n"RES));
 	if (ft_main_draw_scene_patterns_full(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
+	if (ft_main_draw_idea(0))
+		return (printf(AKA"❌ draw_idea failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
 }

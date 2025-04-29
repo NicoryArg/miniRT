@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:24:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 03:47:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:16:40 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:16:40 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_hitlist	**new_hitlist()
 	new = malloc(sizeof(t_hitlist *));
 	if (!new)
 		malloc_err("new_hitlist");
-	// new = NULL;
 	*new = NULL;
 	return (new);
 }
