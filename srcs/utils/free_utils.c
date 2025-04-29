@@ -6,7 +6,7 @@
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:12:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:16:20 by nryser           ###   ########.ch       */
+/*   Updated: 2025/04/29 21:05:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,35 @@ void	free_sphere(t_sphere *sphere)
 	free(sphere);
 }
 
+void	free_plane(t_plane *plane)
+{
+	if (!plane)
+		return ;
+	if (plane->base.transf)
+		free_matrix(plane->base.transf);
+	free_material(&plane->base.m);
+	free(plane);
+}
+
+void	free_cylinder(t_cylinder *cyl)
+{
+	if (!cyl)
+		return ;
+	if (cyl->base.transf)
+		free_matrix(cyl->base.transf);
+	free_material(&cyl->base.m);
+	free(cyl);
+}
+void	free_cone(t_cone *cone)
+{
+	if (!cone)
+		return ;
+	if (cone->base.transf)
+		free_matrix(cone->base.transf);
+	free_material(&cone->base.m);
+	free(cone);
+}
+
 void	free_hitlists(t_hitlist *xs)
 {
 	t_hitlist	*tmp;
@@ -80,27 +109,31 @@ void	free_world(t_world *w)
 
 	if (!w)
 		return ;
-
 	i = 0;
 	while (i < w->object_count)
 	{
 		obj = (t_object *)w->objects[i];
-
-		// Free object by type
 		if (obj->type == SPHERE)
 			free_sphere((t_sphere *)obj);
 		else if (obj->type == PLANE)
-			free(((t_plane *)obj));
+			free_plane((t_plane *)obj);
 		else if (obj->type == CYLINDER)
-			free(((t_cylinder *)obj));
-
+			free_cylinder((t_cylinder *)obj);
+		else if (obj->type == CONE)
+			free_cone((t_cone *)obj);
 		i++;
 	}
 	free(w->objects);
+	i = 0;
+	while (i < w->light_count)
+	{
+		if (w->lights[i])
+			free(w->lights[i]);
+		i++;
+	}
 	free(w->lights);
 	free(w);
 }
-
 
 void	free_material(t_material *m)
 {
@@ -111,6 +144,8 @@ void	free_material(t_material *m)
 		free(m->pattern);
 	}
 }
+
+
 
 void	free_hitlist(t_hitlist **hs)
 {

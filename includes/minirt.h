@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:19:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:19:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 21:14:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 21:14:10 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,7 @@ t_matrix	*invert_matrix(t_matrix *matrix);
 int			equal_matrix(t_matrix *a, t_matrix *b);
 void		compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result);
 t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
+t_matrix	*multiply_and_free(t_matrix *a, t_matrix *b);
 t_matrix	*multiply_by_identity(t_matrix *input);
 t_matrix	*transpose_matrix(t_matrix *input);
 
@@ -553,6 +554,9 @@ t_colour	clamp_colour(t_colour c);
 //free_utils.c
 void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
+void		free_plane(t_plane *plane);
+void		free_cylinder(t_cylinder *cyl);
+void		free_cone(t_cone *cone);
 void		free_hitlists(t_hitlist *xs);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);

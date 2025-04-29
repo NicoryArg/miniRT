@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:55:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 04:01:00 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:52:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:53:00 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	add_light_to_world(t_world *world, t_light *light)
 	t_light	**new_lights;
 	int		i;
 
-	new_lights = malloc(sizeof(t_light *) * (world->light_count + 1));
+	new_lights = malloc(sizeof(t_light *) * (world->light_count + 2));
 	if (!new_lights)
 		malloc_err("add_light_to_world");
 	i = 0;
@@ -28,11 +28,12 @@ void	add_light_to_world(t_world *world, t_light *light)
 		i++;
 	}
 	new_lights[i] = light;
-	if (world->lights)
-		free(world->lights);
+	new_lights[i + 1] = NULL;
+	free(world->lights);
 	world->lights = new_lights;
 	world->light_count++;
 }
+
 
 /**
  * @brief Prepares the data needed to shade an intersection.
