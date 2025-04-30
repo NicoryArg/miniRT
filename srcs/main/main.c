@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:35:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:35:54 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/30 01:19:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/30 01:19:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_sphere_nested failed\n"RES));
 	if (ft_main_draw_scene_nested(0))
 		return (printf(AKA"❌ draw_scene_nested failed\n"RES));
-	if (ft_main_draw_world_planes(1))
+	if (ft_main_draw_world_planes(0))
 		return (printf(AKA"❌ draw_world failed\n"RES));
 	if (ft_main_draw_infinite_cylinders(0))
 		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
@@ -50,7 +50,7 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_cone failed\n"RES));
 	if (ft_main_draw_icecream(0))
 		return (printf(AKA"❌ draw_icecream failed\n"RES));
-	if (ft_main_draw_scene_patterns_full(0))
+	if (ft_main_draw_scene_patterns_full(1))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_idea(0))
 		return (printf(AKA"❌ draw_idea failed\n"RES));

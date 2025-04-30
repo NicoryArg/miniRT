@@ -11,7 +11,7 @@ WHITE    		= "\033[37m"    # White
 
 # Program names
 NAME			= miniRT
-BONUS_NAME		= miniRT_bonus
+BONUS_NAME		= miniRT_Bonus
 
 # Compiler
 CC				= cc

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 21:14:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 21:14:10 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/30 01:41:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/30 01:41:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -561,6 +561,7 @@ void		free_hitlists(t_hitlist *xs);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);
 void		free_material(t_material *m);
+void		free_pattern(t_pattern *pattern);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);

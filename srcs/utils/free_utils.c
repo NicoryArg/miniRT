@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:12:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 21:05:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/30 01:41:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/30 01:49:56 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,6 @@ void	free_hitlists(t_hitlist *xs)
 	}
 }
 
-void	free_hits(t_inters *xs)
-{
-	int	i;
-
-	i = 0;
-	while (i < xs->count)
-		free(xs->hits[i++]);
-	free(xs->hits);
-	free(xs);
-}
-
 void	free_world(t_world *w)
 {
 	int			i;
@@ -137,12 +126,21 @@ void	free_world(t_world *w)
 
 void	free_material(t_material *m)
 {
-	if (m->pattern)
-	{
-		if (m->pattern->transform)
-			free_matrix(m->pattern->transform);
-		free(m->pattern);
-	}
+	if (m && m->pattern)
+		free_pattern(m->pattern);
+}
+
+void	free_pattern(t_pattern *pattern)
+{
+	if (!pattern)
+		return;
+	if (pattern->transform)
+		free_matrix(pattern->transform);
+	if (pattern->a_pattern)
+		free_pattern(pattern->a_pattern);
+	if (pattern->b_pattern)
+		free_pattern(pattern->b_pattern);
+	free(pattern);
 }
 
 
