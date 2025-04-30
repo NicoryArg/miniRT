@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_input.c                                   :+:      :+:    :+:   */
+/*   parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 19:48:10 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/29 21:26:35 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:49:33 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "../../includes/parse.h"
 
 static e_identifier	unique_id(char *s)
 {
@@ -80,7 +81,7 @@ static int	valid_tokens(char **tok)
 	return (0);
 }
 
-int	validate_input(char **lines)
+int	parse_input(char **lines)
 {
 	int	i;
 	char *str;

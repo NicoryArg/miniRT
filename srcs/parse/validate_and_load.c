@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:13:20 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/29 20:44:13 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:04:47 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	validate_and_load(int ac, char **av)
 	lines = copy_input(file);
 	if (!lines)
 		return (-1);
-	if (validate_input(lines))
+	if (parse_input(lines))
 		return (-1);
 	for (int i = 0; lines[i]; i++)
 		printf("%s\n", lines[i]);

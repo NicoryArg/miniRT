@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:17:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/29 21:10:44 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/04/30 20:25:14 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,22 @@ typedef enum identifier
 	UFO,
 }	e_identifier;
 
+typedef struct s_input
+{
+	int			shapes;			//number of shape identifiers (sp, cy, etc.)
+	char		**lines;		//2d array for each line of the input file
+	t_tokens	*head;			//first pointer to linked list of tokens (for each line)
+}	t_input;
+
+typedef struct s_tokens
+{
+	char			**tokens;	//2d array of all args for a given identifier
+	e_identifier	type;		//identifier type (A, C, L, sp, cy, etc.)
+	int				count;		//number of arguments (sp expects 4, A expects 3, etc.)
+	t_tokens		*next;		//pointer to next identifier and it's arguments
+}	t_tokens;
+
+
 //check_file.c
 int		check_file(int ac, char **av);
 
@@ -43,8 +59,8 @@ int		split_lines(char *str, char **lines);
 //validate_and_load.c
 int		validate_and_load(int ac, char **av);
 
-//validate_input.c
-int		validate_input(char **lines);
+//parse_input.c
+int		parse_input(char **lines);
 
 //ERROR MESSAGE UTILS
 
