@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:17:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/01 12:06:03 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:14:22 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			split_lines(char *str, char **lines);
 int			validate_and_load(int ac, char **av);
 
 //parse_input.c
-int			parse_input(char **lines);
+t_tokens	*parse_input(char **lines);
 
 //ERROR MESSAGE UTILS
 

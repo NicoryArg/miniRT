@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:13:20 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/30 20:04:47 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:15:29 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	validate_and_load(int ac, char **av)
 {
-	char	*file;
-	char	**lines;
+	char		*file;
+	char		**lines;
+	t_tokens	*head;
 
 	file = av[1];
 	lines = NULL;
@@ -24,11 +25,12 @@ int	validate_and_load(int ac, char **av)
 	lines = copy_input(file);
 	if (!lines)
 		return (-1);
-	if (parse_input(lines))
+	head = parse_input(lines);
+	if (!head)
 		return (-1);
-	for (int i = 0; lines[i]; i++)
-		printf("%s\n", lines[i]);
-	free_array(lines);
+	// for (int i = 0; lines[i]; i++)
+	// 	printf("%s\n", lines[i]);
+	// free_array(lines);
 	return (0);
 }
 

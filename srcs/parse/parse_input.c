@@ -80,7 +80,7 @@ static int	valid_tokens(char **tok)
 	return (0);
 }
 
-int	parse_input(char **lines)
+t_tokens	*parse_input(char **lines)
 {
 	int			i;
 	char		*str;
@@ -98,12 +98,12 @@ int	parse_input(char **lines)
 		{
 			free_array(tokens);
 			free_array(lines);
-			return(-1);
+			return(NULL);
 		}
 		new_node = create_token_node(tokens, get_identifier(tokens[0]));
 		append_token_node(&head, new_node);
 		i++;
-		print_node(new_node);
+		// print_node(new_node);
 	}
-	return (0);
+	return (head);
 }
