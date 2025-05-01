@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:17:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/30 20:25:14 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:06:03 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define MAX_FILE 10240
 # define MAX_LINE_LEN 51
+
+typedef struct s_tokens t_tokens;
 
 typedef enum identifier
 {
@@ -43,24 +45,28 @@ typedef struct s_tokens
 	t_tokens		*next;		//pointer to next identifier and it's arguments
 }	t_tokens;
 
+//build_list.c
+t_tokens	*create_token_node(char **tokens, e_identifier type);
+void		append_token_node(t_tokens **head, t_tokens *new_node);
+void		print_node(t_tokens *node);
 
 //check_file.c
-int		check_file(int ac, char **av);
+int			check_file(int ac, char **av);
 
 //copy_input.c
-char	**copy_input(char *file);
+char		**copy_input(char *file);
 
 //free_parse.c
-void	free_array(char **array);
+void		free_array(char **array);
 
 //split_lines.c
-int		split_lines(char *str, char **lines);
+int			split_lines(char *str, char **lines);
 
 //validate_and_load.c
-int		validate_and_load(int ac, char **av);
+int			validate_and_load(int ac, char **av);
 
 //parse_input.c
-int		parse_input(char **lines);
+int			parse_input(char **lines);
 
 //ERROR MESSAGE UTILS
 

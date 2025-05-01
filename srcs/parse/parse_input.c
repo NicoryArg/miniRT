@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-#include "../../includes/parse.h"
 
 static e_identifier	unique_id(char *s)
 {
@@ -70,8 +69,8 @@ static int	valid_tokens(char **tok)
 	// 	return (valid_camera(tok));
 	// else if (type == L)
 	// 	return (valid_light(tok));
-	else if (type == SP)
-		return (valid_sphere(tok));
+	// else if (type == SP)
+	// 	return (valid_sphere(tok));
 	// else if (type == PL)
 	// 	return (valid_plane(tok));
 	// else if (type == CY)
@@ -83,10 +82,13 @@ static int	valid_tokens(char **tok)
 
 int	parse_input(char **lines)
 {
-	int	i;
-	char *str;
-	char **tokens;
+	int			i;
+	char		*str;
+	char		**tokens;
+	t_tokens	*head;
+	t_tokens	*new_node;
 
+	head = NULL;
 	i = 0;
 	while (lines[i])
 	{
@@ -98,8 +100,10 @@ int	parse_input(char **lines)
 			free_array(lines);
 			return(-1);
 		}
-		free_array(tokens);
+		new_node = create_token_node(tokens, get_identifier(tokens[0]));
+		append_token_node(&head, new_node);
 		i++;
+		print_node(new_node);
 	}
 	return (0);
 }

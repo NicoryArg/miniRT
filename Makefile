@@ -56,7 +56,7 @@ MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free
 									matrix_invert.c matrix_utils.c )
 PARSE_FILES			= $(addprefix parse/, free_parse.c check_file.c \
 									copy_input.c validate_and_load.c \
-									split_lines.c parse_input.c)
+									split_lines.c parse_input.c build_list.c)
 PATTERNS_FILES		= $(addprefix patterns/, patterns.c )
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c)
