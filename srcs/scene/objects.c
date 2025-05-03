@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 21:47:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 21:47:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 08:35:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 08:35:02 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ t_plane	*ft_plane(void)
 	plane->base.transf = create_identity_matrix(4);
 	plane->base.m = ft_material();
 	plane->base.type = PLANE;
+	plane->base.m.ambient = 0.2;
+	plane->base.m.diffuse = 0.7;
+	plane->base.m.specular = 0.3;
 	return (plane);
 }
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:52:55 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:53:00 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:21:56 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:22:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,17 @@ bool	is_shadowed(t_world *w, t_tuple point, t_light *light)
 t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 {
 	t_colour	final_color;
+	t_colour	ambient;
 	t_shading	light_args;
 	bool		in_shadow;
 	int			i;
 
 	final_color = ft_colour(0, 0, 0);
+	if (w->ambient.ratio > 0)
+	{
+		ambient = mult_colour(w->ambient.colour, w->ambient.ratio);
+		final_color = ambient;
+	}
 	i = 0;
 	while (i < w->light_count)
 	{
@@ -135,10 +141,13 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 		final_color = add_colours(final_color, ft_shading(light_args, in_shadow));
 		i++;
 	}
-	final_color = mult_colour(final_color, 1.0 / w->light_count);
-	final_color = clamp_colour(final_color);
-	return (final_color);
+	// Average light contributions if any
+	if (w->light_count > 0)
+		final_color = mult_colour(final_color, 1.0 / w->light_count);
+	return clamp_colour(final_color);
 }
+
+
 
 
 /**

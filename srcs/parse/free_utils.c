@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_parse.c                                       :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:54:19 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/28 18:56:52 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/03 06:36:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 06:36:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 void	free_array(char **array)
 {
@@ -26,4 +28,17 @@ void	free_array(char **array)
 	}
 	free(array);
 	array = NULL;
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

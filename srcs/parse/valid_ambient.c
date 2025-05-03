@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_color.c                                      :+:      :+:    :+:   */
+/*   valid_ambient.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 04:29:13 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 04:29:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:07:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:07:24 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 #include "engine.h"
 #include "parse.h"
 
-t_colour	parse_color(char *str)
+int	valid_ambient(char **tokens)
 {
-	char		**split;
-	double		r;
-	double		g;
-	double		b;
-	t_colour	color;
+	double	ratio;
 
-	split = ft_split(str, ',');
-	if (!split)
-		write(1,"Failed to split color string", 28);
-	r = ft_atof(split[0]) / 255.0;
-	g = ft_atof(split[1]) / 255.0;
-	b = ft_atof(split[2]) / 255.0;
-	color = ft_colour(r, g, b);
-	free_split(split);
-	return (color);
+	if (count_split(tokens) != 3)
+		return (0);
+	if (!is_float(tokens[1]))
+		return (0);
+	ratio = ft_atof(tokens[1]);
+	if (ratio < 0.0 || ratio > 1.0)
+		return (0);
+	if (!is_color(tokens[2]))
+		return (0);
+	return (1);
 }

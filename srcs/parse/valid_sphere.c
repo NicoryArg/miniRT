@@ -3,17 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   valid_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 19:03:01 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/30 19:03:01 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/03 06:48:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 06:50:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 int	valid_sphere(char **sp)
 {
-	int	i;
-	
+	if (count_split(sp) != 4)
+		return (0);
+	if (!is_vec3(sp[1]))
+		return (0);
+	if (!is_float(sp[2]))
+		return (0);
+	if (!is_color(sp[3]))
+		return (0);
+	printf("✅ valid_sphere passed\n");
+	return (1);
 }

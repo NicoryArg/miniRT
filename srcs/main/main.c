@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 02:35:12 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 02:35:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 04:41:25 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 06:18:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "engine.h"
+#include "parse.h"
 #include "tests.h"
 
 int	ft_main_render(int run)
@@ -74,6 +75,22 @@ int	run_render_with(void (*render_func)(t_engine *))
 	cleanup(&engine);
 	return (0);
 }
+// int	run_render_with(void (*render_func)(t_engine *, int, char **), int ac, char **av)
+// {
+// 	t_engine	engine;
+
+// 	init_engine(&engine);
+// 	render_func(&engine, ac, av);
+// 	mlx_put_image_to_window(engine.mlx, engine.window,
+// 		engine.image.img_ptr, 0, 0);
+// 	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+// 	printf("\tPlease refrain from resizing the window\n"RES);
+// 	setup_hooks(&engine);
+// 	mlx_loop(engine.mlx);
+// 	cleanup(&engine);
+// 	return (0);
+// }
+
 
 ////////////////////////////////////////////////////////////////
 ////////////////////// RUN ALL TESTS ///////////////////////////
@@ -117,9 +134,16 @@ int	run_render_with(void (*render_func)(t_engine *))
 ///////////////////////// PARSING //////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-int	main(int ac, char ** av)
+int	main(int ac, char **av)
 {
-	if (validate_and_load(ac, av))
-		return (-1);
-	return (0);
+	(void)ac;
+	(void)av;
+	return (run_render_with(draw_scene_parsed));
 }
+// int	main(int ac, char **av)// TO USE ONCE RUN_RENDER_WITH IS CHANGED
+// {
+// 	return run_render_with(draw_scene_parsed, ac, av);
+// }
+
+
+

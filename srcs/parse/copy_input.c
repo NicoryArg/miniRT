@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_input.c                                      :+:      :+:    :+:   */
+/*   copy_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 18:42:06 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/29 19:42:08 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/03 05:47:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 05:47:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 static int	grab_input(char *file, char **buf)
 {
@@ -79,7 +81,6 @@ static char **alloc_lines(char *str)
 	}
 	return (lines);
 }
-
 
 char	**copy_input(char *file)
 {

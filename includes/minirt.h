@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 02:24:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 02:25:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:05:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:05:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
-# include "parse.h"
 
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
@@ -208,6 +207,11 @@ typedef struct s_hitlist
 //#############################################
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
+typedef struct s_ambient
+{
+	double		ratio;
+	t_colour	colour;
+}	t_ambient;
 
 typedef struct s_light
 {
@@ -263,6 +267,7 @@ typedef struct s_world
 	int			object_count;
 	t_light		**lights;
 	int			light_count;
+	t_ambient	ambient;
 }	t_world;
 
 typedef struct s_camera

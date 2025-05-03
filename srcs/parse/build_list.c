@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   build_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 11:41:19 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/01 12:11:20 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/03 05:46:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 05:47:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 static int	count_tokens(char **tokens)
 {
@@ -57,8 +59,7 @@ void print_node(t_tokens *node)
 	int i;
 
 	if (!node)
-		return;
-
+		return ;
 	printf(B_B "identifier: " RES "%d\n", node->type);
 	printf(B_B "token_count: " RES "%d\n", node->count);
 	printf(B_B "tokens:\n" RES);

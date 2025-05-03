@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                   :+:      :+:    :+:   */
+/*   tokenize_lines.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 19:48:10 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/30 19:49:33 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/03 06:50:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 06:50:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 static e_identifier	unique_id(char *s)
 {
@@ -20,7 +22,7 @@ static e_identifier	unique_id(char *s)
 		return (C);
 	else if (*s == 'L')
 		return (L);
-	printf(AKA""INVALID_ID"", s);
+	printf(AKA"Invalid unique identifier: %s\n"RES, s);
 	return (UFO);
 }
 
@@ -34,56 +36,28 @@ static e_identifier	shape_id(char *s)
 		return (CY);
 	else if (s[0] == 'c' &&s[1] == 'o')
 		return (CO);
-	printf(AKA""INVALID_ID"", s);
+	printf(AKA"Invalid shape identifier: %s\n"RES, s);
 	return (UFO);
 }
 
-static e_identifier	get_identifier(char *s)
+e_identifier	get_identifier(char *s)
 {
-	int	i;
+	int	len;
 
-	i = 0;
 	if (!s || !*s)
-		return(UFO);
-	while (s[i])
-		i++;
-	if (i == 1)
+		return (UFO);
+	len = ft_strlen(s);
+	if (len == 1)
 		return (unique_id(s));
-	else if (i == 2)
+	if (len == 2)
 		return (shape_id(s));
-	printf(AKA""INVALID_ID"", s);
+	printf(AKA"Invalid identifier length: %s\n"RES, s);
 	return (UFO);
-}
-
-static int	valid_tokens(char **tok)
-{
-	e_identifier	type;
-	if (!tok || !(*tok) || !(**tok))
-		return (-1);
-	type = get_identifier(*tok);
-	if (type == UFO)
-		return (-1);
-	// else if (type == A)
-	// 	return (valid_ambient(tok));
-	// else if (type == C)
-	// 	return (valid_camera(tok));
-	// else if (type == L)
-	// 	return (valid_light(tok));
-	// else if (type == SP)
-	// 	return (valid_sphere(tok));
-	// else if (type == PL)
-	// 	return (valid_plane(tok));
-	// else if (type == CY)
-	// 	return (valid_cylinder(tok));
-	// else if (type == CO)
-	// 	return (valid_cone(tok));
-	return (0);
 }
 
 t_tokens	*parse_input(char **lines)
 {
 	int			i;
-	char		*str;
 	char		**tokens;
 	t_tokens	*head;
 	t_tokens	*new_node;
@@ -92,18 +66,25 @@ t_tokens	*parse_input(char **lines)
 	i = 0;
 	while (lines[i])
 	{
-		str = lines[i];
-		tokens = ft_split(str, ' ');
-		if (valid_tokens(tokens))
+		tokens = ft_split(lines[i], ' ');
+		if (!tokens)
 		{
+			printf(AKA"Error: Failed to split line: %s\n"RES, lines[i]);
+			free_array(lines);
+			return (NULL);
+		}
+		if (!valid_tokens(tokens))
+		{
+			printf(AKA"Invalid token line: %s\n"RES, lines[i]);
 			free_array(tokens);
 			free_array(lines);
-			return(NULL);
+			return (NULL);
 		}
 		new_node = create_token_node(tokens, get_identifier(tokens[0]));
 		append_token_node(&head, new_node);
 		i++;
 		// print_node(new_node);
 	}
+	printf(G_B"✔ "GR"Finished parsing tokens\n"RES);
 	return (head);
 }

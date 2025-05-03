@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:33:27 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:33:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 06:38:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 06:38:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
-#include "../../includes/parse.h"
-#include "../../includes/engine.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 int	skip_spaces_and_sign(const char *str, int *sign)
 {
@@ -50,36 +50,4 @@ double	ft_atof(const char *str)
 		}
 	}
 	return (result * sign);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
-
-t_tuple	parse_tuple(char *str, int type)
-{
-	char	**split;
-	double	x;
-	double	y;
-	double	z;
-	t_tuple	tup;
-
-	split = ft_split(str, ',');
-	if (!split)
-		write(1, "Failed to split tuple string", 28);
-	x = ft_atof(split[0]);
-	y = ft_atof(split[1]);
-	z = ft_atof(split[2]);
-	tup = ft_tuple(x, y, z, type);
-	free_split(split);
-	return (tup);
 }

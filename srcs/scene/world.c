@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:56:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:56:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:03:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:03:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_world	*ft_world(void)
 	w->object_count = 0;
 	w->lights = NULL;
 	w->light_count = 0;
+	w->ambient.ratio = 0.1;
+	w->ambient.colour = ft_colour(1, 1, 1); 
 	return (w);
 }
 
