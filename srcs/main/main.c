@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 01:19:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/30 01:19:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 02:35:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 02:35:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,37 +79,37 @@ int	run_render_with(void (*render_func)(t_engine *))
 ////////////////////// RUN ALL TESTS ///////////////////////////
 ////////////////////////////////////////////////////////////////
 
-int	main()
-{
-	// print_test_banner("RUNNING ALL TESTS");
-	if (ft_main_tuples(0)) //1 to run , 0 to skip
-		return (-1);
-	if (ft_main_transform(0)) //1 to run , 0 to skip
-		return (-1);
-	if (ft_main_rays(0)) //1 to run, 0 to skip
-		return (-1);
-	if (ft_main_phong(0)) //1 to run, 0 to skip
-		return (-1);
-	if (ft_main_world(0)) //1 to run, 0 to skip
-		return (-1);
-	if (ft_main_view(0)) //1 to run, 0 to skip
-		return (-1);
-	if (ft_main_shadows(0)) //1 to run, 0 to skip
-		return (-1);
-	if (ft_main_plane(0))
-		return (-1);
-	if(ft_main_patterns(0))
-		return (-1);
-	if (ft_main_cylinder(0))
-		return (-1);
-	if (ft_main_cone(0))
-		return (-1);
-	///////////////////////////////////////////////
-	if (ft_main_render(1)) //1 to run, 0 to skip
-		return (-1);
-	printf(G_B"END OF ALL TESTS\n"RES);
-	return (0);
-}
+// int	main()
+// {
+// 	// print_test_banner("RUNNING ALL TESTS");
+// 	if (ft_main_tuples(0)) //1 to run , 0 to skip
+// 		return (-1);
+// 	if (ft_main_transform(0)) //1 to run , 0 to skip
+// 		return (-1);
+// 	if (ft_main_rays(0)) //1 to run, 0 to skip
+// 		return (-1);
+// 	if (ft_main_phong(0)) //1 to run, 0 to skip
+// 		return (-1);
+// 	if (ft_main_world(0)) //1 to run, 0 to skip
+// 		return (-1);
+// 	if (ft_main_view(0)) //1 to run, 0 to skip
+// 		return (-1);
+// 	if (ft_main_shadows(0)) //1 to run, 0 to skip
+// 		return (-1);
+// 	if (ft_main_plane(0))
+// 		return (-1);
+// 	if(ft_main_patterns(0))
+// 		return (-1);
+// 	if (ft_main_cylinder(0))
+// 		return (-1);
+// 	if (ft_main_cone(0))
+// 		return (-1);
+// 	///////////////////////////////////////////////
+// 	if (ft_main_render(1)) //1 to run, 0 to skip
+// 		return (-1);
+// 	printf(G_B"END OF ALL TESTS\n"RES);
+// 	return (0);
+// }
 
 
 
@@ -117,9 +117,9 @@ int	main()
 ///////////////////////// PARSING //////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-// int	main(int ac, char ** av)
-// {
-// 	if (validate_and_load(ac, av))
-// 		return (-1);
-// 	return (0);
-// }
+int	main(int ac, char ** av)
+{
+	if (validate_and_load(ac, av))
+		return (-1);
+	return (0);
+}

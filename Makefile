@@ -59,8 +59,10 @@ MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_ray
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c handle_hooks.c handle_mouse.c handle_bar.c key_hook.c make_engine.c)
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
-PARSE_FILES			= $(addprefix parse/, check_file.c check_input.c validate_and_load.c parse_color.c parse_cyl.c parse_plane.c parse_utils.c)
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
+PARSE_FILES			= $(addprefix parse/, free_parse.c check_file.c \
+									copy_input.c validate_and_load.c \
+									split_lines.c parse_input.c build_list.c  parse_color.c parse_cyl.c parse_plane.c parse_utils.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c intersect_cone_caps.c intersect_cone.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 01:53:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/30 02:20:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 02:23:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 02:24:07 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ t_world	*scene_pattern(void)
 	left_wall->base.m.specular = 0;
 	wall_pat_left = malloc(sizeof(t_pattern));
 	*wall_pat_left = uv_gradient_pattern(ft_colour(0.5, 0, 0.9), ft_colour(0, 0.8, 0.8), 0, 0);
-	transform = multiply_and_free(rotate_y(-M_PI / 4), multiply_and_free(rotate_x(M_PI / 2), scale(1, 1, 1)));
+	wall_pat_left->transform = multiply_matrices(
+		rotate_y(-M_PI / 4), multiply_matrices(rotate_x(M_PI / 2), scale(1, 1, 1)));
 	left_wall->base.m.pattern = wall_pat_left;
-	left_rot = multiply_and_free(transform, multiply_and_free(rotate_y(-M_PI / 4), rotate_x(M_PI / 2)));
-	// free_matrix(transform);
-	set_transf(left_wall, multiply_and_free(translate(-5, 0, 0), left_rot));
+	left_rot = multiply_matrices(rotate_y(-M_PI / 4), rotate_x(M_PI / 2));
+	set_transf(left_wall, multiply_matrices(translate(-5, 0, 0), left_rot));
+	free_matrix(left_rot);
 	object_count++;
 
 	// Right wall — UV stripes
@@ -110,11 +111,12 @@ t_world	*scene_pattern(void)
 	right_wall->base.m.specular = 0;
 	wall_pat_right = malloc(sizeof(t_pattern));
 	*wall_pat_right = uv_stripe_pattern(ft_colour(0.5, 0, 0.9), ft_colour(0, 0.8, 0.8), 10, 1);
-	transform = multiply_and_free(rotate_y(M_PI / 4), multiply_and_free(rotate_x(M_PI / 2), scale(1, 1, 1)));
+	wall_pat_right->transform = multiply_matrices(
+		rotate_y(M_PI / 4), multiply_matrices(rotate_x(M_PI / 2), scale(1, 1, 1)));
 	right_wall->base.m.pattern = wall_pat_right;
-	right_rot = multiply_and_free(transform, multiply_and_free(rotate_y(M_PI / 4), rotate_x(M_PI / 2)));
-	// free_matrix(transform);
-	set_transf(right_wall, multiply_and_free(translate(5, 0, 0), right_rot));
+	right_rot = multiply_matrices(rotate_y(M_PI / 4), rotate_x(M_PI / 2));
+	set_transf(right_wall, multiply_matrices(translate(5, 0, 0), right_rot));
+	free_matrix(right_rot);
 	object_count++;
 
 	// Cylinder 1
