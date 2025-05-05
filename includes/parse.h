@@ -223,7 +223,7 @@ int			valid_cylinder(char **tokens);
 int			add_cylinders(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_light.c
-int			valid_light(char **tokens);
+int			valid_light(char **tokens, bool bonus);
 void		add_lights(t_world *w, t_parsed_scene *scene);
 
 //valid_add_plane.c

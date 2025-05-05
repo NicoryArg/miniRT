@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:50:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/05 20:29:16 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:51:42 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	valid_tokens(t_tokens *node, e_id type, bool bonus)
 	else if (type == C)
 		return (valid_camera(node->tokens));
 	else if (type == L)
-		return (valid_light(node->tokens));
+		return (valid_light(node->tokens, bonus));
 	else if (type == SP)
 		return (valid_sphere(node->tokens));
 	else if (type == PL)
@@ -54,7 +54,7 @@ int	valid_input(t_input *data, bool bonus)
 	current = data->list;
 	while (current)
 	{
-		if (valid_tokens(current, current->type, bonus))
+		if (!valid_tokens(current, current->type, bonus))
 			return (-1);
 		current = current->next;
 	}
