@@ -29,7 +29,7 @@ int	validate_and_load(int ac, char **av, t_input *data)
 	if (valid_input(data, data->bonus))
 	{
 		// free_data(data);
-		return(printf("❌ "INVALID_INPUT""));
+		return(-1);
 	}
 	// *scene = build_scene_from_tokens(list);
 	return (1);

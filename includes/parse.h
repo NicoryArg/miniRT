@@ -236,14 +236,16 @@ int			valid_sphere(char **tokens);
 int			add_spheres(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_input.c
+void		print_count(t_id_count count);
 int			valid_input(t_input *data, bool bonus);
 
 //ERROR MESSAGE UTILS
 
+
 # define X ""AKA"Error\n"RES""
 # define O "✔ "GR""
-# define VALID_INFO "Please ensure you separate values with spaces only -> ' '"
-# define INVALID_INPUT "Invalid input\n"LILA"Tip: "VALID_INFO"\n"RES""
+# define TIP "Please ensure you separate values with spaces only -> ' '\n"
+# define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES""
 # define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
 # define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
 #endif

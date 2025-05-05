@@ -6,14 +6,14 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:50:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/05 20:51:42 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:10:42 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parse.h"
 
-static void	print_count(t_id_count count)
+void	print_count(t_id_count count)
 {
 	printf("A: %d\n", count.a);
 	printf("C: %d\n", count.c);
@@ -50,7 +50,7 @@ int	valid_input(t_input *data, bool bonus)
 
 	if (expected_identifiers(data, data->list, bonus))
 		return (-1);
-	print_count(data->count);
+	// print_count(data->count); //DEBUG
 	current = data->list;
 	while (current)
 	{
