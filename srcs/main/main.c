@@ -139,8 +139,11 @@ int	main(int ac, char ** av)
 	t_parsed_scene	scene;
 	t_engine		engine;
 
-	if (validate_and_load(ac, av, &scene))
+	if (validate_and_load(ac, av, &scene) != 1)
+	{
+		printf(AKA"❌ Failed to load scene file\n"RES);
 		return (-1);
+	}
 	init_engine(&engine);
 	draw_scene_parsed(&engine, &scene);
 	mlx_put_image_to_window(engine.mlx, engine.window,
