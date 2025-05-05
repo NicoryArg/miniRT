@@ -137,9 +137,19 @@ int	run_render_with(void (*render_func)(t_engine *))
 int	main(int ac, char ** av)
 {
 	t_parsed_scene	scene;
+	t_engine		engine;
 
 	if (validate_and_load(ac, av, &scene))
 		return (-1);
+	init_engine(&engine);
+	draw_scene_parsed(&engine, &scene);
+	mlx_put_image_to_window(engine.mlx, engine.window,
+		engine.image.img_ptr, 0, 0);
+	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	printf("\tPlease refrain from resizing the window\n"RES);
+	setup_hooks(&engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
 	return (0);
 }
 // int	main(int ac, char **av)

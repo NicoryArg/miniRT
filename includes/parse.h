@@ -145,7 +145,7 @@ t_tokens		*parse_input(char **lines);
 
 //entrypoint_parser.c
 int				validate_and_load(int ac, char **av, t_parsed_scene *scene);
-void			draw_scene_parsed(t_engine *engine);
+void			draw_scene_parsed(t_engine *engine, t_parsed_scene *scene);
 
 //free_utils.c
 void			free_array(char **array);

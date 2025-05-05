@@ -21,41 +21,27 @@ int	validate_and_load(int ac, char **av, t_parsed_scene *scene)
 
 	if (!check_file(ac, av))
 		return (-1);
-	printf("entering copy_input \n");
 	lines = copy_input(av[1]);
 	if (!lines)
-	{
-		printf("❌ copy_input failed\n");
-		return (-1);
-	}
-	printf("Entering parse_input2\n");
+		return (printf("❌ copy_input failed\n"));
 	tokens = parse_input(lines);
 	if (!tokens)
-	{
-		printf("❌ parse_input failed\n");
-		return (-1);
-	}
-	printf("entering build_scene\n");
+		return(printf("❌ parse_input failed\n"));
+	// if ()
 	*scene = build_scene_from_tokens(tokens);
 	return (1);
 }
 
-void	draw_scene_parsed(t_engine *engine)
+void	draw_scene_parsed(t_engine *engine, t_parsed_scene *scene)
 {
-	t_parsed_scene	scene;
 	t_world			*w;
 	t_camera		cam;
 
-	if (validate_and_load (2, (char*[]){"./miniRT", "scene.rt"}, &scene) < 0)//under is the correct function for main ↓↓
-	{
-		printf("❌ Failed to load scene.rt\n");
-		return ;
-	}
-	w = convert_scene_to_world(&scene);
-	cam = ft_camera(WIN_SIZE, WIN_SIZE, scene.fov);
+	w = convert_scene_to_world(scene);
+	cam = ft_camera(WIN_SIZE, WIN_SIZE, scene->fov);
 	cam.transf = view_transform(
-			scene.camera_pos,
-			add_tuple(scene.camera_pos, scene.camera_dir),
+			scene->camera_pos,
+			add_tuple(scene->camera_pos, scene->camera_dir),
 			ft_tuple(0, 1, 0, VECTOR));
 	render(cam, w, &engine->image);
 	mlx_put_image_to_window(engine->mlx, engine->window,
