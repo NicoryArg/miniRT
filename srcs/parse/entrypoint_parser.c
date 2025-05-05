@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 08:55:15 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 08:55:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 09:56:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:57:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,17 @@ void	draw_scene_parsed(t_engine *engine)
 	t_world			*w;
 	t_camera		cam;
 
-	if (validate_and_load(2, (char*[]){"./miniRT", "scene.rt"}, &scene) < 0)//under is the correct function for main ↓↓
+	if (validate_and_load (2, (char*[]){"./miniRT", "scene.rt"}, &scene) < 0)//under is the correct function for main ↓↓
 	{
 		printf("❌ Failed to load scene.rt\n");
 		return ;
 	}
 	w = convert_scene_to_world(&scene);
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, scene.fov);
-	// cam.transf = view_transform(
-	// 	ft_tuple(0, 3, -10, POINT),               // Camera above
-	// 	ft_tuple(0, 0, 0, POINT),                 // Looking toward the origin
-	// 	ft_tuple(0, 1, 0, VECTOR)                 // Up vector
-	// );
 	cam.transf = view_transform(
-		scene.camera_pos,				// from
-		add_tuple(scene.camera_pos, scene.camera_dir), // to (camera looks toward pos + dir)
-		ft_tuple(0, 1, 0, VECTOR)		// up vector
-	);
+			scene.camera_pos,
+			add_tuple(scene.camera_pos, scene.camera_dir),
+			ft_tuple(0, 1, 0, VECTOR));
 	render(cam, w, &engine->image);
 	mlx_put_image_to_window(engine->mlx, engine->window,
 		engine->image.img_ptr, 0, 0);
@@ -82,19 +76,15 @@ void	draw_scene_parsed(t_engine *engine)
 // 		printf("❌ Failed to load scene file\n");
 // 		return;
 // 	}
-
 // 	w = convert_scene_to_world(&scene);
 // 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);
 // 	cam.transf = view_transform(
 // 		ft_tuple(0, 2, -9, POINT),
 // 		ft_tuple(0, 0, 10, POINT),
 // 		ft_tuple(0, 1, 0, VECTOR));
-
 // 	render(cam, w, &engine->image);
 // 	mlx_put_image_to_window(engine->mlx, engine->window,
 // 		engine->image.img_ptr, 0, 0);
-
 // 	free_world(w);
 // 	free_matrix(cam.transf);
 // }
-

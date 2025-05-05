@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 06:50:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:50:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 09:55:31 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:55:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static e_identifier	unique_id(char *s)
 
 static e_identifier	shape_id(char *s)
 {
-	if (s[0] == 's' &&s[1] == 'p')
+	if (s[0] == 's' && s[1] == 'p')
 		return (SP);
-	else if (s[0] == 'p' &&s[1] == 'l')
+	else if (s[0] == 'p' && s[1] == 'l')
 		return (PL);
-	else if (s[0] == 'c' &&s[1] == 'y')
+	else if (s[0] == 'c' && s[1] == 'y')
 		return (CY);
-	else if (s[0] == 'c' &&s[1] == 'o')
+	else if (s[0] == 'c' && s[1] == 'o')
 		return (CO);
 	printf(AKA"Invalid shape identifier: %s\n"RES, s);
 	return (UFO);
@@ -55,35 +55,43 @@ e_identifier	get_identifier(char *s)
 	return (UFO);
 }
 
+static t_tokens	*handle_token_line(char **lines,
+					int i, t_tokens **head)
+{
+	char		**tokens;
+	t_tokens	*new_node;
+
+	tokens = ft_split(lines[i], ' ');
+	if (!tokens)
+	{
+		printf(AKA"Error: Failed to split line: %s\n"RES, lines[i]);
+		free_array(lines);
+		return (NULL);
+	}
+	if (!valid_tokens(tokens))
+	{
+		printf(AKA"Invalid token line: %s\n"RES, lines[i]);
+		free_array(tokens);
+		free_array(lines);
+		return (NULL);
+	}
+	new_node = create_token_node(tokens, get_identifier(tokens[0]));
+	append_token_node(head, new_node);
+	return (*head);
+}
+
 t_tokens	*parse_input(char **lines)
 {
 	int			i;
-	char		**tokens;
 	t_tokens	*head;
-	t_tokens	*new_node;
 
-	head = NULL;
 	i = 0;
+	head = NULL;
 	while (lines[i])
 	{
-		tokens = ft_split(lines[i], ' ');
-		if (!tokens)
-		{
-			printf(AKA"Error: Failed to split line: %s\n"RES, lines[i]);
-			free_array(lines);
+		if (!handle_token_line(lines, i, &head))
 			return (NULL);
-		}
-		if (!valid_tokens(tokens))
-		{
-			printf(AKA"Invalid token line: %s\n"RES, lines[i]);
-			free_array(tokens);
-			free_array(lines);
-			return (NULL);
-		}
-		new_node = create_token_node(tokens, get_identifier(tokens[0]));
-		append_token_node(&head, new_node);
 		i++;
-		// print_node(new_node);
 	}
 	printf(G_B"✔ "GR"Finished parsing tokens\n"RES);
 	return (head);

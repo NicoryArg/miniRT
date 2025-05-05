@@ -60,10 +60,10 @@ ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c handle_hooks.c handle_m
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
-PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c load_shape.c parse_utils_vec.c \
-						tokenize_lines.c build_scene.c entrypoint_parser.c parse_color.c parse_tuple_utils.c \
-						valid_sphere.c check_file.c free_utils.c parse_utils.c split_lines.c\
-						 validate_tokens.c valid_ambient.c valid_camera.c valid_light.c valid_plane.c)
+PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c load_shape.c load_unique.c parse_utils.c \
+						tokenize_lines.c valid_add_cone.c valid_add_plane.c build_scene.c entrypoint_parser.c parse_color.c \
+						parse_utils_vec.c valid_add_ambient.c valid_add_cylinder.c valid_add_sphere.c check_file.c \
+						free_utils.c parse_tuple_utils.c split_lines.c valid_add_camera.c valid_add_light.c validate_tokens.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c intersect_cone_caps.c intersect_cone.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)

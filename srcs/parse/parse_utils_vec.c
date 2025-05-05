@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 06:32:35 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:32:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 09:43:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:43:44 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,21 @@
 #include "engine.h"
 #include "parse.h"
 
-int	count_split(char **arr)
-{
-	int	count = 0;
-
-	if (!arr)
-		return (0);
-	while (arr[count])
-		count++;
-	return (count);
-}
-
-int	is_float(const char *s)
+static int	is_valid_float_chars(const char *s, int *has_digit)
 {
 	int	i;
-	int	has_digit;
 	int	has_dot;
 
-	if (!s || *s == '\0')
-		return (0);
-
 	i = 0;
-	has_digit = 0;
+	*has_digit = 0;
 	has_dot = 0;
-
-	if (s[i] == '-' || s[i] == '+') // optional sign
-		i++;
-
 	while (s[i])
 	{
 		if (ft_isdigit(s[i]))
-			has_digit = 1;
+			*has_digit = 1;
 		else if (s[i] == '.')
 		{
-			if (has_dot) // multiple dots
+			if (has_dot)
 				return (0);
 			has_dot = 1;
 		}
@@ -55,9 +36,38 @@ int	is_float(const char *s)
 			return (0);
 		i++;
 	}
-	return (has_digit);
+	return (1);
 }
 
+int	is_float(const char *s)
+{
+	int	i;
+	int	has_digit;
+
+	if (!s || *s == '\0')
+		return (0);
+	i = 0;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	return (is_valid_float_chars(s + i, &has_digit) && has_digit);
+}
+
+static int	is_valid_vec3_parts(char **parts)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (!is_float(parts[i]))
+		{
+			printf("❌ is_vec3: component '%s' is not a float\n", parts[i]);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
 
 int	is_vec3(const char *str)
 {
@@ -73,39 +83,12 @@ int	is_vec3(const char *str)
 		free_split(parts);
 		return (0);
 	}
-	for (int i = 0; i < 3; i++)
-	{
-		if (!is_float(parts[i]))
-		{
-			printf("❌ is_vec3: component '%s' is not a float\n", parts[i]);
-			free_split(parts);
-			return (0);
-		}
-	}
-	valid = is_float(parts[0]) && is_float(parts[1]) && is_float(parts[2]);
+	valid = is_valid_vec3_parts(parts);
 	free_split(parts);
 	return (valid);
 }
 
-int	is_color(const char *str)
+bool	is_normalized_vector(t_tuple v)
 {
-	char	**parts;
-	int		r, g, b;
-
-	parts = ft_split(str, ',');
-	if (!parts || count_split(parts) != 3)
-	{
-		printf("❌ is_color failed on '%s'\n", str);
-		free_split(parts);
-		return (0);
-	}
-	r = ft_atoi(parts[0]);
-	g = ft_atoi(parts[1]);
-	b = ft_atoi(parts[2]);
-	free_split(parts);
-	return (
-		r >= 0 && r <= 255 &&
-		g >= 0 && g <= 255 &&
-		b >= 0 && b <= 255
-	);
+	return (fabs(magnitude(v) - 1.0) < EPSILON);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 06:38:03 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:38:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 09:43:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:43:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,16 @@ double	ft_atof(const char *str)
 		}
 	}
 	return (result * sign);
+}
+
+int	count_split(char **arr)
+{
+	int	count;
+
+	count = 0;
+	if (!arr)
+		return (0);
+	while (arr[count])
+		count++;
+	return (count);
 }

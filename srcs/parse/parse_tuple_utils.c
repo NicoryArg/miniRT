@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 06:38:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:38:09 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 09:38:31 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:38:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "engine.h"
 #include "parse.h"
 
+t_tuple	ft_point(double x, double y, double z)
+{
+	return (ft_tuple(x, y, z, POINT));
+}
+
+t_tuple	ft_vector(double x, double y, double z)
+{
+	return (ft_tuple(x, y, z, VECTOR));
+}
 
 t_tuple	parse_tuple(char *str, int type)
 {
@@ -33,15 +42,6 @@ t_tuple	parse_tuple(char *str, int type)
 	free_split(split);
 	return (tup);
 }
-t_tuple	ft_point(double x, double y, double z)
-{
-	return ft_tuple(x, y, z, POINT);
-}
-
-t_tuple	ft_vector(double x, double y, double z)
-{
-	return ft_tuple(x, y, z, VECTOR);
-}
 
 t_point3d	parse_point(char *str)
 {
@@ -60,4 +60,14 @@ t_point3d	parse_point(char *str)
 	point = ft_point(x, y, z);
 	free_split(split);
 	return (point);
+}
+
+t_matrix	*align_up_vector(t_vector3d normal)
+{
+	t_vector3d	up;
+
+	up = ft_vector(0, 1, 0);
+	if (equal_tuple(normalize(normal), up))
+		return (create_identity_matrix(4));
+	return (rotation_matrix(up, normal));
 }

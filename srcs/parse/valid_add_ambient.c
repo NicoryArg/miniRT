@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_camera.c                                     :+:      :+:    :+:   */
+/*   valid_add_ambient.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 07:28:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 07:29:10 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 09:21:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:21:54 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_camera(char **tokens)
+int	valid_ambient(char **tokens)
 {
-	double	fov;
+	double	ratio;
 
-	if (count_split(tokens) != 4)
+	if (count_split(tokens) != 3)
 		return (0);
-	if (!is_vec3(tokens[1]))
+	if (!is_float(tokens[1]))
 		return (0);
-	if (!is_vec3(tokens[2]))
+	ratio = ft_atof(tokens[1]);
+	if (ratio < 0.0 || ratio > 1.0)
 		return (0);
-	if (!is_float(tokens[3]))
-		return (0);
-	fov = ft_atof(tokens[3]);
-	if (fov < 0.0 || fov > 180.0)
+	if (!is_color(tokens[2]))
 		return (0);
 	return (1);
 }

@@ -5,39 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 08:10:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 08:10:12 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 10:01:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 10:01:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "engine.h"
 #include "parse.h"
-
-void	load_ambient(char **tokens, t_parsed_scene *scene)
-{
-	scene->ambient_ratio = ft_atof(tokens[1]);
-	scene->ambient_color = parse_color(tokens[2]);
-	scene->has_ambient = 1;
-}
-
-void	load_camera(char **tokens, t_parsed_scene *scene)
-{
-	scene->camera_pos = parse_point(tokens[1]);
-	scene->camera_dir = parse_tuple(tokens[2], VECTOR);
-	scene->fov = ft_atof(tokens[3]);
-	printf("Parsed FOV: %f\n", scene->fov);
-	scene->has_camera = 1;
-}
-void	load_light(char **tokens, t_parsed_scene *scene)
-{
-	if (scene->light_count >= MAX_LIGHTS)
-		return;
-
-	scene->light_positions[scene->light_count] = parse_point(tokens[1]);
-	scene->light_colours[scene->light_count] = parse_color(tokens[2]);
-	scene->light_count++;
-}
 
 void	load_sphere(char **sp, t_parsed_scene *scene)
 {
@@ -56,6 +31,30 @@ void	load_plane(char **tokens, t_parsed_scene *scene)
 	p.position = parse_point(tokens[1]);
 	p.normal = parse_point(tokens[2]);
 	p.color = parse_color(tokens[3]);
-
 	scene->planes[scene->plane_count++] = p;
+}
+
+void	load_cylinder(char **tokens, t_parsed_scene *scene)
+{
+	t_cylinder_input	cy;
+
+	cy.position = parse_point(tokens[1]);
+	cy.normal = normalize(parse_point(tokens[2]));
+	cy.diameter = ft_atof(tokens[3]);
+	cy.height = ft_atof(tokens[4]);
+	cy.color = parse_color(tokens[5]);
+	scene->cylinders[scene->cylinder_count++] = cy;
+}
+
+void	load_cone(char **tokens, t_parsed_scene *scene)
+{
+	t_cone_input	cone;
+
+	cone.position = parse_point(tokens[1]);
+	cone.normal = parse_tuple(tokens[2], VECTOR);
+	cone.diameter = ft_atof(tokens[3]);
+	cone.min = ft_atof(tokens[4]);
+	cone.max = ft_atof(tokens[5]);
+	cone.color = parse_color(tokens[6]);
+	scene->cones[scene->cone_count++] = cone;
 }

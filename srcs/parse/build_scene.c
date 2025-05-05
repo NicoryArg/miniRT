@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 08:36:27 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 08:38:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 10:00:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 10:00:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,136 +15,91 @@
 #include "parse.h"
 #include "tests.h"
 
-
-t_matrix	*align_up_vector(t_vector3d normal)
+t_object	**alloc_objects_array(t_parsed_scene *scene, int *total)
 {
-	t_vector3d	up;
+	t_object	**objects;
+	int			count;
 
-	up = ft_vector(0, 1, 0);
-	if (equal_tuple(normalize(normal), up))
-		return (create_identity_matrix(4));
-	return (rotation_matrix(up, normal));
+	count = scene->sphere_count + scene->plane_count
+		+ scene->cylinder_count + scene->cone_count;
+	objects = malloc(sizeof(t_object *) * count);
+	if (!objects)
+		malloc_err("Failed to allocate objects");
+	*total = count;
+	return (objects);
 }
+
 t_world	*convert_scene_to_world(t_parsed_scene *scene)
 {
 	t_world		*w;
-	t_sphere	*sphere;
-	t_plane		*plane;
 	t_object	**objects;
+	int			count;
 	int			i;
-	int			obj_count;
 
 	w = ft_world();
 	if (!w)
 		malloc_err("Failed to allocate world");
-
-	obj_count = scene->sphere_count + scene->plane_count;
-	objects = malloc(sizeof(t_object *) * obj_count);
-	if (!objects)
-		malloc_err("Failed to allocate objects");
-
+	objects = alloc_objects_array(scene, &count);
 	i = 0;
-	// Spheres
-	for (int s = 0; s < scene->sphere_count; s++)
-	{
-		t_sphere_input in = scene->spheres[s];
-		sphere = ft_sphere(1);
-		sphere->base.m = ft_material();
-		sphere->base.m.c = in.color;
-
-		double radius = in.diameter / 2.0;
-		t_matrix *scale_m = scale(radius, radius, radius);
-		t_matrix *trans_m = translate(in.position.x, in.position.y, in.position.z);
-		t_matrix *transform = multiply_and_free(scale_m, trans_m);
-		set_transf(sphere, transform);
-
-		objects[i++] = (t_object *)sphere;
-	}
-
-	// Planes
-	for (int p = 0; p < scene->plane_count; p++)
-	{
-		t_plane_input in = scene->planes[p];
-		plane = ft_plane();
-		plane->base.m = ft_material();
-		plane->base.m.c = in.color;
-		plane->base.m.ambient = 0.1;
-		plane->base.m.diffuse = 0.9;
-		plane->base.m.specular = 0.0;
-
-		t_vector3d n = normalize(in.normal);
-		t_matrix *rot_m = align_up_vector(n);
-		t_matrix *trans_m = translate(in.position.x, in.position.y, in.position.z);
-		t_matrix *transform = multiply_and_free(rot_m, trans_m);
-		set_transf(plane, transform);
-		print_matrix(plane->base.transf);  // Add after set_transf
-
-		objects[i++] = (t_object *)plane;
-	}
-
+	i = add_spheres(objects, scene, i);
+	i = add_planes(objects, scene, i);
+	i = add_cylinders(objects, scene, i);
+	i = add_cones(objects, scene, i);
+	add_lights(w, scene);
 	w->ambient.ratio = scene->ambient_ratio;
 	w->ambient.colour = scene->ambient_color;
 	w->objects = (void **)objects;
-	w->object_count = obj_count;
-
-	for (int i = 0; i < scene->light_count; i++)
-		add_light_to_world(w,
-			ft_light(scene->light_positions[i], scene->light_colours[i]));
-
+	w->object_count = count;
 	return (w);
 }
 
+t_parsed_scene	init_parsed_scene(void)
+{
+	t_parsed_scene	scene;
+
+	scene.ambient_ratio = 0;
+	scene.ambient_color = ft_colour(0, 0, 0);
+	scene.has_ambient = 0;
+	scene.has_camera = 0;
+	scene.fov = 0;
+	scene.camera_pos = ft_point(0, 0, 0);
+	scene.camera_dir = ft_vector(0, 0, 1);
+	scene.light_count = 0;
+	scene.sphere_count = 0;
+	scene.plane_count = 0;
+	scene.cylinder_count = 0;
+	scene.cone_count = 0;
+	return (scene);
+}
+
+void	dispatch_token(t_tokens *current, t_parsed_scene *scene)
+{
+	if (current->type == A)
+		load_ambient(current->tokens, scene);
+	else if (current->type == C)
+		load_camera(current->tokens, scene);
+	else if (current->type == L)
+		load_light(current->tokens, scene);
+	else if (current->type == PL)
+		load_plane(current->tokens, scene);
+	else if (current->type == SP)
+		load_sphere(current->tokens, scene);
+	else if (current->type == CY)
+		load_cylinder(current->tokens, scene);
+	else if (current->type == CO)
+		load_cone(current->tokens, scene);
+}
 
 t_parsed_scene	build_scene_from_tokens(t_tokens *head)
 {
 	t_parsed_scene	scene;
 	t_tokens		*current;
 
-	scene.sphere_count = 0;
-	scene.plane_count = 0;
-	scene.light_count = 0;
-	scene.has_ambient = 0;
-	scene.has_camera = 0;
+	scene = init_parsed_scene();
 	current = head;
 	while (current)
 	{
-		if (current->type == A)
-		{
-			if (!valid_ambient(current->tokens))
-				printf("Invalid ambient light\n");
-			load_ambient(current->tokens, &scene);
-		}
-		if (current->type == C)
-		{
-			if (!valid_camera(current->tokens))
-				printf("Invalid camera\n");
-			load_camera(current->tokens, &scene);
-		}
-		else if (current->type == L)
-		{
-			if (!valid_light(current->tokens))
-				printf("Invalid light\n");
-			load_light(current->tokens, &scene);
-		}
-		else if (current->type == PL)
-		{
-			if (!valid_plane(current->tokens))
-				printf("Invalid plane\n");
-			load_plane(current->tokens, &scene);
-		}
-		else if (current->type == SP)
-		{
-			if (!valid_sphere(current->tokens))
-				printf("Invalid sphere\n");
-			load_sphere(current->tokens, &scene);
-		}
-		// else if (current->type == CY)
-		// {
-		// 	if (!valid_cylinder(current->tokens))
-		// 		printf("Invalid cylinder\n");
-		// 	load_cylinder(current->tokens, &scene);
-		// }
-
+		dispatch_token(current, &scene);
 		current = current->next;
 	}
 	return (scene);

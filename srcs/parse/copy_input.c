@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 05:47:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 05:47:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 10:02:23 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 10:02:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	grab_input(char *file, char **buf)
 		if (total >= MAX_FILE)
 		{
 			free(*buf);
-			return(printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
+			return (printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
 		}
 	}
 	if (bytes_read < 0)
@@ -61,7 +61,7 @@ static int	count_lines(char *str)
 	return (count);
 }
 
-static char **alloc_lines(char *str)
+static char	**alloc_lines(char *str)
 {
 	int		i;
 	int		count;
