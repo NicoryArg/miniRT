@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_input.c                                      :+:      :+:    :+:   */
+/*   copy_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 18:42:06 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/29 19:42:08 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/05 10:02:23 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 10:02:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 static int	grab_input(char *file, char **buf)
 {
@@ -27,7 +29,7 @@ static int	grab_input(char *file, char **buf)
 		if (total >= MAX_FILE)
 		{
 			free(*buf);
-			return(printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
+			return (printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
 		}
 	}
 	if (bytes_read < 0)
@@ -59,7 +61,7 @@ static int	count_lines(char *str)
 	return (count);
 }
 
-static char **alloc_lines(char *str)
+static char	**alloc_lines(char *str)
 {
 	int		i;
 	int		count;
@@ -79,7 +81,6 @@ static char **alloc_lines(char *str)
 	}
 	return (lines);
 }
-
 
 char	**copy_input(char *file)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_planes.c                                     :+:      :+:    :+:   */
+/*   draw_planes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:21:58 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:21:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:17:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 21:27:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_world	*scene_planes()
 	s1->base.m.c = ft_colour(0.1, 1, 0.5);
 	s1->base.m.diffuse = 0.7;
 	s1->base.m.specular = 0.3;
-	transform = multiply_matrices(scale(0.9, 0.9, 0.9), translate(-0.5, 0.9, 0.5));
+	transform = multiply_and_free(scale(0.9, 0.9, 0.9), translate(-0.5, 0.9, 0.5));
 	set_transf(s1, transform);
 	object_count++;
 
@@ -38,7 +38,7 @@ t_world	*scene_planes()
 	s2->base.m.c = ft_colour(0.5, 1, 0.1);
 	s2->base.m.diffuse = 0.7;
 	s2->base.m.specular = 0.3;
-	transform = multiply_matrices(scale(0.5, 0.5, 0.5), translate(3, 1, -2.8));
+	transform = multiply_and_free(scale(0.5, 0.5, 0.5), translate(3, 1, -2.8));
 	set_transf(s2, transform);
 	object_count++;
 
@@ -47,7 +47,7 @@ t_world	*scene_planes()
 	s3->base.m.c = ft_colour(1, 0.8, 1);
 	s3->base.m.diffuse = 0.7;
 	s3->base.m.specular = 0.3;
-	transform = multiply_matrices(scale(0.33, 0.33, 0.33), translate(-5, 0.8, -2.7));
+	transform = multiply_and_free(scale(0.33, 0.33, 0.33), translate(-5, 0.8, -2.7));
 	set_transf(s3, transform);
 	object_count++;
 
@@ -59,23 +59,23 @@ t_world	*scene_planes()
 
 // //right wall
 // 	t_plane	*right_wall = ft_plane();
-// 	set_transf(right_wall, multiply_matrices(rotate_y(M_PI/4), rotate_x(M_PI/2)));
-// 	set_transf(right_wall, multiply_matrices(translate(0,0,10), right_wall->base.transf));
+// 	set_transf(right_wall, multiply_and_free(rotate_y(M_PI/4), rotate_x(M_PI/2)));
+// 	set_transf(right_wall, multiply_and_free(translate(0,0,10), right_wall->base.transf));
 // 	right_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
 // 	right_wall->base.m.specular = 0;
 // 	object_count++;
 
 // //left wall
 // 	t_plane	*left_wall = ft_plane();
-// 	set_transf(left_wall, multiply_matrices(rotate_y(-M_PI/4), rotate_x(M_PI/2)));
-// 	set_transf(left_wall, multiply_matrices(translate(0,0,10), left_wall->base.transf));
+// 	set_transf(left_wall, multiply_and_free(rotate_y(-M_PI/4), rotate_x(M_PI/2)));
+// 	set_transf(left_wall, multiply_and_free(translate(0,0,10), left_wall->base.transf));
 // 	left_wall->base.m.c = ft_colour(0.8, 0.8, 0.8);
 // 	left_wall->base.m.specular = 0;
 // 	object_count++;
 
 //World
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
 	w->objects = malloc(sizeof(t_object *) * object_count);
 	if (!w->objects)
 		return (NULL);
@@ -96,6 +96,7 @@ void	draw_planes(t_engine *engine)
 
 	w = scene_planes();
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, 60);//try to not change
+	free_matrix(cam.transf);
 	cam.transf = view_transform(
 		ft_tuple(0, 2, -7, POINT),//from camera
 		ft_tuple(0, 0, 10, POINT),//look at target

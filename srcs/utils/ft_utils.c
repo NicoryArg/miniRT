@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 14:32:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 14:32:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/26 05:43:40 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/26 06:02:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,30 @@ void	ft_swap(t_hit **a, t_hit **b)
 	*b = tmp;
 }
 
-double	ft_max(double a, double b)
+void	print_progress_bar(int y, int total)
 {
-	if (a > b)
-		return (a);
-	else
-		return (b);
+	int		percent;
+	int		filled;
+	int		i;
+
+	percent = (y * 100) / total;
+	filled = (percent * 50) / 100;
+	i = 0;
+	printf("\r[");
+	while (i < filled)
+	{
+		printf("\033[32m=\033[0m");
+		i++;
+	}
+	while (i < 50)
+	{
+		printf(" ");
+		i++;
+	}
+	printf("] %3d%% (%d/%d)", percent, y, total);
+	if (y == total)
+		printf("\n");
 }
 
-double	ft_min(double a, double b)
-{
-	if (a < b)
-		return (a);
-	else
-		return (b);
-}
+
+

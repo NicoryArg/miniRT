@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:20:18 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:20:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:20:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:22:47 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	world_test(int run)
 		printf(GR"✔ No objects in the world\n"RES);
 	else
 		printf(AKA"❌ World has unexpected objects\n"RES);
-	if (w->light == NULL)
+	if (w->lights == NULL)
 		printf(GR"✔ No light in the world\n"RES);
 	else
 		printf(AKA"❌ World has a light source when it shouldn't\n"RES);
@@ -60,33 +60,42 @@ int	default_world_test(int run)
 	w = default_world();
 	// Check the light
 	expected_light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
-	printf("Expected Light Position: (%.1f, %.1f, %.1f)\n", expected_light->pos.x, expected_light->pos.y, expected_light->pos.z);
-	printf("Actual Light Position:   (%.1f, %.1f, %.1f)\n", w->light->pos.x, w->light->pos.y, w->light->pos.z);
-	printf("Expected Light Color: (%.1f, %.1f, %.1f)\n", expected_light->lum.r, expected_light->lum.g, expected_light->lum.b);
-	printf("Actual Light Color:   (%.1f, %.1f, %.1f)\n", w->light->lum.r, w->light->lum.g, w->light->lum.b);
-	if (equal_tuple(w->light->pos, expected_light->pos) &&
-		ft_equal(w->light->lum.r, expected_light->lum.r) &&
-		ft_equal(w->light->lum.g, expected_light->lum.g) &&
-		ft_equal(w->light->lum.b, expected_light->lum.b))
+	printf("Expected Light Position: (%.1f, %.1f, %.1f)\n",
+		expected_light->pos.x, expected_light->pos.y, expected_light->pos.z);
+	printf("Actual Light Position:   (%.1f, %.1f, %.1f)\n",
+		w->lights[0]->pos.x, w->lights[0]->pos.y, w->lights[0]->pos.z);
+	printf("Expected Light Color: (%.1f, %.1f, %.1f)\n",
+		expected_light->lum.r, expected_light->lum.g, expected_light->lum.b);
+	printf("Actual Light Color:   (%.1f, %.1f, %.1f)\n",
+		w->lights[0]->lum.r, w->lights[0]->lum.g, w->lights[0]->lum.b);
+	if (equal_tuple(w->lights[0]->pos, expected_light->pos) &&
+		ft_equal(w->lights[0]->lum.r, expected_light->lum.r) &&
+		ft_equal(w->lights[0]->lum.g, expected_light->lum.g) &&
+		ft_equal(w->lights[0]->lum.b, expected_light->lum.b))
 		printf(G_B"✔ Light is correctly initialized\n"RES);
 	else
-		return(printf(AKA"❌ Light does not match expected values\n"RES));
+		return (printf(AKA"❌ Light does not match expected values\n"RES));
 	free(expected_light);
 	// Check object count
 	printf("World object count: %d\n", w->object_count);
 	if (w->object_count == 2)
 		printf(G_B"✔ World has 2 objects\n"RES);
 	else
-		return(printf(AKA"❌ World object count is incorrect\n"RES));
+		return (printf(AKA"❌ World object count is incorrect\n"RES));
 	// Check first sphere's material
 	s1 = w->objects[0];
-	printf("First sphere material color: (%.1f, %.1f, %.1f)\n", s1->base.m.c.r, s1->base.m.c.g, s1->base.m.c.b);
-	printf("Diffuse: %.1f | Specular: %.1f\n", s1->base.m.diffuse, s1->base.m.specular);
-	if (ft_equal(s1->base.m.c.r, 0.8) && ft_equal(s1->base.m.c.g, 1.0) && ft_equal(s1->base.m.c.b, 0.6) &&
-		ft_equal(s1->base.m.diffuse, 0.7) && ft_equal(s1->base.m.specular, 0.2))
+	printf("First sphere material color: (%.1f, %.1f, %.1f)\n",
+		s1->base.m.c.r, s1->base.m.c.g, s1->base.m.c.b);
+	printf("Diffuse: %.1f | Specular: %.1f\n",
+		s1->base.m.diffuse, s1->base.m.specular);
+	if (ft_equal(s1->base.m.c.r, 0.8) &&
+		ft_equal(s1->base.m.c.g, 1.0) &&
+		ft_equal(s1->base.m.c.b, 0.6) &&
+		ft_equal(s1->base.m.diffuse, 0.7) &&
+		ft_equal(s1->base.m.specular, 0.2))
 		printf(G_B"✔ First sphere material matches expected values\n"RES);
 	else
-		return(printf(AKA"❌ First sphere material does not match expected values\n"RES));
+		return (printf(AKA"❌ First sphere material does not match expected values\n"RES));
 	// Check second sphere’s scale (0.5, 0.5, 0.5)
 	s2 = w->objects[1];
 	expected_scale = scale(0.5, 0.5, 0.5);
@@ -97,11 +106,12 @@ int	default_world_test(int run)
 	if (equal_matrix(s2->base.transf, expected_scale))
 		printf(G_B"✔ Second sphere transform is scaled correctly\n"RES);
 	else
-		return(printf(AKA"❌ Second sphere transform is incorrect\n"RES));
+		return (printf(AKA"❌ Second sphere transform is incorrect\n"RES));
 	free_matrix(expected_scale);
 	free_world(w);
 	return (0);
 }
+
 
 int	intersect_world_test(int run)
 {
@@ -299,7 +309,7 @@ int	shade_hit_test(int run)
 	print_test_banner("Shading an intersection (inside)");
 	print_test_number(&i);
 	w = default_world();
-	w->light = ft_light(ft_tuple(0, 0.25, 0, POINT), ft_colour(1, 1, 1));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 	hit = intersection(0.5, w->objects[1]);
 	comps = pre_compute(hit, r);

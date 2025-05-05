@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 14:32:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/02 14:32:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:55:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:55:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ t_colour	add_colours(t_colour	a, t_colour b)
 	return (new);
 }
 
+t_colour	diff_colours(t_colour a, t_colour b)
+{
+	t_colour result;
+
+	result.r = a.r - b.r;
+	result.g = a.g - b.g;
+	result.b = a.b - b.b;
+	return (result);
+}
 t_colour	mult_colour(t_colour c, double num)
 {
 	t_colour	new;
@@ -81,8 +90,17 @@ int	convert_colour_to_int(t_colour col)
 	int	g;
 	int	b;
 
-	r = ft_min(ft_max(col.r * 255, 0), 255);
-	g = ft_min(ft_max(col.g * 255, 0), 255);
-	b = ft_min(ft_max(col.b * 255, 0), 255);
+	r = fmin(fmax(col.r * 255, 0), 255);
+	g = fmin(fmax(col.g * 255, 0), 255);
+	b = fmin(fmax(col.b * 255, 0), 255);
 	return (r << 16 | g << 8 | b);
+}
+t_colour	clamp_colour(t_colour c)
+{
+	t_colour	clamped;
+
+	clamped.r = fmin(fmax(c.r, 0.0), 1.0);
+	clamped.g = fmin(fmax(c.g, 0.0), 1.0);
+	clamped.b = fmin(fmax(c.b, 0.0), 1.0);
+	return (clamped);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:41:32 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:41:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:05:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:05:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
-# include "parse.h"
 
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
@@ -76,16 +75,31 @@ typedef enum e_pattern_type
 	PATTERN_STRIPE,
 	PATTERN_GRADIENT,
 	PATTERN_RING,
-	PATTERN_CHECKERS
+	PATTERN_CHECKERS,
+	PATTERN_UV_STRIPE,
+	PATTERN_UV_GRADIENT,
+	PATTERN_UV_CHECKERS,
+	PATTERN_SOLID
 } t_pattern_type;
 
 typedef struct s_pattern
 {
-	t_pattern_type type;
-	t_colour a;
-	t_colour b;
-	t_matrix *transform;
-} t_pattern;
+	t_pattern_type		type;
+	t_colour			a;
+	t_colour			b;
+	t_matrix			*transform;
+	double				frequency;
+	int					width;		// number of columns for UV checkers
+	int					height;		// number of rows for UV checkers
+	struct s_pattern	*a_pattern;
+	struct s_pattern	*b_pattern;
+}	t_pattern;
+
+typedef struct s_uv
+{
+	double	u;
+	double	v;
+}	t_uv;
 
 //#############################################
 //################ OBJECTS ####################
@@ -95,8 +109,8 @@ typedef enum e_obj_type
 	SPHERE,
 	CYLINDER,
 	PLANE,
+	CONE,
 }	t_obj;
-
 
 typedef struct s_material
 {
@@ -132,6 +146,28 @@ typedef struct s_cylinder
 	double		max;
 	bool		closed;
 }	t_cylinder;
+
+typedef struct s_cone
+{
+	t_object	base;
+	double		min;
+	double		max;
+	bool		closed;
+}	t_cone;
+
+/**
+ * @brief Stores the two t-values resulting from a ray-cone intersection.
+ *
+ * When a ray intersects the side of a cone, it produces up to two
+ * solutions (t0 and t1) from the quadratic formula. This struct holds
+ * those values for later validation against the cone’s height limits.
+ */
+typedef struct	s_cone_vals
+{
+	double	t0;
+	double	t1;
+}	t_cone_vals;
+
 
 typedef struct s_plane
 {
@@ -171,6 +207,11 @@ typedef struct s_hitlist
 //#############################################
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
+typedef struct s_ambient
+{
+	double		ratio;
+	t_colour	colour;
+}	t_ambient;
 
 typedef struct s_light
 {
@@ -224,7 +265,9 @@ typedef struct s_world
 {
 	void		**objects;
 	int			object_count;
-	t_light		*light;
+	t_light		**lights;
+	int			light_count;
+	t_ambient	ambient;
 }	t_world;
 
 typedef struct s_camera
@@ -236,6 +279,7 @@ typedef struct s_camera
 	double		half_width;
 	double		half_height;
 	t_matrix	*transf;
+	t_matrix	*inverse_transf;
 }	t_camera;
 
 //#############################################
@@ -293,6 +337,7 @@ t_matrix	*invert_matrix(t_matrix *matrix);
 int			equal_matrix(t_matrix *a, t_matrix *b);
 void		compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result);
 t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
+t_matrix	*multiply_and_free(t_matrix *a, t_matrix *b);
 t_matrix	*multiply_by_identity(t_matrix *input);
 t_matrix	*transpose_matrix(t_matrix *input);
 
@@ -302,14 +347,46 @@ void		free_matrix(t_matrix *matrix);
 //#############################################
 //##############PATTERNS#######################
 //#############################################
-double		ft_floor(double x);
-t_pattern	stripe_pattern(t_colour a, t_colour b);
-t_colour	stripe_at(t_pattern *pattern, t_tuple point);
-t_colour	stripe_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
-t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
-t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
-t_pattern	test_pattern(void);//test
+//nested_patterns.c
+t_pattern	*solid_pattern(t_colour c);
+t_pattern	*make_diagonal_stripe(t_colour a, t_colour b, double angle);
 
+//patterns.c
+t_tuple		transform_world_to_object(t_tuple w_point, t_matrix *inverse);
+t_colour	pattern_at_object(t_pattern *pattern, t_object *object, t_tuple world_point);
+t_colour	pattern_colour_at(t_pattern *patt, t_tuple pattern_point, t_object *obj);
+t_colour	pattern_colour_at_world(t_pattern *pattern, t_object *object, t_tuple world_point);
+// t_colour	test_pattern_at(t_pattern *pattern, t_tuple point);//TEST
+// t_pattern	test_pattern(void);//test
+
+//math_patterns.c
+t_colour	stripe_at(t_pattern *pattern, t_tuple point, t_object *obj);
+t_colour	gradient_at(t_pattern *pattern, t_tuple point);
+t_colour	ring_at(t_pattern *pattern, t_tuple point, t_object *obj);
+t_colour	checkers_at(t_pattern *pattern, t_tuple point, t_object *obj);
+
+//type_patterns.c
+t_pattern	stripe_pattern(t_colour a, t_colour b);
+t_pattern	gradient_pattern(t_colour a, t_colour b);
+t_pattern	ring_pattern(t_colour a, t_colour b);
+t_pattern	checkers_pattern(t_colour a, t_colour b);
+
+//type_uv_patterns.c
+t_pattern	uv_stripe_pattern(t_colour a, t_colour b, int width, int height);
+t_pattern	uv_gradient_pattern(t_colour a, t_colour b, int width, int height);
+t_pattern	uv_checkers_pattern(t_colour a, t_colour b, int width, int height);
+//uv_mapping.c
+t_uv		uv_spherical(t_tuple point);
+t_uv		uv_planar(t_tuple point);
+t_uv		uv_cylindrical(t_tuple point);
+t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj);
+
+//type_uv_patterns.c
+t_colour	uv_checkers_at(t_pattern *pattern, t_uv uv);
+t_colour	uv_stripe_at(t_pattern *pattern, t_uv uv);
+t_colour	uv_gradient_at(t_pattern *pattern, t_uv uv);
+
+//
 //#############################################
 //##################RAYS#######################
 //#############################################
@@ -318,6 +395,14 @@ void		ft_swap(t_hit **a, t_hit **b);
 void		sort_intersections(t_hit	**xs, int count);
 t_hit		*find_visible_hit(t_hitlist **list);
 double		find_hit(t_hit	**intersections, int count);
+
+//intersect_cone_caps.c
+void		intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray);
+bool		check_cone_cap(t_ray *ray, double t, double y);
+t_tuple		normal_at_cone(t_object *obj, t_tuple world_point);
+
+//intersect_cone.c
+void		intersect_cone(t_object *shape, t_ray *ray, t_hitlist **xs);
 
 //intersect_cyl.c
 void		intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs);
@@ -375,7 +460,8 @@ t_tuple		local_normal_at(void *shape, t_tuple world_p);
 t_computations	pre_compute(t_hit	*hit, t_ray *ray);
 t_colour		shade_hit(t_world *w, t_computations comps, bool ignore_shadows);
 t_colour		color_at(t_world *world, t_ray *ray, bool ignore_shadows);
-bool			is_shadowed(t_world *w, t_tuple point);
+bool			is_shadowed(t_world *w, t_tuple point, t_light *light);
+void			add_light_to_world(t_world *world, t_light *light);
 
 
 //#############################################
@@ -395,6 +481,7 @@ void		intersect_world(t_world *w, t_ray *r, t_hitlist **xs);
 t_sphere	*ft_sphere(double radius);
 t_plane		*ft_plane(void);
 t_cylinder	*ft_cylinder(void);
+t_cone		*ft_cone(void);
 
 //#############################################
 //############ TRANSFORMATIONS ################
@@ -447,7 +534,7 @@ t_tuple		cross(t_tuple a, t_tuple b);
  */
 t_tuple		ft_tuple(double x, double y, double z, t_tpl type);
 t_tuple		new_tuple(void);
-t_tuple		normalise(t_tuple v);
+t_tuple		normalize(t_tuple v);
 
 //tuple_utils.c
 bool		is_point(t_tuple tuple);
@@ -462,22 +549,29 @@ t_tuple		ft_negate(t_tuple tup);
 //colours.c
 t_colour	ft_colour(double r, double g, double b);
 t_colour	add_colours(t_colour	a, t_colour b);
+t_colour	diff_colours(t_colour a, t_colour b);
 t_colour	mult_colour(t_colour c, double num);
 t_colour	mult_colours(t_colour c1, t_colour c2);
 int			convert_colour_to_int(t_colour col);
+t_colour	clamp_colour(t_colour c);
 
 
 //free_utils.c
 void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
+void		free_plane(t_plane *plane);
+void		free_cylinder(t_cylinder *cyl);
+void		free_cone(t_cone *cone);
+void		free_hitlists(t_hitlist *xs);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);
 void		free_material(t_material *m);
+void		free_pattern(t_pattern *pattern);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);
-double		ft_max(double a, double b);
-double		ft_min(double a, double b);
+void		print_progress_bar(int y, int total);
+
 
 //#############################################
 //################# VIEW ######################
@@ -503,6 +597,7 @@ t_camera	ft_camera(double hsize, double vsize, double fov_degrees);
  * @return a pointer to the ray object
  */
 t_ray		*ray_for_pixel(t_camera cam, int px, int py);
+t_ray		ray_for_subpixel(t_camera cam, int px, int py, double offset_x, double offset_y);
 
 //view_transform.c
 t_matrix	*orientation_matrix(t_tuple forward, t_tuple up);

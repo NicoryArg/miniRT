@@ -24,7 +24,7 @@ t_tuple ft_tuple(double x, double y, double z, t_tpl type)
 	return (tuple);
 }
 
-t_tuple	normalise(t_tuple v)
+t_tuple	normalize(t_tuple v)
 {
 	double	len;
 	t_tuple	normal;

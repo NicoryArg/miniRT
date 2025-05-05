@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 23:23:20 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 23:23:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/23 16:39:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/23 16:39:48 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ t_colour	ft_shading(t_shading L, bool in_shadow)
 
 	if (L.m.pattern && L.m.pattern->transform && L.obj && ((t_object *)L.obj)->transf)
 		ph.effective_colour = mult_colours(
-			pattern_at_object(L.m.pattern, L.obj, L.point), L.l->lum);
+			pattern_colour_at_world(L.m.pattern, L.obj, L.point), L.l->lum);
 	else
 		ph.effective_colour = mult_colours(L.m.c, L.l->lum);
-	ph.lightv = normalise(diff_tuple(L.l->pos, L.point));
+	ph.lightv = normalize(diff_tuple(L.l->pos, L.point));
 	ph.ambient = mult_colour(ph.effective_colour, L.m.ambient);
 	if (in_shadow)
 		return (ph.ambient);

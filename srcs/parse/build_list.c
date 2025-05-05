@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   build_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 11:41:19 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/01 12:11:20 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/05 09:58:40 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:59:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
 static int	count_tokens(char **tokens)
 {
@@ -24,16 +26,16 @@ static int	count_tokens(char **tokens)
 
 t_tokens	*create_token_node(char **tokens, e_identifier type)
 {
-	t_tokens *node;
+	t_tokens	*node;
 
 	node = malloc(sizeof(t_tokens));
 	if (!node)
-		return NULL;
+		return (NULL);
 	node->tokens = tokens;
 	node->count = count_tokens(tokens);
 	node->type = type;
 	node->next = NULL;
-	return node;
+	return (node);
 }
 
 void	append_token_node(t_tokens **head, t_tokens *new_node)
@@ -43,7 +45,7 @@ void	append_token_node(t_tokens **head, t_tokens *new_node)
 	if (!*head)
 	{
 		*head = new_node;
-		return;
+		return ;
 	}
 	current = *head;
 	while (current->next)
@@ -51,14 +53,12 @@ void	append_token_node(t_tokens **head, t_tokens *new_node)
 	current->next = new_node;
 }
 
-
-void print_node(t_tokens *node)
+void	print_node(t_tokens *node)
 {
-	int i;
+	int	i;
 
 	if (!node)
-		return;
-
+		return ;
 	printf(B_B "identifier: " RES "%d\n", node->type);
 	printf(B_B "token_count: " RES "%d\n", node->count);
 	printf(B_B "tokens:\n" RES);

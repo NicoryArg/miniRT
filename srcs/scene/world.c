@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:03:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:03:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_world	*ft_world(void)
 		return (NULL);
 	w->objects = NULL;
 	w->object_count = 0;
-	w->light = NULL;
+	w->lights = NULL;
+	w->light_count = 0;
+	w->ambient.ratio = 0.1;
+	w->ambient.colour = ft_colour(1, 1, 1); 
 	return (w);
 }
 
@@ -33,7 +36,8 @@ t_world	*default_world(void)
 	t_sphere	*s2;
 	// t_matrix	*transform;
 	w = ft_world();
-	w->light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+
 	s1 = ft_sphere(1);
 	s1->base.m.c = ft_colour(0.8, 1, 0.6);
 	s1->base.m.diffuse = 0.7;
@@ -74,7 +78,6 @@ t_hitlist	**new_hitlist()
 	new = malloc(sizeof(t_hitlist *));
 	if (!new)
 		malloc_err("new_hitlist");
-	// new = NULL;
 	*new = NULL;
 	return (new);
 }

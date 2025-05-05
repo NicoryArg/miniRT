@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:21:18 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 20:21:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/28 03:17:15 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/28 03:17:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_ray	*create_ray_to_point(t_tuple origin, t_tuple target)
 	t_tuple	direction;
 
 	diff = diff_tuple(target, origin);
-	direction = normalise(diff);
+	direction = normalize(diff);
 	return (ft_ray(origin, direction));
 }
 
@@ -41,7 +41,6 @@ static t_world	*simple_world(void)
 	t_sphere	*left_wall;
 	t_sphere	*right_wall;
 	t_matrix	*transform;
-	t_light		*l;
 
 	w = ft_world();
 	s1 = ft_sphere(1);
@@ -83,25 +82,10 @@ static t_world	*simple_world(void)
 	w->objects[3] = right_wall;
 	w->object_count = 4;
 
-	l = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
-	w->light = l;
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
 	return (w);
 }
-static void	print_progress_bar(int y, int total)
-{
-	int		percent = (y * 100) / total;
-	int		filled = (percent * 50) / 100;
 
-	printf("\r["); // Start of bar
-	for (int i = 0; i < filled; i++)
-		printf("\033[32m=\033[0m"); // Green fill
-	for (int i = filled; i < 50; i++)
-		printf(" "); // Empty part
-	printf("] %3d%% (%d/%d)", percent, y, total);
-	fflush(stdout);
-	if (y == total)
-		printf("\n");
-}
 
 static void	render_world_loop(t_render_ctx *ctx, t_image *img)
 {

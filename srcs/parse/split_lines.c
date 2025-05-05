@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   split_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 19:44:24 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/29 19:45:19 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/05 09:59:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 09:59:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
 
-static int copy_str(char *str, int *i, char **lines, int j)
+static int	copy_str(char *str, int *i, char **lines, int j)
 {
-	int k;
-	int space_added;
+	int	k;
+	int	space_added;
 
 	k = 0;
 	space_added = 0;

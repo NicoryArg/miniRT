@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 17:56:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/14 17:56:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 21:30:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 21:30:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_matrix	*translation;
 	t_matrix	*result;
 
-	forward = normalise(diff_tuple(to, from));
+	forward = normalize(diff_tuple(to, from));
 	// Safety check: if up vector is parallel to forward, pick a new up
-	if (fabs(dot(forward, normalise(up))) > 0.999)
+	if (fabs(dot(forward, normalize(up))) > 0.999)
 	{
 		up = safe_up(forward); // Switch to z-up if y-up breaks
 		printf(AKA"[DEBUG] Up vector was adjusted to prevent invalid camera orientation\n"RES);
 	}
-	upn = normalise(up);
+	upn = normalize(up);
 	orientation = orientation_matrix(forward, upn);
 	translation = translate(-from.x, -from.y, -from.z);
 	result = multiply_matrices(orientation, translation);

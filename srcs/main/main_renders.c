@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:55:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:56:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:01:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:01:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ int	ft_main_draw_truncated_cylinders(int run)
 	return (run_render_with(draw_cyl_truncated));
 }
 
+int	ft_main_draw_scene_patterns_full(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_scene_patterns_full));
+}
+
 int	ft_main_draw_capped_cylinders(int run)
 {
 	if (run == 0)
@@ -83,9 +90,49 @@ int	ft_main_draw_capped_cylinders(int run)
 	return (run_render_with(draw_cyl_capped));
 }
 
-int	ft_main_draw_patterns(int run)
+int	ft_main_draw_sphere_pattern(int run)
 {
 	if (run == 0)
 		return (0);
-	return (run_render_with(draw_patterns));
+	return (run_render_with(draw_sphere_pattern));
 }
+
+int	ft_main_draw_sphere_uv(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_sphere_uv));
+}
+int	ft_main_draw_sphere_nested(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_sphere_nested));
+}
+int	ft_main_draw_scene_nested(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_scene_nested));
+}
+
+int	ft_main_draw_cone(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_cone));
+}
+
+int	ft_main_draw_icecream(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_icecream));
+}
+int	ft_main_draw_idea(int run)
+{
+	if (run == 0)
+		return (0);
+	return (run_render_with(draw_idea));
+}
+

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:34:35 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 16:41:23 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/19 16:09:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/19 16:09:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,20 @@ t_matrix	*invert_matrix(t_matrix *matrix)
 	t_matrix	*inverse;
 	double		d;
 
-	if (!(invertable(matrix)))
+	d = determinant(matrix);
+	if (fabs(d) < EPSILON)
 		return (NULL);
 	cofactor_matrix = compute_cofactor_matrix(matrix);
-	inverse = transpose_matrix(cofactor_matrix);
-	d = determinant(matrix);
-	if (d == 0)
+	if (!cofactor_matrix)
 		return (NULL);
+	inverse = transpose_matrix(cofactor_matrix);
 	free_matrix(cofactor_matrix);
+	if (!inverse)
+		return (NULL);
 	scale_matrix(inverse, 1.0 / d);
 	return (inverse);
 }
+
 
 // int	main()
 // {
