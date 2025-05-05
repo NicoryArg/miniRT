@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 10:00:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 10:00:57 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:47:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:56:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,25 @@ t_object	**alloc_objects_array(t_parsed_scene *scene, int *total)
 {
 	t_object	**objects;
 	int			count;
+	int			i;
 
-	count = scene->sphere_count + scene->plane_count
-		+ scene->cylinder_count + scene->cone_count;
+	count = scene->sphere_count
+		+ scene->plane_count
+		+ scene->cylinder_count
+		+ scene->cone_count;
 	objects = malloc(sizeof(t_object *) * count);
 	if (!objects)
 		malloc_err("Failed to allocate objects");
+	i = 0;
+	while (i < count)
+	{
+		objects[i] = NULL;
+		i++;
+	}
 	*total = count;
 	return (objects);
 }
+
 
 t_world	*convert_scene_to_world(t_parsed_scene *scene)
 {
@@ -71,6 +81,8 @@ t_parsed_scene	init_parsed_scene(void)
 	scene.cone_count = 0;
 	return (scene);
 }
+
+
 
 void	dispatch_token(t_tokens *current, t_parsed_scene *scene)
 {

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:20:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 03:22:47 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:43:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:43:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	default_world_test(int run)
 	print_test_number(&i);
 	w = default_world();
 	// Check the light
-	expected_light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	expected_light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0);
 	printf("Expected Light Position: (%.1f, %.1f, %.1f)\n",
 		expected_light->pos.x, expected_light->pos.y, expected_light->pos.z);
 	printf("Actual Light Position:   (%.1f, %.1f, %.1f)\n",
@@ -309,7 +309,7 @@ int	shade_hit_test(int run)
 	print_test_banner("Shading an intersection (inside)");
 	print_test_number(&i);
 	w = default_world();
-	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 	hit = intersection(0.5, w->objects[1]);
 	comps = pre_compute(hit, r);

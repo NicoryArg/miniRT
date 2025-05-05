@@ -111,7 +111,7 @@ void	draw_sphere_pattern(t_engine *engine)
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
 
-	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0);
 	render_sphere_loop(&ctx, &engine->image, light);
 
 	free_sphere(ctx.sph); // also frees pattern and matrix inside

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:18:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 03:18:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:42:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:42:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_world	*scene_cyl_truncated()
 
 //World
 	w = ft_world();
-	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 
 	w->objects = malloc(sizeof(t_object *) * object_count);
 	if (!w->objects)

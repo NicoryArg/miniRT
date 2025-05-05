@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:10:01 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 20:10:01 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:42:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:42:50 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	draw_sphere_nested(t_engine *engine)
 	// 📷 Camera setup
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
-	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0);
 	render_sphere_loop(&ctx, &engine->image, light);
 
 	// 🧹 Cleanup

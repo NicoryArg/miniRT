@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reflect.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 15:59:08 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/01 15:36:52 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/05 17:31:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:31:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_tuple	ft_reflect(t_tuple in, t_tuple normal)
 	return (reflect);
 }
 
-t_light	*ft_light(t_tuple position, t_colour lum)
+t_light	*ft_light(t_tuple position, t_colour lum, double brightness)
 {
 	t_light	*light;
 
@@ -34,5 +34,6 @@ t_light	*ft_light(t_tuple position, t_colour lum)
 		malloc_err("ft_light");
 	light->pos = position;
 	light->lum = lum;
+	light->brightness = brightness;
 	return (light);
 }

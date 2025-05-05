@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 04:41:25 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:18:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 18:49:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 19:10:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_cone failed\n"RES));
 	if (ft_main_draw_icecream(0))
 		return (printf(AKA"❌ draw_icecream failed\n"RES));
-	if (ft_main_draw_scene_patterns_full(1))
+	if (ft_main_draw_scene_patterns_full(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_idea(0))
 		return (printf(AKA"❌ draw_idea failed\n"RES));
+	if (ft_main_draw_simple_cone(1))
+		return (printf(AKA"❌ draw_simple_cone failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
 }
@@ -149,6 +151,28 @@ int	main(int ac, char ** av)
 // int	main(int ac, char **av)// TO USE ONCE RUN_RENDER_WITH IS CHANGED
 // {
 // 	return run_render_with(draw_scene_parsed, ac, av);
+// }
+
+// int	main(int ac, char ** av)
+// {
+// 	t_parsed_scene	scene;
+// 	t_engine		engine;
+
+// 	if (validate_and_load(ac, av, &scene)!= 1)
+// 	{
+// 		printf("❌ Failed to validate or load scene file\n");
+// 		return (-1);
+// 	}
+// 	init_engine(&engine);
+// 	draw_scene_parsed(&engine, &scene);
+// 	mlx_put_image_to_window(engine.mlx, engine.window,
+// 		engine.image.img_ptr, 0, 0);
+// 	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+// 	printf("\tPlease refrain from resizing the window\n"RES);
+// 	setup_hooks(&engine);
+// 	mlx_loop(engine.mlx);
+// 	cleanup(&engine);
+// 	return (0);
 // }
 
 

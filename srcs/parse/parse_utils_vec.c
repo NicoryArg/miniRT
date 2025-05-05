@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:43:44 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 09:43:44 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 18:23:34 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 18:23:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,4 @@ int	is_vec3(const char *str)
 	valid = is_valid_vec3_parts(parts);
 	free_split(parts);
 	return (valid);
-}
-
-bool	is_normalized_vector(t_tuple v)
-{
-	return (fabs(magnitude(v) - 1.0) < EPSILON);
 }

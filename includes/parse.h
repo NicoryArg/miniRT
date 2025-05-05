@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:49:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 09:53:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 19:24:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 19:25:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_parsed_scene
 	t_point3d			light_positions[MAX_LIGHTS];
 	t_colour			light_colours[MAX_LIGHTS];
 	int					light_count;
+	double				brightness[MAX_LIGHTS];
 
 	t_plane_input		planes[MAX_PLANES];
 	int					plane_count;
@@ -145,7 +146,7 @@ t_tokens		*parse_input(char **lines);
 
 //entrypoint_parser.c
 int				validate_and_load(int ac, char **av, t_parsed_scene *scene);
-void			draw_scene_parsed(t_engine *engine);
+void			draw_scene_parsed(t_engine *engine, t_parsed_scene *scene);
 
 //free_utils.c
 void			free_array(char **array);
