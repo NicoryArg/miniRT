@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:24:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 03:24:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/30 01:41:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/30 01:49:56 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,35 @@ void	free_sphere(t_sphere *sphere)
 	free(sphere);
 }
 
+void	free_plane(t_plane *plane)
+{
+	if (!plane)
+		return ;
+	if (plane->base.transf)
+		free_matrix(plane->base.transf);
+	free_material(&plane->base.m);
+	free(plane);
+}
+
+void	free_cylinder(t_cylinder *cyl)
+{
+	if (!cyl)
+		return ;
+	if (cyl->base.transf)
+		free_matrix(cyl->base.transf);
+	free_material(&cyl->base.m);
+	free(cyl);
+}
+void	free_cone(t_cone *cone)
+{
+	if (!cone)
+		return ;
+	if (cone->base.transf)
+		free_matrix(cone->base.transf);
+	free_material(&cone->base.m);
+	free(cone);
+}
+
 void	free_hitlists(t_hitlist *xs)
 {
 	t_hitlist	*tmp;
@@ -62,17 +91,6 @@ void	free_hitlists(t_hitlist *xs)
 	}
 }
 
-void	free_hits(t_inters *xs)
-{
-	int	i;
-
-	i = 0;
-	while (i < xs->count)
-		free(xs->hits[i++]);
-	free(xs->hits);
-	free(xs);
-}
-
 void	free_world(t_world *w)
 {
 	int			i;
@@ -80,52 +98,68 @@ void	free_world(t_world *w)
 
 	if (!w)
 		return ;
-
 	i = 0;
 	while (i < w->object_count)
 	{
 		obj = (t_object *)w->objects[i];
-
-		// Free object by type
 		if (obj->type == SPHERE)
 			free_sphere((t_sphere *)obj);
 		else if (obj->type == PLANE)
-			free(((t_plane *)obj));
+			free_plane((t_plane *)obj);
 		else if (obj->type == CYLINDER)
-			free(((t_cylinder *)obj));
-
+			free_cylinder((t_cylinder *)obj);
+		else if (obj->type == CONE)
+			free_cone((t_cone *)obj);
 		i++;
 	}
 	free(w->objects);
+	i = 0;
+	while (i < w->light_count)
+	{
+		if (w->lights[i])
+			free(w->lights[i]);
+		i++;
+	}
 	free(w->lights);
 	free(w);
 }
 
-
 void	free_material(t_material *m)
 {
-	if (m->pattern)
-	{
-		if (m->pattern->transform)
-			free_matrix(m->pattern->transform);
-		free(m->pattern);
-	}
+	if (m && m->pattern)
+		free_pattern(m->pattern);
 }
+
+void	free_pattern(t_pattern *pattern)
+{
+	if (!pattern)
+		return;
+	if (pattern->transform)
+		free_matrix(pattern->transform);
+	if (pattern->a_pattern)
+		free_pattern(pattern->a_pattern);
+	if (pattern->b_pattern)
+		free_pattern(pattern->b_pattern);
+	free(pattern);
+}
+
+
 
 void	free_hitlist(t_hitlist **hs)
 {
 	t_hitlist	*current;
 	t_hitlist	*next;
 
-	if (!hs || !*hs)
+	if (!hs)
 		return;
 	current = *hs;
 	while (current)
 	{
 		next = current->next;
-		free(current->hit); 	// Free the t_hit inside
-		free(current);			// Free the t_hitlist node itself
+		free(current->hit);
+		free(current);
 		current = next;
 	}
-	*hs = NULL; // Nullify the original pointer
+	free(hs); // free the malloc from new_hitlist()
 }
+

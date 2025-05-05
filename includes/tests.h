@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 05:40:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/27 05:40:07 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:02:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:02:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ void		draw_world(t_engine *engine);
 //draw_utils.c
 t_tuple		compute_wall_point(int x, int y, double px_size, double half);
 t_ray		*create_ray_to_point(t_tuple origin, t_tuple target);
+
+//draw_idea.c
+void		draw_idea(t_engine *engine);
 
 //#############################################
 //################## TESTS ####################
@@ -227,6 +230,7 @@ int			ft_main_draw_capped_cylinders(int run);
 int			ft_main_draw_scene_patterns_full(int run);
 int			ft_main_draw_cone(int run);
 int			ft_main_draw_icecream(int run);
+int			ft_main_draw_idea(int run);
 
 //main_transform.c
 int			ft_main_transform(int run);

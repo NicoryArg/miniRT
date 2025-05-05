@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 09:06:13 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/26 09:06:41 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:30:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:30:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void	create_mlx_window(t_engine *engine)
 {
 	engine->mlx = mlx_init();
 	if (!engine->mlx)
-		error_message("[MLX ERROR]: can't do mlx_init!\n", 1);
+		error_message(engine, "[MLX ERROR]: can't do mlx_init!\n", 1);
 	engine->window = mlx_new_window(engine->mlx,
 			WIN_SIZE, WIN_SIZE, "MiniRt project");
 	if (!engine->window)
-		error_message("[MLX ERROR]: can't create window!\n", 1);
+		error_message(engine, "[MLX ERROR]: can't create window!\n", 1);
 }
 
 /**
@@ -49,7 +49,7 @@ static void	create_image(t_engine *engine)
 
 	engine->image.img_ptr = mlx_new_image(engine->mlx, WIN_SIZE, WIN_SIZE);
 	if (!engine->image.img_ptr)
-		error_message("[MLX ERROR]: can't create image!\n", 1);
+		error_message(engine, "[MLX ERROR]: can't create image!\n", 1);
 	engine->image.addr_ptr = mlx_get_data_addr(engine->image.img_ptr,
 			&pixel_bits, &line_len, &endian);
 	engine->image.pixel_bits = pixel_bits;
@@ -74,5 +74,8 @@ void	init_engine(t_engine *engine)
 	engine->offset_x = 0;
 	engine->offset_y = 0;
 	engine->zoom = 1.0f;
+	engine->last_mouse_x = 0;
+	engine->last_mouse_y = 0;
+	engine->mouse_pressed = 0;
 	setup_hooks(engine);
 }

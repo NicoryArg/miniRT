@@ -5,16 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 16:52:20 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/25 16:53:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:26:52 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 20:29:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/engine.h"
 
-void	error_message(char *text, int mode)
+void	error_message(t_engine *engine, char *text, int mode)
 {
+	if (engine)
+		cleanup(engine);
 	if (mode == 0)
 		perror(text);
 	else if (text)
@@ -24,8 +26,7 @@ void	error_message(char *text, int mode)
 
 int	on_destroy_event(t_engine *engine)
 {
-	mlx_destroy_image(engine->mlx, engine->image.img_ptr);
-	mlx_destroy_window(engine->mlx, engine->window);
+	cleanup(engine);
 	exit(EXIT_SUCCESS);
 }
 
@@ -42,5 +43,12 @@ void	cleanup(t_engine *engine)
 		printf("Destroying window\n");
 		mlx_destroy_window(engine->mlx, engine->window);
 		engine->window = NULL;
+	}
+	if (engine->mlx)
+	{
+		printf("Destroying MLX display\n");
+		mlx_destroy_display(engine->mlx);
+		free(engine->mlx);
+		engine->mlx = NULL;
 	}
 }

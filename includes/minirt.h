@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 04:32:00 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 04:32:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:05:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:05:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 # include "keys.h"
-# include "parse.h"
 
 typedef struct s_colour t_colour;
 typedef struct s_material t_material;
@@ -208,6 +207,11 @@ typedef struct s_hitlist
 //#############################################
 //########## LIGHTS & REFLECTIONS #############
 //#############################################
+typedef struct s_ambient
+{
+	double		ratio;
+	t_colour	colour;
+}	t_ambient;
 
 typedef struct s_light
 {
@@ -263,6 +267,7 @@ typedef struct s_world
 	int			object_count;
 	t_light		**lights;
 	int			light_count;
+	t_ambient	ambient;
 }	t_world;
 
 typedef struct s_camera
@@ -332,6 +337,7 @@ t_matrix	*invert_matrix(t_matrix *matrix);
 int			equal_matrix(t_matrix *a, t_matrix *b);
 void		compute_product_matrix(t_matrix *a, t_matrix *b, t_matrix *result);
 t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b);
+t_matrix	*multiply_and_free(t_matrix *a, t_matrix *b);
 t_matrix	*multiply_by_identity(t_matrix *input);
 t_matrix	*transpose_matrix(t_matrix *input);
 
@@ -553,10 +559,14 @@ t_colour	clamp_colour(t_colour c);
 //free_utils.c
 void		free_ray(t_ray *ray);
 void		free_sphere(t_sphere *sphere);
+void		free_plane(t_plane *plane);
+void		free_cylinder(t_cylinder *cyl);
+void		free_cone(t_cone *cone);
 void		free_hitlists(t_hitlist *xs);
 void		free_hits(t_inters *xs);
 void		free_world(t_world *w);
 void		free_material(t_material *m);
+void		free_pattern(t_pattern *pattern);
 
 //ft_utils.c
 void		ft_swap(t_hit **a, t_hit **b);

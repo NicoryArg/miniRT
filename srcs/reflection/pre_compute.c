@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:55:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 04:01:00 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/03 07:21:56 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 07:22:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	add_light_to_world(t_world *world, t_light *light)
 	t_light	**new_lights;
 	int		i;
 
-	new_lights = malloc(sizeof(t_light *) * (world->light_count + 1));
+	new_lights = malloc(sizeof(t_light *) * (world->light_count + 2));
 	if (!new_lights)
 		malloc_err("add_light_to_world");
 	i = 0;
@@ -28,11 +28,12 @@ void	add_light_to_world(t_world *world, t_light *light)
 		i++;
 	}
 	new_lights[i] = light;
-	if (world->lights)
-		free(world->lights);
+	new_lights[i + 1] = NULL;
+	free(world->lights);
 	world->lights = new_lights;
 	world->light_count++;
 }
+
 
 /**
  * @brief Prepares the data needed to shade an intersection.
@@ -113,11 +114,17 @@ bool	is_shadowed(t_world *w, t_tuple point, t_light *light)
 t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 {
 	t_colour	final_color;
+	t_colour	ambient;
 	t_shading	light_args;
 	bool		in_shadow;
 	int			i;
 
 	final_color = ft_colour(0, 0, 0);
+	if (w->ambient.ratio > 0)
+	{
+		ambient = mult_colour(w->ambient.colour, w->ambient.ratio);
+		final_color = ambient;
+	}
 	i = 0;
 	while (i < w->light_count)
 	{
@@ -134,10 +141,13 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 		final_color = add_colours(final_color, ft_shading(light_args, in_shadow));
 		i++;
 	}
-	final_color = mult_colour(final_color, 1.0 / w->light_count);
-	final_color = clamp_colour(final_color);
-	return (final_color);
+	// Average light contributions if any
+	if (w->light_count > 0)
+		final_color = mult_colour(final_color, 1.0 / w->light_count);
+	return clamp_colour(final_color);
 }
+
+
 
 
 /**

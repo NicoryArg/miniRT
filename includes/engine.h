@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:54:16 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:55:12 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 20:34:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/03 04:20:02 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct	s_environment
 //############## MAKE_ENGINE ##################
 //#############################################
 //clean_engine.c
-void	error_message(char *text, int mode);
+void	error_message(t_engine *engine, char *text, int mode);
 int		on_destroy_event(t_engine *engine);
 void	cleanup(t_engine *engine);
 void	display_help_message(t_engine *engine);
@@ -223,9 +223,29 @@ void redraw_image(t_engine *engine);
 void setup_hooks(t_engine *engine);
 
 
+//parse_color.c
+t_colour	parse_color(char *str);
+
+//parse_cyl.c
+t_cylinder	*parse_cylinder(char **split_line);
+
+//parse_plane.c
+t_plane		*parse_plane(char **split_line);
+
+//parse_utils.c
+int			skip_spaces_and_sign(const char *str, int *sign);
+double		ft_atof(const char *str);
+void		free_split(char **split);
+t_tuple		parse_tuple(char *str, int type);
+
+//rodrigues.c
+t_matrix	*build_skew_matrix(t_tuple v);
+t_matrix	*add_matrices(t_matrix *a, t_matrix *b);
+void		add_matrices_inplace(t_matrix *a, t_matrix *b);
+t_matrix	*rotation_matrix(t_tuple from, t_tuple to);
 
 #define WALL_Z 5
 #define WALL_SIZE 7
-#define CANVAS_SIZE 300
+#define CANVAS_SIZE WIN_SIZE
 
 #endif

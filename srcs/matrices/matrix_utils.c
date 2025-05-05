@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compare_matrix.c                                   :+:      :+:    :+:   */
+/*   matrix_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 20:22:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 22:59:20 by nryser           ###   ########.ch       */
+/*   Created: 2025/04/29 21:14:14 by nryser            #+#    #+#             */
+/*   Updated: 2025/04/29 21:14:18 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,28 @@ t_matrix	*multiply_matrices(t_matrix *a, t_matrix *b)
 	}
 	return (result);
 }
+
+t_matrix	*multiply_and_free(t_matrix *a, t_matrix *b)
+{
+	t_matrix	*result;
+
+	if (a->cols != b->rows)
+	{
+		printf("Error: Matrices cannot be multiplied (A columns != B rows)\n");
+		return (NULL);
+	}
+	result = create_matrix(a->rows, b->cols, 0);
+	if (!result)
+	{
+		printf("❌ Failed to allocate result matrix\n");
+		exit(1);
+	}
+	compute_product_matrix(a, b, result);
+	free_matrix(a);
+	free_matrix(b);
+	return (result);
+}
+
 
 t_matrix	*multiply_by_identity(t_matrix *input)
 {
