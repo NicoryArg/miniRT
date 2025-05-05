@@ -136,7 +136,9 @@ int	run_render_with(void (*render_func)(t_engine *))
 
 int	main(int ac, char ** av)
 {
-	if (validate_and_load(ac, av))
+	t_parsed_scene	scene;
+
+	if (validate_and_load(ac, av, &scene))
 		return (-1);
 	return (0);
 }
