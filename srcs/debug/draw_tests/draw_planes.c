@@ -75,7 +75,7 @@ t_world	*scene_planes()
 
 //World
 	w = ft_world();
-	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 	w->objects = malloc(sizeof(t_object *) * object_count);
 	if (!w->objects)
 		return (NULL);

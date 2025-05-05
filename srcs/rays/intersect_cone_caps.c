@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 04:05:39 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/27 04:05:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 18:43:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 18:43:09 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,23 @@
  * @param y The y-coordinate of the cap being tested.
  * @return true if the point lies within the cap radius, false otherwise.
  */
-bool	check_cone_cap(t_ray *ray, double t, double y)
+bool	check_cone_cap(t_ray ray, double t, t_cone *c)
 {
 	double	x;
 	double	z;
+	double	y;
 	double	radius;
-	double	dist2;
-	double	limit;
 
-	x = ray->origin.x + t * ray->direction.x;
-	z = ray->origin.z + t * ray->direction.z;
-	dist2 = x * x + z * z;
-	radius = fabs(y);
-	limit = radius * radius + CAP_EPSILON;
-	return (dist2 <= limit);
+	y = ray.origin.y + t * ray.direction.y;
+	x = ray.origin.x + t * ray.direction.x;
+	z = ray.origin.z + t * ray.direction.z;
+	if (fabs(y - c->min) < EPSILON)
+		radius = fabs(c->min);
+	else
+		radius = fabs(c->max);
+	return (x * x + z * z <= radius * radius + EPSILON);
 }
+
 
 /**
  * @brief Computes ray intersections with a closed cone’s end caps.
@@ -64,10 +66,10 @@ void	intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray)
 	if (!cone->closed || fabs(ray->direction.y) < EPSILON)
 		return ;
 	t = (cone->min - ray->origin.y) / ray->direction.y;
-	if (t >= 0 && check_cone_cap(ray, t, cone->min))
+	if (t >= 0 && check_cone_cap(*ray, t, cone))
 		add_hit(xs, intersection(t, cone));
 	t = (cone->max - ray->origin.y) / ray->direction.y;
-	if (t >= 0 && check_cone_cap(ray, t, cone->max))
+	if (t >= 0 && check_cone_cap(*ray, t, cone))
 		add_hit(xs, intersection(t, cone));
 }
 

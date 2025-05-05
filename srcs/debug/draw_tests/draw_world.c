@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 03:17:15 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 03:17:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:43:19 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:43:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static t_world	*simple_world(void)
 	w->objects[3] = right_wall;
 	w->object_count = 4;
 
-	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 	return (w);
 }
 

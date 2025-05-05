@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 07:05:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 07:05:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 18:20:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 18:40:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ typedef struct s_light
 {
 	t_tuple		pos;
 	t_colour	lum;
+	double		brightness;
 }	t_light;
 
 typedef struct s_shading
@@ -398,7 +399,7 @@ double		find_hit(t_hit	**intersections, int count);
 
 //intersect_cone_caps.c
 void		intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray);
-bool		check_cone_cap(t_ray *ray, double t, double y);
+bool		check_cone_cap(t_ray ray, double t, t_cone *c);
 t_tuple		normal_at_cone(t_object *obj, t_tuple world_point);
 
 //intersect_cone.c
@@ -444,7 +445,7 @@ t_material	ft_material(void);
  * @brief reflects a given vector around the normal provided
  */
 t_tuple		ft_reflect(t_tuple in, t_tuple normal);
-t_light		*ft_light(t_tuple position, t_colour lum);
+t_light		*ft_light(t_tuple position, t_colour lum, double brightness);
 
 //ft_shading.c
 t_colour	ft_shading(t_shading L, bool in_shadow);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 07:21:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 07:22:13 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:38:25 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:39:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 	t_colour	final_color;
 	t_colour	ambient;
 	t_shading	light_args;
+	t_colour	light_result;
 	bool		in_shadow;
 	int			i;
 
@@ -138,7 +139,9 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 			in_shadow = false;
 		else
 			in_shadow = is_shadowed(w, light_args.point, w->lights[i]);
-		final_color = add_colours(final_color, ft_shading(light_args, in_shadow));
+		light_result = ft_shading(light_args, in_shadow);
+		light_result = mult_colour(light_result, w->lights[i]->brightness);
+		final_color = add_colours(final_color, light_result);
 		i++;
 	}
 	// Average light contributions if any

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 02:23:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 02:24:07 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:42:40 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:42:40 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,10 +167,10 @@ t_world	*scene_pattern(void)
 
 	// World and lights
 	w = ft_world();
-	l1 = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1.5, 1.5, 1.5));
-	l2 = ft_light(ft_tuple(10, 10, -10, POINT), ft_colour(1.5, 1.5, 1.5));
-	l3 = ft_light(ft_tuple(-10, 0, -10, POINT), ft_colour(1.5, 1.5, 1.5));
-	l4 = ft_light(ft_tuple(10, 0, -10, POINT), ft_colour(1.5, 1.5, 1.5));
+	l1 = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1.5, 1.5, 1.5), 1.0);
+	l2 = ft_light(ft_tuple(10, 10, -10, POINT), ft_colour(1.5, 1.5, 1.5), 1.0);
+	l3 = ft_light(ft_tuple(-10, 0, -10, POINT), ft_colour(1.5, 1.5, 1.5), 1.0);
+	l4 = ft_light(ft_tuple(10, 0, -10, POINT), ft_colour(1.5, 1.5, 1.5), 1.0);
 	add_light_to_world(w, l1);
 	add_light_to_world(w, l2);
 	add_light_to_world(w, l3);

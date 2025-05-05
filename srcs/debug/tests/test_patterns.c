@@ -116,7 +116,7 @@ int	pattern_lighting_test(int run)
 	// Common vectors and light
 	eyev = ft_tuple(0, 0, -1, VECTOR);
 	normalv = ft_tuple(0, 0, -1, VECTOR);
-	light = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
+	light = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1), 1.0);
 
 	// Test point 0.9 → should be white
 	point = ft_tuple(0.9, 0, 0, POINT);

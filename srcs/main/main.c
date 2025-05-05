@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:25:17 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 17:25:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 18:49:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 19:10:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ int	ft_main_render(int run)
 		return (printf(AKA"❌ draw_cone failed\n"RES));
 	if (ft_main_draw_icecream(0))
 		return (printf(AKA"❌ draw_icecream failed\n"RES));
-	if (ft_main_draw_scene_patterns_full(1))
+	if (ft_main_draw_scene_patterns_full(0))
 		return (printf(AKA"❌ draw_patterns failed\n"RES));
 	if (ft_main_draw_idea(0))
 		return (printf(AKA"❌ draw_idea failed\n"RES));
+	if (ft_main_draw_simple_cone(1))
+		return (printf(AKA"❌ draw_simple_cone failed\n"RES));
 	printf(G_B"END OF RENDER DEMOS\n"RES);
 	return (0);
 }
@@ -155,10 +157,6 @@ int	main(int ac, char ** av)
 	cleanup(&engine);
 	return (0);
 }
-// int	main(int ac, char **av)// TO USE ONCE RUN_RENDER_WITH IS CHANGED
-// {
-// 	return run_render_with(draw_scene_parsed, ac, av);
-// }
 
 
 

@@ -178,7 +178,7 @@ t_world	*scene_idea(void)
 	add_object(objs, &s3->base, &idx);
 
 	w = ft_world();
-	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 	w->objects = (void **)objs;
 	w->object_count = idx;
 	return (w);

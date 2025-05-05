@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_sphere.c                                      :+:      :+:    :+:   */
+/*   draw_sphere_uv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 21:38:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 21:39:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:42:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:43:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_sphere(t_engine *engine)
 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 	ctx.half = WALL_SIZE / 2.0;
 
-	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0);
 	render_sphere_loop(&ctx, &engine->image, light);
 	free_sphere(ctx.sph);
 	free(light);
@@ -133,7 +133,7 @@ void	draw_sphere(t_engine *engine)
 // 	t_matrix	*transform;
 
 // 	w = ft_world();
-// 	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1)));
+// 	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 
 // 	s1 = ft_sphere(1);
 // 	s1->base.m.c = ft_colour(0.1, 1, 0.5);
@@ -270,7 +270,7 @@ void	draw_sphere(t_engine *engine)
 // 	ctx.pixel_size = WALL_SIZE / (double)CANVAS_SIZE;
 // 	ctx.half = WALL_SIZE / 2.0;
 // 	//light on the left and above
-// 	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1));
+// 	light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0);
 // 	render_loop(&ctx, &engine->image, light);
 // 	free_sphere(ctx.sph);
 // 	free(light);

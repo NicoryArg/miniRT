@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_phong.c                                       :+:      :+:    :+:   */
+/*   test_patterns.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:04:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:05:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:43:23 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:43:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	light_test(int run)
 	lum = ft_colour(1, 1, 1);
 	pos = ft_tuple(0, 0, 0, POINT);
 	//run test;
-	light = ft_light(pos, lum);
+	light = ft_light(pos, lum, 1.0);
 	//print output
 	print_light(light, "light");
 	//check output
@@ -145,7 +145,7 @@ int	shading_test(int run)
 	L.point = ft_tuple(0, 0, 0, POINT);
 	L.eyev = ft_tuple(0, 0, -1, VECTOR);
 	L.normalv = ft_tuple(0, 0, -1, VECTOR);
-	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
+	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1), 1.0);
 	expected = ft_colour(1.9, 1.9, 1.9);
 	//run test
 	result = ft_shading(L, false);

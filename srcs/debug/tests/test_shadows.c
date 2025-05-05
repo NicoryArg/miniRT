@@ -31,7 +31,7 @@ int	shadows_test(int run)
 	print_test_number(&i);
 	L.eyev = ft_tuple(0, 0, -1, VECTOR);
 	L.normalv = ft_tuple(0, 0, -1, VECTOR);
-	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1));
+	L.l = ft_light(ft_tuple(0, 0, -10, POINT), ft_colour(1, 1, 1), 1.0);
 	L.m = ft_material();
 	L.point = ft_tuple(0, 0, 0, POINT);
 	expected = ft_colour(0.1, 0.1, 0.1);

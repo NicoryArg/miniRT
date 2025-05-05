@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:21:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 17:21:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 19:24:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 19:25:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_parsed_scene
 	t_point3d			light_positions[MAX_LIGHTS];
 	t_colour			light_colours[MAX_LIGHTS];
 	int					light_count;
+	double				brightness[MAX_LIGHTS];
 
 	t_plane_input		planes[MAX_PLANES];
 	int					plane_count;
