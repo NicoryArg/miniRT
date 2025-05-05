@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 04:41:25 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:18:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/05 17:25:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/05 17:25:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,26 @@ int	run_render_with(void (*render_func)(t_engine *))
 ///////////////////////// PARSING //////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-int	main(int ac, char **av)
+int	main(int ac, char ** av)
 {
-	(void)ac;
-	(void)av;
-	return (run_render_with(draw_scene_parsed));
+	t_parsed_scene	scene;
+	t_engine		engine;
+
+	if (validate_and_load(ac, av, &scene)!= 1)
+	{
+		printf("❌ Failed to validate or load scene file\n");
+		return (-1);
+	}
+	init_engine(&engine);
+	draw_scene_parsed(&engine, &scene);
+	mlx_put_image_to_window(engine.mlx, engine.window,
+		engine.image.img_ptr, 0, 0);
+	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	printf("\tPlease refrain from resizing the window\n"RES);
+	setup_hooks(&engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
+	return (0);
 }
 // int	main(int ac, char **av)// TO USE ONCE RUN_RENDER_WITH IS CHANGED
 // {
