@@ -27,18 +27,38 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
-	array = NULL;
 }
-
-void	free_split(char **split)
+void	free_split(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (split[i])
+	if (!array)
+		return ;
+	while (array[i])
 	{
-		free(split[i]);
+		free(array[i]);
 		i++;
 	}
-	free(split);
+	free(array);
+}
+void	free_token_node(t_tokens *node)
+{
+	if (!node)
+		return ;
+	free_array(node->tokens);
+	free(node);
+}
+
+t_tokens	*free_tokens_list(t_tokens *head)
+{
+	t_tokens *temp;
+
+	while (head)
+	{
+		temp = head->next;
+		free_token_node(head);
+		head = temp;
+	}
+	return (NULL);
 }

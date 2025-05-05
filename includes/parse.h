@@ -22,6 +22,7 @@
 # define MAX_CONES 4
 
 #include "minirt.h"
+#include "engine.h"
 
 typedef			t_tuple t_point3d;
 typedef			t_tuple t_vector3d;
@@ -38,13 +39,17 @@ typedef enum	identifier
 	CO,
 	UFO,
 }	e_identifier;
-
-typedef struct	s_input
+typedef struct s_id_count
 {
-	int			shapes;			//number of shape identifiers (sp, cy, etc.)
-	char		**lines;		//2d array for each line of the input file
-	t_tokens	*head;			//first pointer to linked list of tokens (for each line)
-}	t_input;
+	int	a;
+	int	c;
+	int	l;
+	int	sp;
+	int	pl;
+	int	cy;
+	int	co;
+	int	total;
+}	t_id_count;
 
 typedef struct	s_tokens
 {
@@ -115,6 +120,15 @@ typedef struct s_parsed_scene
 	int					cone_count;
 }	t_parsed_scene;
 
+typedef struct	s_input
+{
+	int				shapes;		//number of shape identifiers (sp, cy, etc.)
+	char			**lines;	//2d array for each line of the input file
+	t_tokens		*list;		//first pointer to linked list of tokens (for each line)
+	t_id_count		count;		//count of each identifier type
+	t_parsed_scene	sc;			//parsed scene struct
+	bool			bonus;		//bonus flag
+}	t_input;
 
 //build_list.c
 t_tokens	*create_token_node(char **tokens, e_identifier type);
@@ -138,18 +152,22 @@ char			**copy_input(char *file);
 void			free_array(char **array);
 
 //validate_and_load.c
-int				validate_and_load(int ac, char **av, t_parsed_scene *scene);
 
 //parse_input.c
 t_tokens		*parse_input(char **lines);
 
 //entrypoint_parser.c
-int				validate_and_load(int ac, char **av, t_parsed_scene *scene);
+int				validate_and_load(int ac, char **av, t_input *data);
 void			draw_scene_parsed(t_engine *engine, t_parsed_scene *scene);
+
+//expected_identifiers.c
+int	expected_identifiers(t_input *data, t_tokens *list, bool bonus);
 
 //free_utils.c
 void			free_array(char **array);
-void			free_split(char **split);
+void			free_split(char **array);
+void			free_token_node(t_tokens *node);
+t_tokens		*free_tokens_list(t_tokens *head);
 
 //load_shape.c
 void			load_sphere(char **sp, t_parsed_scene *scene);
@@ -216,13 +234,18 @@ int				add_planes(t_object **objects, t_parsed_scene *scene, int start);
 int				valid_sphere(char **tokens);
 int				add_spheres(t_object **objects, t_parsed_scene *scene, int start);
 
+//valid_input.c
+int				valid_input(t_input *data, bool bonus);
+
 //validate_tokens.c
 int				valid_tokens(char **tok);
 
 //ERROR MESSAGE UTILS
 
-# define X "Error\n"
+# define X ""AKA"Error\n"RES""
 # define O "✔ "GR""
+# define VALID_INFO "Please ensure you separate values with spaces only -> ' '"
+# define INVALID_INPUT "Invalid input\n"LILA"Tip: "VALID_INFO"\n"RES""
 # define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
-
+# define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
 #endif

@@ -134,26 +134,32 @@ int	run_render_with(void (*render_func)(t_engine *))
 ///////////////////////// PARSING //////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+static void	init_data(t_input *data)
+{
+	data->shapes = 0;
+	data->lines = NULL;
+	data->list = NULL;
+	data->bonus = true;
+}
+
 int	main(int ac, char ** av)
 {
-	t_parsed_scene	scene;
-	t_engine		engine;
+	t_input	data;
+	// t_engine		engine;
 
-	if (validate_and_load(ac, av, &scene) != 1)
-	{
-		printf(AKA"❌ Failed to load scene file\n"RES);
+	init_data(&data);
+	if (validate_and_load(ac, av, &data) != 1)
 		return (-1);
-	}
-	init_engine(&engine);
-	draw_scene_parsed(&engine, &scene);
-	mlx_put_image_to_window(engine.mlx, engine.window,
-		engine.image.img_ptr, 0, 0);
-	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
-	printf("\tPlease refrain from resizing the window\n"RES);
-	setup_hooks(&engine);
-	mlx_loop(engine.mlx);
-	cleanup(&engine);
-	return (0);
+	// init_engine(&engine);
+	// draw_scene_parsed(&engine, &scene);
+	// mlx_put_image_to_window(engine.mlx, engine.window,
+	// 	engine.image.img_ptr, 0, 0);
+	// printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	// printf("\tPlease refrain from resizing the window\n"RES);
+	// setup_hooks(&engine);
+	// mlx_loop(engine.mlx);
+	// cleanup(&engine);
+	// return (0);
 }
 // int	main(int ac, char **av)
 // {
