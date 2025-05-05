@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "parse.h"
 
-static e_identifier	unique_id(char *s)
+static e_id	unique_id(char *s)
 {
 	if (*s == 'A')
 		return (A);
@@ -26,7 +26,7 @@ static e_identifier	unique_id(char *s)
 	return (UFO);
 }
 
-static e_identifier	shape_id(char *s)
+static e_id	shape_id(char *s)
 {
 	if (s[0] == 's' && s[1] == 'p')
 		return (SP);
@@ -40,7 +40,7 @@ static e_identifier	shape_id(char *s)
 	return (UFO);
 }
 
-e_identifier	get_identifier(char *s)
+e_id	get_identifier(char *s)
 {
 	int	len;
 
@@ -55,42 +55,62 @@ e_identifier	get_identifier(char *s)
 	return (UFO);
 }
 
-static t_tokens	*handle_token_line(char **lines,
-					int i, t_tokens **head)
-{
-	char		**tokens;
-	t_tokens	*new_node;
+// static t_tokens	*handle_token_line(char **lines,
+// 					int i, t_tokens **head)
+// {
+// 	char		**tokens;
+// 	t_tokens	*new_node;
 
-	tokens = ft_split(lines[i], ' ');
+// 	tokens = ft_split(lines[i], ' ');
+// 	if (!tokens)
+// 	{
+// 		printf(AKA"Error: Failed to split line: %s\n"RES, lines[i]);
+// 		free_array(lines);
+// 		return (NULL);
+// 	}
+// 	if (!valid_tokens_old(tokens))
+// 	{
+// 		printf(AKA"Invalid token line: %s\n"RES, lines[i]);
+// 		free_array(tokens);
+// 		free_array(lines);
+// 		return (NULL);
+// 	}
+// 	new_node = create_token_node(tokens, get_identifier(tokens[0]));
+// 	append_token_node(head, new_node);
+// 	return (*head);
+// }
+
+static t_tokens	*parse_line(char *line)
+{
+	char			**tokens;
+	e_id	type;
+	t_tokens		*new_node;
+
+	tokens = ft_split(line, ' ');
 	if (!tokens)
 	{
-		printf(AKA"Error: Failed to split line: %s\n"RES, lines[i]);
-		free_array(lines);
+		printf(""X""FAILED_SPLIT"", line);
 		return (NULL);
 	}
-	if (!valid_tokens(tokens))
-	{
-		printf(AKA"Invalid token line: %s\n"RES, lines[i]);
-		free_array(tokens);
-		free_array(lines);
-		return (NULL);
-	}
-	new_node = create_token_node(tokens, get_identifier(tokens[0]));
-	append_token_node(head, new_node);
-	return (*head);
+	type = get_identifier(tokens[0]);
+	new_node = create_token_node(tokens, type);
+	return (new_node);
 }
 
 t_tokens	*parse_input(char **lines)
 {
 	int			i;
 	t_tokens	*head;
+	t_tokens	*new_node;
 
 	i = 0;
 	head = NULL;
 	while (lines[i])
 	{
-		if (!handle_token_line(lines, i, &head))
-			return (NULL);
+		new_node = parse_line(lines[i]);
+		if (!new_node)
+			return (free_tokens_list(head));
+		append_token_node(&head, new_node);
 		i++;
 	}
 	printf(G_B"✔ "GR"Finished parsing tokens\n"RES);

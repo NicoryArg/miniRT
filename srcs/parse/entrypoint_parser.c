@@ -14,30 +14,24 @@
 #include "engine.h"
 #include "parse.h"
 
-int	validate_and_load(int ac, char **av, t_parsed_scene *scene)
-{
-	char		**lines;
-	t_tokens	*tokens;
 
+
+int	validate_and_load(int ac, char **av, t_input *data)
+{
 	if (!check_file(ac, av))
 		return (-1);
-	printf("entering copy_input \n");
-	lines = copy_input(av[1]);
-	if (!lines)
+	data->lines = copy_input(av[1]);
+	if (!data->lines)
+		return (printf(""X"❌ copy_input failed\n"));
+	data->list = parse_input(data->lines);
+	if (!data->list)
+		return(printf(""X"❌ parse_input failed\n"));
+	if (valid_input(data, data->bonus))
 	{
-		printf("❌ copy_input failed\n");
-		return (-1);
+		// free_data(data);
+		return(printf("❌ "INVALID_INPUT""));
 	}
-	printf("Entering parse_input2\n");
-	tokens = parse_input(lines);
-	if (!tokens)
-	{
-		printf("❌ parse_input failed\n");
-		return (-1);
-	}
-	printf("entering build_scene\n");
-	*scene = build_scene_from_tokens(tokens);
-	printf("Finished building scene\n");
+	// *scene = build_scene_from_tokens(list);
 	return (1);
 }
 

@@ -14,13 +14,32 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_light(char **tokens)
+static int print_token_line(char **tokens, int count, bool bonus)
+{
+	int	i;
+
+	i = 0;
+	if (!bonus && count > 3)
+		printf(""X"Too many arguments in line: `");
+	else if (bonus && count > 4)
+		printf(""X"Too many arguments in line: `");
+	else
+		printf(""X"Too few arguments in line: `");
+	while (i < count - 1)
+		printf(AKA"%s    ", tokens[i++]);
+	printf("%s"RES"`\n", tokens[i]);
+	return (0);
+}
+
+int	valid_light(char **tokens, bool bonus)
 {
 	int	count;
 
 	count = count_split(tokens);
-	if (count != 4)
-		return (0);
+	if (count != 3 && !bonus)
+		return (print_token_line(tokens, count, bonus));
+	else if (count != 4 && bonus == true)
+		return (print_token_line(tokens, count, bonus));
 	if (!is_vec3(tokens[1]))
 		return (0);
 	if (!is_float(tokens[2]))
