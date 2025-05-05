@@ -24,7 +24,7 @@ static int	count_tokens(char **tokens)
 	return (i);
 }
 
-t_tokens	*create_token_node(char **tokens, e_identifier type)
+t_tokens	*create_token_node(char **tokens, e_id type)
 {
 	t_tokens	*node;
 

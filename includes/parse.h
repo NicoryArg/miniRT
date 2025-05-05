@@ -38,7 +38,7 @@ typedef enum	identifier
 	CY,
 	CO,
 	UFO,
-}	e_identifier;
+}	e_id;
 typedef struct s_id_count
 {
 	int	a;
@@ -54,7 +54,7 @@ typedef struct s_id_count
 typedef struct	s_tokens
 {
 	char			**tokens;	//2d array of all args for a given identifier
-	e_identifier	type;		//identifier type (A, C, L, sp, cy, etc.)
+	e_id	type;		//identifier type (A, C, L, sp, cy, etc.)
 	int				count;		//number of arguments (sp expects 4, A expects 3, etc.)
 	t_tokens		*next;		//pointer to next identifier and it's arguments
 }	t_tokens;
@@ -131,7 +131,7 @@ typedef struct	s_input
 }	t_input;
 
 //build_list.c
-t_tokens	*create_token_node(char **tokens, e_identifier type);
+t_tokens	*create_token_node(char **tokens, e_id type);
 void		append_token_node(t_tokens **head, t_tokens *new_node);
 void		print_node(t_tokens *node);
 
@@ -205,40 +205,37 @@ int				count_split(char **arr);
 int				split_lines(char *str, char **lines);
 
 //tokenize_lines.c
-e_identifier	get_identifier(char *s);
-t_tokens		*parse_input(char **lines);
+e_id		get_identifier(char *s);
+t_tokens	*parse_input(char **lines);
 
 //valid_add_ambient.c
-int				valid_ambient(char **tokens);
+int			valid_ambient(char **tokens);
 
 //valid_add_camera.c
-int				valid_camera(char **tokens);
+int			valid_camera(char **tokens);
 
 //valid_add_cone.c
-int				valid_cone(char **tokens);
-int				add_cones(t_object **objects, t_parsed_scene *scene, int start);
+int			valid_cone(char **tokens);
+int			add_cones(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_cylinder.c
-int				valid_cylinder(char **tokens);
-int				add_cylinders(t_object **objects, t_parsed_scene *scene, int start);
+int			valid_cylinder(char **tokens);
+int			add_cylinders(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_light.c
-int				valid_light(char **tokens);
-void			add_lights(t_world *w, t_parsed_scene *scene);
+int			valid_light(char **tokens);
+void		add_lights(t_world *w, t_parsed_scene *scene);
 
 //valid_add_plane.c
-int				valid_plane(char **tokens);
-int				add_planes(t_object **objects, t_parsed_scene *scene, int start);
+int			valid_plane(char **tokens);
+int			add_planes(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_sphere.c
-int				valid_sphere(char **tokens);
-int				add_spheres(t_object **objects, t_parsed_scene *scene, int start);
+int			valid_sphere(char **tokens);
+int			add_spheres(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_input.c
-int				valid_input(t_input *data, bool bonus);
-
-//validate_tokens.c
-int				valid_tokens(char **tok);
+int			valid_input(t_input *data, bool bonus);
 
 //ERROR MESSAGE UTILS
 

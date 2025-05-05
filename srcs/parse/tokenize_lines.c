@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "parse.h"
 
-static e_identifier	unique_id(char *s)
+static e_id	unique_id(char *s)
 {
 	if (*s == 'A')
 		return (A);
@@ -26,7 +26,7 @@ static e_identifier	unique_id(char *s)
 	return (UFO);
 }
 
-static e_identifier	shape_id(char *s)
+static e_id	shape_id(char *s)
 {
 	if (s[0] == 's' && s[1] == 'p')
 		return (SP);
@@ -40,7 +40,7 @@ static e_identifier	shape_id(char *s)
 	return (UFO);
 }
 
-e_identifier	get_identifier(char *s)
+e_id	get_identifier(char *s)
 {
 	int	len;
 
@@ -68,7 +68,7 @@ e_identifier	get_identifier(char *s)
 // 		free_array(lines);
 // 		return (NULL);
 // 	}
-// 	if (!valid_tokens(tokens))
+// 	if (!valid_tokens_old(tokens))
 // 	{
 // 		printf(AKA"Invalid token line: %s\n"RES, lines[i]);
 // 		free_array(tokens);
@@ -83,7 +83,7 @@ e_identifier	get_identifier(char *s)
 static t_tokens	*parse_line(char *line)
 {
 	char			**tokens;
-	e_identifier	type;
+	e_id	type;
 	t_tokens		*new_node;
 
 	tokens = ft_split(line, ' ');

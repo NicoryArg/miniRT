@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:50:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/05 20:22:19 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:29:16 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,22 @@ static void	print_count(t_id_count count)
 	printf("Total shapes: %d\n", count.total);
 }
 
-static int	valid_identifiers(t_tokens *list, bool bonus)
+static int	valid_tokens(t_tokens *node, e_id type, bool bonus)
 {
+	if (type == A)
+		return (valid_ambient(node->tokens));
+	else if (type == C)
+		return (valid_camera(node->tokens));
+	else if (type == L)
+		return (valid_light(node->tokens));
+	else if (type == SP)
+		return (valid_sphere(node->tokens));
+	else if (type == PL)
+		return (valid_plane(node->tokens));
+	else if (type == CY)
+		return (valid_cylinder(node->tokens));
+	else if (type == CO)
+		return (valid_cone(node->tokens));
 	return (0);
 }
 
@@ -40,7 +54,7 @@ int	valid_input(t_input *data, bool bonus)
 	current = data->list;
 	while (current)
 	{
-		if (valid_identifiers(current, bonus))
+		if (valid_tokens(current, current->type, bonus))
 			return (-1);
 		current = current->next;
 	}
