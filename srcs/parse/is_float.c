@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:13:11 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/06 18:13:56 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:27:55 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 
 static int	print_float_error(const char *s)
 {
+	if (!s || !*s)
+	{
+		printf(""X"INVALID_INPUT");
+		return (0);
+	}
 	printf(""X"`"AKA"%s"RES"` is not a valid float\n", s);
 	return (0);
 }

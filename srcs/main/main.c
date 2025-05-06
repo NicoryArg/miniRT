@@ -153,7 +153,7 @@ int	main(int ac, char ** av)
 	if (validate_and_load(ac, av, &data) != 1)
 		return (-1);
 	// init_engine(&engine);
-	// draw_scene_parsed(&engine, &scene);
+	// draw_scene_parsed(&engine, &data->sc);
 	// mlx_put_image_to_window(engine.mlx, engine.window,
 	// 	engine.image.img_ptr, 0, 0);
 	// printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");

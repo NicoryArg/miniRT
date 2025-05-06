@@ -247,7 +247,7 @@ int			valid_input(t_input *data, bool bonus);
 # define X ""AKA"Error\n"RES""
 # define O "✔ "GR""
 # define TIP "Please ensure you separate values with spaces only -> ' '\n"
-# define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES""
+# define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES"\n"
 # define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
 # define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
 #endif
