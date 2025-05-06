@@ -39,7 +39,7 @@ t_tuple	parse_tuple(char *str, int type)
 	y = ft_atof(split[1]);
 	z = ft_atof(split[2]);
 	tup = ft_tuple(x, y, z, type);
-	free_split(split);
+	free_array(split);
 	return (tup);
 }
 
@@ -58,7 +58,7 @@ t_point3d	parse_point(char *str)
 	y = ft_atof(split[1]);
 	z = ft_atof(split[2]);
 	point = ft_point(x, y, z);
-	free_split(split);
+	free_array(split);
 	return (point);
 }
 

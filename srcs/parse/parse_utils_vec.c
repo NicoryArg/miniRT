@@ -80,10 +80,10 @@ int	is_vec3(const char *str)
 	if (count_split(parts) != 3)
 	{
 		printf("❌ is_vec3 failed on '%s'\n", str);
-		free_split(parts);
+		free_array(parts);
 		return (0);
 	}
 	valid = is_valid_vec3_parts(parts);
-	free_split(parts);
+	free_array(parts);
 	return (valid);
 }

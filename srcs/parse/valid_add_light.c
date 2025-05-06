@@ -44,7 +44,7 @@ int	valid_light(char **tokens, bool bonus)
 		return (0);
 	if (!is_float(tokens[2]))
 		return (0);
-	if (!is_color(tokens[3]))
+	if (bonus && !is_color(tokens[3]))
 		return (0);
 	return (1);
 }
