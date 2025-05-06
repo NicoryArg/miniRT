@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:57:06 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:57:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 15:58:58 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 15:58:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,18 @@ void	malloc_err(char *func_name)
 {
 	printf(R_B"Error:"RES" [%s] -> failed to allocate memory\n", func_name);
 	exit(1);
+}
+
+void	print_tuple(t_tuple tuple, char *name)
+{
+	if (is_vector(tuple))
+		printf(G_B"tuple `"YEL"%s"G_B"` is VECTOR:\n"RES, name);
+	else if (is_point(tuple))
+		printf(G_B"tuple `"YEL"%s"G_B"` is POINT:\n"RES, name);
+	else
+		printf(R_B"ERROR:"RES" tuple type undefined\n");
+	printf(YEL"\tx:"RES" %.5f\n", tuple.x);
+	printf(YEL"\ty:"RES" %.5f\n", tuple.y);
+	printf(YEL"\tz:"RES" %.5f\n", tuple.z);
+	printf(YEL"\tw:"RES" %d\n", tuple.w);
 }

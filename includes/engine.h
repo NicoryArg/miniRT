@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:34:05 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 04:20:02 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 15:59:17 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 15:59:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ void		join_threads(pthread_t *threads, int thread_count);
 void		put_help_text(t_engine *engine, int *y, char *text);
 void		display_help_message(t_engine *engine);
 void		malloc_err(char *func_name);
+void		print_tuple(t_tuple tuple, char *name);
 
 int key_hook(int keycode, t_engine *engine);
 int mouse_hook(int button, int x, int y, t_engine *engine);

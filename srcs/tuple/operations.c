@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:58:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:58:10 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 15:59:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 15:59:42 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_tuple	add_tuple(t_tuple t1, t_tuple t2)
 	res.x = t1.x + t2.x;
 	res.y = t1.y + t2.y;
 	res.z = t1.z + t2.z;
-	// print_tuple(res, "res");//		debugging
+	print_tuple(res, "res");//		debugging
 	return (res);
 }
 
@@ -48,8 +48,8 @@ t_tuple	diff_tuple(t_tuple t1, t_tuple t2)
 	if (t1.w == VECTOR && t2.w == POINT)
 	{
 		printf("[DEBUG] `diff_tuple` . Trying to substract point from vector\n");
-		// print_tuple(t1, "t1");
-		// print_tuple(t2, "t2");
+		print_tuple(t1, "t1");
+		print_tuple(t2, "t2");
 		exit(1);
 	}
 	res.w = t1.w - t2.w;

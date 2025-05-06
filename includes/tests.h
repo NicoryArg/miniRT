@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:49:42 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 18:49:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 15:59:08 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 15:59:08 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef enum	e_obj_type t_obj;
 //#############################################
 //print.c
 
-void		print_tuple(t_tuple tuple, char *name);
 void		print_normal(t_tuple tuple, t_tuple expected, t_obj type);
 void		print_reflected(t_tuple tuple, t_tuple expected);
 void		print_light(t_light *l, char *name);
