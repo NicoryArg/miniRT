@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:20:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 18:40:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 19:05:36 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 19:05:36 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -610,7 +610,7 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 300
+# define WIN_SIZE 500
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256
