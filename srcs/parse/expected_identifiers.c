@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expected_identifiers.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:52:27 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/05 20:14:33 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/06 19:14:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 19:15:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static void	count_identifiers(t_tokens *list, t_id_count *count)
 
 static int	expected_count(t_id_count count, bool bonus)
 {
-	if (count.a > 1)
+	if (count.a != 1)
 		return(printf(""X"❌ Too many ambient (max 1)\n"RES));
-	if (count.c > 1)
+	if (count.c != 1)
 		return(printf(""X"❌ Too many cameras (max 1)\n"RES));
-	if (count.l > 1 && bonus == false)
+	if (count.l != 1 && bonus == false)
 		return(printf(""X"❌ Too many lights (max 1)\n"RES));
 	else if (count.l > MAX_LIGHTS)
 		return(printf(""X"❌ Too many lights (max 4)\n"RES));

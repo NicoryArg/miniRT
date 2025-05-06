@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:49:54 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 19:10:31 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 19:06:50 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 19:07:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,21 +146,21 @@ static void	init_data(t_input *data)
 
 int	main(int ac, char ** av)
 {
-	t_input	data;
-	// t_engine		engine;
+	t_input		data;
+	t_engine		engine;
 
 	init_data(&data);
 	if (validate_and_load(ac, av, &data) != 1)
 		return (-1);
-	// init_engine(&engine);
-	// draw_scene_parsed(&engine, &data->sc);
-	// mlx_put_image_to_window(engine.mlx, engine.window,
-	// 	engine.image.img_ptr, 0, 0);
-	// printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
-	// printf("\tPlease refrain from resizing the window\n"RES);
-	// setup_hooks(&engine);
-	// mlx_loop(engine.mlx);
-	// cleanup(&engine);
+	init_engine(&engine);
+	draw_scene_parsed(&engine, &data.sc);
+	mlx_put_image_to_window(engine.mlx, engine.window,
+		engine.image.img_ptr, 0, 0);
+	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	printf("\tPlease refrain from resizing the window\n"RES);
+	setup_hooks(&engine);
+	mlx_loop(engine.mlx);
+	cleanup(&engine);
 	return (0);
 }
 // int	main(int ac, char **av)

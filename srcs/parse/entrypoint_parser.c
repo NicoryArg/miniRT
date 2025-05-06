@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:24:48 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 17:24:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 19:07:45 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 19:07:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	validate_and_load(int ac, char **av, t_input *data)
 		// free_data(data);
 		return(-1);
 	}
-	// data->sc = build_scene_from_tokens(data->list);
+	data->sc = build_scene_from_tokens(data->list);
 	return (1);
 }
 
