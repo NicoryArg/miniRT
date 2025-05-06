@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:58:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:58:10 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 16:29:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 16:29:34 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_tuple	add_tuple(t_tuple t1, t_tuple t2)
 	res.x = t1.x + t2.x;
 	res.y = t1.y + t2.y;
 	res.z = t1.z + t2.z;
-	// print_tuple(res, "res");//		debugging
+	// print_tuple(res, "res\n");//		debugging
 	return (res);
 }
 

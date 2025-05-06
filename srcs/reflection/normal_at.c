@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 00:58:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 00:58:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 16:32:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 16:32:49 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_tuple	ft_local_point(t_matrix *inverse, t_tuple world_point)
 	local_point_mtx = tuple_to_matrix(world_point);
 	object_point_mtx = multiply_matrices(inverse, local_point_mtx);
 	local_p = matrix_to_tuple(object_point_mtx);
+	local_p.w = POINT;
 	free_matrix(local_point_mtx);
 	free_matrix(object_point_mtx);
 	return (local_p);
