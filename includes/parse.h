@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 19:24:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 19:25:27 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 20:28:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 20:28:31 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@
 # define MAX_PLANES 4
 # define MAX_CYLINDERS 4
 # define MAX_CONES 4
+
+#define PATTERN_STRIPE 		1
+#define PATTERN_GRADIENT	2
+#define PATTERN_RING		3
+#define PATTERN_CHECKERS	4
+#define PATTERN_UV_STRIPE	5
+#define PATTERN_UV_GRADIENT	6
+#define PATTERN_UV_CHECKERS	7
+
+#define SHAPE_SPHERE	1
+#define SHAPE_PLANE		2
+#define SHAPE_CYLINDER	3
+#define SHAPE_CONE		4
 
 #include "minirt.h"
 #include "engine.h"
@@ -64,6 +77,7 @@ typedef struct	s_sphere_input
 	t_point3d	position;
 	double		diameter;
 	t_colour	color;
+	int			patt_type;
 }	t_sphere_input;
 
 typedef struct	s_plane_input
@@ -71,6 +85,7 @@ typedef struct	s_plane_input
 	t_point3d	position;
 	t_vector3d	normal;
 	t_colour	color;
+	int			patt_type;
 }	t_plane_input;
 
 typedef struct	s_cylinder_input
@@ -80,6 +95,7 @@ typedef struct	s_cylinder_input
 	double		diameter;
 	double		height;
 	t_colour	color;
+	int			patt_type;
 } t_cylinder_input;
 
 typedef struct s_cone_input
@@ -90,6 +106,7 @@ typedef struct s_cone_input
 	double		min;
 	double		max;
 	t_colour	color;
+	int			patt_type;
 }	t_cone_input;
 
 typedef struct s_parsed_scene
@@ -149,6 +166,9 @@ int				check_file(int ac, char **av);
 //copy_input.c
 char			**copy_input(char *file);
 
+//create_patterns.c
+t_pattern	*create_pattern_by_type(int type, t_colour base, int shape_type);
+
 //free_parse.c
 void			free_array(char **array);
 
@@ -172,6 +192,7 @@ t_tokens		*free_tokens_list(t_tokens *head);
 
 // is_float.c
 int				is_float(const char *s);
+int				is_int(char *s);
 
 //load_shape.c
 void			load_sphere(char **sp, t_parsed_scene *scene);

@@ -60,7 +60,7 @@ ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c handle_hooks.c handle_m
 MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
 									matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
-PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c load_shape.c load_unique.c parse_utils.c \
+PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c create_patterns.c load_shape.c load_unique.c parse_utils.c \
 						tokenize_lines.c valid_add_cone.c valid_add_plane.c build_scene.c entrypoint_parser.c parse_color.c \
 						parse_utils_vec.c valid_add_ambient.c valid_add_cylinder.c valid_add_sphere.c check_file.c \
 						free_utils.c parse_tuple_utils.c split_lines.c valid_add_camera.c valid_add_light.c \

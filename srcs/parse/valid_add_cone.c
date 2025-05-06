@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:57:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 09:58:24 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 20:31:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 20:31:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	valid_cone(char **tokens)
 	double	min;
 	double	max;
 
-	if (count_split(tokens) != 7)
+	if (count_split(tokens) != 8)
 		return (0);
 	if (!is_vec3(tokens[1]) || !is_vec3(tokens[2]))
 		return (0);
@@ -32,6 +32,8 @@ int	valid_cone(char **tokens)
 	if (diameter <= 0.0 || min >= max)
 		return (0);
 	if (!is_color(tokens[6]))
+		return (0);
+	if (!is_int(tokens[7]))
 		return (0);
 	return (1);
 }
@@ -47,6 +49,8 @@ static t_cone	*build_cone(t_cone_input in)
 	cone = ft_cone();
 	cone->base.m = ft_material();
 	cone->base.m.c = in.color;
+	if (in.patt_type >= 1 && in.patt_type <= 7)
+		cone->base.m.pattern = create_pattern_by_type(in.patt_type, in.color, SHAPE_CONE);
 	cone->min = in.min;
 	cone->max = in.max;
 	cone->closed = true;

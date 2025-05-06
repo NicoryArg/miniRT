@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_float.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 17:13:11 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/06 18:27:55 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/06 19:59:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 19:59:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,16 @@ int	is_float(const char *s)
 		return (print_float_error(s));
 	if (!is_valid_float(s, i))
 		return(0);
+	return (1);
+}
+
+int	is_int(char *s)
+{
+	if (!s || !*s)
+		return (0);
+	if (s[1] != '\0')
+		return (0);
+	if (s[0] < '0' || s[0] > '7')
+		return (0);
 	return (1);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 10:01:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 10:01:23 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 20:29:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 20:29:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 
 int	valid_sphere(char **sp)
 {
-	if (count_split(sp) != 4)
+	if (count_split(sp) != 5)
 		return (0);
 	if (!is_vec3(sp[1]))
 		return (0);
 	if (!is_float(sp[2]))
 		return (0);
 	if (!is_color(sp[3]))
+		return (0);
+	if (!is_int(sp[4]))
 		return (0);
 	return (1);
 }
@@ -42,6 +44,8 @@ int	add_spheres(t_object **objects, t_parsed_scene *scene, int start)
 		sphere = ft_sphere(1);
 		sphere->base.m = ft_material();
 		sphere->base.m.c = in.color;
+		if (in.patt_type >= 1 && in.patt_type <= 7)
+			sphere->base.m.pattern = create_pattern_by_type(in.patt_type, in.color, SHAPE_SPHERE);
 		scale_m = scale(in.diameter / 2.0,
 				in.diameter / 2.0,
 				in.diameter / 2.0);
