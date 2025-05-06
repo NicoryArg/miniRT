@@ -5,37 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 00:50:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 00:50:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 21:15:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 21:16:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-
-/**
- * @brief Calculates the pattern color at a world-space point on a given object.
- *
- * Transforms the point from world space → object space → pattern space.
- */
-t_colour	pattern_at_object(t_pattern *patt, t_object *obj, t_tuple w_point)
-{
-	t_matrix	*object_inverse;
-	t_matrix	*pattern_inverse;
-	t_tuple		object_point;
-	t_tuple		pattern_point;
-	t_colour	result;
-
-	object_inverse = invert_matrix(obj->transf);
-	object_point = matrix_to_tuple(multiply_matrices(
-				object_inverse, tuple_to_matrix(w_point)));
-	pattern_inverse = invert_matrix(patt->transform);
-	pattern_point = matrix_to_tuple(multiply_matrices(
-				pattern_inverse, tuple_to_matrix(object_point)));
-	result = stripe_at(patt, pattern_point, obj);
-	free_matrix(object_inverse);
-	free_matrix(pattern_inverse);
-	return (result);
-}
 
 // /**
 //  * @brief A pattern used for testing: maps x/y/z to RGB.

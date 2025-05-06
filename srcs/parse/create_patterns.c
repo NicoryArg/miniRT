@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 20:42:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 20:45:41 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 21:10:02 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 21:10:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_pattern *create_pattern_for_cone(int type, t_colour base)
 	else if (type == PATTERN_UV_GRADIENT)
 		*pat = uv_gradient_pattern(base, alt, 0, 0);
 	else if (type == PATTERN_UV_CHECKERS)
-		*pat = uv_checkers_pattern(base, alt, 6, 6);
+		*pat = uv_checkers_pattern(base, alt, 50, 50);
 	else
 		return (free(pat), NULL);
 	return (pat);
