@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 18:39:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 18:39:30 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/06 16:31:22 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/06 16:32:41 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,17 @@ t_ray	*transform(t_ray *r, t_matrix *inverse)
 
 	new = malloc(sizeof(t_ray));
 	if (!new)
-		malloc_err("transform");//	debugging
+		malloc_err("transform");
 	temp = tuple_to_matrix(r->direction);
 	ray_mtx = multiply_matrices(inverse, temp);
 	new->direction = matrix_to_tuple(ray_mtx);
+	new->direction.w = VECTOR;
 	free_matrix(temp);
 	free_matrix(ray_mtx);
 	temp = tuple_to_matrix(r->origin);
 	ray_mtx = multiply_matrices(inverse, temp);
 	new->origin = matrix_to_tuple(ray_mtx);
+	new->origin.w = POINT;
 	free_matrix(temp);
 	free_matrix(ray_mtx);
 	return (new);
