@@ -44,12 +44,22 @@ int	is_float(const char *s)
 	int	i;
 	int	has_digit;
 
-	if (!s || *s == '\0')
+	if (!s || *s == '\0' || *s == '.')
+	{
+		printf("%s INVALID!\n", s);
 		return (0);
+	}
 	i = 0;
 	if (s[i] == '-' || s[i] == '+')
 		i++;
-	return (is_valid_float_chars(s + i, &has_digit) && has_digit);
+	if (is_valid_float_chars(s + i, &has_digit) && has_digit)
+		printf("VALID!\n");
+	else
+	{
+		printf("%s INVALID!\n", s);
+		return (0);
+	}
+	return (1);
 }
 
 static int	is_valid_vec3_parts(char **parts)

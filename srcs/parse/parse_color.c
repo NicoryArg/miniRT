@@ -80,7 +80,7 @@ int	is_color(const char *str)
 	parts = ft_split(str, ',');
 	if (!parts || count_split(parts) != 3)
 	{
-		printf("❌ is_color failed on '%s'\n", str);
+		printf(""X""FAILED_SPLIT"", str);
 		free_array(parts);
 		return (0);
 	}
