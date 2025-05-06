@@ -64,7 +64,7 @@ PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c load_shape.c load_u
 						tokenize_lines.c valid_add_cone.c valid_add_plane.c build_scene.c entrypoint_parser.c parse_color.c \
 						parse_utils_vec.c valid_add_ambient.c valid_add_cylinder.c valid_add_sphere.c check_file.c \
 						free_utils.c parse_tuple_utils.c split_lines.c valid_add_camera.c valid_add_light.c \
-						expected_identifiers.c valid_input.c)
+						expected_identifiers.c valid_input.c is_float.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c intersect_cone_caps.c intersect_cone.c)
 REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)

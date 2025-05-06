@@ -14,54 +14,6 @@
 #include "engine.h"
 #include "parse.h"
 
-static int	is_valid_float_chars(const char *s, int *has_digit)
-{
-	int	i;
-	int	has_dot;
-
-	i = 0;
-	*has_digit = 0;
-	has_dot = 0;
-	while (s[i])
-	{
-		if (ft_isdigit(s[i]))
-			*has_digit = 1;
-		else if (s[i] == '.')
-		{
-			if (has_dot)
-				return (0);
-			has_dot = 1;
-		}
-		else
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_float(const char *s)
-{
-	int	i;
-	int	has_digit;
-
-	if (!s || *s == '\0' || *s == '.')
-	{
-		printf("%s INVALID!\n", s);
-		return (0);
-	}
-	i = 0;
-	if (s[i] == '-' || s[i] == '+')
-		i++;
-	if (is_valid_float_chars(s + i, &has_digit) && has_digit)
-		printf("VALID!\n");
-	else
-	{
-		printf("%s INVALID!\n", s);
-		return (0);
-	}
-	return (1);
-}
-
 static int	is_valid_vec3_parts(char **parts)
 {
 	int	i;

@@ -1,0 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_float.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 17:13:11 by ameechan          #+#    #+#             */
+/*   Updated: 2025/05/06 18:04:14 by ameechan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minirt.h"
+#include "engine.h"
+#include "parse.h"
+
+static int	print_float_error(const char *s)
+{
+	printf(""X"`"AKA"%s"RES"` is not a valid float\n", s);
+	return (0);
+}
+
+static int	is_valid_float(const char *s, int i)
+{
+	int	has_dot;
+
+	has_dot = 0;
+	while (s[i])
+	{
+		if (ft_isdigit(s[i]))
+			continue ;
+		else if (s[i] == '.')
+		{
+			if (has_dot)
+				return (print_float_error(s));
+			has_dot = 1;
+		}
+		else
+			return (print_float_error(s));
+		i++;
+	}
+	if (s[i - 1] == '.')
+	{
+		printf(YEL"has_digit is useful!\n");
+		return (print_float_error(s));
+	}
+	return (1);
+}
+
+static int valid_decimal_points(const char *s)
+{
+	char	**parts;
+	int		count;
+
+	parts = ft_split(s, '.');
+	count = count_split(parts);
+	if (count > 2)
+	{
+		free_array(parts);
+		return (0);
+	}
+	free_array(parts);
+	return (1);
+}
+
+int	is_float(const char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s || *s == '\0')
+		return (print_float_error(s));
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	if (s[i] == '.' || !(valid_decimal_points(s)))
+		return (print_float_error(s));
+	if (!is_valid_float(s, i))
+		return(0);
+	return (1);
+}

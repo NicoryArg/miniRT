@@ -170,6 +170,9 @@ void			free_split(char **array);
 void			free_token_node(t_tokens *node);
 t_tokens		*free_tokens_list(t_tokens *head);
 
+// is_float.c
+int				is_float(const char *s);
+
 //load_shape.c
 void			load_sphere(char **sp, t_parsed_scene *scene);
 void			load_plane(char **tokens, t_parsed_scene *scene);
@@ -193,7 +196,6 @@ t_point3d		parse_point(char *str);
 t_matrix		*align_up_vector(t_vector3d normal);
 
 //parse_utils_vec.c
-int				is_float(const char *s);
 int				is_vec3(const char *str);
 bool			is_normalized_vector(t_tuple v);
 
