@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:13:11 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/06 18:04:14 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:13:56 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static int	is_valid_float(const char *s, int i)
 	while (s[i])
 	{
 		if (ft_isdigit(s[i]))
+		{
+			i++;
 			continue ;
+		}
 		else if (s[i] == '.')
 		{
 			if (has_dot)
@@ -40,10 +43,7 @@ static int	is_valid_float(const char *s, int i)
 		i++;
 	}
 	if (s[i - 1] == '.')
-	{
-		printf(YEL"has_digit is useful!\n");
 		return (print_float_error(s));
-	}
 	return (1);
 }
 

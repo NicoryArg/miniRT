@@ -161,7 +161,7 @@ int	main(int ac, char ** av)
 	// setup_hooks(&engine);
 	// mlx_loop(engine.mlx);
 	// cleanup(&engine);
-	// return (0);
+	return (0);
 }
 // int	main(int ac, char **av)
 // {
