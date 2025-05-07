@@ -233,7 +233,7 @@ e_id		get_identifier(char *s);
 t_tokens	*parse_input(char **lines);
 
 //valid_add_ambient.c
-int			args_error(char **tokens, int count, int max);
+int			args_count_error(char **tokens, int count, int max);
 int			valid_ambient(char **tokens);
 
 //valid_add_camera.c
