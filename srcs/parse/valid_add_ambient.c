@@ -14,13 +14,28 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_ambient(char **tokens, bool bonus)
+int	args_error(char **tokens, int count, int max)
+{
+	int	i;
+
+	i = 0;
+	if (count > max)
+		printf(R_B""X""RES"Too many arguments in line: `");
+	else
+		printf(R_B""X""RES"Too few arguments in line: `");
+	while (i < count - 1)
+		printf(AKA"%s    ", tokens[i++]);
+	printf("%s"RES"`\n", tokens[i]);
+	return (0);
+}
+
+int	valid_ambient(char **tokens)
 {
 	int	count;
 
 	count = count_split(tokens);
 	if (count != 3)
-		return (print_token_line(tokens, count, bonus));
+		return (args_error(tokens, count, 3));
 	if (!is_float(tokens[1]) || !valid_light_ratio(tokens[1]))
 		return (0);
 	if (!is_color(tokens[2]))
