@@ -236,6 +236,8 @@ t_tokens	*parse_input(char **lines);
 int			valid_ambient(char **tokens);
 
 //valid_add_camera.c
+void		orientation_err(double x, double y, double z);
+int			valid_orientation(char *str);
 int			valid_camera(char **tokens);
 
 //valid_add_cone.c
@@ -272,6 +274,7 @@ int			valid_input(t_input *data, bool bonus);
 # define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES"\n"
 # define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
 # define BRIGHT ""AKA"Light ratio out of range:"RES"    "
+# define TOO_MANY_VEC3 "Too many or few args: "AKA"%s"RES"\n"
 # define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
 # define LONG_LINE "line too long! (max 50)\n"
 #endif
