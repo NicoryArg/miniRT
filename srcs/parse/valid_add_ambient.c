@@ -20,10 +20,7 @@ int	valid_ambient(char **tokens)
 
 	if (count_split(tokens) != 3)
 		return (0);
-	if (!is_float(tokens[1]))
-		return (0);
-	ratio = ft_atof(tokens[1]);
-	if (ratio < 0.0 || ratio > 1.0)
+	if (!is_float(tokens[1]) || !valid_light_ratio(tokens[1]))
 		return (0);
 	if (!is_color(tokens[2]))
 		return (0);

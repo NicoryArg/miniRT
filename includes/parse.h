@@ -247,6 +247,7 @@ int			valid_cylinder(char **tokens);
 int			add_cylinders(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_light.c
+int			valid_light_ratio(char *num);
 int			valid_light(char **tokens, bool bonus);
 void		add_lights(t_world *w, t_parsed_scene *scene);
 
@@ -270,7 +271,7 @@ int			valid_input(t_input *data, bool bonus);
 # define TIP "Please ensure you separate values with spaces only -> ' '\n"
 # define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES"\n"
 # define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
-# define BRIGHT ""AKA"Brightness out of range:"RES"    "
+# define BRIGHT ""AKA"Light ratio out of range:"RES"    "
 # define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
 # define LONG_LINE "line too long! (max 50)\n"
 #endif

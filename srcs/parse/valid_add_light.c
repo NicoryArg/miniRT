@@ -31,7 +31,7 @@ static int print_token_line(char **tokens, int count, bool bonus)
 	return (0);
 }
 
-static int	within_light_range(char *num)
+int	valid_light_ratio(char *num)
 {
 	double	n;
 
@@ -60,7 +60,7 @@ int	valid_light(char **tokens, bool bonus)
 		return (print_token_line(tokens, count, bonus));
 	if (!is_vec3(tokens[1]))
 		return (0);
-	if (!is_float(tokens[2]) || !within_light_range(tokens[2]))
+	if (!is_float(tokens[2]) || !valid_light_ratio(tokens[2]))
 		return (0);
 	if (bonus && !is_color(tokens[3]))
 		return (0);
