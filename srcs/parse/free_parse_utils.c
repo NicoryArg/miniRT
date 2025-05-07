@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   free_parse_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:22:18 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:22:28 by nryser           ###   ########.ch       */
+/*   Created: 07/05/2025 19:03:09 by nryser            #+#    #+#             */
+/*   Updated: 07/05/2025 19:53:33 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_tokens	*free_tokens_list(t_tokens *head)
 {
 	t_tokens	*temp;
 
+	if (!head)
+		return (NULL);
 	while (head)
 	{
 		temp = head->next;

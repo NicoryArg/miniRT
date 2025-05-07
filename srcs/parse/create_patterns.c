@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:58:24 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:58:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 19:06:56 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 19:07:03 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "parse.h"
 
-static t_patt	*create_simple_pattern(int type, t_colour base,
+t_patt	*create_simple_pattern(int type, t_colour base,
 					t_colour alt, double freq)
 {
 	t_patt	*pat;
@@ -36,7 +36,7 @@ static t_patt	*create_simple_pattern(int type, t_colour base,
 	return (pat);
 }
 
-static t_patt	*create_uv_pattern(int type, t_colour base,
+t_patt	*create_uv_pattern(int type, t_colour base,
 					t_colour alt, t_uvsize size)
 {
 	t_patt	*pat;

@@ -22,7 +22,7 @@ static t_id	unique_id(char *s)
 		return (C);
 	else if (*s == 'L')
 		return (L);
-	printf(AKA"Invalid unique identifier: %s\n"RES, s);
+	printf(R_B""X""RES""ID_ERR""AKA"%s\n"RES, s);
 	return (UFO);
 }
 
@@ -36,7 +36,7 @@ static t_id	shape_id(char *s)
 		return (CY);
 	else if (s[0] == 'c' && s[1] == 'o')
 		return (CO);
-	printf(AKA"Invalid shape identifier: %s\n"RES, s);
+	printf(R_B""X""RES""ID_ERR""AKA"%s\n"RES, s);
 	return (UFO);
 }
 
@@ -51,7 +51,7 @@ t_id	get_identifier(char *s)
 		return (unique_id(s));
 	if (len == 2)
 		return (shape_id(s));
-	printf(AKA"Invalid identifier length: %s\n"RES, s);
+	printf(R_B""X""RES""ID_ERR""AKA"%s\n"RES, s);
 	return (UFO);
 }
 
@@ -93,6 +93,8 @@ static t_tokens	*parse_line(char *line)
 		return (NULL);
 	}
 	type = get_identifier(tokens[0]);
+	if (type == UFO)
+		return (NULL);
 	new_node = create_token_node(tokens, type);
 	return (new_node);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:21:06 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:21:23 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:14:12 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:14:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,17 @@ int	validate_and_load(int ac, char **av, t_input *data)
 		return (printf(R_B""X""RES"copy_input failed\n"));
 	data->list = parse_input(data->lines);
 	if (!data->list)
-		return (printf(R_B""X""RES"parse_input failed\n"));
+	{
+		free_array(data->lines);
+		return (printf(R_B"Failed to parse input\n"));
+	}
 	if (valid_input(data, data->bonus))
+	{
+		printf(R_B"Invalid input\n"RES);
+		free_array(data->lines);
+		free_tokens_list(data->list);
 		return (-1);
+	}
 	data->sc = build_scene_from_tokens(data->list);
 	return (1);
 }
@@ -37,6 +45,7 @@ void	draw_scene_parsed(t_engine *engine, t_parsed_scene *scene)
 
 	w = convert_scene_to_world(scene);
 	cam = ft_camera(WIN_SIZE, WIN_SIZE, scene->fov);
+	free_matrix(cam.transf);
 	cam.transf = view_transform(
 			scene->camera_pos,
 			add_tuple(scene->camera_pos, scene->camera_dir),

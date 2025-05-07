@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:19:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:19:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:36:13 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:36:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -508,6 +508,7 @@ t_matrix		*tuple_to_matrix(t_tuple tup);
 t_tuple			matrix_to_tuple(t_matrix *matrix);
 t_matrix		*add_matrices(t_matrix *a, t_matrix *b);
 void			add_matrices_inplace(t_matrix *a, t_matrix *b);
+t_matrix		*add_matrices_free_first(t_matrix *a, t_matrix *b);
 
 //#############################################
 //################# TUPLE #####################
@@ -615,7 +616,7 @@ t_matrix		*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 500
+# define WIN_SIZE 50
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256

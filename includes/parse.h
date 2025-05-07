@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 19:00:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 19:00:52 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 19:53:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 19:53:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,13 @@ int				check_file(int ac, char **av);
 char			**copy_input(char *file);
 
 //create_patterns.c
+t_patt			*create_simple_pattern(int type, t_colour base,
+					t_colour alt, double freq);
+t_patt			*create_uv_pattern(int type, t_colour base,
+					t_colour alt, t_uvsize size);
 t_patt			*create_patt_by_type(int type, t_colour base, int shape_type);
 
-//free_parse.c
+//free_parse_utils.c
 void			free_array(char **array);
 
 //validate_and_load.c
@@ -248,7 +252,8 @@ t_id			get_identifier(char *s);
 t_tokens		*parse_input(char **lines);
 
 //valid_add_ambient.c
-int				valid_ambient(char **tokens, bool bonus);
+int				args_count_error(char **tokens, int count, int max);
+int				valid_ambient(char **tokens);
 
 //valid_add_camera.c
 void			orientation_err(double x, double y, double z);
@@ -256,11 +261,11 @@ int				valid_orientation(char *str);
 int				valid_camera(char **tokens);
 
 //valid_add_cone.c
-int				valid_cone(char **tokens);
+int				valid_cone(char **tokens, bool bonus);
 int				add_cones(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_cylinder.c
-int				valid_cylinder(char **tokens);
+int				valid_cylinder(char **tokens, bool bonus);
 int				add_cylinders(t_object **objects,
 					t_parsed_scene *scene, int start);
 
@@ -271,12 +276,12 @@ int				valid_light(char **tokens, bool bonus);
 void			add_lights(t_world *w, t_parsed_scene *scene);
 
 //valid_add_plane.c
-int				valid_plane(char **tokens);
+int				valid_plane(char **tokens, bool bonus);
 int				add_planes(t_object **objects,
 					t_parsed_scene *scene, int start);
 
 //valid_add_sphere.c
-int				valid_sphere(char **tokens);
+int				valid_sphere(char **tokens, bool bonus);
 int				add_spheres(t_object **objects,
 					t_parsed_scene *scene, int start);
 
@@ -284,11 +289,14 @@ int				add_spheres(t_object **objects,
 void			print_count(t_id_count count);
 int				valid_input(t_input *data, bool bonus);
 
-//ERROR MESSAGE UTILS
+//DEFINE BONUS
+# define BONUS 1
 
+//ERROR MESSAGE UTILS
 # define X "Error\n❌ "
 # define TIP "Please ensure you separate values with spaces only -> ' '\n"
 # define INVALID_INPUT "Invalid input\n"
+# define ID_ERR "Invalid identifier:   "
 # define BRIGHT "Light ratio out of range:\n   "
 # define TOO_MANY_VEC3 "Too many or few args:\n   "
 # define FAILED_SPLIT "failed to split:   "

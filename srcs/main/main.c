@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:04:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:04:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:46:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:51:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static void	init_data(t_input *data)
 	data->shapes = 0;
 	data->lines = NULL;
 	data->list = NULL;
-	data->bonus = true;
+	data->bonus = BONUS;
 }
 
 int	main(int ac, char **av)
@@ -141,5 +141,7 @@ int	main(int ac, char **av)
 	setup_hooks(&engine);
 	mlx_loop(engine.mlx);
 	cleanup(&engine);
+	free_array(data.lines);
+	free_tokens_list(data.list);
 	return (0);
 }

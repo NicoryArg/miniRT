@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 15:02:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 15:02:46 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:36:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:36:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static t_matrix	*build_rotation_matrix_body(t_tuple from, t_tuple to, double c)
 	skew_sq = multiply_matrices(skew, skew);
 	k = 1.0 / (1.0 + c);
 	scale_matrix(skew_sq, k);
-	result = add_matrices(create_identity_matrix(4), skew);
+	result = add_matrices_free_first(create_identity_matrix(4), skew);
 	add_matrices_inplace(result, skew_sq);
 	free_matrix(skew);
 	free_matrix(skew_sq);

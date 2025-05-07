@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 10:02:23 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 10:02:33 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:54:01 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 21:03:39 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,79 @@
 #include "engine.h"
 #include "parse.h"
 
-static int	grab_input(char *file, char **buf)
+static int	read_all(int fd, char *buf)
 {
 	int	bytes_read;
 	int	total;
-	int	fd;
 
 	total = 0;
-	*buf = calloc(sizeof(char), MAX_FILE);
-	fd = open(file, O_RDONLY);
-	while ((bytes_read = read(fd, *buf + total, MAX_FILE - total)) > 0)
+	bytes_read = read(fd, buf + total, MAX_FILE - total);
+	while (bytes_read > 0)
 	{
 		total += bytes_read;
 		if (total >= MAX_FILE)
-		{
-			free(*buf);
-			return (printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
-		}
+			return (-2);
+		bytes_read = read(fd, buf + total, MAX_FILE - total);
 	}
 	if (bytes_read < 0)
+		return (-1);
+	return (0);
+}
+
+static int	grab_input(char *file, char **buf)
+{
+	int	fd;
+	int	status;
+
+	*buf = calloc(sizeof(char), MAX_FILE);
+	fd = open(file, O_RDONLY);
+	if (fd < 0 || !(*buf))
+		return (printf(AKA"Error\n❌ Could not open or allocate\n"RES));
+	status = read_all(fd, *buf);
+	close(fd);
+	if (status == -1)
 	{
 		free(*buf);
 		return (printf(AKA"Error\n❌ Read error\n"RES));
 	}
-	close(fd);
+	if (status == -2)
+	{
+		free(*buf);
+		return (printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)\n"));
+	}
 	printf(G_B"✔ "GR"input grabbed\n"RES);
 	return (0);
 }
+
+// static int	grab_input(char *file, char **buf)
+// {
+// 	int	bytes_read;
+// 	int	total;
+// 	int	fd;
+
+// 	total = 0;
+// 	*buf = calloc(sizeof(char), MAX_FILE);
+// 	fd = open(file, O_RDONLY);
+// 	bytes_read = read(fd, *buf + total, MAX_FILE - total);
+// 	while (bytes_read > 0)
+// 	{
+// 		total += bytes_read;
+// 		if (total >= MAX_FILE)
+// 		{
+// 			free(*buf);
+// 			return (printf(AKA"Error\n❌ File too big"RES" (Max: 10240b)n"));
+// 		}
+// 		bytes_read = read(fd, *buf + total, MAX_FILE - total);
+// 	}
+// 	if (bytes_read < 0)
+// 	{
+// 		free(*buf);
+// 		return (printf(AKA"Error\n❌ Read error\n"RES));
+// 	}
+// 	close(fd);
+// 	printf(G_B"✔ "GR"input grabbed\n"RES);
+// 	return (0);
+// }
 
 static int	count_lines(char *str)
 {

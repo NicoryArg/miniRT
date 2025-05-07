@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:38:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:38:14 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 19:04:15 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 19:04:15 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	print_count(t_id_count count)
 {
+	printf(YEL"[DEBUG]\n"RES);
 	printf("A: %d\n", count.a);
 	printf("C: %d\n", count.c);
 	printf("L: %d\n", count.l);
@@ -28,19 +29,19 @@ void	print_count(t_id_count count)
 static int	valid_tokens(t_tokens *node, t_id type, bool bonus)
 {
 	if (type == A)
-		return (valid_ambient(node->tokens, bonus));
+		return (valid_ambient(node->tokens));
 	else if (type == C)
 		return (valid_camera(node->tokens));
 	else if (type == L)
 		return (valid_light(node->tokens, bonus));
 	else if (type == SP)
-		return (valid_sphere(node->tokens));
+		return (valid_sphere(node->tokens, bonus));
 	else if (type == PL)
-		return (valid_plane(node->tokens));
+		return (valid_plane(node->tokens, bonus));
 	else if (type == CY)
-		return (valid_cylinder(node->tokens));
+		return (valid_cylinder(node->tokens, bonus));
 	else if (type == CO)
-		return (valid_cone(node->tokens));
+		return (valid_cone(node->tokens, bonus));
 	return (0);
 }
 
@@ -57,5 +58,6 @@ int	valid_input(t_input *data, bool bonus)
 			return (-1);
 		current = current->next;
 	}
+	printf(G_B"✔ "GR"Valid input\n"RES);
 	return (0);
 }

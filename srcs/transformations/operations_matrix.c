@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 14:56:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 14:58:00 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:52:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:52:20 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,13 @@ void	add_matrices_inplace(t_matrix *a, t_matrix *b)
 		}
 		i++;
 	}
+}
+
+t_matrix	*add_matrices_free_first(t_matrix *a, t_matrix *b)
+{
+	t_matrix	*result;
+
+	result = add_matrices(a, b);
+	free_matrix(a);
+	return (result);
 }

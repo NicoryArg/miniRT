@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:35:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:35:29 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:03:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:40:26 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_plane(char **tokens)
+int	valid_plane(char **tokens, bool bonus)
 {
-	if (count_split(tokens) != 5)
-		return (0);
+	int	count;
+
+	count = count_split(tokens);
+	if (!bonus && count != 4)
+		return (args_count_error(tokens, count, 4));
+	if (bonus && count != 5)
+		return (args_count_error(tokens, count, 5));
 	if (!is_vec3(tokens[1]))
 		return (0);
 	if (!is_vec3(tokens[2]))
 		return (0);
 	if (!is_color(tokens[3]))
 		return (0);
-	if (!is_int(tokens[4]))
+	if (bonus && !is_int(tokens[4]))
 		return (0);
 	return (1);
 }

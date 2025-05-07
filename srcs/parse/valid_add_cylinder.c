@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:26:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 18:26:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 20:23:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 20:24:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_cylinder(char **tokens)
+int	valid_cylinder(char **tokens, bool bonus)
 {
-	if (count_split(tokens) != 7)
-		return (0);
+	int	count;
+
+	count = count_split(tokens);
+	if (!bonus && count != 6)
+		return (args_count_error(tokens, count, 6));
+	if (bonus && count != 7)
+		return (args_count_error(tokens, count, 7));
 	if (!is_vec3(tokens[1]) || !is_vec3(tokens[2]))
 		return (0);
 	if (!is_float(tokens[3]) || !is_float(tokens[4]))
 		return (0);
 	if (!is_color(tokens[5]))
 		return (0);
-	if (!is_int(tokens[6]))
+	if (bonus && !is_int(tokens[6]))
 		return (0);
 	return (1);
 }

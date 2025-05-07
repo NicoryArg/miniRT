@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 13:09:51 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 13:09:58 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 19:46:55 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 19:46:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ void	intersect_cone(t_object *shape, t_ray *ray, t_hitlist **xs)
 			&& fabs(local_ray->direction.z) < EPSILON))
 		cone_quadratic_intersections(cone, local_ray, xs);
 	intersect_cone_caps(xs, cone, local_ray);
+	free_matrix(inverse);
 	free(local_ray);
 }
