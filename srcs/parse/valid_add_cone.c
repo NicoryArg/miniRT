@@ -14,14 +14,18 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_cone(char **tokens)
+int	valid_cone(char **tokens, bool bonus)
 {
 	double	diameter;
 	double	min;
 	double	max;
+	int		count;
 
-	if (count_split(tokens) != 8)
-		return (0);
+	count = count_split(tokens);
+	if (!bonus && count != 7)
+		return (args_count_error(tokens, count, 7));
+	if (bonus && count != 8)
+		return (args_count_error(tokens, count, 8));
 	if (!is_vec3(tokens[1]) || !is_vec3(tokens[2]))
 		return (0);
 	if (!is_float(tokens[3]) || !is_float(tokens[4]) || !is_float(tokens[5]))
@@ -33,7 +37,7 @@ int	valid_cone(char **tokens)
 		return (0);
 	if (!is_color(tokens[6]))
 		return (0);
-	if (ft_atoi(tokens[7]) > 5 || ft_atoi(tokens[7]) < 0)
+	if (bonus && (ft_atoi(tokens[7]) > 5 || ft_atoi(tokens[7]) < 0))
 		return (0);
 	return (1);
 }

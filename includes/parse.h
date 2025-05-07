@@ -242,11 +242,11 @@ int			valid_orientation(char *str);
 int			valid_camera(char **tokens);
 
 //valid_add_cone.c
-int			valid_cone(char **tokens);
+int			valid_cone(char **tokens, bool bonus);
 int			add_cones(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_cylinder.c
-int			valid_cylinder(char **tokens);
+int			valid_cylinder(char **tokens, bool bonus);
 int			add_cylinders(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_light.c
@@ -268,7 +268,7 @@ void		print_count(t_id_count count);
 int			valid_input(t_input *data, bool bonus);
 
 //DEFINE BONUS
-# define BONUS true
+# define BONUS false
 
 //ERROR MESSAGE UTILS
 # define X "Error\n❌ "

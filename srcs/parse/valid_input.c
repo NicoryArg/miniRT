@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:50:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/07 18:10:57 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:24:51 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static int	valid_tokens(t_tokens *node, e_id type, bool bonus)
 	else if (type == PL)
 		return (valid_plane(node->tokens, bonus));
 	else if (type == CY)
-		return (valid_cylinder(node->tokens));
+		return (valid_cylinder(node->tokens, bonus));
 	else if (type == CO)
-		return (valid_cone(node->tokens));
+		return (valid_cone(node->tokens, bonus));
 	return (0);
 }
 
