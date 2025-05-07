@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 20:31:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 20:31:53 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 03:33:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 03:33:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	valid_cone(char **tokens)
 		return (0);
 	if (!is_color(tokens[6]))
 		return (0);
-	if (!is_int(tokens[7]))
+	if (ft_atoi(tokens[7]) > 5 || ft_atoi(tokens[7]) < 0)
 		return (0);
 	return (1);
 }
