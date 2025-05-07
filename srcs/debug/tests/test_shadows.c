@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:25:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:26:03 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:54:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:55:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@
 // 	L.point = ft_tuple(0, 0, 0, POINT);
 // 	expected = ft_colour(0.1, 0.1, 0.1);
 // 	result = ft_shading(L, true);
-// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"",
+	// result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"",
+	// expected.r, expected.g, expected.b);
 // 	if (equal_colour(result, expected))
 // 		printf(GR"✔ result matches expected\n"RES);
 // 	else
@@ -45,7 +47,8 @@
 // 	free(L.l);
 
 // 	// TEST 2
-// 	print_test_banner("No shadow when nothing is colinear with point and light");
+// 	print_test_banner(
+	// "No shadow when nothing is colinear with point and light");
 // 	print_test_number(&i);
 // 	w = default_world();
 // 	p = ft_tuple(0, 10, 0, POINT);

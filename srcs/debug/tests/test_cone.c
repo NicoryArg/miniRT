@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:23:59 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:47:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:41:37 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:47:15 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,21 @@
 // 			return (1);
 // 		}
 // 		printf("  Expected t0 = %.5f, got %.5f\n", (double)(T0), xs->hit->t);
-// 		if (!equal_double(xs->hit->t, T0)) return (printf(AKA"❌ Failed at t0\n"RES));
-// 		printf("  Expected t1 = %.5f, got %.5f\n", (double)(T1), xs->next->hit->t);
-// 		if (!equal_double(xs->next->hit->t, T1)) return (printf(AKA"❌ Failed at t1\n"RES));
+// 		if (!equal_double(xs->hit->t, T0))
+			// return (printf(AKA"❌ Failed at t0\n"RES));
+// 		printf("Expected t1 = %.5f,got %.5f\n",(double)(T1),xs->next->hit->t);
+// 		if (!equal_double(xs->next->hit->t, T1))
+			// return (printf(AKA"❌ Failed at t1\n"RES));
 // 		printf(GR"✔ Passed\n\n"RES);
 // 		free_ray(r); free_cone(cone); free_hitlist(&xs);
 // 	}
 
-// 	TEST_CONE_INTERSECT_2(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR), 5, 5, "Ray hits cone straight");
-// 	TEST_CONE_INTERSECT_2(ft_tuple(0, 0, -5, POINT), ft_tuple(1, 1, 1, VECTOR), 8.66025, 8.66025, "Ray hits cone diagonally");
-// 	TEST_CONE_INTERSECT_2(ft_tuple(1, 1, -5, POINT), ft_tuple(-0.5, -1, 1, VECTOR), 4.55006, 49.44994, "Ray hits from the side");
+// 	TEST_CONE_INTERSECT_2(ft_tuple(0, 0, -5, POINT),
+	// ft_tuple(0, 0, 1, VECTOR), 5, 5, "Ray hits cone straight");
+// 	TEST_CONE_INTERSECT_2(ft_tuple(0, 0, -5, POINT),
+	// ft_tuple(1, 1, 1, VECTOR), 8.66025, 8.66025, "Ray hits cone diagonally");
+// 	TEST_CONE_INTERSECT_2(ft_tuple(1, 1, -5, POINT),
+// ft_tuple(-0.5, -1, 1, VECTOR), 4.55006, 49.44994, "Ray hits from the side");
 
 // 	print_test_banner("Ray parallel to cone’s side");
 // 	print_test_number(&i);
@@ -83,7 +88,6 @@
 // 	free_hitlist(&xs);
 // 	return (0);
 // }
-
 
 // int	list_size(t_hitlist *xs)
 // {
@@ -122,7 +126,8 @@
 // 		cone->closed = true;
 // 		origin = O;
 // 		direction = normalize(D);
-// 		printf("  Using direction = (%.5f, %.5f, %.5f)\n", direction.x, direction.y, direction.z);
+// 		printf("  Using direction = (%.5f, %.5f, %.5f)\n",
+			// direction.x, direction.y, direction.z);
 // 		r = ft_ray(origin, direction);
 // 		xs = NULL;
 // 		intersect_cone((t_object *)cone, r, &xs);
@@ -137,12 +142,13 @@
 // 			const char *label = NULL;
 // 			if (hit->t < 0)
 // 				label = "PAST HIT";
-// 			else if (fabs(p.y - cone->min) < EPSILON || fabs(p.y - cone->max) < EPSILON) {
+// 			else if (fabs(p.y - cone->min) < EPSILON ||
+					// fabs(p.y - cone->max) < EPSILON) {
 // 				label = "CAP HIT";
 // 				actual_count++;
 // 			} else
 // 				label = "SIDE HIT";
-// 			printf("  HIT %d: t = %.5f → %s (y=%.5f)\n", k++, hit->t, label, p.y);
+// 			printf("HIT %d:t = %.5f→%s(y=%.5f)\n",k++,hit->t,label,p.y);
 // 			tmp = tmp->next;
 // 		}
 // 		printf("  Expected hit count: %d\n", EXPECTED_COUNT);
@@ -151,14 +157,21 @@
 // 		printf(GR"✔ Passed\n\n"RES);
 // 		free_ray(r); free_cone(cone); free_hitlist(&xs);
 // 	}
-// 	printf("First test #####################################################\n");
-// 	TEST_CONE_CAP(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 1, 0, VECTOR), 0, "Ray misses end caps (too far away)");
-// 	printf("Second test #####################################################\n");
-// 	TEST_CONE_CAP(ft_tuple(0, 1, 0, POINT), ft_tuple(0, -1, 0, VECTOR), 2, "Ray goes vertically through both end caps");
-// 	printf("Third test #####################################################\n");
-// 	TEST_CONE_CAP(ft_tuple(0, -1, 0, POINT), ft_tuple(0, 1, 0, VECTOR), 2, "Ray goes vertically through both end caps (reversed)");
-// 	printf("Fourth test #####################################################\n");
-// 	TEST_CONE_CAP(ft_tuple(0, 0, -0.25, POINT), ft_tuple(0, 1, 0, VECTOR), 1, "Ray intersects upper cap vertically");
+// 	printf("First test ##################\n");
+// 	TEST_CONE_CAP(ft_tuple(0, 0, -5, POINT),
+	// ft_tuple(0, 1, 0, VECTOR), 0,
+		// "Ray misses end caps (too far away)");
+// 	printf("Second test #######################\n");
+// 	TEST_CONE_CAP(ft_tuple(0, 1, 0, POINT),
+	// ft_tuple(0, -1, 0, VECTOR), 2,
+		// "Ray goes vertically through both end caps");
+// 	printf("Third test ####################\n");
+// 	TEST_CONE_CAP(ft_tuple(0, -1, 0, POINT),
+	// ft_tuple(0, 1, 0, VECTOR), 2,
+		// "Ray goes vertically through both end caps (reversed)");
+// 	printf("Fourth test ###################\n");
+// 	TEST_CONE_CAP(ft_tuple(0, 0, -0.25, POINT),
+	// ft_tuple(0, 1, 0, VECTOR), 1, "Ray intersects upper cap vertically");
 
 // 	return (0);
 // }
@@ -177,7 +190,7 @@
 // 	print_test_number(&i);
 
 // 	#define TEST_CONE_NORMAL(P, N, LABEL) {
-// 		p = P; 
+// 		p = P;
 // 		if (N.x == 0 && N.y == 0 && N.z == 0)
 // 			expected = N;
 // 		else
@@ -185,18 +198,23 @@
 // 		actual = normal_at_cone((t_object *)cone, p);
 // 		printf("→ %s\n", LABEL);
 // 		printf("  Point:   (%.2f, %.2f, %.2f)\n", p.x, p.y, p.z);
-// 		printf("  Normal:  (%.5f, %.5f, %.5f)\n", actual.x, actual.y, actual.z);
-// 		printf("  Expect:  (%.5f, %.5f, %.5f)\n", expected.x, expected.y, expected.z);
-// 		if (!equal_double(actual.x, expected.x) || !equal_double(actual.y, expected.y) || !equal_double(actual.z, expected.z))
+// 		printf("  Normal:  (%.5f, %.5f, %.5f)\n",
+			// actual.x, actual.y, actual.z);
+// 		printf("  Expect:  (%.5f, %.5f, %.5f)\n",
+			// expected.x, expected.y, expected.z);
+// 		if (!equal_double(actual.x, expected.x) ||
+		// !equal_double(actual.y, expected.y) ||
+				// !equal_double(actual.z, expected.z))
 // 			return (printf(AKA"❌ Failed\n\n"RES));
 // 		printf(GR"✔ Passed\n\n"RES);
 // 	}
 
-
-
-// 	TEST_CONE_NORMAL(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 0, VECTOR), "Undefined normal at the tip (0,0,0)");
-// 	TEST_CONE_NORMAL(ft_tuple(1, 1, 1, POINT), ft_tuple(1, -sqrt2, 1, VECTOR), "Point on side (1,1,1)");
-// 	TEST_CONE_NORMAL(ft_tuple(-1, -1, 0, POINT), ft_tuple(-1, 1, 0, VECTOR), "Point on side (-1,-1,0)");
+// 	TEST_CONE_NORMAL(ft_tuple(0, 0, 0, POINT),
+		// ft_tuple(0, 0, 0, VECTOR), "Undefined normal at the tip (0,0,0)");
+// 	TEST_CONE_NORMAL(ft_tuple(1, 1, 1, POINT),
+			// ft_tuple(1, -sqrt2, 1, VECTOR), "Point on side (1,1,1)");
+// 	TEST_CONE_NORMAL(ft_tuple(-1, -1, 0, POINT),
+		// ft_tuple(-1, 1, 0, VECTOR), "Point on side (-1,-1,0)");
 
 // 	free_cone(cone);
 // 	return (0);

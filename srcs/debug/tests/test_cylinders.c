@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:24:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:24:24 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:40:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:41:12 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "tests.h"
 
-// static int	check_cyl_intersect_result(t_hitlist **xs, int count, double t0, double t1)
+// static int	check_cyl_intersect_result(t_hitlist **xs,
+					// int count, double t0, double t1)
 // {
 // 	if (count_hits(xs) == count)
 // 		printf(GR"✔ ray intersects cylinder\n"RES);
@@ -265,7 +266,8 @@
 // 	return (0);
 // }
 
-// static int	check_truncated_result(bool intersect, int expected, int xs_count)
+// static int	check_truncated_result(bool intersect,
+					// int expected, int xs_count)
 // {
 // 	if (intersect == false)
 // 	{
@@ -280,7 +282,8 @@
 // 		if (xs_count == expected)
 // 			printf(GR"✔ ray intersects truncated cylinder\n\n"RES);
 // 		else
-// 			return (printf(AKA"❌ ray does not intersect truncated cylinder\n"RES));
+// 			return (
+	// printf(AKA"❌ ray does not intersect truncated cylinder\n"RES));
 // 	}
 // 	return (0);
 // }
@@ -450,4 +453,3 @@
 // 	free_ray(ray);
 // 	return (0);
 // }
-

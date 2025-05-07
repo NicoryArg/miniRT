@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:24:30 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:24:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:34:56 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:35:02 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 // 	t_tuple		expected;
 // 	t_matrix	*transf;
 // 	int			i = 1;
-
 
 // //TEST 1
 // 	//print banners
@@ -109,5 +108,3 @@
 // 		return(printf(AKA"❌ tuples don't match\n"RES));
 // 	return (0);
 // }
-
-

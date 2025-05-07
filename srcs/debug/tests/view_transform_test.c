@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:26:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:26:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:38:47 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:40:10 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,16 @@
 // 	//run test
 // 	c = ft_camera(160, 120, 90);
 // 	//print output
-// 	printf(B_B"c.hsize: %.0f\t"G_B"expected: %.0f\n"RES, c.hsize, expected_hsize);
-// 	printf(B_B"c.vsize: %.0f\t"G_B"expected: %.0f\n"RES, c.vsize, expected_vsize);
-// 	printf(B_B"c.fov:   %.2f\t"G_B"expected: %.2f\n"RES, c.fov, expected_fov);
+// 	printf(B_B"c.hsize:%.0f\t"G_B"expected: %.0f\n"RES,c.hsize, expected_hsize);
+// 	printf(B_B"c.vsize: %.0f\t"G_B"expected:%.0f\n"RES,c.vsize, expected_vsize);
+// 	printf(B_B"c.fov:   %.2f\t"G_B"expected: %.2f\n"RES,c.fov, expected_fov);
 // 	printf(B_B"c.transf:\n"RES);
 // 	print_matrix(c.transf);
 // 	printf(G_B"expected:\n"RES);
 // 	print_matrix(expected_transf);
 // 	//check output
-// 	if (ft_equal(c.hsize, expected_hsize) && ft_equal(c.vsize, expected_vsize) && ft_equal(c.fov, expected_fov))
+// 	if (ft_equal(c.hsize, expected_hsize) &&
+		// ft_equal(c.vsize, expected_vsize) && ft_equal(c.fov, expected_fov))
 // 		printf(GR"✔ camera created successfully\n"RES);
 // 	else
 // 		return(printf(AKA"❌ camera creation failed\n"RES));
@@ -161,7 +162,9 @@
 // 	//run test
 // 	c = ft_camera(200, 125, 90);
 // 	//print output
-// 	printf(B_B"c.pixel_size: %.2f\t"G_B"expected: %.2f\n"RES, c.pixel_size, expected_pixel_size);
+// 	printf(B_B
+// "c.pixel_size:%.2f\t"G_B
+// "expected:%.2f\n"RES,c.pixel_size,expected_pixel_size);
 // 	//check output
 // 	if (ft_equal(c.pixel_size, expected_pixel_size))
 // 		printf(GR"✔ pixel size is correct\n"RES);
@@ -176,7 +179,9 @@
 // 	//run test
 // 	c = ft_camera(125, 200, 90);
 // 	//print output
-// 	printf(B_B"c.pixel_size: %.2f\t"G_B"expected: %.2f\n"RES, c.pixel_size, expected_pixel_size);
+// 	printf(B_B
+// "c.pixel_size: %.2f\t"G_B
+// "expected: %.2f\n"RES, c.pixel_size, expected_pixel_size);
 // 	//check output
 // 	if (ft_equal(c.pixel_size, expected_pixel_size))
 // 		printf(GR"✔ pixel size is correct\n"RES);

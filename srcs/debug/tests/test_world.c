@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:26:33 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:26:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:31:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:34:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@
 // 	print_test_number(&i);
 // 	w = default_world();
 // 	// Check the light
-// 	expected_light = ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0);
+// 	expected_light = ft_light(ft_tuple(-10, 10, -10, POINT),
+						// ft_colour(1, 1, 1), 1.0);
 // 	printf("Expected Light Position: (%.1f, %.1f, %.1f)\n",
 // 		expected_light->pos.x, expected_light->pos.y, expected_light->pos.z);
 // 	printf("Actual Light Position:   (%.1f, %.1f, %.1f)\n",
@@ -94,7 +95,8 @@
 // 		ft_equal(s1->base.m.specular, 0.2))
 // 		printf(G_B"✔ First sphere material matches expected values\n"RES);
 // 	else
-// 		return (printf(AKA"❌ First sphere material does not match expected values\n"RES));
+// 		return (printf(
+		// AKA"❌ First sphere material does not match expected values\n"RES));
 // 	// Check second sphere’s scale (0.5, 0.5, 0.5)
 // 	s2 = w->objects[1];
 // 	expected_scale = scale(0.5, 0.5, 0.5);
@@ -111,14 +113,14 @@
 // 	return (0);
 // }
 
-
 // int	intersect_world_test(int run)
 // {
 // 	if (run == 0)
 // 		return (0);
 // 	int			i = 3;
 // 	t_world		*w = default_world();
-// 	t_ray		*r = ft_ray(ft_tuple(0, 0, -5, POINT), ft_tuple(0, 0, 1, VECTOR));
+// 	t_ray		*r = ft_ray(ft_tuple(0, 0, -5, POINT),
+					// ft_tuple(0, 0, 1, VECTOR));
 // 	t_hitlist	**xs = new_hitlist();
 // 	double		expected[] = {5.5, 4.5, 6.0, 4.0};
 // 	int			count;
@@ -137,7 +139,8 @@
 
 // 	for (int j = 0; j < count; j++)
 // 	{
-// 		printf("xs[%d].t = %.1f (expected %.1f)\n", j, (*xs)->hit->t, expected[j]);
+// 		printf("xs[%d].t = %.1f (expected %.1f)\n", j,
+			// (*xs)->hit->t, expected[j]);
 // 		if (ft_equal((*xs)->hit->t, expected[j]))
 // 			printf(GR"✔ t%d is correct\n"RES, j);
 // 		else
@@ -190,7 +193,8 @@
 // 	printf("________________________________________________\n");
 
 // 	//point
-// 	printf(B_B"comps.point: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.point.x, comps.point.y, comps.point.z, comps.point.w);
+// 	printf(B_B"comps.point: (%.0f,%.0f,%.0f,%d)\n"RES"",
+		// comps.point.x, comps.point.y, comps.point.z, comps.point.w);
 // 	printf(G_B"expected:    (0,0,-1,1)\n"RES"");
 // 	if (equal_tuple(comps.point, ft_tuple(0,0,-1,POINT)))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -199,7 +203,8 @@
 // 	printf("________________________________________________\n");
 
 // 	//eyev
-// 	printf(B_B"comps.eyev: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
+// 	printf(B_B"comps.eyev: (%.0f,%.0f,%.0f,%d)\n"RES"",
+		// comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
 // 	printf(G_B"expected:   (0,0,-1,0)\n"RES"");
 // 	if (equal_tuple(comps.eyev, ft_tuple(0,0,-1,VECTOR)))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -208,7 +213,8 @@
 // 	printf("________________________________________________\n");
 
 // 	//normalv
-// 	printf(B_B"comps.normalv: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
+// 	printf(B_B"comps.normalv: (%.0f,%.0f,%.0f,%d)\n"RES"",
+		// comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
 // 	printf(G_B"expected:      (0,0,-1,0)\n"RES"");
 // 	if (equal_tuple(comps.normalv, ft_tuple(0,0,-1,VECTOR)))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -224,7 +230,8 @@
 // 	if (comps.inside == false)
 // 		printf(GR"✔ comps.inside properly set to FALSE\n"RES);
 // 	else
-// 		return(printf(AKA"❌ comps.inside is set to TRUE when it should be FALSE\n"RES));
+// 		return(
+	// printf(AKA"❌ comps.inside is set to TRUE when it should be FALSE\n"RES));
 
 // //TEST 3
 // 	//print banners
@@ -238,7 +245,8 @@
 // 	comps = pre_compute(hit, r);
 // 	//check & print output
 // 	//point
-// 	printf(B_B"comps.point: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.point.x, comps.point.y, comps.point.z, comps.point.w);
+// 	printf(B_B"comps.point: (%.0f,%.0f,%.0f,%d)\n"RES"",
+	// comps.point.x, comps.point.y, comps.point.z, comps.point.w);
 // 	printf(G_B"expected:    (0,0,1,1)\n"RES"");
 // 	if (equal_tuple(comps.point, ft_tuple(0,0,1,POINT)))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -247,7 +255,8 @@
 // 	printf("________________________________________________\n");
 
 // 	//eyev
-// 	printf(B_B"comps.eyev: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
+// 	printf(B_B"comps.eyev: (%.0f,%.0f,%.0f,%d)\n"RES"",
+	// comps.eyev.x, comps.eyev.y, comps.eyev.z, comps.eyev.w);
 // 	printf(G_B"expected:   (0,0,-1,0)\n"RES"");
 // 	if (equal_tuple(comps.eyev, ft_tuple(0,0,-1,VECTOR)))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -259,10 +268,12 @@
 // 	if (comps.inside == true)
 // 		printf(GR"✔ intersection properly occurs on the inside\n"RES);
 // 	else
-// 		return(printf(AKA"❌ intersection incorrectly occurs on the outside\n"RES));
+// 		return(
+	// printf(AKA"❌ intersection incorrectly occurs on the outside\n"RES));
 
 // 	//normalv
-// 	printf(B_B"comps.normalv: (%.0f,%.0f,%.0f,%d)\n"RES"", comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
+// 	printf(B_B"comps.normalv: (%.0f,%.0f,%.0f,%d)\n"RES"",
+	// comps.normalv.x, comps.normalv.y, comps.normalv.z, comps.normalv.w);
 // 	printf(G_B"expected:      (0,0,-1,0)\n"RES"");
 // 	if (equal_tuple(comps.normalv, ft_tuple(0,0,-1,VECTOR)))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -294,9 +305,11 @@
 // 	comps = pre_compute(hit, r);
 // 	col = shade_hit(w, comps, false);
 // 	// color check
-// 	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
+// 	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"",
+				// col.r, col.g, col.b);
 // 	printf(G_B"expected:        (0.38066, 0.47583, 0.28550)\n"RES"");
-// 	if (ft_equal(col.r, 0.38066) && ft_equal(col.g, 0.47583) && ft_equal(col.b, 0.2855))
+// 	if (ft_equal(col.r, 0.38066) && ft_equal(col.g, 0.47583) &&
+	// ft_equal(col.b, 0.2855))
 // 		printf(GR"✔ color matches expected value\n"RES);
 // 	else
 // 		return (printf(AKA"❌ color does not match expected value\n"RES));
@@ -308,15 +321,18 @@
 // 	print_test_banner("Shading an intersection (inside)");
 // 	print_test_number(&i);
 // 	w = default_world();
-// 	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
+// 	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT),
+							// ft_colour(1, 1, 1), 1.0));
 // 	r = ft_ray(ft_tuple(0, 0, 0, POINT), ft_tuple(0, 0, 1, VECTOR));
 // 	hit = intersection(0.5, w->objects[1]);
 // 	comps = pre_compute(hit, r);
 // 	col = shade_hit(w, comps, false);
 // 	// color check
-// 	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
+// 	printf(B_B"computed colour: (%.5f, %.5f, %.5f)\n"RES"",
+			// col.r, col.g, col.b);
 // 	printf(G_B"expected:        (0.90498, 0.90498, 0.90498)\n"RES"");
-// 	if (ft_equal(col.r, 0.90498) && ft_equal(col.g, 0.90498) && ft_equal(col.b, 0.90498))
+// 	if (ft_equal(col.r, 0.90498) && ft_equal(col.g, 0.90498) &&
+			// ft_equal(col.b, 0.90498))
 // 		printf(GR"✔ color matches expected value\n"RES);
 // 	else
 // 		return (printf(AKA"❌ color does not match expected value\n"RES));
@@ -362,7 +378,8 @@
 
 // 	printf(B_B"returned color: (%.5f, %.5f, %.5f)\n"RES"", col.r, col.g, col.b);
 // 	printf(G_B"expected:       (0.38066, 0.47583, 0.28550)\n"RES"");
-// 	if (ft_equal(col.r, 0.38066) && ft_equal(col.g, 0.47583) && ft_equal(col.b, 0.2855))
+// 	if (ft_equal(col.r, 0.38066) && ft_equal(col.g, 0.47583) &&
+				// ft_equal(col.b, 0.2855))
 // 		printf(GR"✔ color matches expected surface color\n"RES);
 // 	else
 // 		return (printf(AKA"❌ color does not match expected\n"RES));

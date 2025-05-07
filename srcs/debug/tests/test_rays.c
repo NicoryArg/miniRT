@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:25:31 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:25:36 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:50:42 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:54:18 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 // 	if (run == 0)
 // 		return (0);
 // 	int	i = 1;
-// 	t_ray	*r = ft_ray(ft_tuple(2, 3, 4, POINT), ft_tuple(1, 0, 0, VECTOR));
+// 	t_ray	*r = ft_ray(ft_tuple(2, 3, 4, POINT),
+// ft_tuple(1, 0, 0, VECTOR));
 // 	t_tuple	res;
 // 	t_tuple	expected;
-
 
 // 	print_test_banner("Computing a point from a distance");
 // //TEST 1
@@ -34,8 +34,10 @@
 // 	//run test
 // 	res = get_point(r, 0);
 // 	//print output
-// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
-// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// res.x, res.y, res.z, res.w);
+// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// expected.x, expected.y, expected.z, expected.w);
 // 	//check output
 // 	if (equal_tuple(res, expected))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -50,8 +52,10 @@
 // 	//run test
 // 	res = get_point(r, 1);
 // 	//print output
-// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
-// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// res.x, res.y, res.z, res.w);
+// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// expected.x, expected.y, expected.z, expected.w);
 // 	//check output
 // 	if (equal_tuple(res, expected))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -66,8 +70,10 @@
 // 	//run test
 // 	res = get_point(r, -1);
 // 	//print output
-// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
-// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// res.x, res.y, res.z, res.w);
+// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// expected.x, expected.y, expected.z, expected.w);
 // 	//check output
 // 	if (equal_tuple(res, expected))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -82,8 +88,10 @@
 // 	//run test
 // 	res = get_point(r, 2.5);
 // 	//print output
-// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"", res.x, res.y, res.z, res.w);
-// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"", expected.x, expected.y, expected.z, expected.w);
+// 	printf(B_B"result: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// res.x, res.y, res.z, res.w);
+// 	printf(G_B"expected: (%.0f, %.0f, %.0f, %d)\n"RES"",
+	// expected.x, expected.y, expected.z, expected.w);
 // 	//check output
 // 	if (equal_tuple(res, expected))
 // 		printf(GR"✔ tuples match\n"RES);
@@ -117,8 +125,6 @@
 // 	return (0);
 // }
 
-
-
 // //#################################################################//
 // //########################## P59 - P62 #############################//
 // //#################################################################//
@@ -138,7 +144,6 @@
 // 	}
 // 	return (i);
 // }
-
 
 // int	sph_ray_intersect(int run)
 // {
@@ -284,8 +289,6 @@
 // 	return (0);
 // }
 
-
-
 // //#################################################################//
 // //########################## P63 - P66 #############################//
 // //#################################################################//
@@ -297,7 +300,8 @@
 // 	int			i = 1;
 // 	int			count = 0;
 // 	t_sphere	*s = ft_sphere(1);
-// 	t_ray		*r = ft_ray(ft_tuple(-5, 0, 0, POINT), ft_tuple(1, 0, 0, VECTOR));
+// 	t_ray		*r = ft_ray(ft_tuple(-5, 0, 0, POINT),
+	// ft_tuple(1, 0, 0, VECTOR));
 // 	t_hit		*i1 = NULL;
 // 	t_hit		*i2 = NULL;
 // 	t_hit		*i3 = NULL;
@@ -441,7 +445,8 @@
 // {
 // 	if (run == 0)
 // 		return (0);
-// 	t_ray		*r = ft_ray(ft_tuple(1, 2, 3, POINT), ft_tuple(0, 1, 0, VECTOR));
+// 	t_ray		*r = ft_ray(ft_tuple(1, 2, 3, POINT),
+// 				ft_tuple(0, 1, 0, VECTOR));
 // 	t_ray		*transformed_ray = NULL;
 // 	t_matrix	*transf = translate(3, 4, 5);
 // 	int			i = 1;
@@ -456,8 +461,14 @@
 // 	//call function
 // 	transformed_ray = transform(r, transf);
 // 	//print output
-// 	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (4, 6, 8, 1)\n"RES"", transformed_ray->origin.x, transformed_ray->origin.y, transformed_ray->origin.z, transformed_ray->origin.w);
-// 	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (0, 1, 0, 0)\n"RES"", transformed_ray->direction.x, transformed_ray->direction.y, transformed_ray->direction.z, transformed_ray->direction.w);
+// 	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d) \t "G_B
+	// "expected: (4, 6, 8, 1)\n"RES"", transformed_ray->origin.x,
+	// transformed_ray->origin.y, transformed_ray->origin.z,
+	// transformed_ray->origin.w);
+// 	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B
+	// "expected: (0, 1, 0, 0)\n"RES"", transformed_ray->direction.x,
+	// transformed_ray->direction.y,
+	// transformed_ray->direction.z, transformed_ray->direction.w);
 // 	//check output
 // 	if (equal_tuple(transformed_ray->origin, expected_origin))
 // 		printf(GR"✔ origin is correct\n"RES);
@@ -482,8 +493,14 @@
 // 	//call function
 // 	transformed_ray = transform(r, transf);
 // 	//print output
-// 	printf(B_B"origin:    (%.0f, %.0f, %.0f, %d)\t "G_B"expected: (2, 6, 12, 1)\n"RES"", transformed_ray->origin.x, transformed_ray->origin.y, transformed_ray->origin.z, transformed_ray->origin.w);
-// 	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B"expected: (0, 3, 0, 0)\n"RES"", transformed_ray->direction.x, transformed_ray->direction.y, transformed_ray->direction.z, transformed_ray->direction.w);
+// 	printf(B_B"origin:(%.0f, %.0f, %.0f, %d)\t "G_B
+	// "expected: (2, 6, 12, 1)\n"RES"", transformed_ray->origin.x,
+	// transformed_ray->origin.y, transformed_ray->origin.z,
+	// transformed_ray->origin.w);
+// 	printf(B_B"direction: (%.0f, %.0f, %.0f, %d) \t "G_B
+	// "expected: (0, 3, 0, 0)\n"RES"", transformed_ray->direction.x,
+	// transformed_ray->direction.y, transformed_ray->direction.z,
+	// transformed_ray->direction.w);
 // 	//check output
 // 	if (equal_tuple(transformed_ray->origin, expected_origin))
 // 		printf(GR"✔ origin is correct\n"RES);

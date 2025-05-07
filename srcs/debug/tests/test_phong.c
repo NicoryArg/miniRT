@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:24:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:25:01 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:29:05 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:31:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 // 	t_tuple		pos;
 // 	t_light		*light;
 // 	int			i = 1;
-
 
 // //TEST 1
 // 	//print banners
@@ -150,8 +149,9 @@
 // 	//run test
 // 	result = ft_shading(L, false);
 // 	//print output
-// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	printf(B_B"result:(%.1f, %.1f, %.1f)\n"RES"",result.r, result.g, result.b);
+// 	printf(G_B"expected:(%.1f, %.1f, %.1f)\n"RES"",
+			// expected.r,expected.g,expected.b);
 // 	//check output
 // 	if (equal_colour(result, expected))
 // 		printf(GR"✔ result matches expected\n"RES);
@@ -169,8 +169,10 @@
 // 	//run test
 // 	result = ft_shading(L, false);
 // 	//print output
-// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"",
+			// result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"",
+			// expected.r, expected.g, expected.b);
 // 	//check output
 // 	if (equal_colour(result, expected))
 // 		printf(GR"✔ result matches expected\n"RES);
@@ -188,8 +190,10 @@
 // 	//run test
 // 	result = ft_shading(L, false);
 // 	//print output
-// 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
-// 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
+// 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"",
+			// result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"",
+				// expected.r, expected.g, expected.b);
 // 	//check output
 // 	if (equal_colour(result, expected))
 // 		printf(GR"✔ result matches expected\n"RES);
@@ -206,8 +210,10 @@
 // 	//run test
 // 	result = ft_shading(L, false);
 // 	//print output
-// 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"", result.r, result.g, result.b);
-// 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"", expected.r, expected.g, expected.b);
+// 	printf(B_B"result:   (%.4f, %.4f, %.4f)\n"RES"",
+			// result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.4f, %.4f, %.4f)\n"RES"",
+			// expected.r, expected.g, expected.b);
 // 	//check output
 // 	if (equal_colour(result, expected))
 // 		printf(GR"✔ result matches expected\n"RES);
@@ -225,8 +231,10 @@
 // 	//run test
 // 	result = ft_shading(L, false);
 // 	//print output
-// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"", result.r, result.g, result.b);
-// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"", expected.r, expected.g, expected.b);
+// 	printf(B_B"result:   (%.1f, %.1f, %.1f)\n"RES"",
+			// result.r, result.g, result.b);
+// 	printf(G_B"expected: (%.1f, %.1f, %.1f)\n"RES"",
+			// expected.r, expected.g, expected.b);
 // 	//check output
 // 	if (equal_colour(result, expected))
 // 		printf(GR"✔ result matches expected\n"RES);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:45:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:46:33 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:55:36 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 17:57:51 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@
 // 		pt = ft_tuple((double)(x), (double)(y), (double)(z), POINT);
 // 		expected = exp_col;
 // 		actual = stripe_at(&p, pt, NULL);
-// 		printf("→ %s at point (%.1f, %.1f, %.1f)\n", label, (double)(x), (double)(y), (double)(z));
-// 		printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
-// 		printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b);
+// 		printf("→ %s at point (%.1f, %.1f, %.1f)\n",
+	// label, (double)(x), (double)(y), (double)(z));
+// 		printf("Expected: (%.1f, %.1f, %.1f)\n",
+	// expected.r, expected.g, expected.b);
+// 		printf("Actual:   (%.1f, %.1f, %.1f)\n",
+	// actual.r, actual.g, actual.b);
 // 		if (equal_colour(actual, expected))
 // 			printf(GR"✔ Passed\n\n"RES);
 // 		else
-// 			return (printf(AKA"❌ Failed\n\n"RES)); 
+// 			return (printf(AKA"❌ Failed\n\n"RES));
 // 	}
-
 
 // 	// Constant in Y
 // 	TEST_STRIPE_AT(0, 0, 0, p.a, "Constant Y");
@@ -77,7 +79,6 @@
 // 	free_matrix(p.transform);
 // 	return (0);
 // }
-
 
 // int	patt_lighting_test(int run)
 // {
@@ -129,7 +130,8 @@
 // 	expected = ft_colour(1, 1, 1);
 
 // 	printf("Point: (%.1f, %.1f, %.1f)\n", point.x, point.y, point.z);
-// 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
+// 	printf("Expected: (%.1f, %.1f, %.1f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Lighting is correct at point 0.9 (white stripe)\n\n"RES);
@@ -143,7 +145,8 @@
 // 	expected = ft_colour(0, 0, 0);
 
 // 	printf("Point: (%.1f, %.1f, %.1f)\n", point.x, point.y, point.z);
-// 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
+// 	printf("Expected: (%.1f, %.1f, %.1f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Lighting is correct at point 1.1 (black stripe)\n"RES);
@@ -179,8 +182,10 @@
 // 	expected = ft_colour(1, 1, 1);
 // 	actual = patt_colour_at_world(&patt, (t_object *)s, world_point);
 
-// 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x, world_point.y, world_point.z);
-// 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
+// 	printf("Point: (%.1f, %.1f, %.1f)\n",
+	// world_point.x, world_point.y, world_point.z);
+// 	printf("Expected: (%.1f, %.1f, %.1f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: object transform\n\n"RES);
@@ -200,8 +205,10 @@
 // 	expected = ft_colour(1, 1, 1);
 // 	actual = patt_colour_at_world(&patt, (t_object *)s, world_point);
 
-// 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x, world_point.y, world_point.z);
-// 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
+// 	printf("Point: (%.1f, %.1f, %.1f)\n",
+		// world_point.x, world_point.y, world_point.z);
+// 	printf("Expected: (%.1f, %.1f, %.1f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: patt transform\n\n"RES);
@@ -221,8 +228,10 @@
 // 	expected = ft_colour(1, 1, 1);
 // 	actual = patt_colour_at_world(&patt, (t_object *)s, world_point);
 
-// 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x, world_point.y, world_point.z);
-// 	printf("Expected: (%.1f, %.1f, %.1f)\n", expected.r, expected.g, expected.b);
+// 	printf("Point: (%.1f, %.1f, %.1f)\n", world_point.x,
+		// world_point.y, world_point.z);
+// 	printf("Expected: (%.1f, %.1f, %.1f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.1f, %.1f, %.1f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: object + patt transform\n\n"RES);
@@ -258,7 +267,8 @@
 // 	// expected = ft_colour(1, 1.5, 2);
 // 	// actual = patt_colour_at_world(&patt, (t_object *)s, world_point);
 
-// 	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	// printf("Expected: (%.2f, %.2f, %.2f)\n",
+		// expected.r, expected.g, expected.b);
 // 	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	// if (equal_colour(actual, expected))
 // 	// 	printf(GR"✔ Passed: object transformation\n\n"RES);
@@ -277,7 +287,8 @@
 // 	// expected = ft_colour(1, 1.5, 2);
 // 	// actual = patt_colour_at_world(&patt, (t_object *)s, world_point);
 
-// 	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	// printf("Expected: (%.2f, %.2f, %.2f)\n",
+			// expected.r, expected.g, expected.b);
 // 	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	// if (equal_colour(actual, expected))
 // 	// 	printf(GR"✔ Passed: patt transformation\n\n"RES);
@@ -297,7 +308,8 @@
 // 	// expected = ft_colour(0.75, 0.5, 0.25);
 // 	// actual = patt_colour_at_world(&patt, (t_object *)s, world_point);
 
-// 	// printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	// printf("Expected: (%.2f, %.2f, %.2f)\n",
+		// expected.r, expected.g, expected.b);
 // 	// printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	// if (equal_colour(actual, expected))
 // 	// 	printf(GR"✔ Passed: object + patt transformation\n"RES);
@@ -333,7 +345,8 @@
 // 	p = ft_tuple(0, 0, 0, POINT);
 // 	expected = ft_colour(1, 1, 1);
 // 	actual = gradient_at(&patt, p);
-// 	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	printf("Expected: (%.2f, %.2f, %.2f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: point(0,0,0) = white\n\n"RES);
@@ -345,7 +358,8 @@
 // 	p = ft_tuple(0.25, 0, 0, POINT);
 // 	expected = ft_colour(0.75, 0.75, 0.75);
 // 	actual = gradient_at(&patt, p);
-// 	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	printf("Expected: (%.2f, %.2f, %.2f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: point(0.25,0,0)\n\n"RES);
@@ -357,7 +371,8 @@
 // 	p = ft_tuple(0.5, 0, 0, POINT);
 // 	expected = ft_colour(0.5, 0.5, 0.5);
 // 	actual = gradient_at(&patt, p);
-// 	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	printf("Expected: (%.2f, %.2f, %.2f)\n",
+		// expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: point(0.5,0,0)\n\n"RES);
@@ -369,7 +384,8 @@
 // 	p = ft_tuple(0.75, 0, 0, POINT);
 // 	expected = ft_colour(0.25, 0.25, 0.25);
 // 	actual = gradient_at(&patt, p);
-// 	printf("Expected: (%.2f, %.2f, %.2f)\n", expected.r, expected.g, expected.b);
+// 	printf("Expected: (%.2f, %.2f, %.2f)\n",
+// 		expected.r, expected.g, expected.b);
 // 	printf("Actual:   (%.2f, %.2f, %.2f)\n", actual.r, actual.g, actual.b);
 // 	if (equal_colour(actual, expected))
 // 		printf(GR"✔ Passed: point(0.75,0,0)\n\n"RES);

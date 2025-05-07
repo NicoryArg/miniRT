@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:27:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:27:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 17:58:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:00:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@
 // {
 // 	if ((type == PLANE || type == CYLINDER) && tuple.w == 0)
 // 	{
-// 		printf(B_B"normal:   (%.0f, %.0f, %.0f)\n"RES, tuple.x, tuple.y, tuple.z);
-// 		printf(G_B"expected: (%.0f, %.0f, %.0f)\n"RES, expected.x, expected.y, expected.z);
+// 		printf(B_B"normal:   (%.0f, %.0f, %.0f)\n"RES,
+			// tuple.x, tuple.y, tuple.z);
+// 		printf(G_B"expected: (%.0f, %.0f, %.0f)\n"RES,
+			// expected.x, expected.y, expected.z);
 // 	}
 // 	else if (type == SPHERE && tuple.w == 0)
 // 	{
-// 		printf(B_B"normal:   (%.5f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
-// 		printf(G_B"expected: (%.5f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
+// 		printf(B_B"normal:   (%.5f, %.5f, %.5f)\n"RES,
+			// tuple.x, tuple.y, tuple.z);
+// 		printf(G_B"expected: (%.5f, %.5f, %.5f)\n"RES,
+			// expected.x, expected.y, expected.z);
 // 	}
 // 	else
 // 	{
@@ -38,8 +42,10 @@
 // {
 // 	if (tuple.w == 0)
 // 	{
-// 		printf(BOLD"reflected: (%.0f, %.5f, %.5f)\n"RES, tuple.x, tuple.y, tuple.z);
-// 		printf(G_B"expected:  (%.0f, %.5f, %.5f)\n"RES, expected.x, expected.y, expected.z);
+// 		printf(BOLD"reflected: (%.0f, %.5f, %.5f)\n"RES,
+			// tuple.x, tuple.y, tuple.z);
+// 		printf(G_B"expected:(%.0f, %.5f, %.5f)\n"RES,
+			// expected.x, expected.y, expected.z);
 // 	}
 // 	else
 // 	{
@@ -152,12 +158,12 @@
 // {
 // 	int total_width = 62;  // Adjust if needed
 // 	int word_length = ft_strlen(word);
-// 	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
-// 	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+// 	int padding = (total_width - word_length - 4) / 2;
+// 	int extra = (total_width - word_length - 4) % 2;
 
-// 	printf(B_B"##############################################################\n");
+// 	printf(B_B"########################\n");
 // 	printf("#%*s%s%*s#\n", padding, "", word, padding + extra, "");
-// 	printf("##############################################################\n"RES);
+// 	printf("##################\n"RES);
 // }
 
 // // void	print_test_number(int *i)
@@ -168,23 +174,24 @@
 // {
 // 	int total_width = 57;  // Adjust if needed
 // 	int word_length = 1;
-// 	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
-// 	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+// 	int padding = (total_width - word_length - 4) / 2;
+// 	int extra = (total_width - word_length - 4) % 2;
 // 	char *word = "TEST";
 
-// 	printf(C_B"#####%*s%s %d%*s#####\n"RES, padding, "", word, (*i)++, padding + extra, "");
+// 	printf(C_B"%*s%s %d%*s \n"RES, padding, ""
+		// word, (*i)++, padding + extra, "");
 // }
 
 // void	print_sub_header(const char *word, int *i)
 // {
 // 	int total_width = 62;  // Adjust if needed
 // 	int word_length = strlen(word);
-// 	int padding = (total_width - word_length - 4) / 2;  // 4 accounts for spaces around word
-// 	int extra = (total_width - word_length - 4) % 2;    // Handle odd length cases
+// 	int padding = (total_width - word_length - 4) / 2;
+// 	int extra = (total_width - word_length - 4) % 2;
 
 // 	if (*i != 0)
 // 		print_test_number(i);
-// 	printf(CYAN"#####%*s%s%*s#####\n"RES, padding, "", word, padding + extra, "");
+// 	printf(CYAN"#%*s%s%*s#\n"RES, padding, "", word, padding + extra, "");
 // }
 
 // void	print_intersections(t_hit **xs, int count, int sorted)
@@ -228,8 +235,6 @@
 //##############################################################//
 //######################## OBSOLETE ###########################//
 //##############################################################//
-
-
 
 /*
 void	print_rs(t_ray_sphere *rs)
