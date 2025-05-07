@@ -268,7 +268,7 @@ void		print_count(t_id_count count);
 int			valid_input(t_input *data, bool bonus);
 
 //DEFINE BONUS
-# define BONUS false
+# define BONUS true
 
 //ERROR MESSAGE UTILS
 # define X "Error\n❌ "

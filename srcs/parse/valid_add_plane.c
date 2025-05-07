@@ -19,15 +19,17 @@ int	valid_plane(char **tokens, bool bonus)
 	int	count;
 
 	count = count_split(tokens);
+	if (!bonus && count != 4)
+		return(args_count_error(tokens, count, 4));
 	if (bonus && count != 5)
-		return (0);
+		return(args_count_error(tokens, count, 5));
 	if (!is_vec3(tokens[1]))
 		return (0);
 	if (!is_vec3(tokens[2]))
 		return (0);
 	if (!is_color(tokens[3]))
 		return (0);
-	if (!is_int(tokens[4]))
+	if (bonus && !is_int(tokens[4]))
 		return (0);
 	return (1);
 }
