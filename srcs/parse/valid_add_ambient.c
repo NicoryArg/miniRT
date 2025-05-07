@@ -16,8 +16,6 @@
 
 int	valid_ambient(char **tokens)
 {
-	double	ratio;
-
 	if (count_split(tokens) != 3)
 		return (0);
 	if (!is_float(tokens[1]) || !valid_light_ratio(tokens[1]))

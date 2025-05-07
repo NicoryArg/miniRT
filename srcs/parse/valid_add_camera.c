@@ -14,6 +14,12 @@
 #include "engine.h"
 #include "parse.h"
 
+static int	valid_orientation(char *str)
+{
+	(void)str;
+	return (1);
+}
+
 int	valid_camera(char **tokens)
 {
 	double	fov;
@@ -22,7 +28,7 @@ int	valid_camera(char **tokens)
 		return (0);
 	if (!is_vec3(tokens[1]))
 		return (0);
-	if (!is_vec3(tokens[2]))
+	if (!is_vec3(tokens[2]) || !valid_orientation(tokens[2]))
 		return (0);
 	if (!is_float(tokens[3]))
 		return (0);
