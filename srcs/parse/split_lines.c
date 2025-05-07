@@ -19,7 +19,7 @@ static void print_long_line(char *str, int index, int k)
 	int	i;
 
 	i = index - k;
-	printf(""X"");
+	printf(R_B""X""RES"");
 	while (str[i] && str[i] != '\n')
 		printf(AKA"%c", str[i++]);
 	printf(RES"  ->  "LONG_LINE"");
@@ -47,7 +47,7 @@ static int	copy_str(char *str, int *i, char **lines, int j)
 	if (k >= MAX_LINE_LEN)
 	{
 		print_long_line(str, *i, k);
-		// printf(""X""LONG_LINE"");
+		// printf(R_B""X""RES""LONG_LINE"");
 		return (1);
 	}
 	return (0);

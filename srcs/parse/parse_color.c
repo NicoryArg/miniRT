@@ -42,7 +42,7 @@ t_colour	parse_color(char *str)
 
 static void print_rgb_error(int r, int g, int b)
 {
-	printf(""X"RGB values out of range: ");
+	printf(R_B""X""RES"RGB values out of range: ");
 	if (r < 0 || r > 255)
 		printf(AKA"%d"RES, r);
 	else
@@ -80,7 +80,7 @@ int	is_color(const char *str)
 	parts = ft_split(str, ',');
 	if (!parts || count_split(parts) != 3)
 	{
-		printf(""X""FAILED_SPLIT"", str);
+		printf(R_B""X""RES""TOO_MANY_VEC3""AKA"%s"RES"\n", str);
 		free_array(parts);
 		return (0);
 	}

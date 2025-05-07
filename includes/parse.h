@@ -233,7 +233,7 @@ e_id		get_identifier(char *s);
 t_tokens	*parse_input(char **lines);
 
 //valid_add_ambient.c
-int			valid_ambient(char **tokens);
+int			valid_ambient(char **tokens, bool bonus);
 
 //valid_add_camera.c
 void		orientation_err(double x, double y, double z);
@@ -249,6 +249,7 @@ int			valid_cylinder(char **tokens);
 int			add_cylinders(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_light.c
+int			print_token_line(char **tokens, int count, bool bonus);
 int			valid_light_ratio(char *num);
 int			valid_light(char **tokens, bool bonus);
 void		add_lights(t_world *w, t_parsed_scene *scene);
@@ -268,13 +269,12 @@ int			valid_input(t_input *data, bool bonus);
 //ERROR MESSAGE UTILS
 
 
-# define X ""R_B"Error\n❌ "RES""
-# define O "✔ "GR""
+# define X "Error\n❌ "
 # define TIP "Please ensure you separate values with spaces only -> ' '\n"
-# define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES"\n"
-# define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
-# define BRIGHT ""AKA"Light ratio out of range:"RES"    "
-# define TOO_MANY_VEC3 "Too many or few args: "AKA"%s"RES"\n"
-# define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
+# define INVALID_INPUT "Invalid input\n"
+# define BRIGHT "Light ratio out of range:\n   "
+# define TOO_MANY_VEC3 "Too many or few args:\n   "
+# define FAILED_SPLIT "failed to split:   "
 # define LONG_LINE "line too long! (max 50)\n"
+# define FOV_ERR "fov out of range:  "
 #endif

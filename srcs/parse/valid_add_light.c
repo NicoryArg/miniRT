@@ -14,17 +14,17 @@
 #include "engine.h"
 #include "parse.h"
 
-static int print_token_line(char **tokens, int count, bool bonus)
+int print_token_line(char **tokens, int count, bool bonus)
 {
 	int	i;
 
 	i = 0;
 	if (!bonus && count > 3)
-		printf(""X"Too many arguments in line: `");
+		printf(R_B""X""RES"Too many arguments in line: `");
 	else if (bonus && count > 4)
-		printf(""X"Too many arguments in line: `");
+		printf(R_B""X""RES"Too many arguments in line: `");
 	else
-		printf(""X"Too few arguments in line: `");
+		printf(R_B""X""RES"Too few arguments in line: `");
 	while (i < count - 1)
 		printf(AKA"%s    ", tokens[i++]);
 	printf("%s"RES"`\n", tokens[i]);
@@ -38,12 +38,12 @@ int	valid_light_ratio(char *num)
 	n = ft_atof(num);
 	if (n > 1)
 	{
-		printf(""X""BRIGHT"[%s "AKA">"RES" 1.0]\n", num);
+		printf(R_B""X""RES""BRIGHT"[%s "AKA">"RES" 1.0]\n", num);
 		return (0);
 	}
 	else if (n < 0)
 	{
-		printf(""X""BRIGHT"[%s "AKA"<"RES" 0.0]\n", num);
+		printf(R_B""X""RES""BRIGHT"[%s "AKA"<"RES" 0.0]\n", num);
 		return (0);
 	}
 	return (1);

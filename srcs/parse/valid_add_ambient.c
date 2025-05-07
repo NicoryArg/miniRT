@@ -14,10 +14,13 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_ambient(char **tokens)
+int	valid_ambient(char **tokens, bool bonus)
 {
-	if (count_split(tokens) != 3)
-		return (0);
+	int	count;
+
+	count = count_split(tokens);
+	if (count != 3)
+		return (print_token_line(tokens, count, bonus));
 	if (!is_float(tokens[1]) || !valid_light_ratio(tokens[1]))
 		return (0);
 	if (!is_color(tokens[2]))

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:50:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/06 15:51:29 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:29:27 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_count(t_id_count count)
 static int	valid_tokens(t_tokens *node, e_id type, bool bonus)
 {
 	if (type == A)
-		return (valid_ambient(node->tokens));
+		return (valid_ambient(node->tokens, bonus));
 	else if (type == C)
 		return (valid_camera(node->tokens));
 	else if (type == L)

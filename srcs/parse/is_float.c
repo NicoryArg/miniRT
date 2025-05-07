@@ -18,10 +18,10 @@ static int	print_float_error(const char *s)
 {
 	if (!s || !*s)
 	{
-		printf(""X"INVALID_INPUT");
+		printf(R_B""X""RES""INVALID_INPUT""LILA"Tip: "TIP"\n"RES);
 		return (0);
 	}
-	printf(""X"`"AKA"%s"RES"` is not a valid float\n", s);
+	printf(R_B""X""RES"`"AKA"%s"RES"` is not a valid float\n", s);
 	return (0);
 }
 

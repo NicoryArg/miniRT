@@ -89,7 +89,7 @@ static t_tokens	*parse_line(char *line)
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 	{
-		printf(""X""FAILED_SPLIT"", line);
+		printf(R_B""X""RES""FAILED_SPLIT"`"AKA"%s"RES"`\n", line);
 		return (NULL);
 	}
 	type = get_identifier(tokens[0]);

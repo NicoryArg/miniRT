@@ -16,21 +16,21 @@
 
 void	orientation_err(double x, double y, double z)
 {
-	printf(""X"3d normal vector values out of range: ");
+	printf(R_B""X""RES"3d normal vector values out of range: ");
 	if (x > 1 || x < -1)
-		printf(AKA"%.1f"RES, x);
+		printf(AKA"%.2f"RES, x);
 	else
-		printf("%.1f", x);
+		printf("%.2f", x);
 	printf(",");
 	if (y > 1 || y < -1)
-		printf(AKA"%.1f"RES, y);
+		printf(AKA"%.2f"RES, y);
 	else
-		printf("%.1f", y);
+		printf("%.2f", y);
 	printf(",");
 	if (z > 1 || z < -1)
-		printf(AKA"%.1f"RES, z);
+		printf(AKA"%.2f"RES, z);
 	else
-		printf("%.1f", z);
+		printf("%.2f", z);
 	printf("\n");
 }
 
@@ -68,6 +68,9 @@ int	valid_camera(char **tokens)
 		return (0);
 	fov = ft_atof(tokens[3]);
 	if (fov < 0.0 || fov > 180.0)
+	{
+		printf(R_B""X""RES""FOV_ERR""AKA"%.0f\n"RES, fov);
 		return (0);
+	}
 	return (1);
 }

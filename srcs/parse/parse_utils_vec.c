@@ -38,7 +38,7 @@ int	is_vec3(const char *str)
 		return (0);
 	if (count_split(parts) != 3)
 	{
-		printf(""X""TOO_MANY_VEC3"", str);
+		printf(R_B""X""RES""TOO_MANY_VEC3""AKA"%s"RES"", str);
 		free_array(parts);
 		return (0);
 	}
