@@ -31,7 +31,7 @@ int	validate_and_load(int ac, char **av, t_input *data)
 		// free_data(data);
 		return(-1);
 	}
-	data->sc = build_scene_from_tokens(data->list);
+	// data->sc = build_scene_from_tokens(data->list);
 	return (1);
 }
 
