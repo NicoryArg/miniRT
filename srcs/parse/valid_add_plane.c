@@ -14,9 +14,12 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_plane(char **tokens)
+int	valid_plane(char **tokens, bool bonus)
 {
-	if (count_split(tokens) != 5)
+	int	count;
+
+	count = count_split(tokens);
+	if (bonus && count != 5)
 		return (0);
 	if (!is_vec3(tokens[1]))
 		return (0);

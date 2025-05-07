@@ -54,6 +54,8 @@ t_tokens	*free_tokens_list(t_tokens *head)
 {
 	t_tokens *temp;
 
+	if (!head)
+		return (NULL);
 	while (head)
 	{
 		temp = head->next;

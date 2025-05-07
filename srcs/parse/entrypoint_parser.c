@@ -25,9 +25,10 @@ int	validate_and_load(int ac, char **av, t_input *data)
 		return (printf(R_B""X""RES"copy_input failed\n"));
 	data->list = parse_input(data->lines);
 	if (!data->list)
-		return(printf(R_B""X""RES"parse_input failed\n"));
+		return(printf(R_B"Failed to parse input\n"));
 	if (valid_input(data, data->bonus))
 	{
+		printf(R_B"Invalid input\n"RES);
 		// free_data(data);
 		return(-1);
 	}

@@ -6,7 +6,7 @@
 /*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 18:50:48 by ameechan          #+#    #+#             */
-/*   Updated: 2025/05/07 16:37:41 by ameechan         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:10:57 by ameechan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	print_count(t_id_count count)
 {
+	printf(YEL"[DEBUG]\n"RES);
 	printf("A: %d\n", count.a);
 	printf("C: %d\n", count.c);
 	printf("L: %d\n", count.l);
@@ -34,9 +35,9 @@ static int	valid_tokens(t_tokens *node, e_id type, bool bonus)
 	else if (type == L)
 		return (valid_light(node->tokens, bonus));
 	else if (type == SP)
-		return (valid_sphere(node->tokens));
+		return (valid_sphere(node->tokens, bonus));
 	else if (type == PL)
-		return (valid_plane(node->tokens));
+		return (valid_plane(node->tokens, bonus));
 	else if (type == CY)
 		return (valid_cylinder(node->tokens));
 	else if (type == CO)
@@ -58,5 +59,6 @@ int	valid_input(t_input *data, bool bonus)
 			return (-1);
 		current = current->next;
 	}
+	printf(G_B"✔ "GR"Valid input\n"RES);
 	return (0);
 }

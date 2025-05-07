@@ -54,10 +54,10 @@ int	valid_light(char **tokens, bool bonus)
 	int	count;
 
 	count = count_split(tokens);
-	if (count != 3 && !bonus)
-		return (print_token_line(tokens, count, bonus));
-	else if (count != 4 && bonus == true)
-		return (print_token_line(tokens, count, bonus));
+	if (!bonus && count != 3)
+		return (args_count_error(tokens, count, 3));
+	else if (bonus && count != 4)
+		return (args_count_error(tokens, count, 4));
 	if (!is_vec3(tokens[1]))
 		return (0);
 	if (!is_float(tokens[2]) || !valid_light_ratio(tokens[2]))

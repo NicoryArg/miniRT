@@ -256,23 +256,25 @@ int			valid_light(char **tokens, bool bonus);
 void		add_lights(t_world *w, t_parsed_scene *scene);
 
 //valid_add_plane.c
-int			valid_plane(char **tokens);
+int			valid_plane(char **tokens, bool bonus);
 int			add_planes(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_add_sphere.c
-int			valid_sphere(char **tokens);
+int			valid_sphere(char **tokens, bool bonus);
 int			add_spheres(t_object **objects, t_parsed_scene *scene, int start);
 
 //valid_input.c
 void		print_count(t_id_count count);
 int			valid_input(t_input *data, bool bonus);
 
+//DEFINE BONUS
+# define BONUS false
+
 //ERROR MESSAGE UTILS
-
-
 # define X "Error\n❌ "
 # define TIP "Please ensure you separate values with spaces only -> ' '\n"
 # define INVALID_INPUT "Invalid input\n"
+# define ID_ERR "Invalid identifier:   "
 # define BRIGHT "Light ratio out of range:\n   "
 # define TOO_MANY_VEC3 "Too many or few args:\n   "
 # define FAILED_SPLIT "failed to split:   "

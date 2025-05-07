@@ -141,7 +141,7 @@ static void	init_data(t_input *data)
 	data->shapes = 0;
 	data->lines = NULL;
 	data->list = NULL;
-	data->bonus = true;
+	data->bonus = BONUS;
 }
 
 int	main(int ac, char ** av)

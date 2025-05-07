@@ -14,17 +14,22 @@
 #include "engine.h"
 #include "parse.h"
 
-int	valid_sphere(char **sp)
+int	valid_sphere(char **sp, bool bonus)
 {
-	if (count_split(sp) != 5)
-		return (0);
+	int	count;
+
+	count = count_split(sp);
+	if (!bonus && count != 4)
+		return (args_count_error(sp, count, 4));
+	else if (bonus && count != 5)
+		return (args_count_error(sp, count, 5));
 	if (!is_vec3(sp[1]))
 		return (0);
 	if (!is_float(sp[2]))
 		return (0);
 	if (!is_color(sp[3]))
 		return (0);
-	if (!is_int(sp[4]))
+	if (bonus && !is_int(sp[4]))
 		return (0);
 	return (1);
 }
