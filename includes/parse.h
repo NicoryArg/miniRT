@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 15:55:10 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:04:11 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 19:00:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 19:00:52 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define PATTERN_UV_GRADIENT	6
 # define PATTERN_UV_CHECKERS	7
 
-# define SHAPE_SPHERE	1
-# define SHAPE_PLANE		2
+# define S_SPH			1
+# define S_PL			2
 # define SHAPE_CYLINDER	3
 # define SHAPE_CONE		4
 
@@ -150,6 +150,12 @@ typedef struct s_input
 	bool			bonus;
 }	t_input;
 
+typedef struct s_uvsize
+{
+	int	u;
+	int	v;
+}	t_uvsize;
+
 //build_list.c
 t_tokens		*create_token_node(char **tokens, t_id type);
 void			append_token_node(t_tokens **head, t_tokens *new_node);
@@ -207,6 +213,13 @@ void			load_ambient(char **tokens, t_parsed_scene *scene);
 void			load_camera(char **tokens, t_parsed_scene *scene);
 void			load_light(char **tokens, t_parsed_scene *scene);
 
+//objs_patterns.c
+t_colour		secondary_colour(t_colour c);
+t_patt			*create_patt_for_sphere(int type, t_colour base);
+t_patt			*create_patt_for_plane(int type, t_colour base);
+t_patt			*create_patt_for_cylinder(int type, t_colour base);
+t_patt			*create_patt_for_cone(int type, t_colour base);
+
 //parse_color.c
 t_colour		parse_color(char *str);
 int				is_color(const char *str);
@@ -235,9 +248,11 @@ t_id			get_identifier(char *s);
 t_tokens		*parse_input(char **lines);
 
 //valid_add_ambient.c
-int				valid_ambient(char **tokens);
+int				valid_ambient(char **tokens, bool bonus);
 
 //valid_add_camera.c
+void			orientation_err(double x, double y, double z);
+int				valid_orientation(char *str);
 int				valid_camera(char **tokens);
 
 //valid_add_cone.c
@@ -250,6 +265,8 @@ int				add_cylinders(t_object **objects,
 					t_parsed_scene *scene, int start);
 
 //valid_add_light.c
+int				print_token_line(char **tokens, int count, bool bonus);
+int				valid_light_ratio(char *num);
 int				valid_light(char **tokens, bool bonus);
 void			add_lights(t_world *w, t_parsed_scene *scene);
 
@@ -269,10 +286,12 @@ int				valid_input(t_input *data, bool bonus);
 
 //ERROR MESSAGE UTILS
 
-# define X ""AKA"Error\n"RES""
-# define O "✔ "GR""
+# define X "Error\n❌ "
 # define TIP "Please ensure you separate values with spaces only -> ' '\n"
-# define INVALID_INPUT "Invalid input\n"LILA"Tip: "TIP""RES"\n"
-# define INVALID_ID ""X""RES"`"AKA"%s"RES"`is invalid identifier\n"
-# define FAILED_SPLIT "❌ failed to split: `"AKA"%s"RES"`\n"
+# define INVALID_INPUT "Invalid input\n"
+# define BRIGHT "Light ratio out of range:\n   "
+# define TOO_MANY_VEC3 "Too many or few args:\n   "
+# define FAILED_SPLIT "failed to split:   "
+# define LONG_LINE "line too long! (max 50)\n"
+# define FOV_ERR "fov out of range:  "
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 16:20:29 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 16:20:41 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:24:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:24:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ t_id	get_identifier(char *s)
 
 static t_tokens	*parse_line(char *line)
 {
-	char			**tokens;
-	t_id	type;
-	t_tokens		*new_node;
+	char		**tokens;
+	t_id		type;
+	t_tokens	*new_node;
 
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 	{
-		printf(""X""FAILED_SPLIT"", line);
+		printf(R_B""X""RES""FAILED_SPLIT"`"AKA"%s"RES"`\n", line);
 		return (NULL);
 	}
 	type = get_identifier(tokens[0]);

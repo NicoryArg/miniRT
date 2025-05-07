@@ -5,14 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:59:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 09:59:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:24:15 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:24:21 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "engine.h"
 #include "parse.h"
+
+static void	print_long_line(char *str, int index, int k)
+{
+	int	i;
+
+	i = index - k;
+	printf(R_B""X""RES"");
+	while (str[i] && str[i] != '\n')
+		printf(AKA"%c", str[i++]);
+	printf(RES"  ->  "LONG_LINE"");
+}
 
 static int	copy_str(char *str, int *i, char **lines, int j)
 {
@@ -35,7 +46,7 @@ static int	copy_str(char *str, int *i, char **lines, int j)
 	}
 	if (k >= MAX_LINE_LEN)
 	{
-		printf(AKA"❌ One or more lines are too long! "RES"(max 50)\n");
+		print_long_line(str, *i, k);
 		return (1);
 	}
 	return (0);

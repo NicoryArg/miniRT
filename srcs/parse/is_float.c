@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 19:59:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 19:59:11 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:22:49 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:22:54 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static int	print_float_error(const char *s)
 {
 	if (!s || !*s)
 	{
-		printf(""X"INVALID_INPUT");
+		printf(R_B""X""RES""INVALID_INPUT""LILA"Tip: "TIP"\n"RES);
 		return (0);
 	}
-	printf(""X"`"AKA"%s"RES"` is not a valid float\n", s);
+	printf(R_B""X""RES"`"AKA"%s"RES"` is not a valid float\n", s);
 	return (0);
 }
 
@@ -52,7 +52,7 @@ static int	is_valid_float(const char *s, int i)
 	return (1);
 }
 
-static int valid_decimal_points(const char *s)
+static int	valid_decimal_points(const char *s)
 {
 	char	**parts;
 	int		count;
@@ -80,7 +80,7 @@ int	is_float(const char *s)
 	if (s[i] == '.' || !(valid_decimal_points(s)))
 		return (print_float_error(s));
 	if (!is_valid_float(s, i))
-		return(0);
+		return (0);
 	return (1);
 }
 

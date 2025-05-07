@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 06:36:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 06:36:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:22:18 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:22:28 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	free_array(char **array)
 	}
 	free(array);
 }
+
 void	free_split(char **array)
 {
 	int	i;
@@ -42,6 +43,7 @@ void	free_split(char **array)
 	}
 	free(array);
 }
+
 void	free_token_node(t_tokens *node)
 {
 	if (!node)
@@ -52,7 +54,7 @@ void	free_token_node(t_tokens *node)
 
 t_tokens	*free_tokens_list(t_tokens *head)
 {
-	t_tokens *temp;
+	t_tokens	*temp;
 
 	while (head)
 	{

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 19:07:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 19:07:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:21:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:21:23 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,18 @@
 #include "engine.h"
 #include "parse.h"
 
-
-
 int	validate_and_load(int ac, char **av, t_input *data)
 {
 	if (!check_file(ac, av))
 		return (-1);
 	data->lines = copy_input(av[1]);
 	if (!data->lines)
-		return (printf(""X"❌ copy_input failed\n"));
+		return (printf(R_B""X""RES"copy_input failed\n"));
 	data->list = parse_input(data->lines);
 	if (!data->list)
-		return(printf(""X"❌ parse_input failed\n"));
+		return (printf(R_B""X""RES"parse_input failed\n"));
 	if (valid_input(data, data->bonus))
-	{
-		// free_data(data);
-		return(-1);
-	}
+		return (-1);
 	data->sc = build_scene_from_tokens(data->list);
 	return (1);
 }
@@ -52,7 +47,6 @@ void	draw_scene_parsed(t_engine *engine, t_parsed_scene *scene)
 	free_world(w);
 	free_matrix(cam.transf);
 }
-
 
 ////////////TO USE WITH THE OTHER RENDERING FUNCTION
 // void	draw_scene_parsed(t_engine *engine, int ac, char **av)

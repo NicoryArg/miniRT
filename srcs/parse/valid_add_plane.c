@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 13:58:35 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 13:58:35 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:35:21 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:35:29 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	add_planes(t_object **objects, t_parsed_scene *scene, int start)
 {
 	int				i;
 	t_plane_input	in;
-	t_plane			*plane;
+	t_plane			*p;
 	t_matrix		*rot_m;
 	t_matrix		*trans_m;
 
@@ -41,18 +41,18 @@ int	add_planes(t_object **objects, t_parsed_scene *scene, int start)
 	while (i < scene->plane_count)
 	{
 		in = scene->planes[i];
-		plane = ft_plane();
-		plane->base.m = ft_material();
-		plane->base.m.c = in.color;
-		plane->base.m.ambient = 0.1;
-		plane->base.m.diffuse = 0.9;
-		plane->base.m.specular = 0.0;
+		p = ft_plane();
+		p->base.m = ft_material();
+		p->base.m.c = in.color;
+		p->base.m.ambient = 0.1;
+		p->base.m.diffuse = 0.9;
+		p->base.m.specular = 0.0;
 		if (in.patt_type >= 1 && in.patt_type <= 7)
-			plane->base.m.patt = create_patt_by_type(in.patt_type, in.color, SHAPE_PLANE);
+			p->base.m.patt = create_patt_by_type(in.patt_type, in.color, S_PL);
 		rot_m = align_up_vector(normalize(in.normal));
 		trans_m = translate(in.position.x, in.position.y, in.position.z);
-		set_transf(plane, multiply_and_free(rot_m, trans_m));
-		objects[start + i] = (t_object *)plane;
+		set_transf(p, multiply_and_free(rot_m, trans_m));
+		objects[start + i] = (t_object *)p;
 		i++;
 	}
 	return (start + i);

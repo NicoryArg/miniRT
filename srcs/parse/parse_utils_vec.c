@@ -22,10 +22,7 @@ static int	is_valid_vec3_parts(char **parts)
 	while (i < 3)
 	{
 		if (!is_float(parts[i]))
-		{
-			printf("❌ is_vec3: component '%s' is not a float\n", parts[i]);
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -41,7 +38,7 @@ int	is_vec3(const char *str)
 		return (0);
 	if (count_split(parts) != 3)
 	{
-		printf("❌ is_vec3 failed on '%s'\n", str);
+		printf(R_B""X""RES""TOO_MANY_VEC3""AKA"%s"RES"", str);
 		free_array(parts);
 		return (0);
 	}

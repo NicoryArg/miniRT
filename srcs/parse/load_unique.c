@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:17:38 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 18:17:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:23:16 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:23:16 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ void	load_light(char **tokens, t_parsed_scene *scene)
 	scene->light_colours[scene->light_count] = parse_color(tokens[3]);
 	scene->light_count++;
 }
-

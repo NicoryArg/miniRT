@@ -91,9 +91,16 @@ char	**copy_input(char *file)
 		return (NULL);
 	lines = alloc_lines(input);
 	if (!lines)
+	{
+		free(input);
 		return (NULL);
+	}
 	if (split_lines(input, lines))
+	{
 		free_array(lines);
+		free(input);
+		return (NULL);
+	}
 	free(input);
 	return (lines);
 }

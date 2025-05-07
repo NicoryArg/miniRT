@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 19:14:57 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 19:15:05 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:21:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:22:05 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parse.h"
 
-static t_id_count init_count(void)
+static t_id_count	init_count(void)
 {
 	t_id_count	count;
 
@@ -57,21 +57,21 @@ static void	count_identifiers(t_tokens *list, t_id_count *count)
 static int	expected_count(t_id_count count, bool bonus)
 {
 	if (count.a != 1)
-		return(printf(""X"❌ Too many ambient (max 1)\n"RES));
+		return (printf(R_B""X""RES"Too many ambient (max 1)\n"RES));
 	if (count.c != 1)
-		return(printf(""X"❌ Too many cameras (max 1)\n"RES));
+		return (printf(R_B""X""RES"Too many cameras (max 1)\n"RES));
 	if (count.l != 1 && bonus == false)
-		return(printf(""X"❌ Too many lights (max 1)\n"RES));
+		return (printf(R_B""X""RES"Too many lights (max 1)\n"RES));
 	else if (count.l > MAX_LIGHTS)
-		return(printf(""X"❌ Too many lights (max 4)\n"RES));
+		return (printf(R_B""X""RES"Too many lights (max 4)\n"RES));
 	if (count.sp > MAX_SPHERES)
-		return(printf(""X"❌ Too many spheres (max 30)\n"RES));
+		return (printf(R_B""X""RES"Too many spheres (max 30)\n"RES));
 	if (count.cy > MAX_CYLINDERS)
-		return(printf(""X"❌ Too many cylinders (max 4)\n"RES));
+		return (printf(R_B""X""RES"Too many cylinders (max 4)\n"RES));
 	if (count.pl > MAX_PLANES)
-		return(printf(""X"❌ Too many planes (max 4)\n"RES));
+		return (printf(R_B""X""RES"Too many planes (max 4)\n"RES));
 	if (count.co > MAX_CONES)
-		return(printf(""X"❌ Too many cones (max 4)\n"RES));
+		return (printf(R_B""X""RES"Too many cones (max 4)\n"RES));
 	return (0);
 }
 

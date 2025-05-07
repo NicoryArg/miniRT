@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_add_plane.c                                  :+:      :+:    :+:   */
+/*   valid_add_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 14:22:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 14:22:19 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:36:42 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:37:21 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	add_spheres(t_object **objects, t_parsed_scene *scene, int start)
 {
 	int					i;
 	t_sphere_input		in;
-	t_sphere			*sphere;
+	t_sphere			*s;
 	t_matrix			*scale_m;
 	t_matrix			*trans_m;
 
@@ -41,17 +41,17 @@ int	add_spheres(t_object **objects, t_parsed_scene *scene, int start)
 	while (i < scene->sphere_count)
 	{
 		in = scene->spheres[i];
-		sphere = ft_sphere(1);
-		sphere->base.m = ft_material();
-		sphere->base.m.c = in.color;
+		s = ft_sphere(1);
+		s->base.m = ft_material();
+		s->base.m.c = in.color;
 		if (in.patt_type >= 1 && in.patt_type <= 7)
-			sphere->base.m.patt = create_patt_by_type(in.patt_type, in.color, SHAPE_SPHERE);
+			s->base.m.patt = create_patt_by_type(in.patt_type, in.color, S_SPH);
 		scale_m = scale(in.diameter / 2.0,
 				in.diameter / 2.0,
 				in.diameter / 2.0);
 		trans_m = translate(in.position.x, in.position.y, in.position.z);
-		set_transf(sphere, multiply_and_free(scale_m, trans_m));
-		objects[start + i] = (t_object *)sphere;
+		set_transf(s, multiply_and_free(scale_m, trans_m));
+		objects[start + i] = (t_object *)s;
 		i++;
 	}
 	return (start + i);

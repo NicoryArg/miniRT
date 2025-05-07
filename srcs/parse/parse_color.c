@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:17:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 18:17:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:23:32 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:23:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_colour	parse_color(char *str)
 	return (color);
 }
 
-static void print_rgb_error(int r, int g, int b)
+static void	print_rgb_error(int r, int g, int b)
 {
-	printf(""X"RGB values out of range: ");
+	printf(R_B""X""RES"RGB values out of range: ");
 	if (r < 0 || r > 255)
 		printf(AKA"%d"RES, r);
 	else
@@ -60,7 +60,7 @@ static void print_rgb_error(int r, int g, int b)
 	printf("\n");
 }
 
-static int valid_rgb(int r, int g, int b)
+static int	valid_rgb(int r, int g, int b)
 {
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
@@ -80,7 +80,7 @@ int	is_color(const char *str)
 	parts = ft_split(str, ',');
 	if (!parts || count_split(parts) != 3)
 	{
-		printf(""X""FAILED_SPLIT"", str);
+		printf(R_B""X""RES""TOO_MANY_VEC3""AKA"%s"RES"\n", str);
 		free_array(parts);
 		return (0);
 	}

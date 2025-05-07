@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:47:52 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 17:56:51 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 18:11:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 18:11:14 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_object	**alloc_objects_array(t_parsed_scene *scene, int *total)
 	*total = count;
 	return (objects);
 }
-
 
 t_world	*convert_scene_to_world(t_parsed_scene *scene)
 {
@@ -81,8 +80,6 @@ t_parsed_scene	init_parsed_scene(void)
 	scene.cone_count = 0;
 	return (scene);
 }
-
-
 
 void	dispatch_token(t_tokens *current, t_parsed_scene *scene)
 {
