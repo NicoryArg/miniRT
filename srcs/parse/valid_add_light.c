@@ -31,6 +31,24 @@ static int print_token_line(char **tokens, int count, bool bonus)
 	return (0);
 }
 
+static int	within_light_range(char *num)
+{
+	double	n;
+
+	n = ft_atof(num);
+	if (n > 1)
+	{
+		printf(""X""BRIGHT"[%s "AKA">"RES" 1.0]\n", num);
+		return (0);
+	}
+	else if (n < 0)
+	{
+		printf(""X""BRIGHT"[%s "AKA"<"RES" 0.0]\n", num);
+		return (0);
+	}
+	return (1);
+}
+
 int	valid_light(char **tokens, bool bonus)
 {
 	int	count;
@@ -42,7 +60,7 @@ int	valid_light(char **tokens, bool bonus)
 		return (print_token_line(tokens, count, bonus));
 	if (!is_vec3(tokens[1]))
 		return (0);
-	if (!is_float(tokens[2]))
+	if (!is_float(tokens[2]) || !within_light_range(tokens[2]))
 		return (0);
 	if (bonus && !is_color(tokens[3]))
 		return (0);

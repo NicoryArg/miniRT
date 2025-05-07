@@ -22,10 +22,10 @@ int	validate_and_load(int ac, char **av, t_input *data)
 		return (-1);
 	data->lines = copy_input(av[1]);
 	if (!data->lines)
-		return (printf(""X"❌ copy_input failed\n"));
+		return (printf(""X"copy_input failed\n"));
 	data->list = parse_input(data->lines);
 	if (!data->list)
-		return(printf(""X"❌ parse_input failed\n"));
+		return(printf(""X"parse_input failed\n"));
 	if (valid_input(data, data->bonus))
 	{
 		// free_data(data);
