@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 20:26:36 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 20:27:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:58:30 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:58:30 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_cylinder	*build_cylinder(t_cylinder_input in)
 	cyl->base.m = ft_material();
 	cyl->base.m.c = in.color;
 	if (in.patt_type >= 1 && in.patt_type <= 7)
-		cyl->base.m.pattern = create_pattern_by_type(in.patt_type, in.color, SHAPE_CYLINDER);
+		cyl->base.m.patt = create_patt_by_type(in.patt_type, in.color, SHAPE_CYLINDER);
 	cyl->min = 0;
 	cyl->max = in.height;
 	cyl->closed = true;

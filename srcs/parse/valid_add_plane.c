@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 20:19:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 20:19:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:58:35 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:58:35 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	add_planes(t_object **objects, t_parsed_scene *scene, int start)
 		plane->base.m.diffuse = 0.9;
 		plane->base.m.specular = 0.0;
 		if (in.patt_type >= 1 && in.patt_type <= 7)
-			plane->base.m.pattern = create_pattern_by_type(in.patt_type, in.color, SHAPE_PLANE);
+			plane->base.m.patt = create_patt_by_type(in.patt_type, in.color, SHAPE_PLANE);
 		rot_m = align_up_vector(normalize(in.normal));
 		trans_m = translate(in.position.x, in.position.y, in.position.z);
 		set_transf(plane, multiply_and_free(rot_m, trans_m));

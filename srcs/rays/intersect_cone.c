@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 14:58:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/25 14:59:55 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:09:51 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:09:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
@@ -120,11 +120,9 @@ static void	cone_quadratic_intersections(t_cone *cone, t_ray *r, t_hitlist **xs)
  */
 void	intersect_cone(t_object *shape, t_ray *ray, t_hitlist **xs)
 {
-	t_cone	*cone;
-	t_ray	*local_ray;
+	t_cone		*cone;
+	t_ray		*local_ray;
 	t_matrix	*inverse;
-
-
 
 	cone = (t_cone *)shape;
 	inverse = invert_matrix(cone->base.transf);

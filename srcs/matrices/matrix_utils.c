@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 21:14:14 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 21:14:18 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:04:48 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:06:47 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 int	equal_matrix(t_matrix *a, t_matrix *b)
 {
@@ -101,30 +101,6 @@ t_matrix	*multiply_and_free(t_matrix *a, t_matrix *b)
 	return (result);
 }
 
-
-t_matrix	*multiply_by_identity(t_matrix *input)
-{
-	int			i;
-	t_matrix	*result;
-	t_matrix	*identity;
-
-	if (input->is_tuple == 1)
-	{
-		result = create_matrix(1, input->cols, 1);
-		i = 0;
-		while (i < input->cols)
-		{
-			result->values[0][i] = input->values[0][i];
-			i++;
-		}
-		return (result);
-	}
-	identity = create_identity_matrix(input->rows);
-	result = multiply_matrices(input, identity);
-	free_matrix(identity);
-	return (result);
-}
-
 t_matrix	*transpose_matrix(t_matrix *input)
 {
 	int			i;
@@ -145,6 +121,28 @@ t_matrix	*transpose_matrix(t_matrix *input)
 	}
 	return (transposed);
 }
+// t_matrix	*multiply_by_identity(t_matrix *input)
+// {
+// 	int			i;
+// 	t_matrix	*result;
+// 	t_matrix	*identity;
+
+// 	if (input->is_tuple == 1)
+// 	{
+// 		result = create_matrix(1, input->cols, 1);
+// 		i = 0;
+// 		while (i < input->cols)
+// 		{
+// 			result->values[0][i] = input->values[0][i];
+// 			i++;
+// 		}
+// 		return (result);
+// 	}
+// 	identity = create_identity_matrix(input->rows);
+// 	result = multiply_matrices(input, identity);
+// 	free_matrix(identity);
+// 	return (result);
+// }
 
 // int	main()
 // {

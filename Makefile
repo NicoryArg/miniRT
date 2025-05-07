@@ -57,8 +57,7 @@ MAIN_FILES			= $(addprefix main/, main.c main_patterns.c main_shadows.c main_ray
 									main_phong.c main_transform.c main_tuples.c main_world.c \
 									main_view.c main_plane.c main_cyl.c main_cone.c)
 ENGINE_FILES		= $(addprefix make_engine/, clean_engine.c handle_hooks.c handle_mouse.c handle_bar.c key_hook.c make_engine.c)
-MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_free.c \
-									matrix_invert.c matrix_utils.c )
+MATRIX_FILES		= $(addprefix matrices/, determinant.c matrix_create.c matrix_invert.c matrix_utils.c )
 PATTERNS_FILES		= $(addprefix patterns/, nested_patterns.c patterns.c patterns_at.c uv_patterns_at.c type_patterns.c type_uv_patterns.c uv_mapping.c)
 PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c create_patterns.c load_shape.c load_unique.c parse_utils.c \
 						tokenize_lines.c valid_add_cone.c valid_add_plane.c build_scene.c entrypoint_parser.c parse_color.c \
@@ -67,12 +66,12 @@ PARSE_FILES			= $(addprefix parse/,build_list.c copy_input.c create_patterns.c l
 						expected_identifiers.c valid_input.c is_float.c)
 RAYS_FILES			= $(addprefix rays/, hits.c intersect.c ray_sphere.c \
 						intersect_pl.c intersect_cyl.c rays.c transform.c intersect_cone_caps.c intersect_cone.c)
-REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c)
+REFLECTION_FILES	= $(addprefix reflection/, pre_compute.c normal_at.c ft_material.c ft_reflect.c ft_shading.c shade_hit.c)
 SCENE_FILES			= $(addprefix scene/, world.c objects.c)
-TRANSFORM_FILES		= $(addprefix transformations/, conversion.c transformations.c rodrigues.c)
+TRANSFORM_FILES		= $(addprefix transformations/, operations_matrix.c transformations.c rodrigues.c)
 TUPLE_FILES			= $(addprefix tuple/, operations.c product.c \
 						tuples.c tuple_utils.c)
-UTILS_FILES			= $(addprefix utils/, colours.c free_utils.c messages.c ft_utils.c)
+UTILS_FILES			= $(addprefix utils/, colours.c colours2.c free_objs.c free_utils.c free_world.c messages.c ft_utils.c)
 VIEW_FILES			= $(addprefix view/, camera.c ray_for_pixel.c view_transform.c )
 
 # Normal (mandatory) rendering

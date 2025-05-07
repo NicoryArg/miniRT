@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cyl.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ameechan <ameechan@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:30:29 by ameechan          #+#    #+#             */
-/*   Updated: 2025/04/23 14:46:25 by ameechan         ###   ########.fr       */
+/*   Created: 2025/05/07 13:09:08 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:09:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 static void	ft_swap_t_cyl(t_cyl_vals *data)
 {
@@ -72,14 +72,14 @@ static void	intersect_caps(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 
 void	intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 {
-	double 		disc;
-	double 		a;
-	double 		b;
-	double 		c;
+	double		disc;
+	double		a;
+	double		b;
+	double		c;
 	t_cyl_vals	data;
 
 	a = ft_sqr(ray->direction.x) + ft_sqr(ray->direction.z);
-	if (ft_equal(a, 0)) // ray is paralel to y axis
+	if (ft_equal(a, 0))
 	{
 		intersect_caps(cyl, ray, xs);
 		return ;
@@ -88,7 +88,7 @@ void	intersect_cyl(t_cylinder *cyl, t_ray *ray, t_hitlist **xs)
 		+ (2 * ray->origin.z * ray->direction.z);
 	c = ft_sqr(ray->origin.x) + ft_sqr(ray->origin.z) - 1;
 	disc = ft_sqr(b) - 4 * a * c;
-	if (disc < 0) // ray does not intersect cylinder
+	if (disc < 0)
 		return ;
 	data.t0 = (-b - sqrt(disc)) / (2 * a);
 	data.t1 = (-b + sqrt(disc)) / (2 * a);

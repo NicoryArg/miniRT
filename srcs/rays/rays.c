@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:49:18 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:49:38 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:12:29 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:12:44 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_ray	*ft_ray(t_tuple origin, t_tuple direction)
@@ -19,11 +19,12 @@ t_ray	*ft_ray(t_tuple origin, t_tuple direction)
 
 	ray = (t_ray *)malloc(sizeof(t_ray));
 	if (!ray)
-		malloc_err("ray");//	debugging
+		malloc_err("ray");
 	ray->origin = origin;
 	ray->direction = direction;
 	return (ray);
 }
+
 /**
  * @brief Finds the point at the given distance `t` along `ray`
  */

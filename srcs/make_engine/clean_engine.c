@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "../../includes/engine.h"
 
 void	error_message(t_engine *engine, char *text, int mode)

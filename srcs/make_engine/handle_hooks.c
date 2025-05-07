@@ -12,7 +12,7 @@
 
 // File: srcs/make_engine/handle_keys.c
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "../../includes/engine.h"
 
 /**

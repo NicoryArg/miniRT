@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   tuple_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 19:09:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/03/11 19:09:40 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:06:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:06:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 bool	is_point(t_tuple tuple)
@@ -56,7 +56,7 @@ t_tuple	ft_negate(t_tuple tup)
 
 	if (tup.w == POINT)
 	{
-		printf("[DEBUG] `negate_tuple` . trying to negate POINT\n");//debugging
+		printf("[DEBUG] `negate_tuple` . trying to negate POINT\n");
 		exit (1);
 	}
 	negated.x = 0 - tup.x;

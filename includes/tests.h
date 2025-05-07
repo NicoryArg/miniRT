@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 15:59:08 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 15:59:08 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 16:19:33 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 16:19:38 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 # include "minirt.h"
 # include "engine.h"
 
-typedef struct	s_tuple t_tuple;
-typedef struct	s_matrix t_matrix;
-typedef struct	s_ray_sphere t_ray_sphere;
-typedef struct	s_hit t_hit;
-typedef struct	s_light t_light;
-typedef struct	s_material t_material;
-typedef struct	s_colour t_colour;
-typedef struct	s_camera t_camera;
-typedef enum	e_obj_type t_obj;
-
+typedef struct s_tuple		t_tuple;
+typedef struct s_matrix		t_matrix;
+typedef struct s_ray_sphere	t_ray_sphere;
+typedef struct s_hit		t_hit;
+typedef struct s_light		t_light;
+typedef struct s_material	t_material;
+typedef struct s_colour		t_colour;
+typedef struct s_camera		t_camera;
+typedef enum e_obj_type		t_obj;
 
 //#############################################
 //################# DEBUG #####################
@@ -48,8 +47,6 @@ void		print_intersections(t_hit **xs, int count, int sorted);
 void		print_hitlist(t_hitlist **xs);
 
 // void		print_rs(t_ray_sphere *rs);//	obsolete
-
-
 //#############################################
 //############### DRAW TESTS ##################
 //#############################################
@@ -129,13 +126,13 @@ int			cone_normal_vector_test(int run);
 int			normal_at_test(int run);
 
 //test_patterns.c
-int		stripe_pattern_test(int run);
-int		pattern_lighting_test(int run);
-int		stripe_transform_test(int run);
-int		pattern_generalization_test(int run);
-int		gradient_pattern_test(int run);
-int		ring_pattern_test(int run);
-int		checkers_pattern_test(int run);
+int			stripe_patt_test(int run);
+int			patt_lighting_test(int run);
+int			stripe_transform_test(int run);
+int			patt_generalization_test(int run);
+int			gradient_patt_test(int run);
+int			ring_patt_test(int run);
+int			checkers_patt_test(int run);
 
 //test_phong.c
 int			light_test(int run);
@@ -143,17 +140,16 @@ int			material_test(int run);
 int			shading_test(int run);
 
 //test_cylinders.c
-int		test_intersect_cylinder(int run);
-int		test_normal_at_cylinder(int run);
-int		test_truncate_cylinder(int run);
+int			test_intersect_cylinder(int run);
+int			test_normal_at_cylinder(int run);
+int			test_truncate_cylinder(int run);
 
 //test_planes.c
 int			local_normal_plane_test(int run);
 int			intersect_plane_test(int run);
 
 //test_ray_for_pixel.c
-int		ray_for_pixel_test(int run);
-
+int			ray_for_pixel_test(int run);
 
 //test_rays.c
 /**
@@ -162,13 +158,14 @@ int		ray_for_pixel_test(int run);
  */
 int			position_test(int run);
 int			sph_unique_id(int run, int num);
+int			count_hits(t_hitlist **xs);
 int			sph_ray_intersect(int run);
 int			intersection_test(int run);
 int			ray_transform_test(int run);
 int			ray_transform_test2(int run);
 
 //test_shadows.c
-int		shadows_test(int run);
+int			shadows_test(int run);
 
 //test_transform.c
 /**
@@ -207,7 +204,7 @@ int			ft_main_cone(int run);
 //main_cyl.c
 int			ft_main_cylinder(int run);
 //main_patterns.c
-int			ft_main_patterns(int run);
+int			ft_main_patt(int run);
 //main_phong.c
 int			ft_main_phong(int run);
 
@@ -246,13 +243,7 @@ int			ft_main_view(int run);
 int			ft_main_shadows(int run);
 int			ft_main_plane(int run);
 
-//#############################################
-//################# SCENES ####################
-//#############################################
-
 //main_world.c
 int			ft_main_world(int run);
-
-
 
 #endif

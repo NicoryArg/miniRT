@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:49:48 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:49:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:08:38 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:08:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 void	sort_intersections(t_hit	**xs, int count)
@@ -43,13 +43,13 @@ t_hit	*find_visible_hit(t_hitlist **list)
 	min = NULL;
 	while (current)
 	{
-		if (current->hit && current->hit->t > 0 && (!min || current->hit->t < min->t))
+		if (current->hit && current->hit->t > 0
+			&& (!min || current->hit->t < min->t))
 			min = current->hit;
 		current = current->next;
 	}
 	return (min);
 }
-
 
 double	find_hit(t_hit	**intersections, int count)
 {

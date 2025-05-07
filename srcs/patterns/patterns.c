@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 21:15:51 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 21:16:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 14:21:43 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 14:21:43 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 // /**
 //  * @brief A pattern used for testing: maps x/y/z to RGB.
@@ -80,7 +80,7 @@ static t_tuple	transform_object_to_pattern(t_tuple obj_point, t_matrix *inv)
  * This dispatches based on the pattern type.
  * For UV patterns, it automatically converts the point to UV coordinates.
  */
-t_colour	pattern_colour_at(t_pattern *patt, t_tuple patt_point,
+t_colour	patt_colour_at(t_patt *patt, t_tuple patt_point,
 				t_object *obj)
 {
 	if (!patt || !obj)
@@ -88,7 +88,7 @@ t_colour	pattern_colour_at(t_pattern *patt, t_tuple patt_point,
 	if (patt->type == PATTERN_UV_CHECKERS
 		|| patt->type == PATTERN_UV_STRIPE
 		|| patt->type == PATTERN_UV_GRADIENT)
-		return (uv_pattern_at(patt, patt_point, obj));
+		return (uv_patt_at(patt, patt_point, obj));
 	if (patt->type == PATTERN_STRIPE)
 		return (stripe_at(patt, patt_point, obj));
 	if (patt->type == PATTERN_GRADIENT)
@@ -117,7 +117,7 @@ t_colour	pattern_colour_at(t_pattern *patt, t_tuple patt_point,
  * @param w_point A point in world space to evaluate the pattern at.
  * @return The final color from the pattern at the given point.
  */
-t_colour	pattern_colour_at_world(t_pattern *patt, t_object *obj,
+t_colour	patt_colour_at_world(t_patt *patt, t_object *obj,
 				t_tuple w_point)
 {
 	t_matrix	*object_inv;
@@ -133,5 +133,5 @@ t_colour	pattern_colour_at_world(t_pattern *patt, t_object *obj,
 	pattern_inv = invert_matrix(patt->transform);
 	pattern_point = transform_object_to_pattern(object_point, pattern_inv);
 	free_matrix(pattern_inv);
-	return (pattern_colour_at(patt, pattern_point, obj));
+	return (patt_colour_at(patt, pattern_point, obj));
 }

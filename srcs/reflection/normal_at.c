@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 16:32:49 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 16:32:49 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:32:11 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:32:11 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_tuple	ft_world_normal(t_matrix *inverse, t_tuple local_normal)
@@ -81,7 +81,7 @@ t_tuple	local_normal_at(void *shape, t_tuple local_p)
 
 	obj = (t_object *)shape;
 	if (obj->type == SPHERE)
-		normal = (diff_tuple(local_p,((t_sphere *)shape)->centre));
+		normal = (diff_tuple(local_p, ((t_sphere *)shape)->centre));
 	else if (obj->type == PLANE)
 		normal = ft_tuple(0, 1, 0, VECTOR);
 	else if (obj->type == CYLINDER)

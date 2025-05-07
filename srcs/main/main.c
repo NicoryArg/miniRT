@@ -1,66 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_patterns.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 19:06:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 19:07:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 14:19:59 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 14:19:59 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 #include "parse.h"
 #include "tests.h"
 
-int	ft_main_render(int run)
-{
-	if (run == 0)
-		return (0);
+// int	ft_main_render(int run)
+// {
+// 	if (run == 0)
+// 		return (0);
 
-	// Run any of the render scenes below by toggling their run flag to 1
-	if (ft_main_draw_2d(0))
-		return (printf(AKA"❌ draw_2d failed\n"RES));
-	if (ft_main_draw_silhouette(0))
-		return (printf(AKA"❌ draw_silhouette failed\n"RES));
-	if (ft_main_draw_sphere(0))
-		return (printf(AKA"❌ draw_sphere failed\n"RES));
-	if (ft_main_draw_world(0))
-		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_world_shadows(0))
-		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_sphere_pattern(0))
-		return (printf(AKA"❌ draw_sphere_pattern failed\n"RES));
-	if (ft_main_draw_sphere_uv(0))
-		return (printf(AKA"❌ draw_sphere_checkers failed\n"RES));
-	if (ft_main_draw_sphere_nested(0))
-		return (printf(AKA"❌ draw_sphere_nested failed\n"RES));
-	if (ft_main_draw_scene_nested(0))
-		return (printf(AKA"❌ draw_scene_nested failed\n"RES));
-	if (ft_main_draw_world_planes(0))
-		return (printf(AKA"❌ draw_world failed\n"RES));
-	if (ft_main_draw_infinite_cylinders(0))
-		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
-	if (ft_main_draw_truncated_cylinders(0))
-		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
-	if (ft_main_draw_capped_cylinders(0))
-		return (printf(AKA"❌ draw_capped_cylinders failed\n"RES));
-	if (ft_main_draw_cone(0))
-		return (printf(AKA"❌ draw_cone failed\n"RES));
-	if (ft_main_draw_icecream(0))
-		return (printf(AKA"❌ draw_icecream failed\n"RES));
-	if (ft_main_draw_scene_patterns_full(0))
-		return (printf(AKA"❌ draw_patterns failed\n"RES));
-	if (ft_main_draw_idea(0))
-		return (printf(AKA"❌ draw_idea failed\n"RES));
-	if (ft_main_draw_simple_cone(1))
-		return (printf(AKA"❌ draw_simple_cone failed\n"RES));
-	printf(G_B"END OF RENDER DEMOS\n"RES);
-	return (0);
-}
-
+// 	if (ft_main_draw_2d(0))
+// 		return (printf(AKA"❌ draw_2d failed\n"RES));
+// 	if (ft_main_draw_silhouette(0))
+// 		return (printf(AKA"❌ draw_silhouette failed\n"RES));
+// 	if (ft_main_draw_sphere(0))
+// 		return (printf(AKA"❌ draw_sphere failed\n"RES));
+// 	if (ft_main_draw_world(0))
+// 		return (printf(AKA"❌ draw_world failed\n"RES));
+// 	if (ft_main_draw_world_shadows(0))
+// 		return (printf(AKA"❌ draw_world failed\n"RES));
+// 	if (ft_main_draw_sphere_pattern(0))
+// 		return (printf(AKA"❌ draw_sphere_pattern failed\n"RES));
+// 	if (ft_main_draw_sphere_uv(0))
+// 		return (printf(AKA"❌ draw_sphere_checkers failed\n"RES));
+// 	if (ft_main_draw_sphere_nested(0))
+// 		return (printf(AKA"❌ draw_sphere_nested failed\n"RES));
+// 	if (ft_main_draw_scene_nested(0))
+// 		return (printf(AKA"❌ draw_scene_nested failed\n"RES));
+// 	if (ft_main_draw_world_planes(0))
+// 		return (printf(AKA"❌ draw_world failed\n"RES));
+// 	if (ft_main_draw_infinite_cylinders(0))
+// 		return (printf(AKA"❌ drar_infinite_cylinders failed\n"RES));
+// 	if (ft_main_draw_truncated_cylinders(0))
+// 		return (printf(AKA"❌ draw_truncated_cylinders failed\n"RES));
+// 	if (ft_main_draw_capped_cylinders(0))
+// 		return (printf(AKA"❌ draw_capped_cylinders failed\n"RES));
+// 	if (ft_main_draw_cone(0))
+// 		return (printf(AKA"❌ draw_cone failed\n"RES));
+// 	if (ft_main_draw_icecream(0))
+// 		return (printf(AKA"❌ draw_icecream failed\n"RES));
+// 	if (ft_main_draw_scene_patterns_full(0))
+// 		return (printf(AKA"❌ draw_patterns failed\n"RES));
+// 	if (ft_main_draw_idea(0))
+// 		return (printf(AKA"❌ draw_idea failed\n"RES));
+// 	if (ft_main_draw_simple_cone(1))
+// 		return (printf(AKA"❌ draw_simple_cone failed\n"RES));
+// 	printf(G_B"END OF RENDER DEMOS\n"RES);
+// 	return (0);
+// }
 
 int	run_render_with(void (*render_func)(t_engine *))
 {
@@ -77,22 +75,6 @@ int	run_render_with(void (*render_func)(t_engine *))
 	cleanup(&engine);
 	return (0);
 }
-// int	run_render_with(void (*render_func)(t_engine *, int, char **), int ac, char **av)
-// {
-// 	t_engine	engine;
-
-// 	init_engine(&engine);
-// 	render_func(&engine, ac, av);
-// 	mlx_put_image_to_window(engine.mlx, engine.window,
-// 		engine.image.img_ptr, 0, 0);
-// 	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
-// 	printf("\tPlease refrain from resizing the window\n"RES);
-// 	setup_hooks(&engine);
-// 	mlx_loop(engine.mlx);
-// 	cleanup(&engine);
-// 	return (0);
-// }
-
 
 ////////////////////////////////////////////////////////////////
 ////////////////////// RUN ALL TESTS ///////////////////////////
@@ -117,7 +99,7 @@ int	run_render_with(void (*render_func)(t_engine *))
 // 		return (-1);
 // 	if (ft_main_plane(0))
 // 		return (-1);
-// 	if(ft_main_patterns(0))
+// 	if(ft_main_patt(0))
 // 		return (-1);
 // 	if (ft_main_cylinder(0))
 // 		return (-1);
@@ -129,8 +111,6 @@ int	run_render_with(void (*render_func)(t_engine *))
 // 	printf(G_B"END OF ALL TESTS\n"RES);
 // 	return (0);
 // }
-
-
 
 ////////////////////////////////////////////////////////////////
 ///////////////////////// PARSING //////////////////////////////
@@ -144,10 +124,10 @@ static void	init_data(t_input *data)
 	data->bonus = true;
 }
 
-int	main(int ac, char ** av)
+int	main(int ac, char **av)
 {
 	t_input		data;
-	t_engine		engine;
+	t_engine	engine;
 
 	init_data(&data);
 	if (validate_and_load(ac, av, &data) != 1)
@@ -163,38 +143,3 @@ int	main(int ac, char ** av)
 	cleanup(&engine);
 	return (0);
 }
-// int	main(int ac, char **av)
-// {
-// 	(void)ac;
-// 	(void)av;
-// 	return (run_render_with(draw_scene_parsed));
-// }
-// int	main(int ac, char **av)// TO USE ONCE RUN_RENDER_WITH IS CHANGED
-// {
-// 	return run_render_with(draw_scene_parsed, ac, av);
-// }
-
-// int	main(int ac, char ** av)
-// {
-// 	t_parsed_scene	scene;
-// 	t_engine		engine;
-
-// 	if (validate_and_load(ac, av, &scene)!= 1)
-// 	{
-// 		printf("❌ Failed to validate or load scene file\n");
-// 		return (-1);
-// 	}
-// 	init_engine(&engine);
-// 	draw_scene_parsed(&engine, &scene);
-// 	mlx_put_image_to_window(engine.mlx, engine.window,
-// 		engine.image.img_ptr, 0, 0);
-// 	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
-// 	printf("\tPlease refrain from resizing the window\n"RES);
-// 	setup_hooks(&engine);
-// 	mlx_loop(engine.mlx);
-// 	cleanup(&engine);
-// 	return (0);
-// }
-
-
-

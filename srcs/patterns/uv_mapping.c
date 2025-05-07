@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 21:15:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 21:15:22 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:36:10 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:36:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
@@ -79,9 +79,10 @@ t_uv	uv_conical(t_tuple point, double min, double max)
 	return (uv);
 }
 
-t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj)
+t_colour	uv_patt_at(t_patt *patt, t_tuple point, t_object *obj)
 {
 	t_uv	uv;
+	t_cone	*cone;
 
 	if (obj->type == PLANE)
 		uv = uv_planar(point);
@@ -91,7 +92,7 @@ t_colour	uv_pattern_at(t_pattern *patt, t_tuple point, t_object *obj)
 		uv = uv_cylindrical(point);
 	else if (obj->type == CONE)
 	{
-		t_cone *cone = (t_cone *)obj;
+		cone = (t_cone *)obj;
 		uv = uv_conical(point, cone->min, cone->max);
 	}
 	else

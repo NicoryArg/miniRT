@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 17:02:43 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 17:02:43 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:02:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:02:56 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 static void	zero_matrix_row(double *row, int cols)
 {
@@ -67,27 +67,27 @@ t_matrix	*submatrix(t_matrix *matrix, int remove_row, int remove_col)
 
 void	fill_submatrix(t_matrix *matrix, t_matrix *sub,
 	int ignore_row, int ignore_col)
-	{
-		int	i;
-		int	j;
-		int	sub_i;
-		int	sub_j;
+{
+	int	i;
+	int	j;
+	int	sub_i;
+	int	sub_j;
 
-		sub_i = 0;
-		i = 0;
-		while (i < matrix->rows)
+	sub_i = 0;
+	i = 0;
+	while (i < matrix->rows)
+	{
+		if (i == ignore_row)
 		{
-			if (i == ignore_row)
-			{
-				i++;
-				continue ;
-			}
-			sub_j = 0;
-			j = 0;
+			i++;
+			continue ;
+		}
+		sub_j = 0;
+		j = 0;
 		while (j < matrix->cols)
 		{
 			if (j != ignore_col)
-			sub->values[sub_i][sub_j++] = matrix->values[i][j];
+				sub->values[sub_i][sub_j++] = matrix->values[i][j];
 			j++;
 		}
 		sub_i++;
@@ -103,10 +103,7 @@ t_matrix	*create_identity_matrix(int size)
 
 	identity = create_matrix(size, size, 0);
 	if (!identity || !identity->values)
-	{
-		printf(AKA"❌ ERROR: create_identity_matrix() failed\n"RES);
 		exit(1);
-	}
 	identity->is_identity = 1;
 	identity->is_invertible = 1;
 	identity->det = 1.0;

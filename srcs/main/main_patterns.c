@@ -5,34 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:18:46 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 15:18:59 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 16:47:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 16:47:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 #include "tests.h"
 
-int	ft_main_patterns(int run)
-{
-	if (run == 0)
-		return (0);
-	if (stripe_pattern_test(0))//	0 to skip, 1 to run
-		return(printf(R_B"stripe_test failed\n"RES));
-	if (pattern_lighting_test(0))//	0 to skip, 1 to run
-		return(printf(R_B"pattern_lighting_test failed\n"RES));
-	if (stripe_transform_test(0))//	0 to skip, 1 to run
-		return(printf(R_B"stripe_transform_test failed\n"RES));
-	if (pattern_generalization_test(0))//	0 to skip, 1 to run
-		return(printf(R_B"pattern_generalization_test failed\n"RES));
-	if (gradient_pattern_test(0))//	0 to skip, 1 to run
-		return(printf(R_B"gradient_pattern_test failed\n"RES));
-	if (ring_pattern_test(0))//	0 to skip, 1 to run
-		return(printf(R_B"ring_pattern_test failed\n"RES));
-	if (checkers_pattern_test(1))//	0 to skip, 1 to run
-		return(printf(R_B"checkers_pattern_test failed\n"RES));
-
-	printf(G_B"END OF PATTERN TESTS\n"RES);
-	return (0);
-}
+// int	ft_main_patt(int run)
+// {
+// 	if (run == 0)
+// 		return (0);
+// 	if (stripe_patt_test(0))
+// 		return (printf(R_B"stripe_test failed\n"RES));
+// 	if (patt_lighting_test(0))
+// 		return (printf(R_B"patt_lighting_test failed\n"RES));
+// 	if (stripe_transform_test(0))
+// 		return (printf(R_B"stripe_transform_test failed\n"RES));
+// 	if (patt_generalization_test(0))
+// 		return (printf(R_B"patt_generalization_test failed\n"RES));
+// 	if (gradient_patt_test(0))
+// 		return (printf(R_B"gradient_patt_test failed\n"RES));
+// 	if (ring_patt_test(0))
+// 		return (printf(R_B"ring_patt_test failed\n"RES));
+// 	if (checkers_patt_test(1))
+// 		return (printf(R_B"checkers_patt_test failed\n"RES));
+// 	printf(G_B"END OF patt TESTS\n"RES);
+// 	return (0);
+// }

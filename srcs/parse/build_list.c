@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:58:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 09:59:17 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 16:20:09 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 16:20:09 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_tokens(char **tokens)
 	return (i);
 }
 
-t_tokens	*create_token_node(char **tokens, e_id type)
+t_tokens	*create_token_node(char **tokens, t_id type)
 {
 	t_tokens	*node;
 

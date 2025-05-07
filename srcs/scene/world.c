@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:43:50 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 17:43:50 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 16:15:19 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 16:15:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_world	*ft_world(void)
@@ -34,19 +34,16 @@ t_world	*default_world(void)
 	t_world		*w;
 	t_sphere	*s1;
 	t_sphere	*s2;
-	// t_matrix	*transform;
-	w = ft_world();
-	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT), ft_colour(1, 1, 1), 1.0));
 
+	w = ft_world();
+	add_light_to_world(w, ft_light(ft_tuple(-10, 10, -10, POINT),
+			ft_colour(1, 1, 1), 1.0));
 	s1 = ft_sphere(1);
 	s1->base.m.c = ft_colour(0.8, 1, 0.6);
 	s1->base.m.diffuse = 0.7;
 	s1->base.m.specular = 0.2;
 	s2 = ft_sphere(1);
-	// s2->base.m.c = ft_colour(0, 1, 0);
 	set_transf(s2, scale(0.5, 0.5, 0.5));
-	// transform= multiply_matrices(scale(1, 0.5, 0.5), translate(0, -2, 0));
-	// set_transf(s2, transform);
 	w->objects = malloc(sizeof(t_sphere *) * 2);
 	if (!w->objects)
 		return (NULL);
@@ -71,7 +68,7 @@ void	copy_hits(t_inters *dst, t_inters *src)
 	}
 }
 
-t_hitlist	**new_hitlist()
+t_hitlist	**new_hitlist(void)
 {
 	t_hitlist	**new;
 
@@ -94,5 +91,4 @@ void	intersect_world(t_world *w, t_ray *r, t_hitlist **xs)
 		intersect(w->objects[i], r, xs);
 		i++;
 	}
-	// sort_intersections(xs->hits, xs->count);
 }

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:07:26 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 16:07:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:11:57 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:12:17 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_inters	*init_intersections(int initial_capacity)
@@ -42,7 +42,7 @@ void	intersect(void *obj, t_ray *ray, t_hitlist **xs)
 	if (((t_object *)obj)->type == SPHERE)
 		intersect_sph((t_sphere *)obj, r2, xs);
 	else if (((t_object *)obj)->type == CYLINDER)
-	 	intersect_cyl((t_cylinder *)obj, r2, xs);
+		intersect_cyl((t_cylinder *)obj, r2, xs);
 	else if (((t_object *)obj)->type == PLANE)
 		intersect_pl((t_plane *)obj, r2, xs);
 	else if (((t_object *)obj)->type == CONE)
@@ -80,7 +80,6 @@ t_hit	*intersection(double t, void *shape)
 // 		rs->x_count = 0;
 // 	printf(B_B"%d intersections\n"RES, rs->x_count);
 // }
-
 
 // double	*intersect_sph(t_sphere *sph, t_ray *ray)
 // {

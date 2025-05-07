@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 21:30:37 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/29 21:30:37 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:25:03 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:25:55 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
@@ -40,6 +40,7 @@ t_matrix	*orientation_matrix(t_tuple forward, t_tuple up)
 	orientation->values[2][2] = -forward.z;
 	return (orientation);
 }
+
 /**
  * @brief Computes a safe up vector to avoid singularities in view_transform()
  */
@@ -47,9 +48,9 @@ static t_tuple	safe_up(t_tuple forward)
 {
 	t_tuple	up;
 
-	up = ft_tuple(0, 1, 0, VECTOR); // default Y-up
+	up = ft_tuple(0, 1, 0, VECTOR);
 	if (fabs(dot(forward, up)) > 0.999)
-		up = ft_tuple(1, 0, 0, VECTOR); // switch to X-up if too close
+		up = ft_tuple(1, 0, 0, VECTOR);
 	return (up);
 }
 
@@ -70,11 +71,10 @@ t_matrix	*view_transform(t_tuple from, t_tuple to, t_tuple up)
 	t_matrix	*result;
 
 	forward = normalize(diff_tuple(to, from));
-	// Safety check: if up vector is parallel to forward, pick a new up
 	if (fabs(dot(forward, normalize(up))) > 0.999)
 	{
-		up = safe_up(forward); // Switch to z-up if y-up breaks
-		printf(AKA"[DEBUG] Up vector was adjusted to prevent invalid camera orientation\n"RES);
+		up = safe_up(forward);
+		printf(AKA"Up vector was adjusted ,invalid camera orientation\n"RES);
 	}
 	upn = normalize(up);
 	orientation = orientation_matrix(forward, upn);

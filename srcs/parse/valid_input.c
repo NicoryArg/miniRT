@@ -25,7 +25,7 @@ void	print_count(t_id_count count)
 	printf("Total shapes: %d\n", count.total);
 }
 
-static int	valid_tokens(t_tokens *node, e_id type, bool bonus)
+static int	valid_tokens(t_tokens *node, t_id type, bool bonus)
 {
 	if (type == A)
 		return (valid_ambient(node->tokens));

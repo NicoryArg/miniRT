@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 08:35:02 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/03 08:35:02 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 16:16:15 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 16:16:15 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_sphere	*ft_sphere(double radius)
@@ -41,7 +41,7 @@ t_plane	*ft_plane(void)
 
 	plane = (t_plane *)malloc(sizeof(t_plane));
 	if (!plane)
-		malloc_err("ft_plane");	//debug
+		malloc_err("ft_plane");
 	plane->base.transf = create_identity_matrix(4);
 	plane->base.m = ft_material();
 	plane->base.type = PLANE;
@@ -57,7 +57,7 @@ t_cylinder	*ft_cylinder(void)
 
 	cyl = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (!cyl)
-		malloc_err("ft_cylinder");	//debug
+		malloc_err("ft_cylinder");
 	cyl->base.transf = create_identity_matrix(4);
 	cyl->base.m = ft_material();
 	cyl->base.type = CYLINDER;

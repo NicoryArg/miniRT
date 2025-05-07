@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_add_sphere.c                                 :+:      :+:    :+:   */
+/*   valid_add_plane.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 20:29:06 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 20:29:06 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 14:22:19 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 14:22:19 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	add_spheres(t_object **objects, t_parsed_scene *scene, int start)
 		sphere->base.m = ft_material();
 		sphere->base.m.c = in.color;
 		if (in.patt_type >= 1 && in.patt_type <= 7)
-			sphere->base.m.pattern = create_pattern_by_type(in.patt_type, in.color, SHAPE_SPHERE);
+			sphere->base.m.patt = create_patt_by_type(in.patt_type, in.color, SHAPE_SPHERE);
 		scale_m = scale(in.diameter / 2.0,
 				in.diameter / 2.0,
 				in.diameter / 2.0);

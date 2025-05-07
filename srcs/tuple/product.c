@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 19:56:45 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/18 19:56:45 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:07:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:07:53 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 double	dot(t_tuple a, t_tuple b)
@@ -20,12 +20,11 @@ double	dot(t_tuple a, t_tuple b)
 	double	y_product;
 	double	z_product;
 
-	if(a.w == POINT || b.w == POINT)
+	if (a.w == POINT || b.w == POINT)
 	{
-		printf("[DEBUG] `dot` . Attempting dot product of POINT\n");//	debugging
+		printf("[DEBUG] `dot` . Attempting dot product of POINT\n");
 		exit(1);
 	}
-
 	w_product = a.w * b.w;
 	x_product = a.x * b.x;
 	y_product = a.y * b.y;
@@ -43,9 +42,9 @@ t_tuple	cross(t_tuple a, t_tuple b)
 {
 	t_tuple	cross;
 
-	if(a.w == POINT || b.w == POINT)
+	if (a.w == POINT || b.w == POINT)
 	{
-		printf("[DEBUG] `cross` . Attempting cross product of POINT\n");//	debugging
+		printf("[DEBUG] `cross` . Attempting cross product of POINT\n");
 		exit(1);
 	}
 	cross.w = VECTOR;

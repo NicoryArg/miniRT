@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:27:16 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:27:16 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:44:35 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:44:35 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
@@ -103,4 +103,3 @@ void	*render_section(void *arg)
 	}
 	return (NULL);
 }
-

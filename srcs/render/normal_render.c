@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 18:52:36 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 18:53:26 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:46:39 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:47:25 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_image	*render(t_camera cam, t_world *world, t_image *img)
 {
-	int		x;
-	int		y;
-	t_ray	*ray;
-	t_colour col;
+	int			x;
+	int			y;
+	t_ray		*ray;
+	t_colour	col;
 
 	y = 0;
 	while (y < (int)cam.vsize)

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 18:43:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 18:43:09 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:15:53 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:21:45 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 #define CAP_EPSILON 1e-4
@@ -44,7 +44,6 @@ bool	check_cone_cap(t_ray ray, double t, t_cone *c)
 	return (x * x + z * z <= radius * radius + EPSILON);
 }
 
-
 /**
  * @brief Computes ray intersections with a closed cone’s end caps.
  *
@@ -73,27 +72,41 @@ void	intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray)
 		add_hit(xs, intersection(t, cone));
 }
 
-/**
- * @brief Computes the normal vector on the side surface of a cone.
- *
- * This helper function takes a point in object/local space and
- * calculates the normal vector for a cone's curved surface at that point.
- * The y-component is derived from the slope of the cone.
- *
- * @param lp The local-space point on the cone’s side.
- * @return A normalized normal vector for the side surface.
- */
-// static t_tuple	cone_side_normal(t_tuple lp)
-// {
-// 	t_tuple	normal;
-// 	double	y;
+static t_tuple	transform_normal_to_world(t_object *obj, t_tuple local_normal)
+{
+	t_matrix	*inv;
+	t_matrix	*inv_transp;
+	t_tuple		world_normal;
 
-// 	y = sqrt(lp.x * lp.x + lp.z * lp.z);
-// 	if (lp.y > 0)
-// 		y = -y;
-// 	normal = ft_tuple(lp.x, y, lp.z, VECTOR);
-// 	return (normalize(normal));
-// }
+	inv = invert_matrix(obj->transf);
+	inv_transp = transpose_matrix(inv);
+	world_normal = transform_world_to_object(local_normal, inv_transp);
+	free_matrix(inv);
+	free_matrix(inv_transp);
+	world_normal.w = 0;
+	return (normalize(world_normal));
+}
+
+static t_tuple	compute_local_cone_normal(t_cone *cone, t_tuple p)
+{
+	double	dist;
+	double	y;
+
+	dist = p.x * p.x + p.z * p.z;
+	if (cone->closed)
+	{
+		if (fabs(p.y - cone->max) < EPSILON
+			&& dist <= fabs(cone->max) * fabs(cone->max))
+			return (ft_tuple(0, 1, 0, VECTOR));
+		if (fabs(p.y - cone->min) < EPSILON
+			&& dist <= fabs(cone->min) * fabs(cone->min))
+			return (ft_tuple(0, -1, 0, VECTOR));
+	}
+	y = sqrt(p.x * p.x + p.z * p.z);
+	if (p.y > 0)
+		y = -y;
+	return (ft_tuple(p.x, y, p.z, VECTOR));
+}
 
 /**
  * @brief Computes the normal vector at a point on a cone.
@@ -112,55 +125,14 @@ void	intersect_cone_caps(t_hitlist **xs, t_cone *cone, t_ray *ray)
 t_tuple	normal_at_cone(t_object *obj, t_tuple world_point)
 {
 	t_cone		*cone;
+	t_matrix	*inv;
 	t_tuple		local_p;
 	t_tuple		local_normal;
-	t_tuple		world_normal;
-	t_matrix	*inv;
-	t_matrix	*inv_transp;
-	double		dist;
-	double		y;
 
 	cone = (t_cone *)obj;
-
-	// Move world_point into object space
 	inv = invert_matrix(obj->transf);
 	local_p = transform_world_to_object(world_point, inv);
 	free_matrix(inv);
-
-	// Calculate normal in object space
-	dist = local_p.x * local_p.x + local_p.z * local_p.z;
-
-	if (cone->closed)
-	{
-		if (fabs(local_p.y - cone->max) < EPSILON && dist <= fabs(cone->max) * fabs(cone->max))
-			local_normal = ft_tuple(0, 1, 0, VECTOR);
-		else if (fabs(local_p.y - cone->min) < EPSILON && dist <= fabs(cone->min) * fabs(cone->min))
-			local_normal = ft_tuple(0, -1, 0, VECTOR);
-		else
-		{
-			y = sqrt(local_p.x * local_p.x + local_p.z * local_p.z);
-			if (local_p.y > 0)
-				y = -y;
-			local_normal = ft_tuple(local_p.x, y, local_p.z, VECTOR);
-		}
-	}
-	else
-	{
-		y = sqrt(local_p.x * local_p.x + local_p.z * local_p.z);
-		if (local_p.y > 0)
-			y = -y;
-		local_normal = ft_tuple(local_p.x, y, local_p.z, VECTOR);
-	}
-
-	// Transform normal back into world space
-	inv = invert_matrix(obj->transf);
-	inv_transp = transpose_matrix(inv);
-	world_normal = transform_world_to_object(local_normal, inv_transp);
-
-	free_matrix(inv);
-	free_matrix(inv_transp);
-
-	world_normal.w = 0; // Make sure it's a vector, not a point
-	return (normalize(world_normal));
+	local_normal = compute_local_cone_normal(cone, local_p);
+	return (transform_normal_to_world(obj, local_normal));
 }
-

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 16:29:21 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 16:29:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:08:04 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:08:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
@@ -25,7 +25,6 @@ t_tuple	add_tuple(t_tuple t1, t_tuple t2)
 	res.x = t1.x + t2.x;
 	res.y = t1.y + t2.y;
 	res.z = t1.z + t2.z;
-	// print_tuple(res, "res\n");//		debugging
 	return (res);
 }
 
@@ -43,13 +42,11 @@ t_tuple	add_tuple(t_tuple t1, t_tuple t2)
  */
 t_tuple	diff_tuple(t_tuple t1, t_tuple t2)
 {
-	t_tuple res;
+	t_tuple	res;
 
 	if (t1.w == VECTOR && t2.w == POINT)
 	{
 		printf("[DEBUG] `diff_tuple` . Trying to substract point from vector\n");
-		// print_tuple(t1, "t1");
-		// print_tuple(t2, "t2");
 		exit(1);
 	}
 	res.w = t1.w - t2.w;
@@ -81,7 +78,7 @@ t_tuple	mult_tuple(t_tuple vector, double t)
  */
 double	ft_sqr(double x)
 {
-	return (x*x);
+	return (x * x);
 }
 
 /**
@@ -92,7 +89,7 @@ double	magnitude(t_tuple v)
 	double	magnitude;
 	double	square;
 
-	square = (ft_sqr(v.x)+ft_sqr(v.y)+ft_sqr(v.z)+ft_sqr(v.w));
+	square = (ft_sqr(v.x) + ft_sqr(v.y) + ft_sqr(v.z) + ft_sqr(v.w));
 	magnitude = sqrt(square);
 	if (ft_equal(magnitude, 0))
 		printf("[DEBUG] `magnitude` . magnitude of 0 detected\n");

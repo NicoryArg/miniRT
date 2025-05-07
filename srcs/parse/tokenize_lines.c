@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:55:31 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 09:55:46 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 16:20:29 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 16:20:41 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "engine.h"
 #include "parse.h"
 
-static e_id	unique_id(char *s)
+static t_id	unique_id(char *s)
 {
 	if (*s == 'A')
 		return (A);
@@ -26,7 +26,7 @@ static e_id	unique_id(char *s)
 	return (UFO);
 }
 
-static e_id	shape_id(char *s)
+static t_id	shape_id(char *s)
 {
 	if (s[0] == 's' && s[1] == 'p')
 		return (SP);
@@ -40,7 +40,7 @@ static e_id	shape_id(char *s)
 	return (UFO);
 }
 
-e_id	get_identifier(char *s)
+t_id	get_identifier(char *s)
 {
 	int	len;
 
@@ -83,7 +83,7 @@ e_id	get_identifier(char *s)
 static t_tokens	*parse_line(char *line)
 {
 	char			**tokens;
-	e_id	type;
+	t_id	type;
 	t_tokens		*new_node;
 
 	tokens = ft_split(line, ' ');

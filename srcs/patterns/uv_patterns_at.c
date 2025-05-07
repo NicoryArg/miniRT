@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 20:37:04 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/23 20:37:04 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:43:01 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:43:13 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
@@ -23,7 +23,7 @@
  * @param uv The UV coordinate in [0,1].
  * @return Either color A or B depending on parity of the tile indices.
  */
-t_colour	uv_checkers_at(t_pattern *pattern, t_uv uv)
+t_colour	uv_checkers_at(t_patt *pattern, t_uv uv)
 {
 	int	width;
 	int	height;
@@ -54,19 +54,19 @@ t_colour	uv_checkers_at(t_pattern *pattern, t_uv uv)
  * @param uv The UV coordinate.
  * @return The alternating stripe color at the UV coordinate.
  */
-t_colour	uv_stripe_at(t_pattern *pattern, t_uv uv)
+t_colour	uv_stripe_at(t_patt *patt, t_uv uv)
 {
 	int	width;
 	int	u_index;
 
-	width = pattern->width;
+	width = patt->width;
 	if (width <= 0)
 		width = 10;
 	u_index = fmin(width - 1, (int)(uv.u * width));
 	if (u_index % 2 == 0)
-		return (pattern->a);
+		return (patt->a);
 	else
-		return (pattern->b);
+		return (patt->b);
 }
 
 /**
@@ -78,12 +78,12 @@ t_colour	uv_stripe_at(t_pattern *pattern, t_uv uv)
  *
  * This produces a continuous blend from color A (left) to B (right).
  */
-t_colour	uv_gradient_at(t_pattern *pattern, t_uv uv)
+t_colour	uv_gradient_at(t_patt *patt, t_uv uv)
 {
 	t_colour	distance;
 	double		fraction;
 
-	distance = diff_colours(pattern->b, pattern->a);
+	distance = diff_colours(patt->b, patt->a);
 	fraction = uv.u;
-	return (add_colours(pattern->a, mult_colour(distance, fraction)));
+	return (add_colours(patt->a, mult_colour(distance, fraction)));
 }

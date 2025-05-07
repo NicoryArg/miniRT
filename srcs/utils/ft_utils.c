@@ -5,13 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 05:43:40 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/26 06:02:39 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:49:58 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:49:58 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
+
+void	put_pixel(t_image *img, int x, int y, int color)
+{
+	char	*pixel;
+
+	if (x >= 0 && x < WIN_SIZE && y >= 0 && y < WIN_SIZE)
+	{
+		pixel = img->addr_ptr + (y * img->line_len + x * (img->pixel_bits / 8));
+		*(unsigned int *)pixel = color;
+	}
+}
 
 void	ft_swap(t_hit **a, t_hit **b)
 {
@@ -46,6 +57,3 @@ void	print_progress_bar(int y, int total)
 	if (y == total)
 		printf("\n");
 }
-
-
-

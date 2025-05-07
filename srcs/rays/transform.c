@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 16:31:22 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 16:32:41 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:14:01 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:14:01 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 void	set_transf(void *obj, t_matrix *trans)
 {
 	t_object	*o;
 
-	o = (t_object *)obj;//equivalent to a pointer to obj->base
+	o = (t_object *)obj;
 	if (o->transf && o->transf != trans)
 	{
 		free_matrix(o->transf);

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 19:02:19 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/06 19:03:48 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:35:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:35:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_material	ft_material(void)
@@ -22,6 +22,6 @@ t_material	ft_material(void)
 	m.diffuse = 0.9;
 	m.specular = 1.0;
 	m.shininess = 100;
-	m.pattern = NULL;
+	m.patt = NULL;
 	return (m);
 }

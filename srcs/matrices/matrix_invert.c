@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 16:09:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/19 16:09:46 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:03:44 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:04:32 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 t_matrix	*compute_cofactor_matrix(t_matrix *matrix)
 {
@@ -50,14 +50,20 @@ void	scale_matrix(t_matrix *matrix, double scalar)
 		i++;
 	}
 }
+
 /*
 ** NOTE:
-** This function used to modify the input matrix by setting its `det` and `is_invertible` fields.
-** That caused serious side effects when the matrix was part of shared data (e.g., pattern->transform),
-** leading to undefined behavior, invalid writes, and segmentation faults during rendering.
+** This function used to modify the input matrix by
+** setting its `det` and `is_invertible` fields.
+** That caused serious side effects when the matrix
+** was part of shared data (e.g., pattern->transform),
+** leading to undefined behavior, invalid writes, and
+** segmentation faults during rendering.
 **
-** To avoid side effects, this version of `invertable()` is now read-only and purely checks
-** whether the matrix is invertible based on its determinant, without altering the input.
+** To avoid side effects, this version of `invertable()`
+** is now read-only and purely checks
+** whether the matrix is invertible based on its
+** determinant, without altering the input.
 */
 bool	invertable(t_matrix *matrix)
 {
@@ -65,7 +71,6 @@ bool	invertable(t_matrix *matrix)
 		return (false);
 	return (determinant(matrix) != 0);
 }
-
 
 t_matrix	*invert_matrix(t_matrix *matrix)
 {
@@ -86,7 +91,6 @@ t_matrix	*invert_matrix(t_matrix *matrix)
 	scale_matrix(inverse, 1.0 / d);
 	return (inverse);
 }
-
 
 // int	main()
 // {

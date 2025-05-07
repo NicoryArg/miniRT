@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 03:34:34 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 03:34:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:54:54 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:56:40 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,119 +19,119 @@ static t_colour	secondary_colour(t_colour c)
 	return (ft_colour(c.r * 0.5, c.g * 0.5, c.b * 0.5));
 }
 
-t_pattern *create_pattern_for_sphere(int type, t_colour base)
+t_patt *create_patt_for_sphere(int type, t_colour base)
 {
 	t_colour alt = secondary_colour(base);
-	t_pattern *pat = malloc(sizeof(t_pattern));
+	t_patt *pat = malloc(sizeof(t_patt));
 	if (!pat)
 		return (NULL);
 
 	if (type == PATTERN_STRIPE)
-		*pat = stripe_pattern(base, alt), pat->frequency = 10.0;
+		*pat = stripe_patt(base, alt), pat->frequency = 10.0;
 	else if (type == PATTERN_GRADIENT)
-		*pat = gradient_pattern(base, alt), pat->frequency = 4.0;
+		*pat = gradient_patt(base, alt), pat->frequency = 4.0;
 	else if (type == PATTERN_RING)
-		*pat = ring_pattern(base, alt), pat->frequency = 12.0;
+		*pat = ring_patt(base, alt), pat->frequency = 12.0;
 	else if (type == PATTERN_CHECKERS)
-		*pat = checkers_pattern(base, alt), pat->frequency = 1.0;
+		*pat = checkers_patt(base, alt), pat->frequency = 1.0;
 	else if (type == PATTERN_UV_STRIPE)
-		*pat = uv_stripe_pattern(base, alt, 10, 1);
+		*pat = uv_stripe_patt(base, alt, 10, 1);
 	else if (type == PATTERN_UV_GRADIENT)
-		*pat = uv_gradient_pattern(base, alt, 0, 0);
+		*pat = uv_gradient_patt(base, alt, 0, 0);
 	else if (type == PATTERN_UV_CHECKERS)
-		*pat = uv_checkers_pattern(base, alt, 8, 8);
+		*pat = uv_checkers_patt(base, alt, 8, 8);
 	else
 		return (free(pat), NULL);
 	return (pat);
 }
 
-t_pattern *create_pattern_for_plane(int type, t_colour base)
+t_patt *create_patt_for_plane(int type, t_colour base)
 {
 	t_colour alt = secondary_colour(base);
-	t_pattern *pat = malloc(sizeof(t_pattern));
+	t_patt *pat = malloc(sizeof(t_patt));
 	if (!pat)
 		return (NULL);
 
 	if (type == PATTERN_STRIPE)
-		*pat = stripe_pattern(base, alt), pat->frequency = 3.0;
+		*pat = stripe_patt(base, alt), pat->frequency = 3.0;
 	else if (type == PATTERN_GRADIENT)
-		*pat = gradient_pattern(base, alt), pat->frequency = 2.0;
+		*pat = gradient_patt(base, alt), pat->frequency = 2.0;
 	else if (type == PATTERN_RING)
-		*pat = ring_pattern(base, alt), pat->frequency = 4.0;
+		*pat = ring_patt(base, alt), pat->frequency = 4.0;
 	else if (type == PATTERN_CHECKERS)
-		*pat = checkers_pattern(base, alt), pat->frequency = 0.5;
+		*pat = checkers_patt(base, alt), pat->frequency = 0.5;
 	else if (type == PATTERN_UV_STRIPE)
-		*pat = uv_stripe_pattern(base, alt, 4, 1);
+		*pat = uv_stripe_patt(base, alt, 4, 1);
 	else if (type == PATTERN_UV_GRADIENT)
-		*pat = uv_gradient_pattern(base, alt, 0, 0);
+		*pat = uv_gradient_patt(base, alt, 0, 0);
 	else if (type == PATTERN_UV_CHECKERS)
-		*pat = uv_checkers_pattern(base, alt, 4, 4);
+		*pat = uv_checkers_patt(base, alt, 4, 4);
 	else
 		return (free(pat), NULL);
 	return (pat);
 }
 
-t_pattern *create_pattern_for_cylinder(int type, t_colour base)
+t_patt *create_patt_for_cylinder(int type, t_colour base)
 {
 	t_colour alt = secondary_colour(base);
-	t_pattern *pat = malloc(sizeof(t_pattern));
+	t_patt *pat = malloc(sizeof(t_patt));
 	if (!pat)
 		return (NULL);
 
 	if (type == PATTERN_STRIPE)
-		*pat = stripe_pattern(base, alt), pat->frequency = 15.0;
+		*pat = stripe_patt(base, alt), pat->frequency = 15.0;
 	else if (type == PATTERN_GRADIENT)
-		*pat = gradient_pattern(base, alt), pat->frequency = 5.0;
+		*pat = gradient_patt(base, alt), pat->frequency = 5.0;
 	else if (type == PATTERN_RING)
-		*pat = ring_pattern(base, alt), pat->frequency = 8.0;
+		*pat = ring_patt(base, alt), pat->frequency = 8.0;
 	else if (type == PATTERN_CHECKERS)
-		*pat = checkers_pattern(base, alt), pat->frequency = 1.0;
+		*pat = checkers_patt(base, alt), pat->frequency = 1.0;
 	else if (type == PATTERN_UV_STRIPE)
-		*pat = uv_stripe_pattern(base, alt, 12, 1);
+		*pat = uv_stripe_patt(base, alt, 12, 1);
 	else if (type == PATTERN_UV_GRADIENT)
-		*pat = uv_gradient_pattern(base, alt, 0, 0);
+		*pat = uv_gradient_patt(base, alt, 0, 0);
 	else if (type == PATTERN_UV_CHECKERS)
-		*pat = uv_checkers_pattern(base, alt, 12, 6);
+		*pat = uv_checkers_patt(base, alt, 12, 6);
 	else
 		return (free(pat), NULL);
 	return (pat);
 }
 
-t_pattern *create_pattern_for_cone(int type, t_colour base)
+t_patt *create_patt_for_cone(int type, t_colour base)
 {
 	t_colour alt = secondary_colour(base);
-	t_pattern *pat = malloc(sizeof(t_pattern));
+	t_patt *pat = malloc(sizeof(t_patt));
 	if (!pat)
 		return (NULL);
 
 	if (type == PATTERN_STRIPE)
-		*pat = stripe_pattern(base, alt), pat->frequency = 20.0;
+		*pat = stripe_patt(base, alt), pat->frequency = 20.0;
 	else if (type == PATTERN_GRADIENT)
-		*pat = gradient_pattern(base, alt), pat->frequency = 6.0;
+		*pat = gradient_patt(base, alt), pat->frequency = 6.0;
 	else if (type == PATTERN_RING)
-		*pat = ring_pattern(base, alt), pat->frequency = 14.0;
+		*pat = ring_patt(base, alt), pat->frequency = 14.0;
 	else if (type == PATTERN_CHECKERS)
-		*pat = checkers_pattern(base, alt), pat->frequency = 2;
+		*pat = checkers_patt(base, alt), pat->frequency = 2;
 	else if (type == PATTERN_UV_STRIPE)
-		*pat = uv_stripe_pattern(base, alt, 40, 40);
+		*pat = uv_stripe_patt(base, alt, 40, 40);
 	else if (type == PATTERN_UV_GRADIENT)
-		*pat = uv_gradient_pattern(base, alt, 0, 0);
+		*pat = uv_gradient_patt(base, alt, 0, 0);
 	else if (type == PATTERN_UV_CHECKERS)
-		*pat = uv_checkers_pattern(base, alt, 50, 50);
+		*pat = uv_checkers_patt(base, alt, 50, 50);
 	else
 		return (free(pat), NULL);
 	return (pat);
 }
 
 
-t_pattern *create_pattern_by_type(int type, t_colour base, int shape_type)
+t_patt *create_patt_by_type(int type, t_colour base, int shape_type)
 {
 	if (shape_type == SHAPE_PLANE)
-		return (create_pattern_for_plane(type, base));
+		return (create_patt_for_plane(type, base));
 	else if (shape_type == SHAPE_CYLINDER)
-		return (create_pattern_for_cylinder(type, base));
+		return (create_patt_for_cylinder(type, base));
 	else if (shape_type == SHAPE_CONE)
-		return (create_pattern_for_cone(type, base));
+		return (create_patt_for_cone(type, base));
 	else
-		return (create_pattern_for_sphere(type, base));
+		return (create_patt_for_sphere(type, base));
 }

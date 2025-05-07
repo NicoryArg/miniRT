@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 
 void	intersect_pl(t_plane *pl, t_ray *ray, t_hitlist **xs)
 {

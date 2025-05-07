@@ -5,16 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 17:14:17 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/28 17:22:54 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:02:46 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:02:46 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
-#include "minirt.h"
-
+/**
+ * @brief Builds a skew-symmetric matrix from a vector.
+ *
+ * This function constructs a 4x4 skew-symmetric matrix used in Rodrigues'
+ * rotation formula. It encodes the cross product operation for the given vector.
+ *
+ * @param v The input vector used to build the skew matrix.
+ * @return A newly allocated 4x4 skew-symmetric matrix.
+ */
 t_matrix	*build_skew_matrix(t_tuple v)
 {
 	t_matrix	*skew;
@@ -33,45 +40,20 @@ t_matrix	*build_skew_matrix(t_tuple v)
 	return (skew);
 }
 
-t_matrix	*add_matrices(t_matrix *a, t_matrix *b)
-{
-	t_matrix	*result;
-	int			i;
-	int			j;
-
-	result = create_matrix(a->rows, a->cols, 0);
-	i = 0;
-	while (i < a->rows)
-	{
-		j = 0;
-		while (j < a->cols)
-		{
-			result->values[i][j] = a->values[i][j] + b->values[i][j];
-			j++;
-		}
-		i++;
-	}
-	return (result);
-}
-
-void	add_matrices_inplace(t_matrix *a, t_matrix *b)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < a->rows)
-	{
-		j = 0;
-		while (j < a->cols)
-		{
-			a->values[i][j] += b->values[i][j];
-			j++;
-		}
-		i++;
-	}
-}
-
+/**
+ * @brief Handles special cases in rotation matrix computation.
+ *
+ * This function returns a predefined rotation matrix
+ * for the special cases where:
+ * - from and to vectors are almost identical (dot product ≈ 1): identity matrix
+ * - from and to vectors are nearly opposite (dot product ≈ -1): 180° rotation
+ *
+ * If the case is not special, it returns NULL.
+ *
+ * @param c The dot product of the normalized from and to vectors.
+ * @param from The original direction vector.
+ * @return A special-case rotation matrix or NULL.
+ */
 static t_matrix	*handle_special_case(double c, t_tuple from)
 {
 	t_tuple	axis;
@@ -89,22 +71,26 @@ static t_matrix	*handle_special_case(double c, t_tuple from)
 	return (NULL);
 }
 
-t_matrix	*rotation_matrix(t_tuple from, t_tuple to)
+/**
+ * @brief Builds the core rotation matrix using Rodrigues' rotation formula.
+ *
+ * This function computes the rotation matrix that rotates vector `from` to
+ * vector `to`, using the cross product and dot product. Assumes `from` and `to`
+ * are already normalized and not in a special case.
+ *
+ * @param from The normalized starting vector.
+ * @param to The normalized target vector.
+ * @param c The dot product of from and to.
+ * @return A newly allocated rotation matrix.
+ */
+static t_matrix	*build_rotation_matrix_body(t_tuple from, t_tuple to, double c)
 {
 	t_tuple		v;
-	double		c;
 	double		k;
 	t_matrix	*skew;
 	t_matrix	*skew_sq;
 	t_matrix	*result;
-	t_matrix	*special;
 
-	from = normalize(from);
-	to = normalize(to);
-	c = dot(from, to);
-	special = handle_special_case(c, from);
-	if (special)
-		return (special);
 	v = cross(from, to);
 	skew = build_skew_matrix(v);
 	skew_sq = multiply_matrices(skew, skew);
@@ -115,4 +101,29 @@ t_matrix	*rotation_matrix(t_tuple from, t_tuple to)
 	free_matrix(skew);
 	free_matrix(skew_sq);
 	return (result);
+}
+
+/**
+ * @brief Computes the rotation matrix from one direction vector to another.
+ *
+ * This function returns a transformation matrix that rotates `from` to `to`.
+ * It handles special cases (parallel and anti-parallel vectors) and otherwise
+ * uses Rodrigues' rotation formula for general cases.
+ *
+ * @param from The starting direction vector.
+ * @param to The target direction vector.
+ * @return A newly allocated rotation matrix that rotates from → to.
+ */
+t_matrix	*rotation_matrix(t_tuple from, t_tuple to)
+{
+	t_matrix	*special;
+	double		c;
+
+	from = normalize(from);
+	to = normalize(to);
+	c = dot(from, to);
+	special = handle_special_case(c, from);
+	if (special)
+		return (special);
+	return (build_rotation_matrix_body(from, to, c));
 }

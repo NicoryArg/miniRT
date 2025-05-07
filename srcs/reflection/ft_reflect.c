@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 17:31:09 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/05 17:31:34 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 13:32:27 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 13:32:27 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 t_tuple	ft_reflect(t_tuple in, t_tuple normal)
@@ -20,7 +20,7 @@ t_tuple	ft_reflect(t_tuple in, t_tuple normal)
 	t_tuple	reflect;
 
 	dot_product = dot(in, normal);
-	temp = mult_tuple(normal, 2*dot_product);
+	temp = mult_tuple(normal, 2 * dot_product);
 	reflect = diff_tuple(in, temp);
 	return (reflect);
 }

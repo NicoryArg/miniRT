@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 02:17:42 by nryser            #+#    #+#             */
-/*   Updated: 2025/04/24 02:17:42 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/07 15:49:06 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/07 15:49:06 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
-
-#include "../../includes/minirt.h"
+#include "minirt.h"
 #include "engine.h"
 
 /**
