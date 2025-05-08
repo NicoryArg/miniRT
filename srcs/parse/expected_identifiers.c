@@ -63,15 +63,15 @@ static int	expected_count(t_id_count count, bool bonus)
 	if (count.l != 1 && bonus == false)
 		return (printf(R_B""X""RES"Too many lights (max 1)\n"RES));
 	else if (count.l > MAX_LIGHTS)
-		return (printf(R_B""X""RES"Too many lights (max 4)\n"RES));
-	if (count.sp > MAX_SPHERES)
-		return (printf(R_B""X""RES"Too many spheres (max 30)\n"RES));
-	if (count.cy > MAX_CYLINDERS)
-		return (printf(R_B""X""RES"Too many cylinders (max 4)\n"RES));
-	if (count.pl > MAX_PLANES)
-		return (printf(R_B""X""RES"Too many planes (max 4)\n"RES));
-	if (count.co > MAX_CONES)
-		return (printf(R_B""X""RES"Too many cones (max 4)\n"RES));
+		return (printf(R_B""X""RES"Too many lights (max %d)\n"RES, MAX_LIGHTS));
+	if (count.sp > MAX_SP)
+		return (printf(R_B""X""RES"Too many spheres (max %d)\n"RES, MAX_SP));
+	if (count.cy > MAX_CYL)
+		return (printf(R_B""X""RES"Too many cylinders (max %d)\n"RES, MAX_CYL));
+	if (count.pl > MAX_PL)
+		return (printf(R_B""X""RES"Too many planes (max %d)\n"RES, MAX_PL));
+	if (count.co > MAX_CO)
+		return (printf(R_B""X""RES"Too many cones (max %d)\n"RES, MAX_CO));
 	return (0);
 }
 

@@ -18,11 +18,11 @@
 
 # define MAX_FILE 10240
 # define MAX_LINE_LEN 51
-# define MAX_SPHERES 30
+# define MAX_SP 30
 # define MAX_LIGHTS 4
-# define MAX_PLANES 4
-# define MAX_CYLINDERS 4
-# define MAX_CONES 4
+# define MAX_PL 4
+# define MAX_CYL 4
+# define MAX_CO 4
 
 # define PATTERN_STRIPE 		1
 # define PATTERN_GRADIENT	2
@@ -127,16 +127,16 @@ typedef struct s_parsed_scene
 	int					light_count;
 	double				brightness[MAX_LIGHTS];
 
-	t_plane_input		planes[MAX_PLANES];
+	t_plane_input		planes[MAX_PL];
 	int					plane_count;
 
-	t_sphere_input		spheres[MAX_SPHERES];
+	t_sphere_input		spheres[MAX_SP];
 	int					sphere_count;
 
-	t_cylinder_input	cylinders[MAX_CYLINDERS];
+	t_cylinder_input	cylinders[MAX_CYL];
 	int					cylinder_count;
 
-	t_cone_input		cones[MAX_CONES];
+	t_cone_input		cones[MAX_CO];
 	int					cone_count;
 }	t_parsed_scene;
 
