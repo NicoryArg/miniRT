@@ -26,6 +26,17 @@ void	print_count(t_id_count count)
 	printf("Total shapes: %d\n", count.total);
 }
 
+int	print_pattern_error(int is_cone, char *s)
+{
+	if (!s || !*s)
+		printf(R_B""X""RES"Undefined Pattern\n");
+	else if (is_cone)
+		printf(AKA""X""RES"Please select pattern between 0-5\n");
+	else
+		printf(AKA""X""RES"Please select pattern between 0-7\n");
+	return (0);
+}
+
 static int	valid_tokens(t_tokens *node, t_id type, bool bonus)
 {
 	if (type == A)

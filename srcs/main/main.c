@@ -127,20 +127,20 @@ static void	init_data(t_input *data)
 int	main(int ac, char **av)
 {
 	t_input		data;
-	t_engine	engine;
+	// t_engine	engine;
 
 	init_data(&data);
 	if (validate_and_load(ac, av, &data) != 1)
 		return (-1);
-	init_engine(&engine);
-	draw_scene_parsed(&engine, &data.sc);
-	mlx_put_image_to_window(engine.mlx, engine.window,
-		engine.image.img_ptr, 0, 0);
-	printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
-	printf("\tPlease refrain from resizing the window\n"RES);
-	setup_hooks(&engine);
-	mlx_loop(engine.mlx);
-	cleanup(&engine);
+	// init_engine(&engine);
+	// draw_scene_parsed(&engine, &data.sc);
+	// mlx_put_image_to_window(engine.mlx, engine.window,
+	// 	engine.image.img_ptr, 0, 0);
+	// printf(AKA"⚠️\tResizing the window causes the image to disappear \t⚠️\n");
+	// printf("\tPlease refrain from resizing the window\n"RES);
+	// setup_hooks(&engine);
+	// mlx_loop(engine.mlx);
+	// cleanup(&engine);
 	free_array(data.lines);
 	free_tokens_list(data.list);
 	return (0);

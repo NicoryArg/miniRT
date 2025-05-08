@@ -87,10 +87,10 @@ int	is_float(const char *s)
 int	is_int(char *s)
 {
 	if (!s || !*s)
-		return (0);
-	if (s[1] != '\0')
-		return (0);
+		return (print_pattern_error(0, s));
+	if (s[1] && s[1] != '\0')
+		return (print_pattern_error(0, s));
 	if (s[0] < '0' || s[0] > '7')
-		return (0);
+		return (print_pattern_error(0, s));
 	return (1);
 }
