@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 #include "engine.h"
+#include "parse.h"
 
 /**
  * @brief adds coordinates of two tuples
@@ -46,7 +47,8 @@ t_tuple	diff_tuple(t_tuple t1, t_tuple t2)
 
 	if (t1.w == VECTOR && t2.w == POINT)
 	{
-		printf("[DEBUG] `diff_tuple` . Trying to substract point from vector\n");
+		printf(R_B""X""RES);
+		printf("`diff_tuple` Trying to substract point from vector\n");
 		exit(1);
 	}
 	res.w = t1.w - t2.w;
