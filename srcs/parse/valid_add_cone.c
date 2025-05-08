@@ -38,7 +38,7 @@ int	valid_cone(char **tokens, bool bonus)
 	if (!is_color(tokens[6]))
 		return (0);
 	if (bonus && (ft_atoi(tokens[7]) > 5 || ft_atoi(tokens[7]) < 0))
-		return (0);
+		return (print_pattern_error(1, tokens[7]));
 	return (1);
 }
 

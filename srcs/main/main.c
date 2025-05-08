@@ -129,6 +129,7 @@ int	main(int ac, char **av)
 	t_input		data;
 	t_engine	engine;
 
+	printf(R_B"BONUS: %d\n"RES"", BONUS);
 	init_data(&data);
 	if (validate_and_load(ac, av, &data) != 1)
 		return (-1);
