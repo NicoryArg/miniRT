@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "parse.h"
 
 double	minor(t_matrix *matrix, int row, int col)
 {
@@ -19,7 +20,7 @@ double	minor(t_matrix *matrix, int row, int col)
 
 	if (matrix->rows < 2 || matrix->cols < 2)
 	{
-		printf("Error: Cannot compute minor for a matrix smaller than 2x2.\n");
+		printf(R_B""X"Cannot compute minor for a matrix smaller than 2x2.\n");
 		return (0);
 	}
 	sub = submatrix(matrix, row, col);
@@ -55,8 +56,9 @@ double	determinant(t_matrix *matrix)
 
 	if (matrix->rows != matrix->cols)
 	{
-		printf("Error: Determinant can only be computed for square matrices.\n");
-		return (0);
+		printf(R_B""X""RES);
+		printf("Determinant can only be computed for square matrices.\n");
+		exit (1);
 	}
 	if (matrix->rows == 2)
 		return (determinant_base_case(matrix));

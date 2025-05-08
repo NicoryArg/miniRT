@@ -153,7 +153,8 @@
 // 		}
 // 		printf("  Expected hit count: %d\n", EXPECTED_COUNT);
 // 		printf("  Actual hit count:   %d\n", actual_count);
-// 		if (actual_count != EXPECTED_COUNT) return (printf(AKA"❌ Failed\n\n"RES));
+// 		if (actual_count != EXPECTED_COUNT)
+// 			return (printf(AKA"❌ Failed\n\n"RES));
 // 		printf(GR"✔ Passed\n\n"RES);
 // 		free_ray(r); free_cone(cone); free_hitlist(&xs);
 // 	}
