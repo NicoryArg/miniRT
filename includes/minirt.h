@@ -297,7 +297,8 @@ typedef struct s_cyl_vals
 	double	temp;
 }	t_cyl_vals;
 
-typedef struct s_render_ctx {
+typedef struct s_render_ctx
+{
 	t_world		*world;
 	t_tuple		ray_origin;
 	t_sphere	*sph;
@@ -616,7 +617,7 @@ t_matrix		*view_transform(t_tuple from, t_tuple to, t_tuple up);
 # define EPSILON 0.00001
 
 // Define window and view parameters
-# define WIN_SIZE 50
+# define WIN_SIZE 500
 # define VIEW_CHANGE_SIZE 60
 # define MIN_ITERATIONS 256
 # define MAX_ITERATIONS 256
