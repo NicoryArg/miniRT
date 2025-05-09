@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 16:10:56 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/09 16:20:21 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/09 18:09:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/09 18:09:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 	while (i < w->light_count)
 	{
 		light_sum = add_colours(light_sum,
-			process_light(w, comps, i, ignore_shadows));
+				process_light(w, comps, i, ignore_shadows));
 		i++;
 	}
 	if (w->light_count > 0)
@@ -75,4 +75,3 @@ t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 	final_color = add_colours(ambient, light_sum);
 	return (clamp_colour(final_color));
 }
-
