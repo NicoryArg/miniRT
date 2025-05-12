@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 14:45:16 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 14:46:46 by nryser           ###   ########.ch       */
+/*   Created: 2025/05/09 18:09:20 by nryser            #+#    #+#             */
+/*   Updated: 2025/05/09 18:09:37 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,23 @@ static t_colour	process_light(t_world *w, t_computations comps,
  */
 t_colour	shade_hit(t_world *w, t_computations comps, bool ignore_shadows)
 {
+	t_colour	ambient;
+	t_colour	light_sum;
 	t_colour	final_color;
 	int			i;
 
-	final_color = ft_colour(0, 0, 0);
-	if (w->ambient.ratio > 0)
-		final_color = mult_colour(w->ambient.colour, w->ambient.ratio);
+	ambient = mult_colour(w->ambient.colour, w->ambient.ratio);
+	ambient = blend_colours(ambient, ((t_object *)comps.obj)->m.c);
+	light_sum = ft_colour(0, 0, 0);
 	i = 0;
 	while (i < w->light_count)
 	{
-		final_color = add_colours(final_color,
+		light_sum = add_colours(light_sum,
 				process_light(w, comps, i, ignore_shadows));
 		i++;
 	}
 	if (w->light_count > 0)
-		final_color = mult_colour(final_color, 1.0 / w->light_count);
+		light_sum = mult_colour(light_sum, 1.0 / w->light_count);
+	final_color = add_colours(ambient, light_sum);
 	return (clamp_colour(final_color));
 }

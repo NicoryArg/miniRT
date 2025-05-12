@@ -297,7 +297,8 @@ typedef struct s_cyl_vals
 	double	temp;
 }	t_cyl_vals;
 
-typedef struct s_render_ctx {
+typedef struct s_render_ctx
+{
 	t_world		*world;
 	t_tuple		ray_origin;
 	t_sphere	*sph;
