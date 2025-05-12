@@ -29,12 +29,15 @@ void	load_camera(char **tokens, t_parsed_scene *scene)
 	scene->has_camera = 1;
 }
 
-void	load_light(char **tokens, t_parsed_scene *scene)
+void	load_light(char **tokens, t_parsed_scene *scene, bool bonus)
 {
 	if (scene->light_count >= MAX_LIGHTS)
 		return ;
 	scene->light_positions[scene->light_count] = parse_point(tokens[1]);
 	scene->brightness[scene->light_count] = ft_atof(tokens[2]);
-	scene->light_colours[scene->light_count] = parse_color(tokens[3]);
+	if (!bonus)
+		scene->light_colours[scene->light_count] = ft_colour(1, 1, 1);
+	else
+		scene->light_colours[scene->light_count] = parse_color(tokens[3]);
 	scene->light_count++;
 }

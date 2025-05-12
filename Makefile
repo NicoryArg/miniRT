@@ -152,26 +152,52 @@ $(OBJS_DIR):
 	@$(MKDIR) $(OBJS_DIR)/utils
 	@$(MKDIR) $(OBJS_DIR)/view
 
+
 bonus_dirs:
-	@echo $(CYAN)   " - ⏳ Creating bonus directories... ⏳" $(RESET)
-	@$(MKDIR) $(OBJS_DIR_BONUS)
-	@$(MKDIR) $(OBJS_DIR_BONUS)/debug
-	@$(MKDIR) $(OBJS_DIR_BONUS)/debug/draw_tests
-	@$(MKDIR) $(OBJS_DIR_BONUS)/debug/tests
-	@$(MKDIR) $(OBJS_DIR_BONUS)/debug/scenes
-	@$(MKDIR) $(OBJS_DIR_BONUS)/main
-	@$(MKDIR) $(OBJS_DIR_BONUS)/make_engine
-	@$(MKDIR) $(OBJS_DIR_BONUS)/matrices
-	@$(MKDIR) $(OBJS_DIR_BONUS)/parse
-	@$(MKDIR) $(OBJS_DIR_BONUS)/patterns
-	@$(MKDIR) $(OBJS_DIR_BONUS)/rays
-	@$(MKDIR) $(OBJS_DIR_BONUS)/reflection
-	@$(MKDIR) $(OBJS_DIR_BONUS)/render
-	@$(MKDIR) $(OBJS_DIR_BONUS)/scene
-	@$(MKDIR) $(OBJS_DIR_BONUS)/transformations
-	@$(MKDIR) $(OBJS_DIR_BONUS)/tuple
-	@$(MKDIR) $(OBJS_DIR_BONUS)/utils
-	@$(MKDIR) $(OBJS_DIR_BONUS)/view
+	@if [ ! -d "$(OBJS_DIR_BONUS)" ]; then \
+		echo $(CYAN) " - ⏳ Creating bonus directories... ⏳" $(RESET); \
+		$(MKDIR) $(OBJS_DIR_BONUS); \
+		$(MKDIR) $(OBJS_DIR_BONUS)/debug; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/debug/draw_tests; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/debug/tests; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/debug/scenes; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/main; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/make_engine; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/matrices; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/parse; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/patterns; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/rays; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/reflection; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/render; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/scene; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/transformations; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/tuple; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/utils; \
+		$(MKDIR) $(OBJS_DIR_BONUS)/view; \
+	else \
+		echo "make: Nothing to be done for 'bonus'."; \
+	fi
+
+# bonus_dirs:
+# 	@echo $(CYAN)   " - ⏳ Creating bonus directories... ⏳" $(RESET)
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/debug
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/debug/draw_tests
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/debug/tests
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/debug/scenes
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/main
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/make_engine
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/matrices
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/parse
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/patterns
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/rays
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/reflection
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/render
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/scene
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/transformations
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/tuple
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/utils
+# 	@$(MKDIR) $(OBJS_DIR_BONUS)/view
 
 $(NAME) : $(OBJS) Makefile
 	@echo $(CYAN)   " - ⏳ Compiling $(NAME)...           ⏳" $(RESET)

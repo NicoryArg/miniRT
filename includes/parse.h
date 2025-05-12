@@ -165,8 +165,9 @@ void			print_node(t_tokens *node);
 t_object		**alloc_objects_array(t_parsed_scene *scene, int *total);
 t_world			*convert_scene_to_world(t_parsed_scene *scene);
 t_parsed_scene	init_parsed_scene(void);
-void			dispatch_token(t_tokens *current, t_parsed_scene *scene);
-t_parsed_scene	build_scene_from_tokens(t_tokens *head);
+void			dispatch_token(t_tokens *current, t_parsed_scene *scene,
+					bool bonus);
+t_parsed_scene	build_scene_from_tokens(t_tokens *head, bool bonus);
 
 //check_file.c
 int				check_file(int ac, char **av);
@@ -215,7 +216,7 @@ void			load_cone(char **tokens, t_parsed_scene *scene);
 //load_unique.c
 void			load_ambient(char **tokens, t_parsed_scene *scene);
 void			load_camera(char **tokens, t_parsed_scene *scene);
-void			load_light(char **tokens, t_parsed_scene *scene);
+void			load_light(char **tokens, t_parsed_scene *scene, bool bonus);
 
 //objs_patterns.c
 t_colour		secondary_colour(t_colour c);

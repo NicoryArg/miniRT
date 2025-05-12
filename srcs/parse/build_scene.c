@@ -81,14 +81,14 @@ t_parsed_scene	init_parsed_scene(void)
 	return (scene);
 }
 
-void	dispatch_token(t_tokens *current, t_parsed_scene *scene)
+void	dispatch_token(t_tokens *current, t_parsed_scene *scene, bool bonus)
 {
 	if (current->type == A)
 		load_ambient(current->tokens, scene);
 	else if (current->type == C)
 		load_camera(current->tokens, scene);
 	else if (current->type == L)
-		load_light(current->tokens, scene);
+		load_light(current->tokens, scene, bonus);
 	else if (current->type == PL)
 		load_plane(current->tokens, scene);
 	else if (current->type == SP)
@@ -99,7 +99,7 @@ void	dispatch_token(t_tokens *current, t_parsed_scene *scene)
 		load_cone(current->tokens, scene);
 }
 
-t_parsed_scene	build_scene_from_tokens(t_tokens *head)
+t_parsed_scene	build_scene_from_tokens(t_tokens *head, bool bonus)
 {
 	t_parsed_scene	scene;
 	t_tokens		*current;
@@ -108,7 +108,7 @@ t_parsed_scene	build_scene_from_tokens(t_tokens *head)
 	current = head;
 	while (current)
 	{
-		dispatch_token(current, &scene);
+		dispatch_token(current, &scene, bonus);
 		current = current->next;
 	}
 	return (scene);
