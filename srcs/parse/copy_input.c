@@ -38,7 +38,7 @@ static int	grab_input(char *file, char **buf)
 	int	fd;
 	int	status;
 
-	*buf = calloc(sizeof(char), MAX_FILE);
+	*buf = ft_calloc(sizeof(char), MAX_FILE);
 	fd = open(file, O_RDONLY);
 	if (fd < 0 || !(*buf))
 		return (printf(AKA"Error\n❌ Could not open or allocate\n"RES));
@@ -115,12 +115,12 @@ static char	**alloc_lines(char *str)
 
 	i = 0;
 	count = count_lines(str);
-	lines = calloc(count + 1, sizeof(char *));
+	lines = ft_calloc(count + 1, sizeof(char *));
 	if (!lines)
 		return (NULL);
 	while (i < count)
 	{
-		lines[i] = calloc(MAX_LINE_LEN, sizeof(char));
+		lines[i] = ft_calloc(MAX_LINE_LEN, sizeof(char));
 		if (!lines[i])
 			free_array(lines);
 		i++;
