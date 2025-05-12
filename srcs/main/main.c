@@ -124,12 +124,26 @@ static void	init_data(t_input *data)
 	data->bonus = BONUS;
 }
 
+static void	print_bonus(int bonus)
+{
+	if (bonus)
+	{
+		printf(G_B"\t   BONUS ACTIVATED!\n"RES);
+		printf(GR"⚡️ Prepare for mega sonic rendering ⚡️\n");
+	}
+	else
+	{
+		printf(G_B"\t  Bonus inactive\n"RES);
+		printf(GR"😴 Prepare for slow(er) rendering 😴\n");
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_input		data;
 	t_engine	engine;
 
-	printf(R_B"BONUS: %d\n"RES"", BONUS);
+	print_bonus(BONUS);
 	init_data(&data);
 	if (validate_and_load(ac, av, &data) != 1)
 		return (-1);
