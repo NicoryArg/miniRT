@@ -292,7 +292,7 @@ int				valid_input(t_input *data, bool bonus);
 
 //DEFINE BONUS
 # ifndef BONUS
-#  define BONUS 0
+#  define BONUS 1
 # endif
 
 //ERROR MESSAGE UTILS

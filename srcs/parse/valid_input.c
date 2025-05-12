@@ -29,9 +29,12 @@ void	print_count(t_id_count count)
 int	print_pattern_error(int is_cone, char *s)
 {
 	if (!s || !*s)
+	{
 		printf(R_B""X""RES"Undefined Pattern\n");
+		return (0);
+	}
 	else if (is_cone)
-		printf(AKA""X""RES"Please select pattern between 0-5\n");
+		printf(AKA""X""RES"Please select pattern between 0-5 for cones\n");
 	else
 		printf(AKA""X""RES"Please select pattern between 0-7\n");
 	return (0);
