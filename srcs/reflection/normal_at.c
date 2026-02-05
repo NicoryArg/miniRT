@@ -6,7 +6,7 @@
 /*   By: nryser <nryser@student.42lausanne.ch>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 13:32:11 by nryser            #+#    #+#             */
-/*   Updated: 2025/05/07 13:32:11 by nryser           ###   ########.ch       */
+/*   Updated: 2026/02/05 16:14:57 by nryser           ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static t_tuple	local_normal_at_cyl(t_cylinder *cyl, t_tuple p)
 
 t_tuple	local_normal_at(void *shape, t_tuple local_p)
 {
-	t_tuple		normal;
+	t_tuple		normal = ft_tuple(0, 0, 0, VECTOR);
 	t_object	*obj;
 
 	obj = (t_object *)shape;
